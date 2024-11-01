@@ -2,20 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@layer base {
+   :root {
+      --radius: 0.5rem;
+   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body * {
+   box-sizing: inherit;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+
+body *:after,
+body *:before {
+   padding: 0;
+   margin: 0;
+   box-sizing: inherit;
+}
+
+* {
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   scroll-behavior: smooth;
+   overflow-x: hidden;
+   -webkit-overflow-scrolling: touch;
+}
+
+body,
+input,
+textarea {
+   input[type='number']::-webkit-inner-spin-,
+   input[type='number']::-webkit-outer-spin- {
+      -webkit-appearance: none;
+      margin: 0;
+   }
+
+   input[type='number'] {
+      -moz-appearance: textfield !important;
+      appearance: textfield !important;
+   }
+}
+
+input:-webkit-autofill::first-line {
+   background-color: transparent;
+}
+
+input:-webkit-autofill {
+   -webkit-box-shadow: none;
+   -webkit-font-smoothing: antialiased;
+   -webkit-background-clip: text;
+}
+
+input:-webkit-autofill {
+   -webkit-box-shadow: 0 0 0 0 transparent inset;
+   -webkit-text-fill-color: white;
+}
+
+input {
+   caret-color: black;
+}
+
+::-webkit-scrollbar {
+   width: 0px;
+   z-index: 1;
+
+   &-thumb {
+      cursor: pointer;
+      border-radius: 8px;
+      background: #c5c5c5;
+   }
 }

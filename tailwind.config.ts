@@ -1,19 +1,137 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
-  },
-  plugins: [],
-};
-export default config;
+   darkMode: ['class'],
+   content: [
+      './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+      './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+      './src/app/**/*.{js,ts,jsx,tsx,mdx}'
+   ],
+   theme: {
+      extend: {
+         container: {
+            center: true,
+            padding: '1rem',
+            screens: {
+               '2xl': '1400px'
+            }
+         },
+         colors: {
+            primary: {
+               default: '#1057E1',
+               light: '#4179E7',
+               contrast: '#FAFAFA'
+            },
+            secondary: {
+               default: '#19B26B',
+               light: '#61D8A1',
+               contrast: '#121212'
+            },
+            error: {
+               default: '#D32F2F',
+               light: '#EF5350',
+               contrast: '#FAFAFA'
+            },
+            warning: {
+               default: '#EF6C00',
+               light: '#FF9800',
+               contrast: '#FAFAFA'
+            },
+            info: {
+               default: '#0288D1',
+               light: '#03A9F4',
+               contrast: '#FAFAFA'
+            },
+            success: {
+               default: '#19B26B',
+               light: '#4DE89D',
+               contrast: '#FAFAFA'
+            },
+            common: {
+               white: '#FAFAFA',
+               black: '#121212'
+            },
+            divider: '#0000001F',
+            text: {
+               primary: '#121212',
+               secondary: '#757575',
+               disabled: '#E0E0E0'
+            },
+            action: {
+               active: '#1212128F',
+               hover: '#1212120A',
+               selected: '#0000001F',
+               disabled: '#12121261',
+               disabledBg: '#1212121F',
+               focus: '#1212121F'
+            },
+            background: {
+               default: '#FAFAFA',
+               paper: '#FAFAFA'
+            },
+            dark: {
+               primary: {
+                  default: '#19B26B',
+                  light: '#61D8A1',
+                  contrast: '#121212'
+               },
+               secondary: {
+                  default: '#1057E1',
+                  light: '#4179E7',
+                  contrast: '#FAFAFA'
+               },
+               error: {
+                  default: '#D32F2F',
+                  light: '#EF5350',
+                  contrast: '#FAFAFA'
+               },
+               warning: {
+                  default: '#EF6C00',
+                  light: '#FF9800',
+                  contrast: '#FAFAFA'
+               },
+               info: {
+                  default: '#0288D1',
+                  light: '#03A9F4',
+                  contrast: '#FAFAFA'
+               },
+               success: {
+                  default: '#19B26B',
+                  light: '#4DE89D',
+                  contrast: '#FAFAFA'
+               },
+               common: {
+                  white: '#FAFAFA',
+                  black: '#121212'
+               },
+               divider: '#0000001F',
+               text: {
+                  primary: '#FAFAFA',
+                  secondary: '#BDBDBD',
+                  disabled: '#E0E0E0'
+               },
+               action: {
+                  active: '#FAFAFA',
+                  hover: '#FAFAFA0A',
+                  selected: '#FFFFFF1F',
+                  disabled: '#FAFAFA61',
+                  disabledBg: '#FAFAFA1F',
+                  focus: '#FAFAFA1F'
+               },
+               background: {
+                  default: '#1C2939',
+                  paper: '#1C2939'
+               }
+            }
+         },
+         borderRadius: {
+            lg: 'var(--radius)',
+            md: 'calc(var(--radius) - 2px)',
+            sm: 'calc(var(--radius) - 4px)'
+         }
+      }
+   },
+   plugins: [require('tailwindcss-animate')]
+}
+
+export default config
