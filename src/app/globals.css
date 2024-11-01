@@ -84,3 +84,7 @@ input {
       background: #c5c5c5;
    }
 }
+
+.material-symbols-outlined {
+   font-weight: 350 !important;
+}
