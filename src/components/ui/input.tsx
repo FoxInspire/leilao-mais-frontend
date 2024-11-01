@@ -20,7 +20,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   'text-base leading-6 tracking-[0.15px]',
                   'border rounded-[4px]',
                   'border-[#1212127f]',
-                  'focus:border-primary-default',
+                  'focus:border-primary-default dark:focus:border-primary-default',
                   className
                )}
                ref={ref}
