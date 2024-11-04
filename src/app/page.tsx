@@ -18,6 +18,8 @@ export default function Home() {
             <Input label="Label" placeholder="Placeholder" type="text" />
             <Input label="Label" placeholder="Placeholder" type="password" />
             <Input label="Email" type="email" />
+            <Input label="Email" type="email" error="Error" />
+            <Input label="Email" type="email" disabled />
          </div>
       </React.Fragment>
    )
