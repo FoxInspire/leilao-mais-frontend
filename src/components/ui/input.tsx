@@ -90,7 +90,12 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-   ({ className, type, label, error, ...props }, ref) => {
+   ({ className, type: initialType, label, error, ...props }, ref) => {
+      const isPassword = initialType === 'password'
+      const [type, setType] = isPassword
+         ? React.useState(initialType)
+         : [initialType, null]
+
       return (
          <React.Fragment>
             <div
@@ -117,6 +122,28 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   >
                      {label}
                   </label>
+               )}
+               {isPassword && (
+                  <button
+                     type="button"
+                     onClick={() =>
+                        setType?.(type === 'password' ? 'text' : 'password')
+                     }
+                     className={cn(
+                        'flex items-center justify-center',
+                        'absolute right-3 top-1/2 -translate-y-1/2',
+                        'text-neutral-500 hover:text-neutral-700',
+                        'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-default',
+                        'transition-colors duration-200 rounded-sm'
+                     )}
+                     aria-label={
+                        type === 'password' ? 'Show password' : 'Hide password'
+                     }
+                  >
+                     <span className="material-symbols-outlined">
+                        {type === 'password' ? 'visibility' : 'visibility_off'}
+                     </span>
+                  </button>
                )}
             </div>
             {error && <span className="mt-1 text-sm text-red-500">{error}</span>}
