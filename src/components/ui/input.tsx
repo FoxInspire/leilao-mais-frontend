@@ -73,7 +73,10 @@ export const labelVariants = cva(
 
       'placeholder-opacity-0',
 
-      'transition-all duration-200 ease-out'
+      'transition-all duration-200 ease-out',
+
+      'peer-[&[data-autofilled="true"]]:top-1',
+      'peer-[&[data-autofilled="true"]]:scale-75'
    ],
    {
       variants: {
@@ -83,11 +86,6 @@ export const labelVariants = cva(
       }
    }
 )
-
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-   label?: string
-   error?: string
-}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
    ({ className, type: initialType, label, error, ...props }, ref) => {
@@ -113,6 +111,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   aria-invalid={error ? 'true' : undefined}
                   ref={ref}
                   placeholder={label}
+                  onAnimationStart={(e) => {
+                     if (e.animationName === 'onAutoFillStart') {
+                        ;(e.target as HTMLInputElement).setAttribute(
+                           'data-autofilled',
+                           'true'
+                        )
+                     }
+                  }}
                   {...props}
                />
                {label && (
@@ -151,6 +157,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       )
    }
 )
+
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+   label?: string
+   error?: string
+}
 
 Input.displayName = 'Input'
 

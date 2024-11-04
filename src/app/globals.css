@@ -60,14 +60,25 @@ input:-webkit-autofill::first-line {
 }
 
 input:-webkit-autofill {
-   -webkit-box-shadow: none;
-   -webkit-font-smoothing: antialiased;
-   -webkit-background-clip: text;
+   -webkit-box-shadow: 0 0 0 30px white inset;
+   -webkit-text-fill-color: black;
+   transition: background-color 5000s ease-in-out 0s;
 }
 
-input:-webkit-autofill {
-   -webkit-box-shadow: 0 0 0 0 transparent inset;
-   -webkit-text-fill-color: black;
+input:-webkit-autofill + label {
+   top: 0px !important;
+   transform: scale(0.75) !important;
+   transition-property: all !important;
+   transition-duration: 200ms !important;
+   transition-timing-function: ease-out !important;
+}
+
+input:autofill + label {
+   top: -8.5px !important;
+   transform: scale(0.75) !important;
+   transition-property: all !important;
+   transition-duration: 200ms !important;
+   transition-timing-function: ease-out !important;
 }
 
 input {

@@ -15,7 +15,7 @@ export default function Home() {
             <Button variant="link">Click me</Button>
          </div>
          <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
-            <Input label="Label" placeholder="Placeholder" type="text" />
+            <Input label="E-mail" placeholder="Placeholder" type="text" />
             <Input label="Label" placeholder="Placeholder" type="password" />
             <Input label="Email" type="email" />
             <Input label="Email" type="email" error="Error" />
