@@ -17,6 +17,7 @@ export default function Home() {
          <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
             <Input label="Label" placeholder="Placeholder" type="text" />
             <Input label="Label" placeholder="Placeholder" type="password" />
+            <Input label="Email" type="email" />
          </div>
       </React.Fragment>
    )
