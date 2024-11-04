@@ -16,11 +16,32 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             <input
                type={type}
                className={cn(
-                  'peer block min-h-[56px] w-full bg-transparent px-[14px] py-[16.5px] leading-6 text-neutral-500 transition-colors duration-200 ease-linear placeholder:opacity-0 placeholder:transition-opacity placeholder:duration-200 focus:placeholder:opacity-100 focus:text-primary disabled:cursor-not-allowed disabled:opacity-50 dark:text-white dark:placeholder:text-neutral-300 dark:peer-focus:text-primary',
+                  'peer block w-full min-h-[56px]',
+
+                  'px-[14px] py-[16.5px]',
+
                   'text-base leading-6 tracking-[0.15px]',
-                  'border rounded-[4px]',
-                  'border-[#1212127f]',
-                  'focus:border-primary-default dark:focus:border-primary-default',
+                  'text-black',
+                  'dark:text-white',
+
+                  'bg-transparent',
+
+                  'border border-[#1212127f] rounded-[4px]',
+                  'outline-2 outline-transparent',
+
+                  'focus:border-primary-default focus:outline-primary-default',
+                  'dark:focus:border-primary-default dark:focus:outline-primary-default',
+                  'focus:text-primary',
+
+                  'placeholder:opacity-0',
+                  'placeholder:transition-opacity placeholder:duration-200',
+                  'focus:placeholder:opacity-100',
+                  'dark:placeholder:text-neutral-300',
+
+                  'disabled:cursor-not-allowed disabled:opacity-50',
+
+                  'transition-colors duration-200 ease-linear',
+
                   className
                )}
                ref={ref}
