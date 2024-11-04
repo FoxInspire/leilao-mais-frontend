@@ -6,6 +6,16 @@ import {
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import {
+   Drawer,
+   DrawerClose,
+   DrawerContent,
+   DrawerDescription,
+   DrawerFooter,
+   DrawerHeader,
+   DrawerTitle,
+   DrawerTrigger
+} from '@/components/ui/drawer'
 import { Input } from '@/components/ui/input'
 import {
    Select,
@@ -21,6 +31,25 @@ import React from 'react'
 export default function Home() {
    return (
       <React.Fragment>
+         <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
+            <Drawer direction="right">
+               <DrawerTrigger>Open</DrawerTrigger>
+               <DrawerContent className="max-w-xl bg-white fixed w-[40rem] h-screen overflow-y-scroll overflow-x-hidden flex flex-col top-0 right-0 z-[1000] py-12 2xl:py-14 px-12 focus:outline-none">
+                  <DrawerHeader>
+                     <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                     <DrawerDescription>
+                        This action cannot be undone.
+                     </DrawerDescription>
+                  </DrawerHeader>
+                  <DrawerFooter>
+                     <Button>Submit</Button>
+                     <DrawerClose>
+                        <Button variant="outline">Cancel</Button>
+                     </DrawerClose>
+                  </DrawerFooter>
+               </DrawerContent>
+            </Drawer>
+         </div>
          <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
             <div>
                <div className="space-y-1">
