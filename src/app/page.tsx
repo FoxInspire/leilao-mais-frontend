@@ -25,12 +25,28 @@ import {
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {
+   Tooltip,
+   TooltipContent,
+   TooltipProvider,
+   TooltipTrigger
+} from '@/components/ui/tooltip'
 
 import React from 'react'
 
 export default function Home() {
    return (
       <React.Fragment>
+         <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
+            <TooltipProvider>
+               <Tooltip>
+                  <TooltipTrigger>Hover</TooltipTrigger>
+                  <TooltipContent>
+                     <p className="text-sm text-white">Add to library</p>
+                  </TooltipContent>
+               </Tooltip>
+            </TooltipProvider>
+         </div>
          <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
             <Drawer direction="right">
                <DrawerTrigger>Open</DrawerTrigger>
