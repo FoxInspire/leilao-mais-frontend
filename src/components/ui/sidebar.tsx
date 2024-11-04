@@ -14,7 +14,7 @@ import {
    TooltipTrigger
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
-import { useIsMobile } from '@/src/hooks/use-mobile'
+import { useIsMobile } from '@/src/hooks/useMobile'
 import { Slot } from '@radix-ui/react-slot'
 import { VariantProps, cva } from 'class-variance-authority'
 import { PanelLeft } from 'lucide-react'
