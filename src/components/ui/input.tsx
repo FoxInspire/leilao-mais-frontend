@@ -90,9 +90,11 @@ export const labelVariants = cva(
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
    ({ className, type: initialType, label, error, ...props }, ref) => {
       const isPassword = initialType === 'password'
-      const [type, setType] = isPassword
-         ? React.useState(initialType)
-         : [initialType, null]
+      const [type, setType] = React.useState(initialType)
+
+      const togglePassword = isPassword
+         ? () => setType(type === 'password' ? 'text' : 'password')
+         : undefined
 
       return (
          <React.Fragment>
@@ -132,9 +134,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                {isPassword && (
                   <button
                      type="button"
-                     onClick={() =>
-                        setType?.(type === 'password' ? 'text' : 'password')
-                     }
+                     onClick={togglePassword}
                      className={cn(
                         'flex items-center justify-center',
                         'absolute right-3 top-1/2 -translate-y-1/2',
