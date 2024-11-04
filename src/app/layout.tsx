@@ -1,5 +1,5 @@
+import '@/src/styles/globals.css'
 import type { Metadata } from 'next'
-import './globals.css'
 
 export const metadata: Metadata = {
    metadataBase: new URL(`https://${process.env.VERCEL_URL}`),
