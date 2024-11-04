@@ -13,6 +13,7 @@ import {
    SelectItem,
    SelectTrigger
 } from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import React from 'react'
@@ -20,6 +21,24 @@ import React from 'react'
 export default function Home() {
    return (
       <React.Fragment>
+         <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
+            <div>
+               <div className="space-y-1">
+                  <h4 className="text-sm font-medium leading-none">Leilão Mais</h4>
+                  <p className="text-sm text-muted-foreground">
+                     Sistema completo para gestão de leilões automotivos.
+                  </p>
+               </div>
+               <Separator className="my-4" />
+               <div className="flex h-5 items-center space-x-4 text-sm">
+                  <div>Início</div>
+                  <Separator orientation="vertical" />
+                  <div>Sobre</div>
+                  <Separator orientation="vertical" />
+                  <div>Contato</div>
+               </div>
+            </div>
+         </div>
          <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
             <Tabs defaultValue="account" className="w-[400px]">
                <TabsList>
