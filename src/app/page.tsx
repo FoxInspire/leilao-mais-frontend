@@ -13,12 +13,25 @@ import {
    SelectItem,
    SelectTrigger
 } from '@/components/ui/select'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import React from 'react'
 
 export default function Home() {
    return (
       <React.Fragment>
+         <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
+            <Tabs defaultValue="account" className="w-[400px]">
+               <TabsList>
+                  <TabsTrigger value="account">Account</TabsTrigger>
+                  <TabsTrigger value="password">Password</TabsTrigger>
+               </TabsList>
+               <TabsContent value="account">
+                  Make changes to your account here.
+               </TabsContent>
+               <TabsContent value="password">Change your password here.</TabsContent>
+            </Tabs>
+         </div>
          <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
             <Checkbox label="Sem Termo de Apreensão" />
          </div>
@@ -41,7 +54,7 @@ export default function Home() {
                </SelectContent>
             </Select>
          </div>
-         <div className="m-2 rounded-md p-2 border border-primary-default border-dashed">
+         <div className="m-2 rounded-md p-2 border border-primary-default border-dashed space-y-2">
             <Button variant="destructive">Click me</Button>
             <Button variant="default">Click me</Button>
             <Button variant="secondary">Click me</Button>
