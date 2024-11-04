@@ -52,16 +52,32 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                <label
                   htmlFor={props.id}
                   className={cn(
-                     'pointer-events-none absolute left-[11px] top-[50%] -translate-y-[50%] mb-0 max-w-[90%] origin-[0_0] truncate leading-6 text-neutral-500 transition-all duration-200 ease-out',
+                     'absolute left-[11px] top-[50%]',
+                     'pointer-events-none',
+                     '-translate-y-[50%]',
+                     'mb-0 max-w-[90%]',
+                     'origin-[0_0]',
 
-                     'peer-focus:top-1 peer-focus:scale-75 peer-focus:text-primary-default',
+                     'truncate leading-6',
+                     'text-neutral-500',
+                     'dark:text-neutral-400',
 
-                     'peer-data-[twe-input-state-active]:top-1 peer-data-[twe-input-state-active]:scale-75 peer-focus:text-primary-default',
+                     'bg-white px-1',
 
-                     'dark:text-neutral-400 dark:peer-focus:text-primary-default',
+                     'peer-focus:top-1',
+                     'peer-focus:scale-75',
+                     'peer-focus:text-primary-default',
+                     'dark:peer-focus:text-primary-default',
+
+                     'peer-[&:not(:placeholder-shown)]:top-1',
+                     'peer-[&:not(:placeholder-shown)]:scale-75',
+
+                     'peer-data-[twe-input-state-active]:top-1',
+                     'peer-data-[twe-input-state-active]:scale-75',
+
                      'placeholder-opacity-0',
 
-                     'bg-white px-1'
+                     'transition-all duration-200 ease-out'
                   )}
                >
                   {label}

@@ -14,8 +14,9 @@ export default function Home() {
             <Button variant="ghost">Click me</Button>
             <Button variant="link">Click me</Button>
          </div>
-         <div className="m-2 rounded-md p-2 border border-primary-default border-dashed">
+         <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
             <Input label="Label" placeholder="Placeholder" type="text" />
+            <Input label="Label" placeholder="Placeholder" type="password" />
          </div>
       </React.Fragment>
    )
