@@ -117,3 +117,7 @@ input {
 .material-symbols-outlined {
    font-weight: 350;
 }
+
+.filled {
+   font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}

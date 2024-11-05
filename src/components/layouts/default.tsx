@@ -1,252 +1,231 @@
 'use client'
 
+import * as React from 'react'
+
+import { LogoComplete, LogoSimplified } from '@/components/icons/logo'
 import {
-   DropdownMenu,
-   DropdownMenuContent,
-   DropdownMenuItem,
-   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
-import { Label } from '@/components/ui/label'
+   Collapsible,
+   CollapsibleContent,
+   CollapsibleTrigger
+} from '@/components/ui/collapsible'
 import {
    Sidebar,
    SidebarContent,
    SidebarGroup,
-   SidebarGroupContent,
-   SidebarGroupLabel,
    SidebarHeader,
-   SidebarInput,
    SidebarInset,
    SidebarMenu,
    SidebarMenuButton,
    SidebarMenuItem,
+   SidebarMenuSub,
+   SidebarMenuSubButton,
+   SidebarMenuSubItem,
    SidebarProvider,
-   SidebarRail
+   SidebarRail,
+   useSidebar
 } from '@/components/ui/sidebar'
-import { Check, ChevronsUpDown, GalleryVerticalEnd, Search } from 'lucide-react'
+import { cn } from '@/src/lib/utils'
+import { usePathname } from 'next/navigation'
 
-import React from 'react'
+import Link from 'next/link'
 
 const data = {
-   versions: ['1.0.1', '1.1.0-alpha', '2.0.0-beta1'],
-   navMain: [
+   menuItems: [
       {
-         title: 'Getting Started',
+         title: 'Dashboard',
          url: '#',
+         icon: (
+            <span className="material-symbols-outlined filled">space_dashboard</span>
+         )
+      },
+      {
+         title: 'Pré-leilão',
+         url: '#',
+         icon: <span className="material-symbols-outlined">monitor</span>,
+         isActive: true,
          items: [
             {
-               title: 'Installation',
+               title: 'Manutenção de leilões',
                url: '#'
             },
             {
-               title: 'Project Structure',
-               url: '#'
+               title: 'Monitor de operações',
+               url: '/dashboard'
             }
          ]
       },
+
       {
-         title: 'Building Your Application',
+         title: 'Pós-leilão',
          url: '#',
-         items: [
-            {
-               title: 'Routing',
-               url: '#'
-            },
-            {
-               title: 'Data Fetching',
-               url: '#',
-               isActive: true
-            },
-            {
-               title: 'Rendering',
-               url: '#'
-            },
-            {
-               title: 'Caching',
-               url: '#'
-            },
-            {
-               title: 'Styling',
-               url: '#'
-            },
-            {
-               title: 'Optimizing',
-               url: '#'
-            },
-            {
-               title: 'Configuring',
-               url: '#'
-            },
-            {
-               title: 'Testing',
-               url: '#'
-            },
-            {
-               title: 'Authentication',
-               url: '#'
-            },
-            {
-               title: 'Deploying',
-               url: '#'
-            },
-            {
-               title: 'Upgrading',
-               url: '#'
-            },
-            {
-               title: 'Examples',
-               url: '#'
-            }
-         ]
-      },
-      {
-         title: 'API Reference',
-         url: '#',
-         items: [
-            {
-               title: 'Components',
-               url: '#'
-            },
-            {
-               title: 'File Conventions',
-               url: '#'
-            },
-            {
-               title: 'Functions',
-               url: '#'
-            },
-            {
-               title: 'next.config.js Options',
-               url: '#'
-            },
-            {
-               title: 'CLI',
-               url: '#'
-            },
-            {
-               title: 'Edge Runtime',
-               url: '#'
-            }
-         ]
-      },
-      {
-         title: 'Architecture',
-         url: '#',
-         items: [
-            {
-               title: 'Accessibility',
-               url: '#'
-            },
-            {
-               title: 'Fast Refresh',
-               url: '#'
-            },
-            {
-               title: 'Next.js Compiler',
-               url: '#'
-            },
-            {
-               title: 'Supported Browsers',
-               url: '#'
-            },
-            {
-               title: 'Turbopack',
-               url: '#'
-            }
-         ]
+         icon: <span className="material-symbols-outlined filled">star</span>
       }
-   ]
+   ] as MenuItemType[]
 }
 
 export const DefaultLayout: React.FC<React.PropsWithChildren> = ({
    children
 }: React.PropsWithChildren) => {
-   const [selectedVersion, setSelectedVersion] = React.useState(data.versions[0])
+   const pathname = usePathname()
+
+   const isActiveRoute = (url: string) => {
+      return pathname === url
+   }
+
    return (
       <section>
          <SidebarProvider>
-            <Sidebar>
+            <Sidebar collapsible="icon">
                <SidebarHeader>
-                  <SidebarMenu>
-                     <SidebarMenuItem>
-                        <DropdownMenu>
-                           <DropdownMenuTrigger asChild>
-                              <SidebarMenuButton
-                                 size="lg"
-                                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                              >
-                                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                                    <GalleryVerticalEnd className="size-4" />
-                                 </div>
-                                 <div className="flex flex-col gap-0.5 leading-none">
-                                    <span className="font-semibold">
-                                       Documentation
-                                    </span>
-                                    <span className="">selectedVersion</span>
-                                 </div>
-                                 <ChevronsUpDown className="ml-auto" />
-                              </SidebarMenuButton>
-                           </DropdownMenuTrigger>
-                           <DropdownMenuContent
-                              className="w-[--radix-dropdown-menu-trigger-width]"
-                              align="start"
-                           >
-                              {data.versions.map((version) => (
-                                 <DropdownMenuItem
-                                    key={version}
-                                    onSelect={() => setSelectedVersion(version)}
-                                 >
-                                    v{version}{' '}
-                                    {version === selectedVersion && (
-                                       <Check className="ml-auto" />
-                                    )}
-                                 </DropdownMenuItem>
-                              ))}
-                           </DropdownMenuContent>
-                        </DropdownMenu>
-                     </SidebarMenuItem>
-                  </SidebarMenu>
-                  <form>
-                     <SidebarGroup className="py-0">
-                        <SidebarGroupContent className="relative">
-                           <Label htmlFor="search" className="sr-only">
-                              Search
-                           </Label>
-                           <SidebarInput
-                              id="search"
-                              placeholder="Search the docs..."
-                              className="pl-8"
-                           />
-                           <Search className="pointer-events-none absolute left-2 top-1/2 size-4 -translate-y-1/2 select-none opacity-50" />
-                        </SidebarGroupContent>
-                     </SidebarGroup>
-                  </form>
+                  <LogoSwitcher />
                </SidebarHeader>
-               <SidebarContent>
-                  {/* We create a SidebarGroup for each parent. */}
-                  {data.navMain.map((item) => (
-                     <SidebarGroup key={item.title}>
-                        <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
-                        <SidebarGroupContent>
-                           <SidebarMenu>
-                              {item.items.map((item) => (
-                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton
-                                       asChild
-                                       isActive={item.isActive}
-                                    >
-                                       <a href={item.url}>{item.title}</a>
-                                    </SidebarMenuButton>
+               <SidebarContent className="px-2">
+                  <SidebarGroup>
+                     <SidebarMenu className="gap-3">
+                        {data.menuItems.map((item) =>
+                           item.items && item.items.length > 0 ? (
+                              <Collapsible
+                                 key={item.title}
+                                 asChild
+                                 defaultOpen={item.isActive}
+                                 className="group/collapsible"
+                              >
+                                 <SidebarMenuItem>
+                                    <CollapsibleTrigger className="h-10" asChild>
+                                       <SidebarMenuButton tooltip={item.title}>
+                                          {item.icon &&
+                                             renderIcon(
+                                                item.icon,
+                                                cn({
+                                                   'text-primary-default':
+                                                      item.items.some((subItem) =>
+                                                         isActiveRoute(subItem.url)
+                                                      )
+                                                })
+                                             )}
+                                          <span
+                                             className={cn('text-sm font-medium', {
+                                                'text-primary-default':
+                                                   item.items.some((subItem) =>
+                                                      isActiveRoute(subItem.url)
+                                                   )
+                                             })}
+                                          >
+                                             {item.title}
+                                          </span>
+                                          <div
+                                             className={cn(
+                                                'material-symbols-outlined shrink-0 transition-transform duration-200 origin-center text-action-active',
+                                                'ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:-rotate-90'
+                                             )}
+                                          >
+                                             keyboard_arrow_down
+                                          </div>
+                                       </SidebarMenuButton>
+                                    </CollapsibleTrigger>
+                                    <CollapsibleContent>
+                                       <SidebarMenuSub>
+                                          {item.items.map((subItem) => (
+                                             <SidebarMenuSubItem key={subItem.title}>
+                                                <SidebarMenuSubButton asChild>
+                                                   <Link href={subItem.url}>
+                                                      <span
+                                                         className={cn(
+                                                            'text-sm font-normal',
+                                                            {
+                                                               'text-primary-default':
+                                                                  isActiveRoute(
+                                                                     subItem.url
+                                                                  )
+                                                            }
+                                                         )}
+                                                      >
+                                                         {subItem.title}
+                                                      </span>
+                                                   </Link>
+                                                </SidebarMenuSubButton>
+                                             </SidebarMenuSubItem>
+                                          ))}
+                                       </SidebarMenuSub>
+                                    </CollapsibleContent>
                                  </SidebarMenuItem>
-                              ))}
-                           </SidebarMenu>
-                        </SidebarGroupContent>
-                     </SidebarGroup>
-                  ))}
+                              </Collapsible>
+                           ) : (
+                              <SidebarMenuItem key={item.title}>
+                                 <SidebarMenuButton className="h-10" asChild>
+                                    <Link href={item.url}>
+                                       {item.icon &&
+                                          renderIcon(
+                                             item.icon,
+                                             cn({
+                                                'text-primary-default':
+                                                   isActiveRoute(item.url)
+                                             })
+                                          )}
+                                       <span
+                                          className={cn('text-sm font-medium', {
+                                             'text-primary-default': isActiveRoute(
+                                                item.url
+                                             )
+                                          })}
+                                       >
+                                          {item.title}
+                                       </span>
+                                    </Link>
+                                 </SidebarMenuButton>
+                              </SidebarMenuItem>
+                           )
+                        )}
+                     </SidebarMenu>
+                  </SidebarGroup>
                </SidebarContent>
                <SidebarRail />
             </Sidebar>
-            <SidebarInset>{children}</SidebarInset>
+            <SidebarInset className="p-6">{children}</SidebarInset>
          </SidebarProvider>
       </section>
+   )
+}
+
+type IconType = React.ComponentType<{ className?: string }>
+
+interface MenuItemType {
+   title: string
+   url: string
+   icon: IconType | JSX.Element
+   isActive?: boolean
+   items?: MenuItemType[]
+}
+
+const renderIcon = (icon: IconType | JSX.Element, className?: string) => {
+   if (React.isValidElement(icon)) {
+      if ((icon as React.ReactElement).type === 'span') {
+         return React.cloneElement(icon as React.ReactElement, {
+            className: cn((icon as React.ReactElement).props.className, className)
+         })
+      }
+      return icon
+   }
+   const IconComponent = icon as IconType
+   return <IconComponent className={className} />
+}
+
+const LogoSwitcher: React.FC = () => {
+   const { state } = useSidebar()
+   console.log('state', state)
+
+   return (
+      <div
+         className={cn('flex items-center justify-center h-full', {
+            'pt-6': state === 'expanded',
+            'py-6': state === 'collapsed'
+         })}
+      >
+         {state === 'expanded' ? (
+            <LogoComplete className="w-48 h-auto" />
+         ) : (
+            <LogoSimplified className="w-full h-8" />
+         )}
+      </div>
    )
 }
