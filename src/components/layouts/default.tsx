@@ -29,57 +29,20 @@ import { usePathname } from 'next/navigation'
 
 import Link from 'next/link'
 
-const data = {
-   menuItems: [
-      {
-         title: 'Dashboard',
-         url: '#',
-         icon: (
-            <span className="material-symbols-outlined filled">space_dashboard</span>
-         )
-      },
-      {
-         title: 'Pré-leilão',
-         url: '#',
-         icon: <span className="material-symbols-outlined">monitor</span>,
-         isActive: true,
-         items: [
-            {
-               title: 'Manutenção de leilões',
-               url: '#'
-            },
-            {
-               title: 'Monitor de operações',
-               url: '/dashboard'
-            }
-         ]
-      },
-
-      {
-         title: 'Pós-leilão',
-         url: '#',
-         icon: <span className="material-symbols-outlined filled">star</span>
-      }
-   ] as MenuItemType[]
-}
-
 export const DefaultLayout: React.FC<React.PropsWithChildren> = ({
    children
 }: React.PropsWithChildren) => {
    const pathname = usePathname()
-
-   const isActiveRoute = (url: string) => {
-      return pathname === url
-   }
+   const isActiveRoute = (url: string) => pathname === url
 
    return (
       <section>
          <SidebarProvider>
-            <Sidebar collapsible="icon">
+            <Sidebar hasHeaderMenu collapsible="icon">
                <SidebarHeader>
                   <LogoSwitcher />
                </SidebarHeader>
-               <SidebarContent className="px-2">
+               <SidebarContent>
                   <SidebarGroup>
                      <SidebarMenu className="gap-3">
                         {data.menuItems.map((item) =>
@@ -185,6 +148,40 @@ export const DefaultLayout: React.FC<React.PropsWithChildren> = ({
          </SidebarProvider>
       </section>
    )
+}
+
+const data = {
+   menuItems: [
+      {
+         title: 'Dashboard',
+         url: '#',
+         icon: (
+            <span className="material-symbols-outlined filled">space_dashboard</span>
+         )
+      },
+      {
+         title: 'Pré-leilão',
+         url: '#',
+         icon: <span className="material-symbols-outlined">monitor</span>,
+         isActive: true,
+         items: [
+            {
+               title: 'Manutenção de leilões',
+               url: '#'
+            },
+            {
+               title: 'Monitor de operações',
+               url: '/dashboard'
+            }
+         ]
+      },
+
+      {
+         title: 'Pós-leilão',
+         url: '#',
+         icon: <span className="material-symbols-outlined filled">star</span>
+      }
+   ] as MenuItemType[]
 }
 
 type IconType = React.ComponentType<{ className?: string }>
