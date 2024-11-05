@@ -59,7 +59,7 @@ export const DefaultLayout: React.FC<React.PropsWithChildren> = ({
                                           {item.icon &&
                                              renderIcon(
                                                 item.icon,
-                                                cn({
+                                                cn('w-6 h-6 block', {
                                                    'text-primary-default':
                                                       item.items.some((subItem) =>
                                                          isActiveRoute(subItem.url)
@@ -78,7 +78,7 @@ export const DefaultLayout: React.FC<React.PropsWithChildren> = ({
                                           </span>
                                           <div
                                              className={cn(
-                                                'material-symbols-outlined shrink-0 transition-transform duration-200 origin-center text-action-active',
+                                                'material-symbols-outlined shrink-0 transition-transform duration-200 origin-center text-action-active w-6 h-6 block !text-[24px]',
                                                 'ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:-rotate-90'
                                              )}
                                           >
@@ -120,7 +120,7 @@ export const DefaultLayout: React.FC<React.PropsWithChildren> = ({
                                        {item.icon &&
                                           renderIcon(
                                              item.icon,
-                                             cn({
+                                             cn('w-6 h-6 block', {
                                                 'text-primary-default':
                                                    isActiveRoute(item.url)
                                              })
@@ -156,13 +156,19 @@ const data = {
          title: 'Dashboard',
          url: '#',
          icon: (
-            <span className="material-symbols-outlined filled">space_dashboard</span>
+            <span className="material-symbols-outlined filled !text-[24px] leading-6 w-6 h-6 block">
+               space_dashboard
+            </span>
          )
       },
       {
          title: 'Pré-leilão',
          url: '#',
-         icon: <span className="material-symbols-outlined">monitor</span>,
+         icon: (
+            <span className="material-symbols-outlined !text-[24px] leading-6 w-6 h-6 block">
+               monitor
+            </span>
+         ),
          isActive: true,
          items: [
             {
@@ -175,11 +181,14 @@ const data = {
             }
          ]
       },
-
       {
          title: 'Pós-leilão',
          url: '#',
-         icon: <span className="material-symbols-outlined filled">star</span>
+         icon: (
+            <span className="material-symbols-outlined filled !text-[24px] leading-6 w-6 h-6 block">
+               star
+            </span>
+         )
       }
    ] as MenuItemType[]
 }
@@ -198,18 +207,21 @@ const renderIcon = (icon: IconType | JSX.Element, className?: string) => {
    if (React.isValidElement(icon)) {
       if ((icon as React.ReactElement).type === 'span') {
          return React.cloneElement(icon as React.ReactElement, {
-            className: cn((icon as React.ReactElement).props.className, className)
+            className: cn(
+               (icon as React.ReactElement).props.className,
+               className,
+               'w-6 h-6 block'
+            )
          })
       }
       return icon
    }
    const IconComponent = icon as IconType
-   return <IconComponent className={className} />
+   return <IconComponent className={cn(className, 'w-6 h-6 block')} />
 }
 
 const LogoSwitcher: React.FC = () => {
    const { state } = useSidebar()
-   console.log('state', state)
 
    return (
       <div
