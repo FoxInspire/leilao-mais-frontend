@@ -1,10 +1,7 @@
 import * as z from 'zod'
 
 const createEnv = () => {
-   const EnvSchema = z.object({
-      WS_URL: z.string().url(),
-      API_URL: z.string().url()
-   })
+   const EnvSchema = z.object({ API_URL: z.string().url() })
 
    const envVars = Object.entries(import.meta.filename).reduce<
       Record<string, string>
