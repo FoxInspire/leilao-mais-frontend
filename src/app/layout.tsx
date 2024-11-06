@@ -1,5 +1,6 @@
 import '@/src/styles/globals.css'
 import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
 
 export const metadata: Metadata = {
    metadataBase: new URL(`https://${process.env.VERCEL_URL}`),
@@ -36,7 +37,7 @@ export default function RootLayout({
    children: React.ReactNode
 }>) {
    return (
-      <html lang="pt-BR">
+      <html lang="pt-BR" suppressHydrationWarning>
          <head>
             {/* eslint-disable-next-line @next/next/no-page-custom-font */}
             <link
@@ -86,7 +87,16 @@ export default function RootLayout({
                href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
             />
          </head>
-         <body className="antialiased">{children}</body>
+         <body className="antialiased">
+            <ThemeProvider
+               attribute="class"
+               defaultTheme="system"
+               enableSystem
+               disableTransitionOnChange
+            >
+               {children}
+            </ThemeProvider>
+         </body>
       </html>
    )
 }
