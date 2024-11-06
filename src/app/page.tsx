@@ -131,6 +131,7 @@ export default function Home() {
             <Button variant="outline">Click me</Button>
             <Button variant="ghost">Click me</Button>
             <Button variant="link">Click me</Button>
+            <Button loading>Click me</Button>
          </div>
          <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
             <Input label="E-mail" placeholder="Placeholder" type="text" />
