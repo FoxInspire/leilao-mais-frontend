@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+  <img src="https://res.cloudinary.com/dnqiosdb6/image/upload/v1730922045/Group_2_hl9yb7.png" alt="leilao-mais-admin">
 
-## Getting Started
+## Sobre o projeto
 
-First, run the development server:
+O **Leilão Mais** é uma solução abrangente para administração e gerenciamento de leilões, projetada para simplificar e otimizar todos os processos envolvidos no ciclo de vida de um leilão. A plataforma oferece uma experiência intuitiva através de quatro módulos principais que trabalham em harmonia:
+
+O Dashboard proporciona uma visão estratégica e em tempo real do status dos leilões. O Módulo de Leilões centraliza toda a gestão de leilões e lotes, incluindo cadastros, edições e geração de documentos. O Módulo de Operações facilita o acompanhamento e execução das transações, enquanto o módulo de Prestação de Leilões garante um controle financeiro eficiente e transparente.
+
+Com recursos avançados de importação e exportação de dados, gestão de proprietários e arrematantes, e um sistema robusto de acompanhamento de status, o Leilão Mais é a ferramenta ideal para profissionais que buscam eficiência e controle em suas operações de leilão.
+
+## Configuração do ambiente
+
+### 1. Pré-requisitos
+
+**a. Instalação de dependências**
+
+Certifique-se de ter instalado em sua máquina:
+
+-  Node.js (versão 18 ou superior)
+-  PNPM (versão 8 ou superior)
+-  Git
+
+**b. Variáveis de ambiente**
+
+Configure as variáveis de ambiente necessárias:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configuração do projeto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**a. Clone do repositório**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Clone o repositório e acesse o diretório do projeto:
 
-## Learn More
+```bash
+git clone https://github.com/FoxInspire/leilao-mais-frontend.git
+cd leilao-mais-frontend
+```
 
-To learn more about Next.js, take a look at the following resources:
+**b. Instalação das dependências**
 
--  [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--  [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Instale todas as dependências do projeto utilizando o PNPM:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm i
+```
 
-## Deploy on Vercel
+### 3. Executando o projeto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**a. Ambiente de desenvolvimento**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Inicie o servidor de desenvolvimento:
+
+```bash
+pnpm dev
+```
+
+O aplicativo estará disponível em [http://localhost:3000](http://localhost:3000)
+
+**b. Ambiente de produção**
+
+Para build de produção:
+
+```bash
+pnpm build && pnpm start
+```
+
+### 4. Testes
+
+**a. Comandos básicos do playwright**
+
+Executar todos os testes:
+
+```bash
+npx playwright test
+```
+
+Executar um arquivo de teste específico:
+
+```bash
+npx playwright test tests/example.spec.ts
+```
+
+Executar testes em modo debug:
+
+```bash
+npx playwright test --debug
+```
+
+Executar testes com interface visual:
+
+```bash
+npx playwright test --ui
+```
+
+Executar testes em navegador com interface:
+
+```bash
+npx playwright test --headed
+```
+
+Executar testes para um projeto específico:
+
+```bash
+npx playwright test --project=chromium
+```
+
+Executar testes com reporter específico:
+
+```bash
+npx playwright test --reporter=dot
+```
+
+**b. Linting**
+
+Para executar o linter:
+
+```bash
+pnpm lint
+```
+
+[Saiba mais sobre os comandos do Playwright](https://playwright.dev/docs/test-cli)
