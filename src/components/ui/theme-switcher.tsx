@@ -1,64 +1,84 @@
+'use client'
+
 import { cn } from '@/src/lib/utils'
 import { useTheme } from 'next-themes'
-
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const ThemeSwitch: React.FC = () => {
    const { theme, setTheme } = useTheme()
+   const [mounted, setMounted] = useState(false)
+
+   // Previne erro de hidratação montando o componente apenas no cliente
+   useEffect(() => {
+      setMounted(true)
+   }, [])
+
+   if (!mounted) {
+      return null // ou um placeholder/skeleton
+   }
 
    return (
-      <div className="w-full h-full flex flex-col justify-center items-center">
-         <div className="flex justify-center items-center">
-            <span>
-               <svg
-                  className={cn('h-6 w-6', {
-                     'text-primary-default': theme !== 'dark',
-                     'text-text-secondary': theme === 'dark'
-                  })}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-               >
-                  <path
-                     strokeLinecap="round"
-                     strokeLinejoin="round"
-                     strokeWidth="2"
-                     d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
-               </svg>
-            </span>
-            <div
+      <div className="flex justify-center items-center">
+         <div className="border dark:border-gray-500 rounded-full p-1 flex gap-1">
+            <button
+               onClick={() => setTheme('light')}
                className={cn(
-                  'w-14 h-7 flex items-center rounded-full mx-3 px-1 cursor-pointer transition-colors duration-200 ease-in-out',
-                  theme === 'dark' ? 'bg-dark-primary-default' : 'bg-primary-default'
+                  'rounded-full h-6 w-6 transition-all duration-200',
+                  'text-gray-500 dark:text-gray-500',
+                  'hover:bg-gray-100 dark:hover:bg-gray-700',
+                  'flex items-center justify-center',
+                  'focus:outline-none',
+                  theme === 'light' ? 'bg-gray-100 text-primary-light' : ''
                )}
-               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             >
-               <div
-                  className={cn(
-                     'bg-common-white w-5 h-5 rounded-full shadow-md transform transition-transform duration-200 ease-in-out',
-                     theme === 'dark' && 'translate-x-7'
-                  )}
-               />
-            </div>
-            <span>
-               <svg
-                  className={cn('h-6 w-6', {
-                     'text-action-disabled': theme !== 'dark',
-                     'text-secondary-default': theme === 'dark'
-                  })}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+               <span
+                  className="material-symbols-outlined text-base"
+                  style={{ fontSize: '1.2rem' }}
                >
-                  <path
-                     strokeLinecap="round"
-                     strokeLinejoin="round"
-                     strokeWidth="2"
-                     d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                  />
-               </svg>
-            </span>
+                  light_mode
+               </span>
+            </button>
+
+            <button
+               onClick={() => setTheme('system')}
+               className={cn(
+                  'rounded-full h-6 w-6 transition-all duration-200',
+                  'text-gray-500 dark:hover:text-gray-300',
+                  'hover:bg-gray-100 dark:hover:bg-gray-700',
+                  'flex items-center justify-center',
+                  'focus:outline-none',
+                  theme === 'system' &&
+                     'bg-gray-100 dark:bg-gray-700 text-primary-light dark:text-gray-300'
+               )}
+            >
+               <span
+                  className="material-symbols-outlined text-base text-gray-400 dark:text-gray-500"
+                  style={{ fontSize: '1.2rem' }}
+               >
+                  desktop_windows
+               </span>
+            </button>
+
+            <button
+               onClick={() => setTheme('dark')}
+               className={cn(
+                  'rounded-full h-6 w-6 transition-all duration-200',
+                  'text-gray-500 dark:text-gray-500',
+                  'hover:bg-gray-100 dark:hover:bg-gray-700',
+                  'flex items-center justify-center',
+                  'focus:outline-none',
+                  theme === 'dark'
+                     ? 'bg-gray-100 dark:bg-gray-700 text-primary-light dark:text-secondary-default'
+                     : ''
+               )}
+            >
+               <span
+                  className="material-symbols-outlined text-base text-gray-400 dark:text-gray-500"
+                  style={{ fontSize: '1.2rem' }}
+               >
+                  dark_mode
+               </span>
+            </button>
          </div>
       </div>
    )

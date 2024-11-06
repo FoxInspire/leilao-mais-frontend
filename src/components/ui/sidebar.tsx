@@ -19,6 +19,7 @@ import { useIsMobile } from '@/src/hooks/useMobile'
 import { Slot } from '@radix-ui/react-slot'
 import { VariantProps, cva } from 'class-variance-authority'
 import { PanelLeft } from 'lucide-react'
+import { ThemeSwitch } from './theme-switcher'
 
 const SIDEBAR_COOKIE_NAME = 'sidebar:state'
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -201,9 +202,8 @@ const Sidebar = React.forwardRef<
       // Header Component
       const HeaderMenu = () => {
          const { isMobile, toggleSidebar } = useSidebar()
-
          return (
-            <div className="fixed top-0 left-0 right-0 h-14 dark:bg-primary-default z-20 bg-dark-background-paper rounded-b-lg flex items-center justify-between px-6">
+            <div className="fixed top-0 left-0 right-0 h-14 dark:bg-dark-background-paper bg-primary-default z-20 rounded-b-lg flex items-center justify-between px-6">
                <button
                   onClick={() => {
                      if (isMobile) {
@@ -217,10 +217,13 @@ const Sidebar = React.forwardRef<
                   <span className="material-symbols-outlined text-white">menu</span>
                </button>
 
-               <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>CN</AvatarFallback>
-               </Avatar>
+               <div className="flex items-center gap-4">
+                  <ThemeSwitch />
+                  <Avatar>
+                     <AvatarImage src="https://github.com/shadcn.png" />
+                     <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+               </div>
             </div>
          )
       }
