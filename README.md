@@ -77,12 +77,6 @@ Executar todos os testes:
 npx playwright test
 ```
 
-Executar um arquivo de teste específico:
-
-```bash
-npx playwright test tests/example.spec.ts
-```
-
 Executar testes em modo debug:
 
 ```bash
@@ -93,24 +87,6 @@ Executar testes com interface visual:
 
 ```bash
 npx playwright test --ui
-```
-
-Executar testes em navegador com interface:
-
-```bash
-npx playwright test --headed
-```
-
-Executar testes para um projeto específico:
-
-```bash
-npx playwright test --project=chromium
-```
-
-Executar testes com reporter específico:
-
-```bash
-npx playwright test --reporter=dot
 ```
 
 **b. Linting**
