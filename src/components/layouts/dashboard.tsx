@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 
-import { LogoComplete, LogoSimplified } from '@/components/icons/logo'
 import {
    Collapsible,
    CollapsibleContent,
@@ -24,6 +23,7 @@ import {
    SidebarRail,
    useSidebar
 } from '@/components/ui/sidebar'
+import { LogoComplete, LogoSimplified } from '@/src/components/svgs/logo'
 import { cn } from '@/src/lib/utils'
 import { usePathname } from 'next/navigation'
 

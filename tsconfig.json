@@ -21,7 +21,12 @@
          "@/components/*": ["./src/components/*"],
          "@/routes/*": ["./src/routes/*"],
          "@/lib/*": ["./src/lib/*"],
-         "@/types/*": ["./src/types/*"]
+         "@/types/*": ["./src/types/*"],
+         "@/features/*": ["./src/features/*"],
+         "@/styles/*": ["./src/styles/*"],
+         "@/hooks/*": ["./src/hooks/*"],
+         "@/utils/*": ["./src/utils/*"],
+         "@/svgs/*": ["./src/components/svgs/*"]
       }
    },
    "include": [
