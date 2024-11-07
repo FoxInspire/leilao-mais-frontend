@@ -27,6 +27,7 @@ import { LogoComplete, LogoSimplified } from '@/src/components/svgs/logo'
 import { cn } from '@/src/lib/utils'
 import { usePathname } from 'next/navigation'
 
+import { dashboard_routes } from '@/src/routes/dashboard'
 import Link from 'next/link'
 
 export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
@@ -37,8 +38,8 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
 
    return (
       <section>
-         <SidebarProvider>
-            <Sidebar hasHeaderMenu collapsible="icon">
+         <SidebarProvider hasHeaderMenu>
+            <Sidebar collapsible="icon">
                <SidebarHeader>
                   <LogoSwitcher />
                </SidebarHeader>
@@ -50,7 +51,6 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                               <Collapsible
                                  key={item.title}
                                  asChild
-                                 defaultOpen={item.isActive}
                                  className="group/collapsible"
                               >
                                  <SidebarMenuItem>
@@ -154,7 +154,7 @@ const data = {
    menuItems: [
       {
          title: 'Dashboard',
-         url: '#',
+         url: dashboard_routes.index,
          icon: (
             <span className="material-symbols-outlined filled !text-[24px] leading-6 w-6 h-6 block">
                space_dashboard
@@ -177,7 +177,7 @@ const data = {
             },
             {
                title: 'Monitor de operações',
-               url: '/dashboard'
+               url: '#'
             }
          ]
       },

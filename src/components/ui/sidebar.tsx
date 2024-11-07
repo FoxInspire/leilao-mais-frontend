@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
@@ -38,6 +38,7 @@ type SidebarContext = {
    setOpenMobile: (open: boolean) => void
    isMobile: boolean
    toggleSidebar: () => void
+   hasHeaderMenu: boolean
 }
 
 /** @dev Create a React context for the sidebar */
@@ -66,6 +67,7 @@ const SidebarProvider = React.forwardRef<
       defaultOpen?: boolean
       open?: boolean
       onOpenChange?: (open: boolean) => void
+      hasHeaderMenu?: boolean
    }
 >(
    (
@@ -73,6 +75,7 @@ const SidebarProvider = React.forwardRef<
          defaultOpen = true,
          open: openProp,
          onOpenChange: setOpenProp,
+         hasHeaderMenu = true,
          className,
          style,
          children,
@@ -163,9 +166,19 @@ const SidebarProvider = React.forwardRef<
             isMobile,
             openMobile,
             setOpenMobile,
-            toggleSidebar
+            toggleSidebar,
+            hasHeaderMenu
          }),
-         [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+         [
+            state,
+            open,
+            setOpen,
+            isMobile,
+            openMobile,
+            setOpenMobile,
+            toggleSidebar,
+            hasHeaderMenu
+         ]
       )
 
       return (
@@ -204,7 +217,6 @@ const Sidebar = React.forwardRef<
       side?: 'left' | 'right'
       variant?: 'sidebar' | 'floating' | 'inset'
       collapsible?: 'offcanvas' | 'icon' | 'none'
-      hasHeaderMenu?: boolean
    }
 >(
    (
@@ -212,7 +224,6 @@ const Sidebar = React.forwardRef<
          side = 'left',
          variant = 'sidebar',
          collapsible = 'offcanvas',
-         hasHeaderMenu = true,
          className,
          children,
          ...props
@@ -220,7 +231,8 @@ const Sidebar = React.forwardRef<
       ref
    ) => {
       /** @dev Access sidebar context to get current state */
-      const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+      const { isMobile, state, openMobile, setOpenMobile, hasHeaderMenu } =
+         useSidebar()
 
       /** @dev JSX content of the sidebar */
       const sidebarContent = (
@@ -253,12 +265,10 @@ const Sidebar = React.forwardRef<
                >
                   <span className="material-symbols-outlined text-white">menu</span>
                </button>
-
                <div className="flex items-center gap-4">
                   <ThemeSwitch />
                   <Avatar>
-                     <AvatarImage src="https://github.com/shadcn.png" />
-                     <AvatarFallback>CN</AvatarFallback>
+                     <AvatarFallback>USR</AvatarFallback>
                   </Avatar>
                </div>
             </div>
@@ -286,7 +296,6 @@ const Sidebar = React.forwardRef<
          return (
             <React.Fragment>
                {hasHeaderMenu && <HeaderMenu />}
-
                <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
                   <SheetContent
                      data-sidebar="sidebar"
@@ -313,7 +322,6 @@ const Sidebar = React.forwardRef<
       return (
          <React.Fragment>
             {hasHeaderMenu && <HeaderMenu />}
-
             <div
                ref={ref}
                className="group peer hidden md:block text-sidebar-foreground"
@@ -426,12 +434,20 @@ SidebarRail.displayName = 'SidebarRail'
  */
 const SidebarInset = React.forwardRef<HTMLDivElement, React.ComponentProps<'main'>>(
    ({ className, ...props }, ref) => {
+      const { hasHeaderMenu } = useSidebar()
+
       return (
          <main
             ref={ref}
             className={cn(
                'relative flex min-h-svh flex-1 flex-col bg-white dark:bg-neutral-950',
-               'peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow',
+               hasHeaderMenu ? 'mt-14' : '',
+               'peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))]',
+               'md:peer-data-[variant=inset]:m-2',
+               'md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2',
+               'md:peer-data-[variant=inset]:ml-0',
+               'md:peer-data-[variant=inset]:rounded-xl',
+               'md:peer-data-[variant=inset]:shadow',
                className
             )}
             {...props}

@@ -1,7 +1,7 @@
 'use client'
 
-import React from 'react'
+import Dashboard from '@/src/features/dashboard/dashboard'
 
-export default function Dashboard() {
-   return <React.Fragment>my dashboard content</React.Fragment>
+export default function DashboardPage() {
+   return <Dashboard />
 }
