@@ -34,7 +34,6 @@ export const inputVariants = cva(
       'placeholder:opacity-0',
       'placeholder:transition-opacity placeholder:duration-200',
       'focus:placeholder:opacity-100',
-      'dark:placeholder:text-neutral-300',
 
       'disabled:cursor-not-allowed disabled:opacity-50',
       'disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none',
