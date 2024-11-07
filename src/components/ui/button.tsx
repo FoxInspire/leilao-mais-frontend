@@ -5,20 +5,20 @@ import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 const buttonVariants = cva(
-   'flex flex-col justify-center items-center self-stretch px-[22px] py-2 rounded-[4px] uppercase text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 font-medium',
+   'flex flex-col justify-center items-center self-stretch px-[22px] py-2 rounded-[4px] uppercase text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 font-medium font-nunito tracking-wider',
    {
       variants: {
          variant: {
             default:
-               'bg-primary-default text-primary-contrast hover:bg-primary-light shadow-[0px_0px_5px_0px_rgba(0,0,0,0.12),0px_0px_2px_0px_rgba(0,0,0,0.14),0px_0px_1px_-2px_rgba(0,0,0,0.20)] dark:bg-primary-contrast dark:text-primary-default dark:hover:bg-primary-contrast/90',
+               'bg-primary-default text-primary-contrast hover:bg-primary-light dark:bg-dark-primary-default dark:hover:bg-dark-primary-light',
             destructive:
-               'bg-error-default text-error-contrast hover:bg-error-light dark:bg-error-contrast dark:text-error-default dark:hover:bg-error-contrast/90',
+               'bg-error-default text-error-contrast hover:bg-error-light dark:bg-dark-error-default dark:text-dark-error-contrast dark:hover:bg-dark-error-light',
             outline:
-               'border border-primary-default bg-transparent text-primary-default dark:border-primary-default dark:bg-transparent hover:bg-primary-default/10 dark:hover:bg-primary-default/10',
+               'border border-primary-default bg-transparent text-primary-default hover:bg-primary-default/10 dark:border-dark-primary-default dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10',
             secondary:
-               'bg-secondary-default text-white hover:bg-secondary-light dark:bg-secondary-contrast dark:text-secondary-default dark:hover:bg-secondary-contrast/90',
-            ghost: 'bg-transparent text-primary-default hover:bg-primary-default/10 dark:hover:bg-primary-default/10',
-            link: 'text-primary-default underline-offset-4 hover:underline dark:text-primary-default'
+               'bg-secondary-default text-secondary-contrast hover:bg-secondary-light dark:bg-dark-secondary-default dark:text-dark-secondary-contrast dark:hover:bg-dark-secondary-light',
+            ghost: 'bg-transparent text-primary-default hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10',
+            link: 'text-primary-default underline-offset-4 hover:underline dark:text-dark-primary-default'
          },
          size: {
             default: 'h-12 px-4 py-2',

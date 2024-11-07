@@ -11,16 +11,25 @@ export const inputVariants = cva(
       'px-[14px] py-[16.5px]',
 
       'text-base leading-6 tracking-[0.15px]',
-      'text-black',
-      'dark:text-white',
+      'text-black dark:text-white',
 
       'bg-transparent',
-      'border border-[#1212127f] rounded-[4px]',
       'outline-2 outline-transparent',
+      'border border-[#1212127f] dark:border-neutral-500 rounded-[4px]',
+      'transition-colors duration-200 ease-linear',
 
-      'focus:border-primary-default focus:outline-primary-default',
-      'dark:focus:border-primary-default dark:focus:outline-primary-default',
-      'focus:text-primary',
+      'focus-visible:border-primary-default',
+      'focus-visible:ring-0',
+      'focus-visible:border-2',
+      'focus-visible:outline-2',
+      'focus-visible:outline-offset-0',
+      'focus-visible:outline-primary-default',
+
+      'dark:focus-visible:border-dark-primary-default',
+      'dark:focus-visible:outline-dark-primary-default',
+      'dark:focus-visible:outline-2',
+      'dark:focus-visible:border-2',
+      'dark:focus-visible:outline-offset-0',
 
       'placeholder:opacity-0',
       'placeholder:transition-opacity placeholder:duration-200',
@@ -32,15 +41,13 @@ export const inputVariants = cva(
 
       'read-only:bg-slate-50 read-only:border-slate-200',
 
-      'transition-colors duration-200 ease-linear',
-
       'invalid:border-red-500 invalid:text-red-600',
       'focus:invalid:border-red-500 focus:invalid:ring-red-500'
    ],
    {
       variants: {
          error: {
-            true: 'border-red-500 text-red-600'
+            true: 'border-red-500 dark:border-red-500 text-red-600 dark:text-red-600'
          }
       }
    }
@@ -58,12 +65,13 @@ export const labelVariants = cva(
       'text-neutral-500',
       'dark:text-neutral-400',
 
-      'bg-white px-1',
+      'bg-background-paper dark:bg-dark-background-paper px-1',
+      'peer-disabled:bg-transparent peer-disabled:text-neutral-500',
 
       'peer-focus:top-1',
       'peer-focus:scale-75',
       'peer-focus:text-primary-default',
-      'dark:peer-focus:text-primary-default',
+      'peer-focus:dark:text-dark-primary-default',
 
       'peer-[&:not(:placeholder-shown)]:top-1',
       'peer-[&:not(:placeholder-shown)]:scale-75',
@@ -99,7 +107,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       return (
          <React.Fragment>
             <div
-               className="relative flex flex-col items-start self-stretch p-0 isolation-auto"
+               className="relative flex flex-col self-stretch p-0 isolate min-h-[61px] items-center justify-center"
                data-twe-input-wrapper-init
             >
                <input
@@ -146,7 +154,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                         type === 'password' ? 'Show password' : 'Hide password'
                      }
                   >
-                     <span className="material-symbols-outlined">
+                     <span className="material-symbols-outlined text-neutral-500 dark:text-neutral-400">
                         {type === 'password' ? 'visibility' : 'visibility_off'}
                      </span>
                   </button>
