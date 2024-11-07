@@ -6,7 +6,8 @@ const config: Config = {
       './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
       './src/components/**/*.{js,ts,jsx,tsx,mdx}',
       './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-      './src/components/ui/**/*.{js,ts,jsx,tsx,mdx}'
+      './src/components/ui/**/*.{js,ts,jsx,tsx,mdx}',
+      './src/features/**/*.{js,ts,jsx,tsx,mdx}'
    ],
    theme: {
       extend: {
@@ -161,6 +162,10 @@ const config: Config = {
          animation: {
             'accordion-down': 'accordion-down 0.2s ease-out',
             'accordion-up': 'accordion-up 0.2s ease-out'
+         },
+         fontFamily: {
+            montserrat: ['Montserrat', 'sans-serif'],
+            nunito: ['Nunito', 'sans-serif']
          }
       }
    },

@@ -36,6 +36,8 @@ body * {
    box-sizing: inherit;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
+   scroll-behavior: smooth;
+   -webkit-overflow-scrolling: touch;
 }
 
 body *:after,

@@ -99,7 +99,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       return (
          <React.Fragment>
             <div
-               className="relative flex flex-col items-start self-stretch p-0"
+               className="relative flex flex-col items-start self-stretch p-0 isolation-auto"
                data-twe-input-wrapper-init
             >
                <input

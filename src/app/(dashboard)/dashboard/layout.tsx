@@ -1,2 +1,2 @@
-import { DefaultLayout } from '@/components/layouts/default'
-export default DefaultLayout
+import { DashboardLayout } from '@/components/layouts/dashboard'
+export default DashboardLayout

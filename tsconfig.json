@@ -20,7 +20,8 @@
          "@/src/*": ["./src/*"],
          "@/components/*": ["./src/components/*"],
          "@/routes/*": ["./src/routes/*"],
-         "@/lib/*": ["./src/lib/*"]
+         "@/lib/*": ["./src/lib/*"],
+         "@/types/*": ["./src/types/*"]
       }
    },
    "include": [

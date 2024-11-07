@@ -29,7 +29,7 @@ import { usePathname } from 'next/navigation'
 
 import Link from 'next/link'
 
-export const DefaultLayout: React.FC<React.PropsWithChildren> = ({
+export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
    children
 }: React.PropsWithChildren) => {
    const pathname = usePathname()
