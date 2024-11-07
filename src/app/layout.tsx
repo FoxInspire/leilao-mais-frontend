@@ -46,20 +46,17 @@ export default function RootLayout({
                href="https://fonts.gstatic.com"
                crossOrigin="anonymous"
             />
-
             {/* eslint-disable-next-line @next/next/no-page-custom-font */}
             <link
                rel="preload"
                href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
                as="style"
             />
-
             {/* eslint-disable-next-line @next/next/no-page-custom-font */}
             <link
                href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
                rel="stylesheet"
             />
-
             {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
             <link
                rel="preload"
@@ -71,7 +68,6 @@ export default function RootLayout({
                rel="stylesheet"
                href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0"
             />
-
             {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
             <link
                rel="preload"
@@ -83,7 +79,6 @@ export default function RootLayout({
                href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite,home,search,settings&display=block"
                rel="stylesheet"
             />
-
             {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
             <link
                rel="preload"
