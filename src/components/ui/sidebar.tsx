@@ -238,7 +238,7 @@ const Sidebar = React.forwardRef<
       const sidebarContent = (
          <div
             data-sidebar="sidebar"
-            className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow gap-6"
+            className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow gap-6 dark:bg-dark-background-paper"
          >
             {children}
          </div>
@@ -252,7 +252,7 @@ const Sidebar = React.forwardRef<
          const { isMobile, toggleSidebar } = useSidebar()
 
          return (
-            <div className="fixed top-0 left-0 right-0 h-14 dark:bg-dark-background-paper bg-primary-default z-20 rounded-b-lg flex items-center justify-between px-6">
+            <div className="fixed top-0 left-0 right-0 h-14 dark:bg-primary-default bg-dark-background-paper z-20 rounded-b-lg flex items-center justify-between px-6">
                <button
                   onClick={() => {
                      if (isMobile) {
@@ -342,7 +342,6 @@ const Sidebar = React.forwardRef<
                   )}
                />
                <div
-                  /** @dev Render the sidebar content with appropriate classes */
                   className={cn(
                      'duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex',
                      hasHeaderMenu ? 'top-14' : 'top-0',
@@ -415,12 +414,17 @@ const SidebarRail = React.forwardRef<
          onClick={toggleSidebar}
          title="Toggle Sidebar"
          className={cn(
-            'absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] hover:after:bg-sidebar-border group-data-[side=left]:-right-4 group-data-[side=right]:left-0 sm:flex',
+            'absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear after:absolute after:inset-y-0 after:left-1/2 after:w-[1px] hover:after:w-[2px] after:bg-sidebar-border dark:after:bg-[#1f252b] group-data-[side=left]:-right-4 group-data-[side=right]:left-0 sm:flex',
+
             '[[data-side=left]_&]:cursor-w-resize [[data-side=right]_&]:cursor-e-resize',
+
             '[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize',
+
             'group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full group-data-[collapsible=offcanvas]:hover:bg-sidebar',
+
             '[[data-side=left][data-collapsible=offcanvas]_&]:-right-2',
             '[[data-side=right][data-collapsible=offcanvas]_&]:-left-2',
+
             className
          )}
          {...props}
@@ -440,7 +444,7 @@ const SidebarInset = React.forwardRef<HTMLDivElement, React.ComponentProps<'main
          <main
             ref={ref}
             className={cn(
-               'relative flex min-h-svh flex-1 flex-col bg-white dark:bg-neutral-950',
+               'relative flex min-h-svh flex-1 flex-col bg-white dark:bg-dark-background-paper',
                hasHeaderMenu ? 'mt-14' : '',
                'peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))]',
                'md:peer-data-[variant=inset]:m-2',
@@ -728,7 +732,11 @@ const SidebarMenuButton = React.forwardRef<
             data-sidebar="menu-button"
             data-size={size}
             data-active={isActive}
-            className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
+            className={cn(
+               sidebarMenuButtonVariants({ variant, size }),
+               'dark:hover:bg-[#fafafa0a]',
+               className
+            )}
             {...props}
          />
       )
@@ -909,7 +917,7 @@ const SidebarMenuSubButton = React.forwardRef<
          data-size={size}
          data-active={isActive}
          className={cn(
-            'flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground',
+            'flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 text-sidebar-foreground outline-none ring-sidebar-ring hover:bg-sidebar-accent dark:hover:bg-[#fafafa0a] hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:text-sidebar-accent-foreground',
             'data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground',
             size === 'sm' && 'text-xs',
             size === 'md' && 'text-sm',
