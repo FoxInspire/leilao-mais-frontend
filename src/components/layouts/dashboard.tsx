@@ -79,7 +79,7 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                                           <div
                                              className={cn(
                                                 'material-symbols-outlined shrink-0 transition-transform duration-200 origin-center text-action-active w-6 h-6 block !text-[24px]',
-                                                'ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:-rotate-90'
+                                                'ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:-rotate-90 dark:text-sidebar-foreground'
                                              )}
                                           >
                                              keyboard_arrow_down
