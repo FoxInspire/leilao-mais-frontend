@@ -149,6 +149,7 @@ input {
 
 .material-symbols-outlined {
    font-weight: 350;
+   user-select: none;
 }
 
 .filled {
