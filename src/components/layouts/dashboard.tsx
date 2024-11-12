@@ -51,11 +51,19 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                               <Collapsible
                                  key={item.title}
                                  asChild
-                                 className="group/collapsible"
+                                 className={cn('group/collapsible', {
+                                    'opacity-50 pointer-events-none': item.disabled
+                                 })}
                               >
                                  <SidebarMenuItem>
                                     <CollapsibleTrigger className="h-10" asChild>
-                                       <SidebarMenuButton tooltip={item.title}>
+                                       <SidebarMenuButton
+                                          tooltip={item.title}
+                                          className={cn({
+                                             'opacity-50 pointer-events-none':
+                                                item.disabled
+                                          })}
+                                       >
                                           {item.icon &&
                                              renderIcon(
                                                 item.icon,
@@ -90,8 +98,22 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                                        <SidebarMenuSub>
                                           {item.items.map((subItem) => (
                                              <SidebarMenuSubItem key={subItem.title}>
-                                                <SidebarMenuSubButton asChild>
-                                                   <Link href={subItem.url}>
+                                                <SidebarMenuSubButton
+                                                   asChild
+                                                   className={cn({
+                                                      'opacity-50 pointer-events-none':
+                                                         item.disabled ||
+                                                         subItem.disabled
+                                                   })}
+                                                >
+                                                   <Link
+                                                      href={
+                                                         item.disabled ||
+                                                         subItem.disabled
+                                                            ? '#'
+                                                            : subItem.url
+                                                      }
+                                                   >
                                                       <span
                                                          className={cn(
                                                             'text-sm font-normal',
@@ -115,8 +137,14 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                               </Collapsible>
                            ) : (
                               <SidebarMenuItem key={item.title}>
-                                 <SidebarMenuButton className="h-10" asChild>
-                                    <Link href={item.url}>
+                                 <SidebarMenuButton
+                                    className={cn('h-10', {
+                                       'opacity-50 pointer-events-none':
+                                          item.disabled
+                                    })}
+                                    asChild
+                                 >
+                                    <Link href={item.disabled ? '#' : item.url}>
                                        {item.icon &&
                                           renderIcon(
                                              item.icon,
@@ -159,7 +187,8 @@ const data = {
             <span className="material-symbols-outlined filled !text-[24px] leading-6 w-6 h-6 block">
                space_dashboard
             </span>
-         )
+         ),
+         disabled: false
       },
       {
          title: 'Pré-leilão',
@@ -170,20 +199,24 @@ const data = {
             </span>
          ),
          isActive: true,
+         disabled: true,
          items: [
             {
                title: 'Manutenção de leilões',
-               url: '#'
+               url: '#',
+               disabled: true
             },
             {
                title: 'Monitor de operações',
-               url: '#'
+               url: '#',
+               disabled: false
             }
          ]
       },
       {
          title: 'Pós-leilão',
          url: '#',
+         disabled: true,
          icon: (
             <span className="material-symbols-outlined filled !text-[24px] leading-6 w-6 h-6 block">
                star
@@ -200,6 +233,7 @@ interface MenuItemType {
    url: string
    icon: IconType | JSX.Element
    isActive?: boolean
+   disabled?: boolean
    items?: MenuItemType[]
 }
 
