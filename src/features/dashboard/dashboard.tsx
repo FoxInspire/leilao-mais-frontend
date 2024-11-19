@@ -14,8 +14,7 @@ const Dashboard: React.FC = () => {
       const hasUnfit = auction.transactions.unfit.items.length > 0
       const hasCompleted = auction.transactions.completed.items.length > 0
 
-      if (hasUnfit) return 'unfit'
-      if (hasPending && !hasCompleted) return 'in-progress'
+      if (hasUnfit && !hasPending && !hasCompleted) return 'unfit'
       if (hasCompleted && !hasPending && !hasUnfit) return 'completed'
       return 'in-progress'
    }

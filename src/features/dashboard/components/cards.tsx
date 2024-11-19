@@ -8,85 +8,100 @@ import { Button } from '@/src/components/ui/button'
 
 export type CardProps = {
    /**
-    * Código identificador único do leilão
+    * Código identificador único do leilão no formato LEI-YYYY-XXX
+    * onde YYYY é o ano e XXX é um número sequencial
+    * @example "LEI-2024-001"
     * @type {string}
     */
    auctionCode: string
 
    /**
-    * Nome do pátio onde o leilão está acontecendo
+    * Nome completo do pátio responsável pela realização do leilão,
+    * incluindo a cidade/região onde está localizado
+    * @example "Pátio Central SP"
     * @type {string}
     */
    yardName: string
 
    /**
-    * Nome do leilão
+    * Identificador comercial do leilão no formato BRUXX.YY-DP
+    * onde XX é o número sequencial e YY é o ano
+    * @example "BRU01.23-DP"
     * @type {string}
     */
    name: string
 
    /**
-    * Quantidade de lotes válidos no leilão
+    * Número total de lotes disponíveis para lance no leilão,
+    * excluindo lotes cancelados ou suspensos
     * @type {number}
     */
    validLots: number
 
    /**
-    * Data de realização do leilão
+    * Data de realização do evento principal do leilão
+    * Utilizada para ordenação e filtragem dos leilões
     * @type {Date}
     */
    date: Date
 
    /**
-    * Local onde o leilão está acontecendo
+    * Endereço onde o leilão será realizado,
+    * no formato "Cidade, UF"
+    * @example "São Paulo, SP"
     * @type {string}
     */
    location: string
 
    /**
-    * Função callback para edição do leilão
-    * @type {function}
+    * Callback acionado quando o usuário clica no botão de edição
+    * Deve abrir o formulário de edição do leilão
+    * @type {() => void}
     */
    onEdit: () => void
 
    /**
-    * Objeto contendo informações sobre as transações do leilão
+    * Agrupamento das transações do leilão por status,
+    * usado para exibir os indicadores visuais no card
     * @type {object}
     */
    transactions: {
       /**
-       * Transações em andamento
+       * Transações em processamento ou aguardando aprovação
+       * Representadas pelo indicador amarelo
        */
       pending: {
-         /** Lista de transações pendentes */
+         /** Lista de transações com suas quantidades e descrições */
          items: Array<{
-            /** Quantidade de transações */
+            /** Número de itens afetados pela transação */
             quantity: number
-            /** Nome da transação */
+            /** Descrição ou identificador da transação */
             name: string
          }>
       }
       /**
-       * Transações inaptas
+       * Transações rejeitadas ou com problemas
+       * Representadas pelo indicador vermelho
        */
       unfit: {
-         /** Lista de transações inaptas */
+         /** Lista de transações com suas quantidades e descrições */
          items: Array<{
-            /** Quantidade de transações */
+            /** Número de itens afetados pela transação */
             quantity: number
-            /** Nome da transação */
+            /** Descrição ou identificador da transação */
             name: string
          }>
       }
       /**
-       * Transações concluídas
+       * Transações finalizadas com sucesso
+       * Representadas pelo indicador verde
        */
       completed: {
-         /** Lista de transações concluídas */
+         /** Lista de transações com suas quantidades e descrições */
          items: Array<{
-            /** Quantidade de transações */
+            /** Número de itens afetados pela transação */
             quantity: number
-            /** Nome da transação */
+            /** Descrição ou identificador da transação */
             name: string
          }>
       }
@@ -112,7 +127,6 @@ export const Card: React.FC<CardProps> = ({
    const hasTransactions = (items: Array<{ quantity: number; name: string }>) => {
       return items.some((item) => item.quantity > 0)
    }
-
    return (
       <div className="p-4 space-y-4 bg-white rounded-md shadow-elevation-8 h-full">
          <div className="flex justify-between items-center">
@@ -177,7 +191,7 @@ export const Card: React.FC<CardProps> = ({
                )}
             </div>
          </div>
-         <div className="grid grid-cols-3">
+         <div className="flex justify-between">
             <div className="flex flex-col">
                <span className="text-base font-normal text-text-secondary">
                   Lotes válidos
