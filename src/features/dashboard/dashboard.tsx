@@ -7,7 +7,7 @@ import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Separator } from '@/src/components/ui/separator'
 import { useQueryState } from 'nuqs'
 
-import React from 'react'
+import * as React from 'react'
 
 const Dashboard: React.FC = () => {
    const getAuctionStatus = (auction: CardProps) => {

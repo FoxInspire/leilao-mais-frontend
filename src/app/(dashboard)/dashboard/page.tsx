@@ -1,7 +1,7 @@
 'use client'
 
 import Dashboard from '@/src/features/dashboard/dashboard'
-import React from 'react'
+import * as React from 'react'
 
 export default function DashboardPage() {
    return (

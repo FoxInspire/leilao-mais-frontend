@@ -2,7 +2,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sh
 import { cn } from '@/lib/utils'
 import { useIsMobile } from '@/src/hooks/useMobile'
 
-import React from 'react'
+import * as React from 'react'
 
 type CollapsibleSidebarProps = {
    side?: 'left' | 'right'
