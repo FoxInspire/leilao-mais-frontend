@@ -56,7 +56,7 @@ export function CollapsibleSidebar({
       <div
          className={cn(
             'relative transition-[width] duration-300 ease-in-out',
-            open ? 'w-80' : 'w-0',
+            open ? 'w-96' : 'w-0',
             hasHeaderMenu ? 'mt-14' : '',
             className
          )}

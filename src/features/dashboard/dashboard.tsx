@@ -1,13 +1,13 @@
 'use client'
 
+import * as React from 'react'
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardProps } from '@/features/dashboard/components/cards'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Separator } from '@/src/components/ui/separator'
 import { useQueryState } from 'nuqs'
-
-import * as React from 'react'
 
 const Dashboard: React.FC = () => {
    const getAuctionStatus = (auction: CardProps) => {
@@ -116,9 +116,9 @@ const Dashboard: React.FC = () => {
          <CollapsibleSidebar
             open={isSidebarOpen}
             onOpenChange={setIsSidebarOpen}
-            className="ml-4"
+            className="h-[calc(100vh-1.5rem-56px)]"
          >
-            <div className="space-y-2">
+            <div className="space-y-2 h-full overflow-y-auto ml-4">
                <div className="flex justify-between items-center gap-2">
                   <h1 className="text-2xl font-bold font-montserrat">
                      Sobre a página
@@ -137,6 +137,57 @@ const Dashboard: React.FC = () => {
                   </Button>
                </div>
                <Separator orientation="horizontal" />
+               <div className="px-4 py-6 space-y-4">
+                  <p className="text-black font-semibold">Descrição</p>
+                  <p className="text-text-secondary">
+                     A página de Dashboard oferece uma visão geral dos leilões,
+                     exibindo cards com o status das transações. O usuário pode
+                     navegar em abas organizadas por: Em progresso, Inaptos e
+                     Concluídos. Também é possível aplicar filtros por tipo de erro e
+                     transação, facilitando o acompanhamento e a gestão eficiente dos
+                     leilões.
+                  </p>
+                  <p className="text-black font-semibold">Detalhes</p>
+                  <div>
+                     <p className="text-black font-normal">Aba Em progresso</p>
+                     <p className="text-text-secondary">
+                        Reúne os leilões que iniciaram as transações com o DETRAN e
+                        não apresentam erros.
+                     </p>
+                  </div>
+                  <div>
+                     <p className="text-black font-normal">Aba Inaptos</p>
+                     <p className="text-text-secondary">
+                        Reúne os leilões que não aderem a nenhum filtro de erro.
+                     </p>
+                  </div>
+                  <div>
+                     <p className="text-black font-normal">Aba Concluídos</p>
+                     <p className="text-text-secondary">
+                        Reúne os leilões finalizados.
+                     </p>
+                  </div>
+                  <div>
+                     <p className="text-black font-normal">Status</p>
+                     <p className="text-text-secondary">
+                        A cor cinza indica lotes com transações em progresso. A cor
+                        vermelha indica lotes com transações que precisam ser
+                        revisadas. A cor verde indica lotes que necessitam
+                        intervenção manual para a continuidade do processo
+                        automático.
+                     </p>
+                  </div>
+                  <div className="bg-[#E6F1F7] px-4 py-4 space-y-2">
+                     <p className="text-black font-normal">Info</p>
+                     <p className="text-text-secondary">
+                        Clique no card para acessar o leilão.
+                     </p>
+                     <p className="text-text-secondary">
+                        Passe o ponteiro do mouse na cor do status para visualizar a
+                        quantidade de lotes por transação.
+                     </p>
+                  </div>
+               </div>
             </div>
          </CollapsibleSidebar>
       </div>
