@@ -3,6 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardProps } from '@/features/dashboard/components/cards'
 import { Button } from '@/src/components/ui/button'
+import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Separator } from '@/src/components/ui/separator'
 import { useQueryState } from 'nuqs'
 
@@ -48,59 +49,97 @@ const Dashboard: React.FC = () => {
       [Tab.Completed]: filteredAuctions[Tab.Completed]
    }
 
+   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
+
    return (
-      <React.Fragment>
-         <div className="space-y-6">
+      <div className="flex h-full">
+         <div className="flex-1">
+            <div className="space-y-6">
+               <div className="space-y-2">
+                  <div className="flex justify-between items-center gap-2">
+                     <h1 className="text-3xl font-bold font-montserrat">
+                        Dashboard
+                     </h1>
+                     <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                     >
+                        <span className="material-symbols-outlined text-action-active">
+                           info
+                        </span>
+                     </Button>
+                  </div>
+                  <Separator orientation="horizontal" />
+               </div>
+               <div>
+                  <Tabs
+                     defaultValue={Tab.InProgress}
+                     onValueChange={(value) => setTab(value as Tab)}
+                  >
+                     <TabsList className="flex justify-between">
+                        <div>
+                           <TabsTrigger className="min-w-36" value={Tab.InProgress}>
+                              Em progresso
+                           </TabsTrigger>
+                           <TabsTrigger className="min-w-36" value={Tab.Unfit}>
+                              Inaptos
+                           </TabsTrigger>
+                           <TabsTrigger className="min-w-36" value={Tab.Completed}>
+                              Concluídos
+                           </TabsTrigger>
+                        </div>
+                        <Button variant="ghost" size="sm">
+                           <div className="flex items-center gap-1.5">
+                              <span className="text-sm font-nunito font-semibold">
+                                 Filtros
+                              </span>
+                              <span className="material-symbols-outlined filled symbol-sm">
+                                 filter_alt
+                              </span>
+                           </div>
+                        </Button>
+                     </TabsList>
+                     <TabsContent value={tab} className="grid grid-cols-4 gap-4">
+                        {tabs_content[tab as Tab].map((auction) => (
+                           <Card
+                              key={auction.auctionCode}
+                              {...auction}
+                              onEdit={() => console.log('Editar leilão')}
+                           />
+                        ))}
+                     </TabsContent>
+                  </Tabs>
+               </div>
+            </div>
+         </div>
+         <CollapsibleSidebar
+            open={isSidebarOpen}
+            onOpenChange={setIsSidebarOpen}
+            className="ml-4"
+         >
             <div className="space-y-2">
                <div className="flex justify-between items-center gap-2">
-                  <h1 className="text-3xl font-bold font-montserrat">Dashboard</h1>
-                  <span className="material-symbols-outlined text-action-active">
-                     info
-                  </span>
+                  <h1 className="text-2xl font-bold font-montserrat">
+                     Sobre a página
+                  </h1>
+                  <Button
+                     variant="ghost"
+                     size="icon"
+                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                  >
+                     <span
+                        className="material-symbols-outlined text-action-active"
+                        style={{ fontSize: '1.5rem' }}
+                     >
+                        close
+                     </span>
+                  </Button>
                </div>
                <Separator orientation="horizontal" />
             </div>
-            <div>
-               <Tabs
-                  defaultValue={Tab.InProgress}
-                  onValueChange={(value) => setTab(value as Tab)}
-               >
-                  <TabsList className="flex justify-between">
-                     <div>
-                        <TabsTrigger className="min-w-36" value={Tab.InProgress}>
-                           Em progresso
-                        </TabsTrigger>
-                        <TabsTrigger className="min-w-36" value={Tab.Unfit}>
-                           Inaptos
-                        </TabsTrigger>
-                        <TabsTrigger className="min-w-36" value={Tab.Completed}>
-                           Concluídos
-                        </TabsTrigger>
-                     </div>
-                     <Button variant="ghost" size="sm">
-                        <div className="flex items-center gap-1.5">
-                           <span className="text-sm font-nunito font-semibold">
-                              Filtros
-                           </span>
-                           <span className="material-symbols-outlined filled symbol-sm">
-                              filter_alt
-                           </span>
-                        </div>
-                     </Button>
-                  </TabsList>
-                  <TabsContent value={tab} className="grid grid-cols-4 gap-4">
-                     {tabs_content[tab as Tab].map((auction) => (
-                        <Card
-                           key={auction.auctionCode}
-                           {...auction}
-                           onEdit={() => console.log('Editar leilão')}
-                        />
-                     ))}
-                  </TabsContent>
-               </Tabs>
-            </div>
-         </div>
-      </React.Fragment>
+         </CollapsibleSidebar>
+      </div>
    )
 }
 
