@@ -1,7 +1,12 @@
 'use client'
 
 import Dashboard from '@/src/features/dashboard/dashboard'
+import React from 'react'
 
 export default function DashboardPage() {
-   return <Dashboard />
+   return (
+      <React.Suspense>
+         <Dashboard />
+      </React.Suspense>
+   )
 }

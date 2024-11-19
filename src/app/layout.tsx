@@ -1,6 +1,8 @@
 import '@/src/styles/globals.css'
+
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 export const metadata: Metadata = {
    metadataBase: new URL(`https://${process.env.VERCEL_URL}`),
@@ -92,14 +94,16 @@ export default function RootLayout({
             />
          </head>
          <body className="antialiased bg-background-default dark:bg-dark-background-default">
-            <ThemeProvider
-               attribute="class"
-               defaultTheme="system"
-               enableSystem
-               disableTransitionOnChange
-            >
-               {children}
-            </ThemeProvider>
+            <NuqsAdapter>
+               <ThemeProvider
+                  attribute="class"
+                  defaultTheme="system"
+                  enableSystem
+                  disableTransitionOnChange
+               >
+                  {children}
+               </ThemeProvider>
+            </NuqsAdapter>
          </body>
       </html>
    )
