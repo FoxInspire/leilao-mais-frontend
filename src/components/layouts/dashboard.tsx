@@ -28,6 +28,7 @@ import { cn } from '@/src/lib/utils'
 import { dashboard_routes } from '@/src/routes/dashboard'
 import { usePathname } from 'next/navigation'
 
+import { useIsMobile } from '@/src/hooks/useMobile'
 import Link from 'next/link'
 
 export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
@@ -255,6 +256,7 @@ const renderIcon = (icon: IconType | JSX.Element, className?: string) => {
 
 const LogoSwitcher: React.FC = () => {
    const { state } = useSidebar()
+   const isMobile = useIsMobile()
 
    return (
       <div
@@ -264,9 +266,17 @@ const LogoSwitcher: React.FC = () => {
          })}
       >
          {state === 'expanded' ? (
-            <LogoComplete className="w-48 h-auto" />
+            <React.Fragment>
+               <LogoComplete className="w-48 h-auto" />
+            </React.Fragment>
          ) : (
-            <LogoSimplified className="w-full h-8" />
+            <React.Fragment>
+               {isMobile ? (
+                  <LogoComplete className="w-48 h-auto" />
+               ) : (
+                  <LogoSimplified className="w-full h-8" />
+               )}
+            </React.Fragment>
          )}
       </div>
    )
