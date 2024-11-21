@@ -128,7 +128,7 @@ export const Card: React.FC<CardProps> = ({
       return items.some((item) => item.quantity > 0)
    }
    return (
-      <div className="p-4 space-y-4 bg-white rounded-md shadow-elevation-8 h-full">
+      <div className="p-4 space-y-4 bg-white rounded-md border border-neutral-200 h-full">
          <div className="flex justify-between items-center">
             <div className="flex flex-col items-start">
                <span className="text-base font-normal text-black">
