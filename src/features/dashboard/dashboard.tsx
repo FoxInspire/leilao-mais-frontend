@@ -92,6 +92,7 @@ const Dashboard: React.FC = () => {
       if (!tabsContainer) return
 
       const activeTabElement = tabsContainer.querySelector(`[data-value="${tab}"]`)
+
       if (activeTabElement) {
          activeTabElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
       }
