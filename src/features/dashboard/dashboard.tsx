@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
                      size="icon"
                      onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                   >
-                     <span className="material-symbols-outlined text-action-active">
+                     <span className="material-symbols-outlined text-action-active dark:text-dark-action-active/70">
                         info
                      </span>
                   </Button>
