@@ -1,4 +1,5 @@
 import '@/src/styles/globals.css'
+import '@/styles/reset.css'
 
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'

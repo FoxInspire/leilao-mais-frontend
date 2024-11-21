@@ -25,9 +25,9 @@ import {
 } from '@/components/ui/sidebar'
 import { LogoComplete, LogoSimplified } from '@/src/components/svgs/logo'
 import { cn } from '@/src/lib/utils'
+import { dashboard_routes } from '@/src/routes/dashboard'
 import { usePathname } from 'next/navigation'
 
-import { dashboard_routes } from '@/src/routes/dashboard'
 import Link from 'next/link'
 
 export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
@@ -60,8 +60,7 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                                        <SidebarMenuButton
                                           tooltip={item.title}
                                           className={cn({
-                                             'opacity-50 pointer-events-none':
-                                                item.disabled
+                                             'pointer-events-none': item.disabled
                                           })}
                                        >
                                           {item.icon &&
@@ -101,7 +100,7 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                                                 <SidebarMenuSubButton
                                                    asChild
                                                    className={cn({
-                                                      'opacity-50 pointer-events-none':
+                                                      'pointer-events-none':
                                                          item.disabled ||
                                                          subItem.disabled
                                                    })}

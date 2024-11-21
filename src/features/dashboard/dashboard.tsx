@@ -57,7 +57,7 @@ const Dashboard: React.FC = () => {
             <div className="space-y-6">
                <div className="space-y-2">
                   <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-3xl font-bold font-montserrat">
+                     <h1 className="text-3xl font-semibold font-montserrat">
                         Dashboard
                      </h1>
                      <Button
@@ -100,7 +100,10 @@ const Dashboard: React.FC = () => {
                            </div>
                         </Button>
                      </TabsList>
-                     <TabsContent value={tab} className="grid grid-cols-4 gap-4">
+                     <TabsContent
+                        value={tab}
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+                     >
                         {tabs_content[tab as Tab].map((auction) => (
                            <Card
                               key={auction.auctionCode}
@@ -120,7 +123,7 @@ const Dashboard: React.FC = () => {
          >
             <div className="space-y-2 h-full overflow-y-auto ml-4">
                <div className="flex justify-between items-center gap-2">
-                  <h1 className="text-2xl font-bold font-montserrat">
+                  <h1 className="text-2xl font-semibold font-montserrat">
                      Sobre a página
                   </h1>
                   <Button
@@ -138,8 +141,8 @@ const Dashboard: React.FC = () => {
                </div>
                <Separator orientation="horizontal" />
                <div className="px-4 py-6 space-y-4">
-                  <p className="text-black font-semibold">Descrição</p>
-                  <p className="text-text-secondary">
+                  <p className="text-black font-semibold text-start">Descrição</p>
+                  <p className="text-text-secondary text-start">
                      A página de Dashboard oferece uma visão geral dos leilões,
                      exibindo cards com o status das transações. O usuário pode
                      navegar em abas organizadas por: Em progresso, Inaptos e
@@ -147,29 +150,33 @@ const Dashboard: React.FC = () => {
                      transação, facilitando o acompanhamento e a gestão eficiente dos
                      leilões.
                   </p>
-                  <p className="text-black font-semibold">Detalhes</p>
+                  <p className="text-black font-semibold text-start">Detalhes</p>
                   <div>
-                     <p className="text-black font-normal">Aba Em progresso</p>
-                     <p className="text-text-secondary">
+                     <p className="text-black font-normal text-start">
+                        Aba Em progresso
+                     </p>
+                     <p className="text-text-secondary text-start">
                         Reúne os leilões que iniciaram as transações com o DETRAN e
                         não apresentam erros.
                      </p>
                   </div>
                   <div>
-                     <p className="text-black font-normal">Aba Inaptos</p>
-                     <p className="text-text-secondary">
+                     <p className="text-black font-normal text-start">Aba Inaptos</p>
+                     <p className="text-text-secondary text-start">
                         Reúne os leilões que não aderem a nenhum filtro de erro.
                      </p>
                   </div>
                   <div>
-                     <p className="text-black font-normal">Aba Concluídos</p>
-                     <p className="text-text-secondary">
+                     <p className="text-black font-normal text-start">
+                        Aba Concluídos
+                     </p>
+                     <p className="text-text-secondary text-start">
                         Reúne os leilões finalizados.
                      </p>
                   </div>
                   <div>
-                     <p className="text-black font-normal">Status</p>
-                     <p className="text-text-secondary">
+                     <p className="text-black font-normal text-start">Status</p>
+                     <p className="text-text-secondary text-start">
                         A cor cinza indica lotes com transações em progresso. A cor
                         vermelha indica lotes com transações que precisam ser
                         revisadas. A cor verde indica lotes que necessitam
@@ -178,11 +185,11 @@ const Dashboard: React.FC = () => {
                      </p>
                   </div>
                   <div className="bg-[#E6F1F7] px-4 py-4 space-y-2">
-                     <p className="text-black font-normal">Info</p>
-                     <p className="text-text-secondary">
+                     <p className="text-black font-normal text-start">Info</p>
+                     <p className="text-text-secondary text-start">
                         Clique no card para acessar o leilão.
                      </p>
-                     <p className="text-text-secondary">
+                     <p className="text-text-secondary text-start">
                         Passe o ponteiro do mouse na cor do status para visualizar a
                         quantidade de lotes por transação.
                      </p>
