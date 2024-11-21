@@ -1,3 +1,4 @@
+import { Card as CardContainer } from '@/components/ui/card'
 import {
    Tooltip,
    TooltipContent,
@@ -128,30 +129,32 @@ export const Card: React.FC<CardProps> = ({
       return items.some((item) => item.quantity > 0)
    }
    return (
-      <div className="p-4 space-y-4 bg-white rounded-md border border-neutral-300 h-full">
+      <CardContainer>
          <div className="flex justify-between items-center">
             <div className="flex flex-col items-start">
-               <span className="text-base font-normal text-black">
+               <span className="text-base font-normal text-black dark:text-dark-text-primary">
                   {auctionCode}
                </span>
-               <span className="text-base font-normal text-text-secondary">
+               <span className="text-base font-normal text-text-secondary dark:text-dark-text-secondary">
                   {yardName}
                </span>
             </div>
             <Button variant="ghost" size="icon" className="my-auto" onClick={onEdit}>
-               <span className="material-symbols-outlined filled text-text-secondary">
+               <span className="material-symbols-outlined filled text-text-secondary dark:text-dark-text-secondary">
                   edit
                </span>
             </Button>
          </div>
          <div className="flex justify-between items-center">
-            <span className="text-2xl font-semibold">{name}</span>
+            <span className="text-2xl font-semibold text-black dark:text-dark-text-primary">
+               {name}
+            </span>
             <div className="flex gap-2">
                {hasTransactions(transactions.pending.items) && (
                   <TooltipProvider>
                      <Tooltip>
                         <TooltipTrigger>
-                           <div className="w-3.5 h-3.5 rounded-full bg-action-active/10" />
+                           <div className="w-3.5 h-3.5 rounded-full bg-warning-default dark:bg-dark-warning-light" />
                         </TooltipTrigger>
                         <TooltipContent>
                            <p className="whitespace-pre">
@@ -165,7 +168,7 @@ export const Card: React.FC<CardProps> = ({
                   <TooltipProvider>
                      <Tooltip>
                         <TooltipTrigger>
-                           <div className="w-3.5 h-3.5 rounded-full bg-error-default" />
+                           <div className="w-3.5 h-3.5 rounded-full bg-error-default dark:bg-dark-error-default" />
                         </TooltipTrigger>
                         <TooltipContent>
                            <p className="whitespace-pre">
@@ -179,7 +182,7 @@ export const Card: React.FC<CardProps> = ({
                   <TooltipProvider>
                      <Tooltip>
                         <TooltipTrigger>
-                           <div className="w-3.5 h-3.5 rounded-full bg-success-default" />
+                           <div className="w-3.5 h-3.5 rounded-full bg-success-default dark:bg-dark-success-default" />
                         </TooltipTrigger>
                         <TooltipContent>
                            <p className="whitespace-pre">
@@ -193,26 +196,30 @@ export const Card: React.FC<CardProps> = ({
          </div>
          <div className="flex justify-between">
             <div className="flex flex-col">
-               <span className="text-base font-normal text-text-secondary">
+               <span className="text-base font-normal text-text-secondary dark:text-dark-text-secondary">
                   Lotes válidos
                </span>
-               <span className="text-base font-normal text-black">{validLots}</span>
+               <span className="text-base font-normal text-black dark:text-dark-text-primary">
+                  {validLots}
+               </span>
             </div>
             <div className="flex flex-col">
-               <span className="text-base font-normal text-text-secondary">
+               <span className="text-base font-normal text-text-secondary dark:text-dark-text-secondary">
                   Data
                </span>
-               <span className="text-base font-normal text-black">
+               <span className="text-base font-normal text-black dark:text-dark-text-primary">
                   {date.toLocaleDateString()}
                </span>
             </div>
             <div className="flex flex-col">
-               <span className="text-base font-normal text-text-secondary">
+               <span className="text-base font-normal text-text-secondary dark:text-dark-text-secondary">
                   Local
                </span>
-               <span className="text-base font-normal text-black">{location}</span>
+               <span className="text-base font-normal text-black dark:text-dark-text-primary">
+                  {location}
+               </span>
             </div>
          </div>
-      </div>
+      </CardContainer>
    )
 }

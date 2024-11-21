@@ -2,37 +2,41 @@
 
 import { cn } from '@/src/lib/utils'
 import { useTheme } from 'next-themes'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 export const ThemeSwitch: React.FC = () => {
    const { theme, setTheme } = useTheme()
-   const [mounted, setMounted] = useState(false)
+   const [mounted, setMounted] = React.useState(false)
 
-   // Previne erro de hidratação montando o componente apenas no cliente
-   useEffect(() => {
+   React.useEffect(() => {
       setMounted(true)
    }, [])
 
    if (!mounted) {
-      return null // ou um placeholder/skeleton
+      return null
    }
 
    return (
       <div className="flex justify-center items-center">
-         <div className="border dark:border-gray-500 rounded-full p-1 flex gap-1">
+         <div className="border border-neutral-300 dark:border-gray-400 rounded-full p-1 flex gap-1.5">
             <button
                onClick={() => setTheme('light')}
                className={cn(
                   'rounded-full h-6 w-6 transition-all duration-200',
                   'text-gray-500 dark:text-gray-500',
-                  'hover:bg-gray-100 dark:hover:bg-gray-700',
+                  'hover:bg-gray-100 ',
                   'flex items-center justify-center',
                   'focus:outline-none',
-                  theme === 'light' ? 'bg-gray-100 text-primary-light' : ''
+                  theme === 'light' ? 'bg-gray-100 dark:bg-gray-700' : ''
                )}
             >
                <span
-                  className="material-symbols-outlined text-base"
+                  className={cn(
+                     'material-symbols-outlined text-base',
+                     theme === 'light'
+                        ? 'text-primary-light'
+                        : 'text-gray-400 dark:text-gray-500'
+                  )}
                   style={{ fontSize: '1.2rem' }}
                >
                   light_mode
@@ -43,16 +47,20 @@ export const ThemeSwitch: React.FC = () => {
                onClick={() => setTheme('system')}
                className={cn(
                   'rounded-full h-6 w-6 transition-all duration-200',
-                  'text-gray-500 dark:hover:text-gray-300',
-                  'hover:bg-gray-100 dark:hover:bg-gray-700',
+                  'text-gray-500 dark:text-gray-500',
+                  'hover:bg-gray-100 ',
                   'flex items-center justify-center',
                   'focus:outline-none',
-                  theme === 'system' &&
-                     'bg-gray-100 dark:bg-gray-700 text-primary-light dark:text-gray-300'
+                  theme === 'system' ? 'bg-gray-100' : ''
                )}
             >
                <span
-                  className="material-symbols-outlined text-base text-gray-400 dark:text-gray-500"
+                  className={cn(
+                     'material-symbols-outlined text-base',
+                     theme === 'system'
+                        ? 'text-primary-light'
+                        : 'text-gray-400 dark:text-gray-500'
+                  )}
                   style={{ fontSize: '1.2rem' }}
                >
                   desktop_windows
@@ -64,16 +72,17 @@ export const ThemeSwitch: React.FC = () => {
                className={cn(
                   'rounded-full h-6 w-6 transition-all duration-200',
                   'text-gray-500 dark:text-gray-500',
-                  'hover:bg-gray-100 dark:hover:bg-gray-700',
+                  'hover:bg-gray-100 ',
                   'flex items-center justify-center',
                   'focus:outline-none',
-                  theme === 'dark'
-                     ? 'bg-gray-100 dark:bg-gray-700 text-primary-light dark:text-secondary-default'
-                     : ''
+                  theme === 'dark' ? 'bg-gray-100' : ''
                )}
             >
                <span
-                  className="material-symbols-outlined text-base text-gray-400 dark:text-gray-500"
+                  className={cn(
+                     'material-symbols-outlined text-base',
+                     theme === 'dark' ? 'text-primary-light' : ''
+                  )}
                   style={{ fontSize: '1.2rem' }}
                >
                   dark_mode
