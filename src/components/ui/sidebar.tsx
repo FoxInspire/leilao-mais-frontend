@@ -268,7 +268,9 @@ const Sidebar = React.forwardRef<
                <div className="flex items-center gap-4">
                   <ThemeSwitch />
                   <Avatar>
-                     <AvatarFallback>USR</AvatarFallback>
+                     <AvatarFallback className="text-xl font-semibold">
+                        R
+                     </AvatarFallback>
                   </Avatar>
                </div>
             </div>
