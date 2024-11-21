@@ -36,7 +36,7 @@ const Checkbox = React.forwardRef<
             ref={ref}
             id={id}
             className={cn(
-               'peer shrink-0 gap-0 flex rounded-sm border-2 border-text-secondary ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary-default data-[state=checked]:bg-primary-default data-[state=checked]:text-common-white dark:border-neutral-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 dark:data-[state=checked]:border-neutral-50 dark:data-[state=checked]:bg-neutral-50 dark:data-[state=checked]:text-neutral-900',
+               'peer shrink-0 gap-0 flex rounded-sm border-2 border-text-secondary ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary-default data-[state=checked]:bg-primary-default data-[state=checked]:text-common-white dark:border-dark-text-secondary dark:ring-offset-dark-background-default dark:focus-visible:ring-neutral-300 dark:data-[state=checked]:border-dark-primary-default dark:data-[state=checked]:bg-dark-primary-default dark:data-[state=checked]:text-dark-text-primary',
                sizeStyles[size].checkbox,
                className
             )}
@@ -56,7 +56,7 @@ const Checkbox = React.forwardRef<
          <label
             htmlFor={id}
             className={cn(
-               'font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+               'font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-dark-text-primary',
                sizeStyles[size].label
             )}
          >
@@ -67,7 +67,7 @@ const Checkbox = React.forwardRef<
       <CheckboxPrimitive.Root
          ref={ref}
          className={cn(
-            'peer h-4 w-4 shrink-0 gap-0 flex flex-grow rounded-sm border border-text-secondary ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary-default data-[state=checked]:bg-primary-default data-[state=checked]:text-common-white dark:border-neutral-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 dark:data-[state=checked]:border-neutral-50 dark:data-[state=checked]:bg-neutral-50 dark:data-[state=checked]:text-neutral-900',
+            'peer h-4 w-4 shrink-0 gap-0 flex flex-grow rounded-sm border border-text-secondary ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary-default data-[state=checked]:bg-primary-default data-[state=checked]:text-common-white dark:border-dark-text-secondary dark:ring-offset-dark-background-default dark:focus-visible:ring-neutral-300 dark:data-[state=checked]:border-dark-primary-default dark:data-[state=checked]:bg-dark-primary-default dark:data-[state=checked]:text-dark-text-primary',
             className
          )}
          {...props}
