@@ -67,6 +67,36 @@ const Dashboard: React.FC = () => {
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
 
+   const tabsRef = React.useRef(null)
+
+   const nextTab = () => {
+      const values = Object.values(Tab)
+      const currentIndex = values.indexOf(tab as Tab)
+      if (currentIndex < values.length - 1) {
+         const nextValue = values[currentIndex + 1]
+         setTab(nextValue)
+      }
+   }
+
+   const previousTab = () => {
+      const values = Object.values(Tab)
+      const currentIndex = values.indexOf(tab as Tab)
+      if (currentIndex > 0) {
+         const prevValue = values[currentIndex - 1]
+         setTab(prevValue)
+      }
+   }
+
+   React.useEffect(() => {
+      const tabsContainer = tabsRef.current as unknown as HTMLElement
+      if (!tabsContainer) return
+
+      const activeTabElement = tabsContainer.querySelector(`[data-value="${tab}"]`)
+      if (activeTabElement) {
+         activeTabElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      }
+   }, [tab])
+
    return (
       <div className="grid grid-cols-[1fr_auto] h-[calc(100vh-16rem)] ">
          <div className="space-y-6">
@@ -90,25 +120,59 @@ const Dashboard: React.FC = () => {
             <div>
                <Tabs
                   defaultValue={Tab.InProgress}
-                  onValueChange={(value) => setTab(value as Tab)}
+                  value={tab as Tab}
+                  onValueChange={(value) => {
+                     setTab(value as Tab)
+                  }}
                >
                   <TabsList className="flex justify-between">
-                     <div>
-                        <TabsTrigger className="min-w-36" value={Tab.InProgress}>
-                           Em progresso
-                        </TabsTrigger>
-                        <TabsTrigger className="min-w-36" value={Tab.Unfit}>
-                           Inaptos
-                        </TabsTrigger>
-                        <TabsTrigger className="min-w-36" value={Tab.Completed}>
-                           Concluídos
-                        </TabsTrigger>
+                     <div className="grid grid-flow-col items-center gap-4">
+                        <span
+                           className="material-symbols-outlined rotate-180 cursor-pointer !text-[32px] hover:scale-110 lg:!hidden"
+                           onClick={previousTab}
+                        >
+                           chevron_right
+                        </span>
+                        <div
+                           className="hide-scrollbar flex w-full overflow-x-auto"
+                           ref={tabsRef}
+                        >
+                           <div className="flex">
+                              <TabsTrigger
+                                 className="min-w-36"
+                                 value={Tab.InProgress}
+                                 data-value={Tab.InProgress}
+                              >
+                                 Em progresso
+                              </TabsTrigger>
+                              <TabsTrigger
+                                 className="min-w-36"
+                                 value={Tab.Unfit}
+                                 data-value={Tab.Unfit}
+                              >
+                                 Inaptos
+                              </TabsTrigger>
+                              <TabsTrigger
+                                 className="min-w-36"
+                                 value={Tab.Completed}
+                                 data-value={Tab.Completed}
+                              >
+                                 Concluídos
+                              </TabsTrigger>
+                           </div>
+                        </div>
+                        <span
+                           className="material-symbols-outlined cursor-pointer !text-[32px] hover:scale-110 lg:!hidden"
+                           onClick={nextTab}
+                        >
+                           chevron_right
+                        </span>
                      </div>
                      <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                            <Button variant="ghost" size="sm">
                               <div className="flex items-center gap-1.5">
-                                 <span className="text-sm font-nunito font-semibold">
+                                 <span className="text-sm font-nunito font-semibold hidden md:block">
                                     Filtros
                                  </span>
                                  <span className="material-symbols-outlined filled symbol-sm">
