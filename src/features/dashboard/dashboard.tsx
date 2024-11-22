@@ -99,7 +99,7 @@ const Dashboard: React.FC = () => {
    }, [tab])
 
    return (
-      <div className="grid grid-cols-[1fr_auto] h-[calc(100vh-16rem)] ">
+      <div className="grid grid-cols-[1fr_auto] h-[calc(100vh-6.5rem)] overflow-hidden">
          <div className="space-y-6">
             <div className="space-y-2">
                <div className="flex justify-between items-center gap-2">
@@ -225,7 +225,7 @@ const Dashboard: React.FC = () => {
                   </TabsList>
                   <TabsContent value={tab} className="h-full">
                      <ScrollArea className="h-[calc(100vh-15rem)] w-full pr-2.5">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-4">
                            {tabs_content[tab as Tab].map((auction) => (
                               <Card
                                  key={auction.auctionCode}

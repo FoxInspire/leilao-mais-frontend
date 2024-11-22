@@ -7,39 +7,29 @@ import { cva } from 'class-variance-authority'
 
 export const inputVariants = cva(
    [
-      'peer block w-full min-h-[56px]',
-      'px-[14px] py-[16.5px]',
-
-      'text-base leading-6 tracking-[0.15px]',
+      'peer block w-full',
       'text-black dark:text-white',
-
       'bg-transparent',
       'outline-2 outline-transparent',
       'border border-[#1212127f] dark:border-neutral-500 rounded-[4px]',
       'transition-colors duration-200 ease-linear',
-
       'focus-visible:border-primary-default',
       'focus-visible:ring-0',
       'focus-visible:border-2',
       'focus-visible:outline-2',
       'focus-visible:outline-offset-0',
       'focus-visible:outline-primary-default',
-
       'dark:focus-visible:border-dark-primary-default',
       'dark:focus-visible:outline-dark-primary-default',
       'dark:focus-visible:outline-2',
       'dark:focus-visible:border-2',
       'dark:focus-visible:outline-offset-0',
-
       'placeholder:opacity-0',
       'placeholder:transition-opacity placeholder:duration-200',
       'focus:placeholder:opacity-100',
-
       'disabled:cursor-not-allowed disabled:opacity-50',
       'disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none',
-
       'read-only:bg-slate-50 read-only:border-slate-200',
-
       'invalid:border-red-500 invalid:text-red-600',
       'focus:invalid:border-red-500 focus:invalid:ring-red-500'
    ],
@@ -47,7 +37,17 @@ export const inputVariants = cva(
       variants: {
          error: {
             true: 'border-red-500 dark:border-red-500 text-red-600 dark:text-red-600'
+         },
+         size: {
+            xs: 'min-h-[32px] px-[8px] py-[4px] text-sm leading-5',
+            sm: 'min-h-[40px] px-[10px] py-[6px] text-sm leading-5',
+            md: 'min-h-[48px] px-[12px] py-[8px] text-sm leading-6',
+            lg: 'min-h-[56px] px-[14px] py-[10px] text-base leading-6',
+            default: 'min-h-[56px] px-[14px] py-[16.5px] text-base leading-6'
          }
+      },
+      defaultVariants: {
+         size: 'default'
       }
    }
 )
@@ -95,7 +95,10 @@ export const labelVariants = cva(
 )
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-   ({ className, type: initialType, label, error, ...props }, ref) => {
+   (
+      { className, type: initialType, label, error, size = 'default', ...props },
+      ref
+   ) => {
       const isPassword = initialType === 'password'
       const [type, setType] = React.useState(initialType)
 
@@ -106,7 +109,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       return (
          <React.Fragment>
             <div
-               className="relative flex flex-col self-stretch p-0 isolate min-h-[61px] items-center justify-center"
+               className="relative flex flex-col self-stretch p-0 isolate items-center justify-center"
                data-twe-input-wrapper-init
             >
                <input
@@ -116,7 +119,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   autoComplete="new-password"
                   autoCorrect="off"
                   autoSave="off"
-                  className={cn(inputVariants({ error: !!error }), className)}
+                  className={cn(inputVariants({ error: !!error, size }), className)}
                   aria-invalid={error ? 'true' : undefined}
                   ref={ref}
                   placeholder={label}
@@ -165,9 +168,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
    }
 )
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
    label?: string
    error?: string
+   size?: 'default' | 'xs' | 'sm' | 'md' | 'lg'
 }
 
 Input.displayName = 'Input'
