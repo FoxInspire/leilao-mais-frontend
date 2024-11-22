@@ -25,8 +25,10 @@ import {
 } from '@/components/ui/sidebar'
 import { LogoComplete, LogoSimplified } from '@/src/components/svgs/logo'
 import { cn } from '@/src/lib/utils'
+import { dashboard_routes } from '@/src/routes/dashboard'
 import { usePathname } from 'next/navigation'
 
+import { useIsMobile } from '@/src/hooks/useMobile'
 import Link from 'next/link'
 
 export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
@@ -37,8 +39,8 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
 
    return (
       <section>
-         <SidebarProvider>
-            <Sidebar hasHeaderMenu collapsible="icon">
+         <SidebarProvider hasHeaderMenu>
+            <Sidebar collapsible="icon">
                <SidebarHeader>
                   <LogoSwitcher />
                </SidebarHeader>
@@ -50,12 +52,18 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                               <Collapsible
                                  key={item.title}
                                  asChild
-                                 defaultOpen={item.isActive}
-                                 className="group/collapsible"
+                                 className={cn('group/collapsible', {
+                                    'opacity-50 pointer-events-none': item.disabled
+                                 })}
                               >
                                  <SidebarMenuItem>
                                     <CollapsibleTrigger className="h-10" asChild>
-                                       <SidebarMenuButton tooltip={item.title}>
+                                       <SidebarMenuButton
+                                          tooltip={item.title}
+                                          className={cn({
+                                             'pointer-events-none': item.disabled
+                                          })}
+                                       >
                                           {item.icon &&
                                              renderIcon(
                                                 item.icon,
@@ -79,7 +87,7 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                                           <div
                                              className={cn(
                                                 'material-symbols-outlined shrink-0 transition-transform duration-200 origin-center text-action-active w-6 h-6 block !text-[24px]',
-                                                'ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:-rotate-90'
+                                                'ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:-rotate-90 dark:text-sidebar-foreground'
                                              )}
                                           >
                                              keyboard_arrow_down
@@ -90,8 +98,22 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                                        <SidebarMenuSub>
                                           {item.items.map((subItem) => (
                                              <SidebarMenuSubItem key={subItem.title}>
-                                                <SidebarMenuSubButton asChild>
-                                                   <Link href={subItem.url}>
+                                                <SidebarMenuSubButton
+                                                   asChild
+                                                   className={cn({
+                                                      'pointer-events-none':
+                                                         item.disabled ||
+                                                         subItem.disabled
+                                                   })}
+                                                >
+                                                   <Link
+                                                      href={
+                                                         item.disabled ||
+                                                         subItem.disabled
+                                                            ? '#'
+                                                            : subItem.url
+                                                      }
+                                                   >
                                                       <span
                                                          className={cn(
                                                             'text-sm font-normal',
@@ -115,8 +137,14 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                               </Collapsible>
                            ) : (
                               <SidebarMenuItem key={item.title}>
-                                 <SidebarMenuButton className="h-10" asChild>
-                                    <Link href={item.url}>
+                                 <SidebarMenuButton
+                                    className={cn('h-10', {
+                                       'opacity-50 pointer-events-none':
+                                          item.disabled
+                                    })}
+                                    asChild
+                                 >
+                                    <Link href={item.disabled ? '#' : item.url}>
                                        {item.icon &&
                                           renderIcon(
                                              item.icon,
@@ -154,12 +182,13 @@ const data = {
    menuItems: [
       {
          title: 'Dashboard',
-         url: '#',
+         url: dashboard_routes.index,
          icon: (
             <span className="material-symbols-outlined filled !text-[24px] leading-6 w-6 h-6 block">
                space_dashboard
             </span>
-         )
+         ),
+         disabled: false
       },
       {
          title: 'Pré-leilão',
@@ -170,20 +199,24 @@ const data = {
             </span>
          ),
          isActive: true,
+         disabled: true,
          items: [
             {
                title: 'Manutenção de leilões',
-               url: '#'
+               url: '#',
+               disabled: true
             },
             {
                title: 'Monitor de operações',
-               url: '/dashboard'
+               url: '#',
+               disabled: false
             }
          ]
       },
       {
          title: 'Pós-leilão',
          url: '#',
+         disabled: true,
          icon: (
             <span className="material-symbols-outlined filled !text-[24px] leading-6 w-6 h-6 block">
                star
@@ -200,6 +233,7 @@ interface MenuItemType {
    url: string
    icon: IconType | JSX.Element
    isActive?: boolean
+   disabled?: boolean
    items?: MenuItemType[]
 }
 
@@ -222,6 +256,7 @@ const renderIcon = (icon: IconType | JSX.Element, className?: string) => {
 
 const LogoSwitcher: React.FC = () => {
    const { state } = useSidebar()
+   const isMobile = useIsMobile()
 
    return (
       <div
@@ -231,9 +266,17 @@ const LogoSwitcher: React.FC = () => {
          })}
       >
          {state === 'expanded' ? (
-            <LogoComplete className="w-48 h-auto" />
+            <React.Fragment>
+               <LogoComplete className="w-48 h-auto" />
+            </React.Fragment>
          ) : (
-            <LogoSimplified className="w-full h-8" />
+            <React.Fragment>
+               {isMobile ? (
+                  <LogoComplete className="w-48 h-auto" />
+               ) : (
+                  <LogoSimplified className="w-full h-8" />
+               )}
+            </React.Fragment>
          )}
       </div>
    )

@@ -1,1 +1,1 @@
-export const dashboard_routes = { home: '/home' }
+export const dashboard_routes = { index: '/dashboard' }

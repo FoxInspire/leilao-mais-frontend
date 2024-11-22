@@ -24,7 +24,7 @@ const buttonVariants = cva(
             default: 'h-12 px-4 py-2',
             sm: 'h-10 rounded-md px-3',
             lg: 'h-14 rounded-md px-8',
-            icon: 'h-10 w-10'
+            icon: 'h-10 w-10 rounded-md p-0'
          }
       },
       defaultVariants: {
@@ -51,8 +51,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ref={ref}
             {...props}
          >
-            <div className="relative">
-               <span className={cn(loading && 'invisible')}>{props.children}</span>
+            <div className="relative flex items-center justify-center">
+               <span className={cn(loading && 'invisible', 'flex items-center')}>
+                  {props.children}
+               </span>
                {loading && (
                   <span className="loader absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animation-spin" />
                )}

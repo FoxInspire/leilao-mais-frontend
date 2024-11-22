@@ -35,7 +35,7 @@ import {
    TooltipTrigger
 } from '@/components/ui/tooltip'
 
-import React from 'react'
+import * as React from 'react'
 
 export default function Home() {
    return (

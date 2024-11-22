@@ -10,7 +10,7 @@ import { Input } from '@/src/components/ui/input'
 import { ThemeSwitch } from '@/src/components/ui/theme-switcher'
 import { useTheme } from 'next-themes'
 
-import React from 'react'
+import * as React from 'react'
 
 const LoginForm: React.FC = () => {
    const { theme } = useTheme()
