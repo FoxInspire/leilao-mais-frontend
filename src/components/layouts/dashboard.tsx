@@ -101,7 +101,7 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                                                 <SidebarMenuSubButton
                                                    asChild
                                                    className={cn({
-                                                      'pointer-events-none':
+                                                      'pointer-events-none opacity-50':
                                                          item.disabled ||
                                                          subItem.disabled
                                                    })}
@@ -192,30 +192,30 @@ const data = {
       },
       {
          title: 'Pré-leilão',
-         url: '#',
+         url: dashboard_routes.pre_auction.index,
          icon: (
             <span className="material-symbols-outlined !text-[24px] leading-6 w-6 h-6 block">
                monitor
             </span>
          ),
          isActive: true,
-         disabled: true,
+         disabled: false,
          items: [
             {
                title: 'Manutenção de leilões',
-               url: '#',
-               disabled: true
+               url: dashboard_routes.pre_auction.auction_maintenance,
+               disabled: false
             },
             {
                title: 'Monitor de operações',
-               url: '#',
-               disabled: false
+               url: dashboard_routes.pre_auction.operations_monitor,
+               disabled: true
             }
          ]
       },
       {
          title: 'Pós-leilão',
-         url: '#',
+         url: dashboard_routes.post_auction.index,
          disabled: true,
          icon: (
             <span className="material-symbols-outlined filled !text-[24px] leading-6 w-6 h-6 block">

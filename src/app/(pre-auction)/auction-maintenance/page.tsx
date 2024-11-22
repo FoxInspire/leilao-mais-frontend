@@ -2,7 +2,7 @@ import Dashboard from '@/src/features/dashboard/dashboard'
 
 import * as React from 'react'
 
-export default function DashboardPage() {
+export default function AuctionMaintenance() {
    return (
       <React.Suspense>
          <Dashboard />
