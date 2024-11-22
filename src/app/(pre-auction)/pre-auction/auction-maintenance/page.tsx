@@ -9,21 +9,19 @@ import path from 'path'
 
 export const taskSchema = z.object({
    id: z.string(),
-   title: z.string(),
+   date: z.string(),
+   auction: z.string(),
+   location: z.string(),
    status: z.string(),
-   label: z.string(),
-   priority: z.string()
+   committer: z.string(),
+   lots: z.number()
 })
 
 export type Task = z.infer<typeof taskSchema>
 
 async function getTasks() {
-   const data = await fs.readFile(
-      path.join(process.cwd(), 'src/features/auction-maintenance/mocks/tasks.json')
-   )
-
+   const data = await fs.readFile(path.join(process.cwd(), 'tasks.json'))
    const tasks = JSON.parse(data.toString())
-
    return z.array(taskSchema).parse(tasks)
 }
 

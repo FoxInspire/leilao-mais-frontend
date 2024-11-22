@@ -26,17 +26,20 @@ import {
 } from '@/components/ui/table'
 
 import { DataTablePagination } from './data-table-pagination'
-import { DataTableToolbar } from './data-table-toolbar'
 
-interface DataTableProps<TData, TValue> {
-   columns: ColumnDef<TData, TValue>[]
+interface DataTableProps<TData> {
    data: TData[]
+   columns: ColumnDef<TData>[]
+   globalFilter?: string
+   setGlobalFilter?: (value: string) => void
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData>({
    columns,
-   data
-}: DataTableProps<TData, TValue>) {
+   data,
+   globalFilter,
+   setGlobalFilter
+}: DataTableProps<TData>) {
    const [rowSelection, setRowSelection] = React.useState({})
    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>(
       {}
@@ -51,7 +54,8 @@ export function DataTable<TData, TValue>({
          sorting,
          columnVisibility,
          rowSelection,
-         columnFilters
+         columnFilters,
+         globalFilter
       },
       enableRowSelection: true,
       onRowSelectionChange: setRowSelection,
@@ -63,12 +67,17 @@ export function DataTable<TData, TValue>({
       getPaginationRowModel: getPaginationRowModel(),
       getSortedRowModel: getSortedRowModel(),
       getFacetedRowModel: getFacetedRowModel(),
-      getFacetedUniqueValues: getFacetedUniqueValues()
+      getFacetedUniqueValues: getFacetedUniqueValues(),
+      onGlobalFilterChange: setGlobalFilter,
+      globalFilterFn: (row, columnId, filterValue) => {
+         const searchValue = filterValue.toLowerCase()
+         const cellValue = String(row.getValue(columnId)).toLowerCase()
+         return cellValue.includes(searchValue)
+      }
    })
 
    return (
       <div className="space-y-4">
-         <DataTableToolbar table={table} />
          <div className="rounded-md border">
             <Table>
                <TableHeader>

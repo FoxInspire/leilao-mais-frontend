@@ -22,6 +22,8 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
    data
 }: AuctionMaintenanceProps) => {
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
+   const [globalFilter, setGlobalFilter] = React.useState('')
+
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto] overflow-hidden h-[calc(100vh-6.5rem)]">
@@ -61,6 +63,8 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                            size="md"
                            label="Busca geral"
                            placeholder="Descrição, Local, ID"
+                           value={globalFilter}
+                           onChange={(e) => setGlobalFilter(e.target.value)}
                         />
                         <Button variant="ghost" className="w-fit">
                            Busca avançada
@@ -70,7 +74,11 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                   </div>
                </div>
                <div className="h-full">
-                  <DataTable data={data} columns={columns} />
+                  <DataTable
+                     data={data}
+                     columns={columns}
+                     globalFilter={globalFilter}
+                  />
                </div>
             </div>
             <CollapsibleSidebar
