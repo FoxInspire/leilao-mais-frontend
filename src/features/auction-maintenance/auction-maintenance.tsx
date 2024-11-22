@@ -14,8 +14,13 @@ import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
+import { ColumnDef } from '@tanstack/react-table'
+import { DataTable } from './components/data-table'
 
-const AuctionMaintenance: React.FC = () => {
+const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
+   columns,
+   data
+}: AuctionMaintenanceProps) => {
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    return (
       <React.Fragment>
@@ -64,7 +69,9 @@ const AuctionMaintenance: React.FC = () => {
                      <Button variant="default">Novo leilão</Button>
                   </div>
                </div>
-               <div className="bg-red-300 h-full"></div>
+               <div className="h-full">
+                  <DataTable data={data} columns={columns} />
+               </div>
             </div>
             <CollapsibleSidebar
                open={isSidebarOpen}
@@ -152,6 +159,11 @@ const AuctionMaintenance: React.FC = () => {
          </div>
       </React.Fragment>
    )
+}
+
+type AuctionMaintenanceProps = {
+   data: any[]
+   columns: ColumnDef<any>[]
 }
 
 export default AuctionMaintenance
