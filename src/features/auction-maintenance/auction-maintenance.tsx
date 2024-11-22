@@ -73,7 +73,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                      <Button variant="default">Novo leilão</Button>
                   </div>
                </div>
-               <div className="h-full">
+               <div className="h-full overflow-y-auto">
                   <DataTable
                      data={data}
                      columns={columns}

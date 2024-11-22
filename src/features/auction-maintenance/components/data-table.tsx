@@ -50,6 +50,12 @@ export function DataTable<TData>({
    const table = useReactTable({
       data,
       columns,
+      initialState: {
+         pagination: {
+            pageSize: 8,
+            pageIndex: 0
+         }
+      },
       state: {
          sorting,
          columnVisibility,
@@ -121,7 +127,7 @@ export function DataTable<TData>({
                            colSpan={columns.length}
                            className="h-24 text-center"
                         >
-                           No results.
+                           Nenhum resultado encontrado.
                         </TableCell>
                      </TableRow>
                   )}

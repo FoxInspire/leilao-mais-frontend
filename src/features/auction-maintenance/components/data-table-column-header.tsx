@@ -9,7 +9,6 @@ import {
    DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
-import { Button } from '@/src/components/ui/button'
 
 interface DataTableColumnHeaderProps<TData, TValue>
    extends React.HTMLAttributes<HTMLDivElement> {
@@ -30,20 +29,16 @@ export function DataTableColumnHeader<TData, TValue>({
       <div className={cn('flex items-center space-x-2', className)}>
          <DropdownMenu>
             <DropdownMenuTrigger asChild>
-               <Button
-                  variant="ghost"
-                  size="sm"
-                  className="-ml-3 h-8 data-[state=open]:bg-accent"
-               >
-                  <span>{title}</span>
+               <div className="flex items-center space-x-2">
+                  <span className="text-black">{title}</span>
                   {column.getIsSorted() === 'desc' ? (
-                     <ArrowDown />
+                     <ArrowDown className="h-4 w-4" />
                   ) : column.getIsSorted() === 'asc' ? (
-                     <ArrowUp />
+                     <ArrowUp className="h-4 w-4" />
                   ) : (
-                     <ChevronsUpDown />
+                     <ChevronsUpDown className="h-4 w-4" />
                   )}
-               </Button>
+               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
                <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
