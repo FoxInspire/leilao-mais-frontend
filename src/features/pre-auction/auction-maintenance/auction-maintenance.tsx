@@ -14,8 +14,8 @@ import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
+import { cn } from '@/src/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
-import { DataTable } from './components/data-table'
 
 const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
    columns,
@@ -24,9 +24,13 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
 
+   const table_ref = React.useRef<HTMLDivElement>(null)
+
+   console.log('table_ref', table_ref.current?.clientHeight)
+
    return (
       <React.Fragment>
-         <div className="grid grid-cols-[1fr_auto] overflow-hidden h-[calc(100vh-6.5rem)]">
+         <div ref={table_ref} className="grid grid-cols-[1fr_auto] bg-blue-100">
             <div className="space-y-6">
                <div className="space-y-4">
                   <Breadcrumb>
@@ -41,7 +45,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
-                     <div className="flex justify-between items-center gap-2">
+                     <div className="flex flex-wrap justify-between items-center gap-2">
                         <h1 className="text-3xl font-semibold font-montserrat">
                            Manutenção de leilões
                         </h1>
@@ -57,34 +61,47 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                      </div>
                      <Separator orientation="horizontal" />
                   </div>
-                  <div className="flex items-center justify-between">
-                     <div className="grid grid-cols-[424px_auto] items-center flex-grow gap-2">
+                  <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
+                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
                         <Input
                            size="md"
                            label="Busca geral"
                            placeholder="Descrição, Local, ID"
                            value={globalFilter}
                            onChange={(e) => setGlobalFilter(e.target.value)}
+                           className="min-w-[300px]"
                         />
-                        <Button variant="ghost" className="w-fit">
+                        <Button
+                           variant="ghost"
+                           className="w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap"
+                        >
                            Busca avançada
                         </Button>
                      </div>
-                     <Button variant="default">Novo leilão</Button>
+                     <Button
+                        variant="default"
+                        className="w-full sm:w-auto sm:min-w-[150px] whitespace-nowrap"
+                     >
+                        Novo leilão
+                     </Button>
                   </div>
                </div>
-               <div className="h-full overflow-y-auto">
+               <div className="bg-red-100 h-[calc(100vh-889px-32px)]"></div>
+               {/* <div className="h-full overflow-y-auto bg-red-100">
                   <DataTable
                      data={data}
                      columns={columns}
                      globalFilter={globalFilter}
                   />
-               </div>
+               </div> */}
             </div>
             <CollapsibleSidebar
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
-               className="h-svh"
+               className={cn('h-svh', {
+                  'overflow-y-auto': isSidebarOpen,
+                  'overflow-y-hidden h-0': !isSidebarOpen
+               })}
             >
                <div className="space-y-2 h-full overflow-y-auto ml-4 mt-[28px]">
                   <div className="flex justify-between items-center gap-2">

@@ -139,7 +139,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                {label && (
                   <label
                      htmlFor={props.id}
-                     className={cn(labelVariants({ error: !!error }), className)}
+                     className={cn(labelVariants({ error: !!error }))}
                   >
                      {label}
                   </label>
