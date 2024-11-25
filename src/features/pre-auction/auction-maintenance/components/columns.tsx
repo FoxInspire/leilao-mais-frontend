@@ -7,9 +7,9 @@ import {
    SelectTrigger,
    SelectValue
 } from '@/components/ui/select'
+import { Auction } from '@/features/pre-auction/auction-maintenance/schemas/auction-mock'
 import { Button } from '@/src/components/ui/button'
 import { Checkbox } from '@/src/components/ui/checkbox'
-import { Auction } from '@/src/features/pre-auction/auction-maintenance/data/schema'
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'

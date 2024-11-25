@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { columns } from '@/src/features/pre-auction/auction-maintenance/components/columns'
-import { auctionSchema } from '@/src/features/pre-auction/auction-maintenance/data/schema'
+import { auctionSchema } from '@/src/features/pre-auction/auction-maintenance/schemas/auction-mock'
 import { promises as fs } from 'fs'
 import { z } from 'zod'
 
