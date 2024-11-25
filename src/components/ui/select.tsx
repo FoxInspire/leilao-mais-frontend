@@ -16,12 +16,14 @@ const SelectTrigger = React.forwardRef<
    React.ElementRef<typeof SelectPrimitive.Trigger>,
    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & {
       hideIcon?: boolean
+      unstyled?: boolean
    }
->(({ className, children, hideIcon = false, ...props }, ref) => (
+>(({ className, children, hideIcon = false, unstyled = false, ...props }, ref) => (
    <SelectPrimitive.Trigger
       ref={ref}
       className={cn(
-         'flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300',
+         !unstyled &&
+            'flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300',
          className
       )}
       {...props}
@@ -29,7 +31,9 @@ const SelectTrigger = React.forwardRef<
       {children}
       {!hideIcon && (
          <SelectPrimitive.Icon asChild>
-            <ChevronDown className="h-4 w-4 opacity-50" />
+            <span className="material-symbols-outlined transition-transform duration-200 data-[state=open]:rotate-180">
+               keyboard_arrow_down
+            </span>
          </SelectPrimitive.Icon>
       )}
    </SelectPrimitive.Trigger>

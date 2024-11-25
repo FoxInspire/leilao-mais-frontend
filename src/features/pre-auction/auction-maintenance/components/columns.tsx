@@ -1,11 +1,12 @@
 'use client'
 
 import {
-   DropdownMenu,
-   DropdownMenuContent,
-   DropdownMenuItem,
-   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
+   Select,
+   SelectContent,
+   SelectItem,
+   SelectTrigger,
+   SelectValue
+} from '@/components/ui/select'
 import { Button } from '@/src/components/ui/button'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { Auction } from '@/src/features/pre-auction/auction-maintenance/data/schema'
@@ -51,7 +52,7 @@ export const columns: ColumnDef<Auction>[] = [
          <DataTableColumnHeader column={column} title="Leilão" />
       ),
       cell: ({ row }) => (
-         <div className="font-semibold text-primary-default uppercase">
+         <div className="font-bold font-nunito text-primary-default uppercase">
             {row.getValue('auction')}
          </div>
       )
@@ -75,21 +76,25 @@ export const columns: ColumnDef<Auction>[] = [
       ),
       cell: ({ row }) => (
          <div>
-            <DropdownMenu>
-               <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="px-6 py-0">
-                     <span className="font-semibold">{row.getValue('status')}</span>
-                     <span className="material-symbols-outlined rotate-180 ml-1">
-                        keyboard_arrow_up
-                     </span>
-                  </Button>
-               </DropdownMenuTrigger>
-               <DropdownMenuContent>
-                  <DropdownMenuItem>Montagem</DropdownMenuItem>
-                  <DropdownMenuItem>Avaliação órgão</DropdownMenuItem>
-                  <DropdownMenuItem>Confirmação de pagamento</DropdownMenuItem>
-               </DropdownMenuContent>
-            </DropdownMenu>
+            <Select>
+               <SelectTrigger
+                  unstyled
+                  className="flex items-center gap-2 font-bold font-nunito text-primary-default text-base"
+               >
+                  <SelectValue
+                     placeholder={
+                        <React.Fragment>{row.getValue('status')}</React.Fragment>
+                     }
+                  />
+               </SelectTrigger>
+               <SelectContent>
+                  <SelectItem value="assembly">Montagem</SelectItem>
+                  <SelectItem value="organs_evaluation">Avaliação órgão</SelectItem>
+                  <SelectItem value="payment_confirmation">
+                     Confirmação de pagamento
+                  </SelectItem>
+               </SelectContent>
+            </Select>
          </div>
       )
    },
@@ -112,7 +117,7 @@ export const columns: ColumnDef<Auction>[] = [
                   <span className="material-symbols-outlined">add</span>
                </Button>
             ) : (
-               <span className="font-semibold text-primary-default">
+               <span className="font-bold font-nunito text-primary-default">
                   {row.getValue('lots')}
                </span>
             )}

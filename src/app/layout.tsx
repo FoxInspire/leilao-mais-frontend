@@ -42,56 +42,29 @@ export default function RootLayout({
    return (
       <html lang="pt-BR" suppressHydrationWarning>
          <head>
-            {/* eslint-disable-next-line @next/next/no-page-custom-font */}
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link
                rel="preconnect"
                href="https://fonts.gstatic.com"
                crossOrigin="anonymous"
             />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-            <link
-               rel="preload"
-               href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-               as="style"
-            />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-            <link
-               href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-               rel="stylesheet"
-            />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
             <link
                rel="preload"
                href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0"
                as="style"
             />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
             <link
                rel="stylesheet"
                href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0"
             />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
             <link
                rel="preload"
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite,home,search,settings&display=block"
+               href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
                as="style"
             />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
             <link
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite,home,search,settings&display=block"
+               href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
                rel="stylesheet"
-            />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
-            <link
-               rel="preload"
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-               as="style"
-            />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
-            <link
-               rel="stylesheet"
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
             />
          </head>
          <body className="antialiased bg-background-default dark:bg-dark-background-default">
