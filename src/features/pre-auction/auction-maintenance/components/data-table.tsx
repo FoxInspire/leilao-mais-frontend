@@ -84,7 +84,7 @@ export function DataTable<TData>({
             <Table>
                <TableHeader>
                   {table.getHeaderGroups().map((headerGroup) => (
-                     <TableRow key={headerGroup.id}>
+                     <TableRow key={headerGroup.id} className="whitespace-nowrap">
                         {headerGroup.headers.map((header) => {
                            return (
                               <TableHead key={header.id} colSpan={header.colSpan}>
@@ -106,6 +106,7 @@ export function DataTable<TData>({
                         <TableRow
                            key={row.id}
                            data-state={row.getIsSelected() && 'selected'}
+                           className="whitespace-nowrap"
                         >
                            {row.getVisibleCells().map((cell) => (
                               <TableCell key={cell.id}>
