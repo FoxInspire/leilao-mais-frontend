@@ -138,6 +138,7 @@ input {
 
 ::-webkit-scrollbar {
    width: 4px;
+   height: 4px;
    z-index: 1;
 
    &-thumb {

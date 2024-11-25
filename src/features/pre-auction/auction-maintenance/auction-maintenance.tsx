@@ -84,7 +84,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                   </div>
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
-                  <div className="flex-1">
+                  <div className="flex-1 overflow-auto">
                      <DataTable
                         data={data}
                         columns={columns}
