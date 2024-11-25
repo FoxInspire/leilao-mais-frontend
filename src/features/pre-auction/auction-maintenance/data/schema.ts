@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const taskSchema = z.object({
+export const auctionSchema = z.object({
    id: z.string(),
    date: z.string(),
    auction: z.string(),
@@ -10,4 +10,4 @@ export const taskSchema = z.object({
    lots: z.number()
 })
 
-export type Task = z.infer<typeof taskSchema>
+export type Auction = z.infer<typeof auctionSchema>

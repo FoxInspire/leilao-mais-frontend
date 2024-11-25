@@ -1,0 +1,902 @@
+[
+   {
+      "id": "9408",
+      "date": "18/10/2025",
+      "auction": "for99.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 106
+   },
+   {
+      "id": "2276",
+      "date": "10/08/2025",
+      "auction": "sal62.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 208
+   },
+   {
+      "id": "3197",
+      "date": "11/06/2025",
+      "auction": "bru09.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 68
+   },
+   {
+      "id": "3087",
+      "date": "26/03/2025",
+      "auction": "mac49.24-DP",
+      "location": "MACEIO/AL",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 431
+   },
+   {
+      "id": "5794",
+      "date": "06/05/2025",
+      "auction": "ter73.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 0
+   },
+   {
+      "id": "5402",
+      "date": "19/06/2025",
+      "auction": "for71.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 60
+   },
+   {
+      "id": "8095",
+      "date": "22/12/2024",
+      "auction": "ara14.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 337
+   },
+   {
+      "id": "3012",
+      "date": "13/07/2025",
+      "auction": "nat08.24-DP",
+      "location": "NATAL/RN",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 130
+   },
+   {
+      "id": "3850",
+      "date": "26/06/2025",
+      "auction": "nat57.24-DP",
+      "location": "NATAL/RN",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 486
+   },
+   {
+      "id": "1540",
+      "date": "20/08/2025",
+      "auction": "ter01.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 74
+   },
+   {
+      "id": "1375",
+      "date": "19/05/2025",
+      "auction": "bru24.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 332
+   },
+   {
+      "id": "9841",
+      "date": "01/04/2025",
+      "auction": "nat69.24-DP",
+      "location": "NATAL/RN",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 487
+   },
+   {
+      "id": "4977",
+      "date": "25/04/2025",
+      "auction": "rec04.24-DP",
+      "location": "RECIFE/PE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 141
+   },
+   {
+      "id": "9806",
+      "date": "30/01/2025",
+      "auction": "for68.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 129
+   },
+   {
+      "id": "4623",
+      "date": "21/06/2025",
+      "auction": "nat39.24-DP",
+      "location": "NATAL/RN",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 117
+   },
+   {
+      "id": "2738",
+      "date": "22/04/2025",
+      "auction": "for66.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 410
+   },
+   {
+      "id": "2573",
+      "date": "01/03/2025",
+      "auction": "sal39.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 252
+   },
+   {
+      "id": "2575",
+      "date": "21/11/2025",
+      "auction": "bru96.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 86
+   },
+   {
+      "id": "2626",
+      "date": "19/07/2025",
+      "auction": "ter47.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 491
+   },
+   {
+      "id": "7609",
+      "date": "24/02/2025",
+      "auction": "ara11.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 65
+   },
+   {
+      "id": "5168",
+      "date": "30/11/2024",
+      "auction": "sal94.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 315
+   },
+   {
+      "id": "7240",
+      "date": "18/10/2025",
+      "auction": "ara81.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 361
+   },
+   {
+      "id": "2807",
+      "date": "05/01/2025",
+      "auction": "ter67.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 259
+   },
+   {
+      "id": "9681",
+      "date": "21/12/2024",
+      "auction": "ara20.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 332
+   },
+   {
+      "id": "6550",
+      "date": "16/04/2025",
+      "auction": "for49.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 404
+   },
+   {
+      "id": "8958",
+      "date": "05/12/2024",
+      "auction": "ter65.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 428
+   },
+   {
+      "id": "6825",
+      "date": "22/03/2025",
+      "auction": "nat29.24-DP",
+      "location": "NATAL/RN",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 30
+   },
+   {
+      "id": "1825",
+      "date": "27/03/2025",
+      "auction": "sal08.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 87
+   },
+   {
+      "id": "3727",
+      "date": "15/08/2025",
+      "auction": "nat41.24-DP",
+      "location": "NATAL/RN",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 383
+   },
+   {
+      "id": "2394",
+      "date": "18/01/2025",
+      "auction": "ara39.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 348
+   },
+   {
+      "id": "3876",
+      "date": "29/09/2025",
+      "auction": "nat08.24-DP",
+      "location": "NATAL/RN",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 281
+   },
+   {
+      "id": "4682",
+      "date": "05/06/2025",
+      "auction": "for51.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 284
+   },
+   {
+      "id": "3313",
+      "date": "16/02/2025",
+      "auction": "bru12.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 1
+   },
+   {
+      "id": "2322",
+      "date": "12/02/2025",
+      "auction": "rec38.24-DP",
+      "location": "RECIFE/PE",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 304
+   },
+   {
+      "id": "8986",
+      "date": "04/06/2025",
+      "auction": "nat04.24-DP",
+      "location": "NATAL/RN",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 0
+   },
+   {
+      "id": "1277",
+      "date": "18/07/2025",
+      "auction": "sal65.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 342
+   },
+   {
+      "id": "1805",
+      "date": "03/07/2025",
+      "auction": "ter58.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 469
+   },
+   {
+      "id": "8185",
+      "date": "13/03/2025",
+      "auction": "ara38.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 128
+   },
+   {
+      "id": "6344",
+      "date": "03/11/2025",
+      "auction": "sal42.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 68
+   },
+   {
+      "id": "3822",
+      "date": "20/08/2025",
+      "auction": "bru88.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 464
+   },
+   {
+      "id": "2503",
+      "date": "13/05/2025",
+      "auction": "nat57.24-DP",
+      "location": "NATAL/RN",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 0
+   },
+   {
+      "id": "6832",
+      "date": "06/07/2025",
+      "auction": "mac78.24-DP",
+      "location": "MACEIO/AL",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 359
+   },
+   {
+      "id": "8891",
+      "date": "16/02/2025",
+      "auction": "nat77.24-DP",
+      "location": "NATAL/RN",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 249
+   },
+   {
+      "id": "2239",
+      "date": "31/12/2024",
+      "auction": "nat83.24-DP",
+      "location": "NATAL/RN",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 472
+   },
+   {
+      "id": "3181",
+      "date": "25/03/2025",
+      "auction": "sal50.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 291
+   },
+   {
+      "id": "1165",
+      "date": "29/01/2025",
+      "auction": "for54.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 266
+   },
+   {
+      "id": "9874",
+      "date": "02/02/2025",
+      "auction": "ter35.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 144
+   },
+   {
+      "id": "8876",
+      "date": "23/04/2025",
+      "auction": "sal12.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 279
+   },
+   {
+      "id": "6499",
+      "date": "26/12/2024",
+      "auction": "ara21.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 158
+   },
+   {
+      "id": "3504",
+      "date": "19/01/2025",
+      "auction": "rec12.24-DP",
+      "location": "RECIFE/PE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 63
+   },
+   {
+      "id": "6520",
+      "date": "24/04/2025",
+      "auction": "ter20.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 136
+   },
+   {
+      "id": "9997",
+      "date": "23/07/2025",
+      "auction": "ter64.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 96
+   },
+   {
+      "id": "3297",
+      "date": "09/09/2025",
+      "auction": "mac75.24-DP",
+      "location": "MACEIO/AL",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 0
+   },
+   {
+      "id": "4921",
+      "date": "12/02/2025",
+      "auction": "ara32.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 48
+   },
+   {
+      "id": "4565",
+      "date": "02/05/2025",
+      "auction": "bru79.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 0
+   },
+   {
+      "id": "9440",
+      "date": "15/08/2025",
+      "auction": "ara17.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 44
+   },
+   {
+      "id": "7908",
+      "date": "10/08/2025",
+      "auction": "nat21.24-DP",
+      "location": "NATAL/RN",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 486
+   },
+   {
+      "id": "3264",
+      "date": "15/09/2025",
+      "auction": "mac66.24-DP",
+      "location": "MACEIO/AL",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 241
+   },
+   {
+      "id": "5057",
+      "date": "21/01/2025",
+      "auction": "rec68.24-DP",
+      "location": "RECIFE/PE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 225
+   },
+   {
+      "id": "3517",
+      "date": "16/09/2025",
+      "auction": "ter36.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 281
+   },
+   {
+      "id": "2409",
+      "date": "20/04/2025",
+      "auction": "rec21.24-DP",
+      "location": "RECIFE/PE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 0
+   },
+   {
+      "id": "8915",
+      "date": "17/04/2025",
+      "auction": "rec11.24-DP",
+      "location": "RECIFE/PE",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 381
+   },
+   {
+      "id": "4071",
+      "date": "09/05/2025",
+      "auction": "rec87.24-DP",
+      "location": "RECIFE/PE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 313
+   },
+   {
+      "id": "6772",
+      "date": "08/02/2025",
+      "auction": "ter91.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 402
+   },
+   {
+      "id": "3870",
+      "date": "22/08/2025",
+      "auction": "for21.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 28
+   },
+   {
+      "id": "5496",
+      "date": "04/11/2025",
+      "auction": "sal29.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 368
+   },
+   {
+      "id": "7101",
+      "date": "05/10/2025",
+      "auction": "mac15.24-DP",
+      "location": "MACEIO/AL",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 75
+   },
+   {
+      "id": "4808",
+      "date": "30/07/2025",
+      "auction": "ter59.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 385
+   },
+   {
+      "id": "9873",
+      "date": "27/04/2025",
+      "auction": "for89.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 403
+   },
+   {
+      "id": "7477",
+      "date": "13/05/2025",
+      "auction": "bru79.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 130
+   },
+   {
+      "id": "7313",
+      "date": "26/11/2024",
+      "auction": "mac22.24-DP",
+      "location": "MACEIO/AL",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 274
+   },
+   {
+      "id": "6798",
+      "date": "22/06/2025",
+      "auction": "ara74.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 380
+   },
+   {
+      "id": "2867",
+      "date": "27/05/2025",
+      "auction": "nat32.24-DP",
+      "location": "NATAL/RN",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 449
+   },
+   {
+      "id": "2543",
+      "date": "10/02/2025",
+      "auction": "ter21.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 439
+   },
+   {
+      "id": "2314",
+      "date": "03/04/2025",
+      "auction": "bru99.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 76
+   },
+   {
+      "id": "4522",
+      "date": "19/09/2025",
+      "auction": "for19.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 136
+   },
+   {
+      "id": "3876",
+      "date": "02/05/2025",
+      "auction": "nat85.24-DP",
+      "location": "NATAL/RN",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 178
+   },
+   {
+      "id": "6450",
+      "date": "03/05/2025",
+      "auction": "sal23.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 310
+   },
+   {
+      "id": "5284",
+      "date": "07/09/2025",
+      "auction": "for70.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 263
+   },
+   {
+      "id": "4954",
+      "date": "29/11/2024",
+      "auction": "nat19.24-DP",
+      "location": "NATAL/RN",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 254
+   },
+   {
+      "id": "1268",
+      "date": "04/01/2025",
+      "auction": "for18.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 0
+   },
+   {
+      "id": "2879",
+      "date": "30/11/2024",
+      "auction": "rec91.24-DP",
+      "location": "RECIFE/PE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 0
+   },
+   {
+      "id": "8119",
+      "date": "18/02/2025",
+      "auction": "for67.24-DP",
+      "location": "FORTALEZA/CE",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 186
+   },
+   {
+      "id": "9890",
+      "date": "30/03/2025",
+      "auction": "bru02.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 256
+   },
+   {
+      "id": "8032",
+      "date": "17/01/2025",
+      "auction": "ter12.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 65
+   },
+   {
+      "id": "2770",
+      "date": "23/03/2025",
+      "auction": "ara93.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 142
+   },
+   {
+      "id": "9106",
+      "date": "08/05/2025",
+      "auction": "rec92.24-DP",
+      "location": "RECIFE/PE",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 465
+   },
+   {
+      "id": "5697",
+      "date": "27/04/2025",
+      "auction": "bru48.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 152
+   },
+   {
+      "id": "5108",
+      "date": "14/01/2025",
+      "auction": "bru91.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 308
+   },
+   {
+      "id": "3212",
+      "date": "04/01/2025",
+      "auction": "sal53.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 42
+   },
+   {
+      "id": "9172",
+      "date": "01/09/2025",
+      "auction": "bru68.24-DP",
+      "location": "BRUMADO/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 377
+   },
+   {
+      "id": "6519",
+      "date": "11/06/2025",
+      "auction": "ter55.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 240
+   },
+   {
+      "id": "1067",
+      "date": "14/11/2025",
+      "auction": "sal38.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 0
+   },
+   {
+      "id": "5628",
+      "date": "26/12/2024",
+      "auction": "ara59.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 64
+   },
+   {
+      "id": "5663",
+      "date": "17/03/2025",
+      "auction": "sal09.24-DP",
+      "location": "SALVADOR/BA",
+      "status": "Montagem",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 303
+   },
+   {
+      "id": "9689",
+      "date": "23/09/2025",
+      "auction": "ter28.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 126
+   },
+   {
+      "id": "6290",
+      "date": "11/09/2025",
+      "auction": "ara50.24-DP",
+      "location": "ARACAJU/SE",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 437
+   },
+   {
+      "id": "1832",
+      "date": "20/02/2025",
+      "auction": "ter11.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Confirmação de pagamento",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 124
+   },
+   {
+      "id": "6523",
+      "date": "25/03/2025",
+      "auction": "mac29.24-DP",
+      "location": "MACEIO/AL",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 67
+   },
+   {
+      "id": "4420",
+      "date": "16/05/2025",
+      "auction": "ter62.24-DP",
+      "location": "TERESINA/PI",
+      "status": "Avaliação órgão",
+      "committer": "PÁTIOS NORDESTE",
+      "lots": 293
+   }
+]

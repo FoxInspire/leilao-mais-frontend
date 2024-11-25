@@ -1,22 +1,21 @@
 'use client'
 
-import { Checkbox } from '@/src/components/ui/checkbox'
-import { ColumnDef } from '@tanstack/react-table'
-import { Task } from '../data/schema'
-import { DataTableColumnHeader } from './data-table-column-header'
-import { DataTableRowActions } from './data-table-row-actions'
-
 import {
    DropdownMenu,
    DropdownMenuContent,
    DropdownMenuItem,
-   DropdownMenuSeparator,
    DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/src/components/ui/button'
+import { Checkbox } from '@/src/components/ui/checkbox'
+import { Auction } from '@/src/features/pre-auction/auction-maintenance/data/schema'
+import { ColumnDef } from '@tanstack/react-table'
+import { DataTableColumnHeader } from './data-table-column-header'
+import { DataTableRowActions } from './data-table-row-actions'
+
 import React from 'react'
 
-export const columns: ColumnDef<Task>[] = [
+export const columns: ColumnDef<Auction>[] = [
    {
       id: 'select',
       header: ({ table }) => (
@@ -52,7 +51,7 @@ export const columns: ColumnDef<Task>[] = [
          <DataTableColumnHeader column={column} title="Leilão" />
       ),
       cell: ({ row }) => (
-         <div className="font-semibold text-primary-default">
+         <div className="font-semibold text-primary-default uppercase">
             {row.getValue('auction')}
          </div>
       )
@@ -109,66 +108,19 @@ export const columns: ColumnDef<Task>[] = [
       cell: ({ row }) => (
          <React.Fragment>
             {row.getValue('lots') === 0 ? (
-               <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                     <Button variant="icon" size="icon">
-                        <span className="material-symbols-outlined">add</span>
-                     </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                     <DropdownMenuItem>
-                        <span className="material-symbols-outlined text-text-secondary symbol-md">
-                           add
-                        </span>
-                        Ingressar lotes
-                     </DropdownMenuItem>
-                     <DropdownMenuItem>
-                        <span className="material-symbols-outlined text-text-secondary symbol-md filled">
-                           edit
-                        </span>
-                        Editar leilão
-                     </DropdownMenuItem>
-                     <DropdownMenuItem>
-                        <span className="material-symbols-outlined text-text-secondary symbol-md">
-                           open_in_new
-                        </span>
-                        Exportar lotes
-                     </DropdownMenuItem>
-                     <DropdownMenuItem>
-                        <span className="material-symbols-outlined text-text-secondary symbol-md">
-                           content_paste
-                        </span>
-                        Gerar edital de leilão
-                     </DropdownMenuItem>
-                     <DropdownMenuItem>
-                        <span className="material-symbols-outlined text-text-secondary symbol-md">
-                           mail
-                        </span>
-                        Notificar proprietários
-                     </DropdownMenuItem>
-                     <DropdownMenuItem>
-                        <span className="material-symbols-outlined text-text-secondary symbol-md">
-                           download
-                        </span>
-                        Importar proprietários
-                     </DropdownMenuItem>
-                     <DropdownMenuSeparator />
-                     <DropdownMenuItem>
-                        <span className="material-symbols-outlined text-text-secondary symbol-md">
-                           monitor
-                        </span>
-                        Monitor de operações
-                     </DropdownMenuItem>
-                  </DropdownMenuContent>
-               </DropdownMenu>
+               <Button variant="icon" size="icon">
+                  <span className="material-symbols-outlined">add</span>
+               </Button>
             ) : (
-               <div>{row.getValue('lots')}</div>
+               <span className="font-semibold text-primary-default">
+                  {row.getValue('lots')}
+               </span>
             )}
          </React.Fragment>
       )
    },
    {
       id: 'actions',
-      cell: ({ row }) => <DataTableRowActions row={row} />
+      cell: ({ row }) => <DataTableRowActions row={row} onSelect={(value) => {}} />
    }
 ]

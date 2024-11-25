@@ -1,68 +1,91 @@
-'use client'
-
-import { Row } from '@tanstack/react-table'
-import { MoreHorizontal } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import {
    DropdownMenu,
    DropdownMenuContent,
    DropdownMenuItem,
-   DropdownMenuRadioGroup,
-   DropdownMenuRadioItem,
    DropdownMenuSeparator,
-   DropdownMenuShortcut,
-   DropdownMenuSub,
-   DropdownMenuSubContent,
-   DropdownMenuSubTrigger,
    DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { cn } from '@/src/lib/utils'
+import { Row } from '@tanstack/react-table'
 
-import { labels } from '../data/data'
-import { taskSchema } from '../data/schema'
+import React from 'react'
 
 interface DataTableRowActionsProps<TData> {
    row: Row<TData>
+   onSelect: (value: string) => void
 }
 
 export function DataTableRowActions<TData>({
-   row
+   row,
+   onSelect
 }: DataTableRowActionsProps<TData>) {
-   const task = taskSchema.parse(row.original)
+   const menuItems = [
+      { icon: 'add', label: 'Ingressar lotes', value: 'add-lots', filled: false },
+      { icon: 'edit', label: 'Editar leilão', value: 'edit-auction', filled: true },
+      {
+         icon: 'open_in_new',
+         label: 'Exportar lotes',
+         value: 'export-lots',
+         filled: false
+      },
+      {
+         icon: 'content_paste',
+         label: 'Gerar edital de leilão',
+         value: 'generate-notice',
+         filled: false
+      },
+      {
+         icon: 'mail',
+         label: 'Notificar proprietários',
+         value: 'notify-owners',
+         filled: false
+      },
+      {
+         icon: 'download',
+         label: 'Importar proprietários',
+         value: 'import-owners',
+         filled: false
+      },
+      {
+         icon: 'monitor',
+         label: 'Monitor de operações',
+         value: 'operations-monitor',
+         filled: false
+      }
+   ]
 
    return (
       <DropdownMenu>
          <DropdownMenuTrigger asChild>
             <Button
-               variant="ghost"
-               className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+               variant="icon"
+               size="icon"
+               className="flex data-[state=open]:bg-muted"
             >
-               <MoreHorizontal />
+               <span className="material-symbols-outlined text-text-secondary">
+                  more_vert
+               </span>
                <span className="sr-only">Open menu</span>
             </Button>
          </DropdownMenuTrigger>
-         <DropdownMenuContent align="end" className="w-[160px]">
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Make a copy</DropdownMenuItem>
-            <DropdownMenuItem>Favorite</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuSub>
-               <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
-               <DropdownMenuSubContent>
-                  <DropdownMenuRadioGroup value={task.label}>
-                     {labels.map((label) => (
-                        <DropdownMenuRadioItem key={label.value} value={label.value}>
-                           {label.label}
-                        </DropdownMenuRadioItem>
-                     ))}
-                  </DropdownMenuRadioGroup>
-               </DropdownMenuSubContent>
-            </DropdownMenuSub>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-               Delete
-               <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-            </DropdownMenuItem>
+         <DropdownMenuContent align="end">
+            {menuItems.map((item, index) => (
+               <React.Fragment key={item.label}>
+                  {index === menuItems.length - 1 && <DropdownMenuSeparator />}
+                  <DropdownMenuItem onClick={() => onSelect(item.value)}>
+                     <span
+                        className={cn(
+                           'material-symbols-outlined text-text-secondary symbol-md',
+                           item.filled && 'filled'
+                        )}
+                     >
+                        {item.icon}
+                     </span>
+                     {item.label}
+                  </DropdownMenuItem>
+               </React.Fragment>
+            ))}
          </DropdownMenuContent>
       </DropdownMenu>
    )

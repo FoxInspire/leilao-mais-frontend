@@ -1,35 +1,34 @@
 import * as React from 'react'
 
 import { columns } from '@/src/features/pre-auction/auction-maintenance/components/columns'
+import { auctionSchema } from '@/src/features/pre-auction/auction-maintenance/data/schema'
 import { promises as fs } from 'fs'
 import { z } from 'zod'
 
 import AuctionMaintenance from '@/src/features/pre-auction/auction-maintenance/auction-maintenance'
 import path from 'path'
 
-export const taskSchema = z.object({
-   id: z.string(),
-   date: z.string(),
-   auction: z.string(),
-   location: z.string(),
-   status: z.string(),
-   committer: z.string(),
-   lots: z.number()
-})
-
-export type Task = z.infer<typeof taskSchema>
-
-async function getTasks() {
-   const data = await fs.readFile(path.join(process.cwd(), 'tasks.json'))
-   const tasks = JSON.parse(data.toString())
-   return z.array(taskSchema).parse(tasks)
+async function getAuctions() {
+   const data = await fs.readFile(
+      path.join(
+         process.cwd(),
+         'src',
+         'features',
+         'pre-auction',
+         'auction-maintenance',
+         'mocks',
+         'auctions.json'
+      )
+   )
+   const auctions = JSON.parse(data.toString())
+   return z.array(auctionSchema).parse(auctions)
 }
 
 export default async function AuctionMaintenancePage() {
-   const tasks = await getTasks()
+   const auctions = await getAuctions()
    return (
       <React.Suspense>
-         <AuctionMaintenance data={tasks} columns={columns} />
+         <AuctionMaintenance data={auctions} columns={columns} />
       </React.Suspense>
    )
 }
