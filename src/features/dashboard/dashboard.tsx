@@ -191,7 +191,7 @@ const Dashboard: React.FC = () => {
                               Tipo de Erro
                            </DropdownMenuLabel>
                            {filter_options.map((option) => (
-                              <DropdownMenuItem key={option.id} className="px-2">
+                              <DropdownMenuItem key={option.id}>
                                  <Checkbox
                                     size="md"
                                     label={option.label}
@@ -208,7 +208,7 @@ const Dashboard: React.FC = () => {
                               Transação
                            </DropdownMenuLabel>
                            {transaction_options.map((option) => (
-                              <DropdownMenuItem key={option.id} className="px-2">
+                              <DropdownMenuItem key={option.id}>
                                  <Checkbox
                                     size="md"
                                     label={option.label}

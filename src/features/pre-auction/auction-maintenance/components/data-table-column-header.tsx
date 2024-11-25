@@ -11,26 +11,32 @@ import {
 import { cn } from '@/lib/utils'
 
 interface DataTableColumnHeaderProps<TData, TValue>
-   extends React.HTMLAttributes<HTMLDivElement> {
+   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'className'> {
    column: Column<TData, TValue>
    title: string
+   className?: {
+      container?: string
+      title?: string
+   }
 }
 
 export function DataTableColumnHeader<TData, TValue>({
    column,
    title,
-   className
+   ...props
 }: DataTableColumnHeaderProps<TData, TValue>) {
    if (!column.getCanSort()) {
-      return <div className={cn(className)}>{title}</div>
+      return <div>{title}</div>
    }
 
    return (
-      <div className={cn('flex items-center space-x-2', className)}>
+      <div className={cn('flex items-center space-x-2', props.className?.container)}>
          <DropdownMenu>
             <DropdownMenuTrigger asChild>
                <div className="flex items-center space-x-2">
-                  <span className="text-black">{title}</span>
+                  <span className={cn('text-black', props.className?.title)}>
+                     {title}
+                  </span>
                   {column.getIsSorted() === 'desc' ? (
                      <ArrowDown className="h-4 w-4" />
                   ) : column.getIsSorted() === 'asc' ? (
@@ -40,19 +46,19 @@ export function DataTableColumnHeader<TData, TValue>({
                   )}
                </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
+            <DropdownMenuContent align="center">
                <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
                   <ArrowUp className="h-3.5 w-3.5 text-muted-foreground/70" />
-                  Asc
+                  Ascendente
                </DropdownMenuItem>
                <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
                   <ArrowDown className="h-3.5 w-3.5 text-muted-foreground/70" />
-                  Desc
+                  Descendente
                </DropdownMenuItem>
                <DropdownMenuSeparator />
                <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
                   <EyeOff className="h-3.5 w-3.5 text-muted-foreground/70" />
-                  Hide
+                  Ocultar
                </DropdownMenuItem>
             </DropdownMenuContent>
          </DropdownMenu>

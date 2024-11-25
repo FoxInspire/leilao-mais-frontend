@@ -17,6 +17,7 @@ const buttonVariants = cva(
                'border border-primary-default bg-transparent text-primary-default hover:bg-primary-default/10 dark:border-dark-primary-default dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10',
             secondary:
                'bg-secondary-default text-secondary-contrast hover:bg-secondary-light dark:bg-dark-secondary-default dark:text-dark-secondary-contrast dark:hover:bg-dark-secondary-light',
+            icon: 'bg-transparent text-primary-default hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 items-center justify-center',
             ghost: 'bg-transparent text-primary-default hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10',
             link: 'text-primary-default underline-offset-4 hover:underline dark:text-dark-primary-default'
          },

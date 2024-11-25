@@ -1,13 +1,20 @@
 'use client'
 
+import { Checkbox } from '@/src/components/ui/checkbox'
 import { ColumnDef } from '@tanstack/react-table'
-
-import { Checkbox } from '@/components/ui/checkbox'
-
-import { statuses } from '../data/data'
 import { Task } from '../data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
+
+import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuSeparator,
+   DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Button } from '@/src/components/ui/button'
+import React from 'react'
 
 export const columns: ColumnDef<Task>[] = [
    {
@@ -44,7 +51,11 @@ export const columns: ColumnDef<Task>[] = [
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Leilão" />
       ),
-      cell: ({ row }) => <div>{row.getValue('auction')}</div>
+      cell: ({ row }) => (
+         <div className="font-semibold text-primary-default">
+            {row.getValue('auction')}
+         </div>
+      )
    },
    {
       accessorKey: 'location',
@@ -63,27 +74,25 @@ export const columns: ColumnDef<Task>[] = [
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Status do leilão" />
       ),
-      cell: ({ row }) => {
-         const status = statuses.find(
-            (status) => status.value === row.getValue('status')
-         )
-
-         if (!status) {
-            return null
-         }
-
-         return (
-            <div className="flex items-center">
-               {status.icon && (
-                  <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-               )}
-               <span>{status.label}</span>
-            </div>
-         )
-      },
-      filterFn: (row, id, value) => {
-         return value.includes(row.getValue(id))
-      }
+      cell: ({ row }) => (
+         <div>
+            <DropdownMenu>
+               <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="px-6 py-0">
+                     <span className="font-semibold">{row.getValue('status')}</span>
+                     <span className="material-symbols-outlined rotate-180 ml-1">
+                        keyboard_arrow_up
+                     </span>
+                  </Button>
+               </DropdownMenuTrigger>
+               <DropdownMenuContent>
+                  <DropdownMenuItem>Montagem</DropdownMenuItem>
+                  <DropdownMenuItem>Avaliação órgão</DropdownMenuItem>
+                  <DropdownMenuItem>Confirmação de pagamento</DropdownMenuItem>
+               </DropdownMenuContent>
+            </DropdownMenu>
+         </div>
+      )
    },
    {
       accessorKey: 'committer',
@@ -97,7 +106,66 @@ export const columns: ColumnDef<Task>[] = [
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Lotes" />
       ),
-      cell: ({ row }) => <div>{row.getValue('lots')}</div>
+      cell: ({ row }) => (
+         <React.Fragment>
+            {row.getValue('lots') === 0 ? (
+               <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                     <Button variant="icon" size="icon">
+                        <span className="material-symbols-outlined">add</span>
+                     </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                     <DropdownMenuItem>
+                        <span className="material-symbols-outlined text-text-secondary symbol-md">
+                           add
+                        </span>
+                        Ingressar lotes
+                     </DropdownMenuItem>
+                     <DropdownMenuItem>
+                        <span className="material-symbols-outlined text-text-secondary symbol-md filled">
+                           edit
+                        </span>
+                        Editar leilão
+                     </DropdownMenuItem>
+                     <DropdownMenuItem>
+                        <span className="material-symbols-outlined text-text-secondary symbol-md">
+                           open_in_new
+                        </span>
+                        Exportar lotes
+                     </DropdownMenuItem>
+                     <DropdownMenuItem>
+                        <span className="material-symbols-outlined text-text-secondary symbol-md">
+                           content_paste
+                        </span>
+                        Gerar edital de leilão
+                     </DropdownMenuItem>
+                     <DropdownMenuItem>
+                        <span className="material-symbols-outlined text-text-secondary symbol-md">
+                           mail
+                        </span>
+                        Notificar proprietários
+                     </DropdownMenuItem>
+                     <DropdownMenuItem>
+                        <span className="material-symbols-outlined text-text-secondary symbol-md">
+                           download
+                        </span>
+                        Importar proprietários
+                     </DropdownMenuItem>
+                     <DropdownMenuSeparator />
+                     <DropdownMenuItem>
+                        <span className="material-symbols-outlined text-text-secondary symbol-md">
+                           monitor
+                        </span>
+                        Monitor de operações
+                     </DropdownMenuItem>
+                  </DropdownMenuContent>
+               </DropdownMenu>
+            ) : (
+               <div>{row.getValue('lots')}</div>
+            )}
+         </React.Fragment>
+      )
    },
    {
       id: 'actions',

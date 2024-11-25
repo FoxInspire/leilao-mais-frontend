@@ -1,902 +1,902 @@
 [
-  {
-    "id": "LEILAO-4831",
-    "date": "04/06/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Jaskolskitown, Wisconsin",
-    "status": "backlog",
-    "committer": "Crona, Kuphal and Farrell",
-    "lots": 166
-  },
-  {
-    "id": "LEILAO-7866",
-    "date": "20/07/2025",
-    "auction": "Leilão de Veículos",
-    "location": "Halvorsonborough, Georgia",
-    "status": "todo",
-    "committer": "Heathcote, Bednar and Cummings",
-    "lots": 264
-  },
-  {
-    "id": "LEILAO-5172",
-    "date": "12/11/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "Palm Beach Gardens, Connecticut",
-    "status": "backlog",
-    "committer": "Sipes - Streich",
-    "lots": 428
-  },
-  {
-    "id": "LEILAO-2395",
-    "date": "29/05/2025",
-    "auction": "Leilão de Veículos",
-    "location": "Macon-Bibb County, Oklahoma",
-    "status": "todo",
-    "committer": "Hansen, Rodriguez and Cassin",
-    "lots": 166
-  },
-  {
-    "id": "LEILAO-8599",
-    "date": "08/12/2024",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Klingbury, Alaska",
-    "status": "canceled",
-    "committer": "Ankunding, Beatty and Cormier",
-    "lots": 257
-  },
-  {
-    "id": "LEILAO-1577",
-    "date": "25/05/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "New Emmyland, North Dakota",
-    "status": "canceled",
-    "committer": "Kerluke - Prohaska",
-    "lots": 71
-  },
-  {
-    "id": "LEILAO-2196",
-    "date": "12/09/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Ephraimcester, Wisconsin",
-    "status": "backlog",
-    "committer": "Tremblay - West",
-    "lots": 30
-  },
-  {
-    "id": "LEILAO-3264",
-    "date": "14/10/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Gloverside, Indiana",
-    "status": "backlog",
-    "committer": "Langworth, Ferry and Braun",
-    "lots": 399
-  },
-  {
-    "id": "LEILAO-5133",
-    "date": "02/02/2025",
-    "auction": "Leilão Judicial",
-    "location": "Fort Lindsayton, Indiana",
-    "status": "done",
-    "committer": "White Inc",
-    "lots": 447
-  },
-  {
-    "id": "LEILAO-3354",
-    "date": "18/12/2024",
-    "auction": "Leilão de Veículos",
-    "location": "Walkerburgh, Indiana",
-    "status": "todo",
-    "committer": "Kling Inc",
-    "lots": 487
-  },
-  {
-    "id": "LEILAO-1637",
-    "date": "14/12/2024",
-    "auction": "Leilão de Imóveis",
-    "location": "Fort Evelineworth, Michigan",
-    "status": "todo",
-    "committer": "Orn, Frami and Franey",
-    "lots": 224
-  },
-  {
-    "id": "LEILAO-4668",
-    "date": "09/06/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "Lake Cedrickfield, Michigan",
-    "status": "canceled",
-    "committer": "Prosacco Group",
-    "lots": 178
-  },
-  {
-    "id": "LEILAO-4401",
-    "date": "24/02/2025",
-    "auction": "Leilão Judicial",
-    "location": "Handfield, Hawaii",
-    "status": "in progress",
-    "committer": "Stark Inc",
-    "lots": 223
-  },
-  {
-    "id": "LEILAO-3357",
-    "date": "11/10/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "West Hazel, Iowa",
-    "status": "todo",
-    "committer": "O'Connell LLC",
-    "lots": 62
-  },
-  {
-    "id": "LEILAO-3849",
-    "date": "04/08/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "West Chelseachester, Oklahoma",
-    "status": "backlog",
-    "committer": "Ward - Berge",
-    "lots": 91
-  },
-  {
-    "id": "LEILAO-4357",
-    "date": "12/04/2025",
-    "auction": "Leilão Judicial",
-    "location": "Lake Kameron, North Carolina",
-    "status": "in progress",
-    "committer": "Corkery LLC",
-    "lots": 326
-  },
-  {
-    "id": "LEILAO-7009",
-    "date": "06/02/2025",
-    "auction": "Leilão Judicial",
-    "location": "Haleyfurt, Arizona",
-    "status": "canceled",
-    "committer": "Torp - Block",
-    "lots": 157
-  },
-  {
-    "id": "LEILAO-4210",
-    "date": "18/09/2025",
-    "auction": "Leilão Judicial",
-    "location": "Conroyland, Pennsylvania",
-    "status": "todo",
-    "committer": "Prosacco, Schowalter and Heaney",
-    "lots": 411
-  },
-  {
-    "id": "LEILAO-3796",
-    "date": "22/07/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Florianbury, New Hampshire",
-    "status": "backlog",
-    "committer": "Muller - Mertz",
-    "lots": 177
-  },
-  {
-    "id": "LEILAO-8263",
-    "date": "11/07/2025",
-    "auction": "Leilão Judicial",
-    "location": "West Allis, Michigan",
-    "status": "todo",
-    "committer": "Oberbrunner - Kertzmann",
-    "lots": 122
-  },
-  {
-    "id": "LEILAO-3752",
-    "date": "18/05/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Fort Alexandro, Michigan",
-    "status": "done",
-    "committer": "Carter, Lynch and Greenholt",
-    "lots": 352
-  },
-  {
-    "id": "LEILAO-1852",
-    "date": "21/10/2025",
-    "auction": "Leilão de Veículos",
-    "location": "Emardside, Mississippi",
-    "status": "done",
-    "committer": "Jast - Sporer",
-    "lots": 287
-  },
-  {
-    "id": "LEILAO-7244",
-    "date": "12/05/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "Port Sonya, Washington",
-    "status": "backlog",
-    "committer": "Corwin, Champlin and Daugherty",
-    "lots": 70
-  },
-  {
-    "id": "LEILAO-8860",
-    "date": "03/03/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Lake Germanfort, Massachusetts",
-    "status": "in progress",
-    "committer": "Kris, Williamson and Marvin",
-    "lots": 266
-  },
-  {
-    "id": "LEILAO-7027",
-    "date": "19/09/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Florissant, Connecticut",
-    "status": "done",
-    "committer": "Prosacco, Mayert and Zulauf",
-    "lots": 131
-  },
-  {
-    "id": "LEILAO-4619",
-    "date": "23/01/2025",
-    "auction": "Leilão de Veículos",
-    "location": "Port Giovannastad, Maine",
-    "status": "canceled",
-    "committer": "Fahey, Kihn and Block",
-    "lots": 173
-  },
-  {
-    "id": "LEILAO-6861",
-    "date": "30/10/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Jaststad, Washington",
-    "status": "todo",
-    "committer": "Walker - Halvorson",
-    "lots": 427
-  },
-  {
-    "id": "LEILAO-2761",
-    "date": "27/10/2025",
-    "auction": "Leilão Judicial",
-    "location": "Rennerchester, New Hampshire",
-    "status": "in progress",
-    "committer": "Reichel, Veum and Johnson",
-    "lots": 69
-  },
-  {
-    "id": "LEILAO-6627",
-    "date": "29/08/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Elenoraborough, Ohio",
-    "status": "todo",
-    "committer": "Spinka, Bartell and King",
-    "lots": 48
-  },
-  {
-    "id": "LEILAO-1023",
-    "date": "12/07/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Ullrichside, South Carolina",
-    "status": "backlog",
-    "committer": "Baumbach, Lockman and Waters",
-    "lots": 425
-  },
-  {
-    "id": "LEILAO-7065",
-    "date": "15/02/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Biloxi, North Dakota",
-    "status": "canceled",
-    "committer": "Lind Group",
-    "lots": 279
-  },
-  {
-    "id": "LEILAO-3907",
-    "date": "25/09/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Connellyshire, Florida",
-    "status": "backlog",
-    "committer": "Mohr, Parker and Schaden",
-    "lots": 277
-  },
-  {
-    "id": "LEILAO-2683",
-    "date": "17/05/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Ceres, Kansas",
-    "status": "canceled",
-    "committer": "Crist - Von",
-    "lots": 168
-  },
-  {
-    "id": "LEILAO-4791",
-    "date": "09/09/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "East Imatown, Connecticut",
-    "status": "in progress",
-    "committer": "Kuhn - Streich",
-    "lots": 222
-  },
-  {
-    "id": "LEILAO-2924",
-    "date": "24/11/2024",
-    "auction": "Leilão de Veículos",
-    "location": "West Loyce, North Dakota",
-    "status": "done",
-    "committer": "Jacobson, Abshire and Howe",
-    "lots": 462
-  },
-  {
-    "id": "LEILAO-3926",
-    "date": "07/01/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "San Ramon, Louisiana",
-    "status": "canceled",
-    "committer": "Berge - Jacobs",
-    "lots": 109
-  },
-  {
-    "id": "LEILAO-9117",
-    "date": "29/04/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "North Retha, South Dakota",
-    "status": "done",
-    "committer": "Stroman, Wiza and Kuhic",
-    "lots": 221
-  },
-  {
-    "id": "LEILAO-3489",
-    "date": "16/08/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Arlington Heights, Colorado",
-    "status": "canceled",
-    "committer": "Hyatt, Hackett and VonRueden",
-    "lots": 318
-  },
-  {
-    "id": "LEILAO-7944",
-    "date": "24/05/2025",
-    "auction": "Leilão Judicial",
-    "location": "Westfield, New Jersey",
-    "status": "todo",
-    "committer": "Green Inc",
-    "lots": 215
-  },
-  {
-    "id": "LEILAO-5263",
-    "date": "01/02/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "Brannonton, Nevada",
-    "status": "done",
-    "committer": "Lynch and Sons",
-    "lots": 202
-  },
-  {
-    "id": "LEILAO-9315",
-    "date": "11/05/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Dennisland, Vermont",
-    "status": "todo",
-    "committer": "Pfeffer - Abernathy",
-    "lots": 95
-  },
-  {
-    "id": "LEILAO-5650",
-    "date": "07/11/2025",
-    "auction": "Leilão de Veículos",
-    "location": "Port Janischester, New York",
-    "status": "todo",
-    "committer": "Ritchie Group",
-    "lots": 126
-  },
-  {
-    "id": "LEILAO-4642",
-    "date": "15/11/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Anaheim, Louisiana",
-    "status": "todo",
-    "committer": "Hudson, Borer and Koss",
-    "lots": 63
-  },
-  {
-    "id": "LEILAO-8103",
-    "date": "12/07/2025",
-    "auction": "Leilão Judicial",
-    "location": "Waukegan, Alabama",
-    "status": "canceled",
-    "committer": "Mann - Murazik",
-    "lots": 198
-  },
-  {
-    "id": "LEILAO-6865",
-    "date": "15/02/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Leannonton, New Jersey",
-    "status": "in progress",
-    "committer": "Ondricka, Marks and Wuckert",
-    "lots": 126
-  },
-  {
-    "id": "LEILAO-2206",
-    "date": "20/12/2024",
-    "auction": "Leilão Extrajudicial",
-    "location": "East Archibald, Rhode Island",
-    "status": "canceled",
-    "committer": "Hermann, Windler and Volkman",
-    "lots": 372
-  },
-  {
-    "id": "LEILAO-7010",
-    "date": "09/10/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Pacochabury, Nevada",
-    "status": "backlog",
-    "committer": "Friesen LLC",
-    "lots": 194
-  },
-  {
-    "id": "LEILAO-4869",
-    "date": "31/03/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "North Brainboro, Minnesota",
-    "status": "done",
-    "committer": "Bernier and Sons",
-    "lots": 30
-  },
-  {
-    "id": "LEILAO-9898",
-    "date": "26/10/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Canton, Wisconsin",
-    "status": "backlog",
-    "committer": "Cartwright, Kiehn and Dooley",
-    "lots": 169
-  },
-  {
-    "id": "LEILAO-9528",
-    "date": "10/07/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "South Marjolainebury, Rhode Island",
-    "status": "todo",
-    "committer": "Stokes, Balistreri and Ziemann",
-    "lots": 309
-  },
-  {
-    "id": "LEILAO-6706",
-    "date": "11/12/2024",
-    "auction": "Leilão de Veículos",
-    "location": "Pomona, Illinois",
-    "status": "todo",
-    "committer": "Effertz LLC",
-    "lots": 362
-  },
-  {
-    "id": "LEILAO-3525",
-    "date": "22/09/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Monterey Park, New Mexico",
-    "status": "backlog",
-    "committer": "Marks, Senger and Langworth",
-    "lots": 276
-  },
-  {
-    "id": "LEILAO-5409",
-    "date": "12/11/2025",
-    "auction": "Leilão Judicial",
-    "location": "Harveybury, Arizona",
-    "status": "done",
-    "committer": "Cole - Nikolaus",
-    "lots": 43
-  },
-  {
-    "id": "LEILAO-4028",
-    "date": "13/09/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Springfield, Missouri",
-    "status": "canceled",
-    "committer": "Emard and Sons",
-    "lots": 211
-  },
-  {
-    "id": "LEILAO-4787",
-    "date": "25/04/2025",
-    "auction": "Leilão de Veículos",
-    "location": "Luciennechester, Hawaii",
-    "status": "canceled",
-    "committer": "Erdman Inc",
-    "lots": 442
-  },
-  {
-    "id": "LEILAO-1210",
-    "date": "14/10/2025",
-    "auction": "Leilão de Veículos",
-    "location": "Eastonville, Missouri",
-    "status": "backlog",
-    "committer": "Conroy, Cronin and Osinski",
-    "lots": 82
-  },
-  {
-    "id": "LEILAO-7090",
-    "date": "02/01/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Union City, Tennessee",
-    "status": "canceled",
-    "committer": "Erdman, Ryan and Kuphal",
-    "lots": 205
-  },
-  {
-    "id": "LEILAO-4664",
-    "date": "04/03/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Botsfordfield, Ohio",
-    "status": "backlog",
-    "committer": "Prosacco - Mante",
-    "lots": 332
-  },
-  {
-    "id": "LEILAO-9871",
-    "date": "14/01/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Harrisland, Kansas",
-    "status": "canceled",
-    "committer": "Dickinson Group",
-    "lots": 434
-  },
-  {
-    "id": "LEILAO-5720",
-    "date": "11/04/2025",
-    "auction": "Leilão Judicial",
-    "location": "West Maria, Tennessee",
-    "status": "done",
-    "committer": "Ruecker - Abbott",
-    "lots": 468
-  },
-  {
-    "id": "LEILAO-4999",
-    "date": "03/09/2025",
-    "auction": "Leilão de Veículos",
-    "location": "Bergstromton, Alaska",
-    "status": "backlog",
-    "committer": "Lemke - Wintheiser",
-    "lots": 424
-  },
-  {
-    "id": "LEILAO-4891",
-    "date": "04/12/2024",
-    "auction": "Leilão de Veículos",
-    "location": "Port Albertoton, Kansas",
-    "status": "backlog",
-    "committer": "Kuphal, Ernser and Halvorson",
-    "lots": 223
-  },
-  {
-    "id": "LEILAO-4765",
-    "date": "30/04/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Lubowitzmouth, Michigan",
-    "status": "in progress",
-    "committer": "Mayert - Hermiston",
-    "lots": 296
-  },
-  {
-    "id": "LEILAO-3798",
-    "date": "22/03/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Franklin, Oregon",
-    "status": "backlog",
-    "committer": "Maggio Group",
-    "lots": 110
-  },
-  {
-    "id": "LEILAO-1694",
-    "date": "10/01/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Nathanielville, Nevada",
-    "status": "todo",
-    "committer": "Emmerich, Rogahn and Kerluke",
-    "lots": 399
-  },
-  {
-    "id": "LEILAO-6539",
-    "date": "29/06/2025",
-    "auction": "Leilão Judicial",
-    "location": "East Rosalind, Alabama",
-    "status": "done",
-    "committer": "Moen, Reilly and McLaughlin",
-    "lots": 285
-  },
-  {
-    "id": "LEILAO-3610",
-    "date": "17/05/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Josiahside, New Hampshire",
-    "status": "done",
-    "committer": "Gorczany, Yost and Monahan",
-    "lots": 294
-  },
-  {
-    "id": "LEILAO-1533",
-    "date": "25/03/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "Judsonmouth, Nebraska",
-    "status": "in progress",
-    "committer": "Dicki - Bayer",
-    "lots": 8
-  },
-  {
-    "id": "LEILAO-9718",
-    "date": "31/01/2025",
-    "auction": "Leilão de Veículos",
-    "location": "North Bethesda, West Virginia",
-    "status": "done",
-    "committer": "Swift - Lindgren",
-    "lots": 262
-  },
-  {
-    "id": "LEILAO-6972",
-    "date": "15/03/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Fort Hassie, Kentucky",
-    "status": "canceled",
-    "committer": "Zieme - Mitchell",
-    "lots": 315
-  },
-  {
-    "id": "LEILAO-6080",
-    "date": "27/05/2025",
-    "auction": "Leilão de Veículos",
-    "location": "Pleasanton, West Virginia",
-    "status": "todo",
-    "committer": "Hoeger and Sons",
-    "lots": 84
-  },
-  {
-    "id": "LEILAO-3055",
-    "date": "07/01/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Port Shaniya, New Mexico",
-    "status": "done",
-    "committer": "Schaefer, Watsica and Ondricka",
-    "lots": 23
-  },
-  {
-    "id": "LEILAO-3913",
-    "date": "15/09/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Percivalton, Texas",
-    "status": "in progress",
-    "committer": "Tremblay LLC",
-    "lots": 132
-  },
-  {
-    "id": "LEILAO-1304",
-    "date": "04/01/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "Bartellfurt, Delaware",
-    "status": "backlog",
-    "committer": "Cronin Group",
-    "lots": 431
-  },
-  {
-    "id": "LEILAO-6836",
-    "date": "22/01/2025",
-    "auction": "Leilão Judicial",
-    "location": "Midwest City, Alaska",
-    "status": "done",
-    "committer": "Kautzer LLC",
-    "lots": 136
-  },
-  {
-    "id": "LEILAO-4949",
-    "date": "19/10/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Fort Dagmarcester, New Mexico",
-    "status": "in progress",
-    "committer": "Bins - Zieme",
-    "lots": 28
-  },
-  {
-    "id": "LEILAO-1193",
-    "date": "03/11/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "Port Vernerchester, Ohio",
-    "status": "canceled",
-    "committer": "Ankunding - Flatley",
-    "lots": 32
-  },
-  {
-    "id": "LEILAO-6033",
-    "date": "07/04/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "Auburn, South Dakota",
-    "status": "in progress",
-    "committer": "Ferry - Kemmer",
-    "lots": 353
-  },
-  {
-    "id": "LEILAO-1660",
-    "date": "04/12/2024",
-    "auction": "Leilão de Veículos",
-    "location": "Fort Brando, Connecticut",
-    "status": "backlog",
-    "committer": "Brekke, Fahey and Hamill",
-    "lots": 250
-  },
-  {
-    "id": "LEILAO-1503",
-    "date": "28/10/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Passaic, North Carolina",
-    "status": "todo",
-    "committer": "Bergstrom Inc",
-    "lots": 417
-  },
-  {
-    "id": "LEILAO-2679",
-    "date": "26/01/2025",
-    "auction": "Leilão Judicial",
-    "location": "Fort Rebekahchester, Minnesota",
-    "status": "todo",
-    "committer": "Schultz and Sons",
-    "lots": 348
-  },
-  {
-    "id": "LEILAO-9696",
-    "date": "04/04/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Hirtheport, Massachusetts",
-    "status": "todo",
-    "committer": "Christiansen - Schoen",
-    "lots": 166
-  },
-  {
-    "id": "LEILAO-1971",
-    "date": "28/03/2025",
-    "auction": "Leilão Judicial",
-    "location": "Columbia, Alaska",
-    "status": "done",
-    "committer": "Fisher Group",
-    "lots": 348
-  },
-  {
-    "id": "LEILAO-6088",
-    "date": "20/12/2024",
-    "auction": "Leilão de Equipamentos",
-    "location": "Albuquerque, Maryland",
-    "status": "backlog",
-    "committer": "Weissnat - Padberg",
-    "lots": 202
-  },
-  {
-    "id": "LEILAO-4332",
-    "date": "01/12/2024",
-    "auction": "Leilão Judicial",
-    "location": "Lake Citlalli, Oklahoma",
-    "status": "in progress",
-    "committer": "Miller - Kub",
-    "lots": 379
-  },
-  {
-    "id": "LEILAO-2273",
-    "date": "18/03/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Simton, Alabama",
-    "status": "backlog",
-    "committer": "Schneider and Sons",
-    "lots": 487
-  },
-  {
-    "id": "LEILAO-7307",
-    "date": "25/08/2025",
-    "auction": "Leilão Judicial",
-    "location": "Dayton, Delaware",
-    "status": "todo",
-    "committer": "Farrell and Sons",
-    "lots": 82
-  },
-  {
-    "id": "LEILAO-4086",
-    "date": "25/12/2024",
-    "auction": "Leilão de Equipamentos",
-    "location": "North Nayeli, Maine",
-    "status": "backlog",
-    "committer": "Altenwerth Inc",
-    "lots": 342
-  },
-  {
-    "id": "LEILAO-1349",
-    "date": "13/10/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Keenanview, Arizona",
-    "status": "in progress",
-    "committer": "King, Thiel and Abshire",
-    "lots": 232
-  },
-  {
-    "id": "LEILAO-7194",
-    "date": "24/12/2024",
-    "auction": "Leilão de Equipamentos",
-    "location": "Owensboro, Rhode Island",
-    "status": "canceled",
-    "committer": "Tillman, Schiller and Schuppe",
-    "lots": 191
-  },
-  {
-    "id": "LEILAO-4800",
-    "date": "10/06/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Sonyastad, Kansas",
-    "status": "in progress",
-    "committer": "Harber - Stark",
-    "lots": 245
-  },
-  {
-    "id": "LEILAO-3174",
-    "date": "16/04/2025",
-    "auction": "Leilão Extrajudicial",
-    "location": "Arlotown, Maryland",
-    "status": "in progress",
-    "committer": "Waters - Yost",
-    "lots": 498
-  },
-  {
-    "id": "LEILAO-2309",
-    "date": "22/10/2025",
-    "auction": "Leilão de Veículos",
-    "location": "New Chanelleworth, Georgia",
-    "status": "backlog",
-    "committer": "Hand, Raynor and Lesch",
-    "lots": 376
-  },
-  {
-    "id": "LEILAO-1555",
-    "date": "09/10/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Temecula, New York",
-    "status": "backlog",
-    "committer": "Wuckert, Dietrich and Kuhic",
-    "lots": 49
-  },
-  {
-    "id": "LEILAO-1167",
-    "date": "23/10/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "North Solonfield, North Dakota",
-    "status": "backlog",
-    "committer": "Haley, Mitchell and Wunsch",
-    "lots": 418
-  },
-  {
-    "id": "LEILAO-8739",
-    "date": "08/04/2025",
-    "auction": "Leilão Judicial",
-    "location": "Ariannabury, Idaho",
-    "status": "backlog",
-    "committer": "Crooks and Sons",
-    "lots": 296
-  },
-  {
-    "id": "LEILAO-2258",
-    "date": "22/12/2024",
-    "auction": "Leilão de Equipamentos",
-    "location": "Herzogstad, Washington",
-    "status": "in progress",
-    "committer": "Wisozk, Beier and Leannon",
-    "lots": 348
-  },
-  {
-    "id": "LEILAO-1054",
-    "date": "28/10/2025",
-    "auction": "Leilão de Bens Diversos",
-    "location": "Rylanside, Utah",
-    "status": "done",
-    "committer": "Schaefer and Sons",
-    "lots": 20
-  },
-  {
-    "id": "LEILAO-6574",
-    "date": "08/06/2025",
-    "auction": "Leilão de Equipamentos",
-    "location": "Casas Adobes, Mississippi",
-    "status": "backlog",
-    "committer": "Steuber - Hauck",
-    "lots": 157
-  },
-  {
-    "id": "LEILAO-9530",
-    "date": "30/08/2025",
-    "auction": "Leilão de Imóveis",
-    "location": "West Eunice, Texas",
-    "status": "in progress",
-    "committer": "Morissette - Kiehn",
-    "lots": 139
-  }
+   {
+      "id": "LEILAO-4831",
+      "date": "04/06/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Jaskolskitown, Wisconsin",
+      "status": "backlog",
+      "committer": "Crona, Kuphal and Farrell",
+      "lots": 0
+   },
+   {
+      "id": "LEILAO-7866",
+      "date": "20/07/2025",
+      "auction": "Leilão de Veículos",
+      "location": "Halvorsonborough, Georgia",
+      "status": "todo",
+      "committer": "Heathcote, Bednar and Cummings",
+      "lots": 264
+   },
+   {
+      "id": "LEILAO-5172",
+      "date": "12/11/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "Palm Beach Gardens, Connecticut",
+      "status": "backlog",
+      "committer": "Sipes - Streich",
+      "lots": 428
+   },
+   {
+      "id": "LEILAO-2395",
+      "date": "29/05/2025",
+      "auction": "Leilão de Veículos",
+      "location": "Macon-Bibb County, Oklahoma",
+      "status": "todo",
+      "committer": "Hansen, Rodriguez and Cassin",
+      "lots": 166
+   },
+   {
+      "id": "LEILAO-8599",
+      "date": "08/12/2024",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Klingbury, Alaska",
+      "status": "canceled",
+      "committer": "Ankunding, Beatty and Cormier",
+      "lots": 257
+   },
+   {
+      "id": "LEILAO-1577",
+      "date": "25/05/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "New Emmyland, North Dakota",
+      "status": "canceled",
+      "committer": "Kerluke - Prohaska",
+      "lots": 71
+   },
+   {
+      "id": "LEILAO-2196",
+      "date": "12/09/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Ephraimcester, Wisconsin",
+      "status": "backlog",
+      "committer": "Tremblay - West",
+      "lots": 30
+   },
+   {
+      "id": "LEILAO-3264",
+      "date": "14/10/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Gloverside, Indiana",
+      "status": "backlog",
+      "committer": "Langworth, Ferry and Braun",
+      "lots": 399
+   },
+   {
+      "id": "LEILAO-5133",
+      "date": "02/02/2025",
+      "auction": "Leilão Judicial",
+      "location": "Fort Lindsayton, Indiana",
+      "status": "done",
+      "committer": "White Inc",
+      "lots": 447
+   },
+   {
+      "id": "LEILAO-3354",
+      "date": "18/12/2024",
+      "auction": "Leilão de Veículos",
+      "location": "Walkerburgh, Indiana",
+      "status": "todo",
+      "committer": "Kling Inc",
+      "lots": 487
+   },
+   {
+      "id": "LEILAO-1637",
+      "date": "14/12/2024",
+      "auction": "Leilão de Imóveis",
+      "location": "Fort Evelineworth, Michigan",
+      "status": "todo",
+      "committer": "Orn, Frami and Franey",
+      "lots": 224
+   },
+   {
+      "id": "LEILAO-4668",
+      "date": "09/06/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "Lake Cedrickfield, Michigan",
+      "status": "canceled",
+      "committer": "Prosacco Group",
+      "lots": 178
+   },
+   {
+      "id": "LEILAO-4401",
+      "date": "24/02/2025",
+      "auction": "Leilão Judicial",
+      "location": "Handfield, Hawaii",
+      "status": "in progress",
+      "committer": "Stark Inc",
+      "lots": 223
+   },
+   {
+      "id": "LEILAO-3357",
+      "date": "11/10/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "West Hazel, Iowa",
+      "status": "todo",
+      "committer": "O'Connell LLC",
+      "lots": 62
+   },
+   {
+      "id": "LEILAO-3849",
+      "date": "04/08/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "West Chelseachester, Oklahoma",
+      "status": "backlog",
+      "committer": "Ward - Berge",
+      "lots": 91
+   },
+   {
+      "id": "LEILAO-4357",
+      "date": "12/04/2025",
+      "auction": "Leilão Judicial",
+      "location": "Lake Kameron, North Carolina",
+      "status": "in progress",
+      "committer": "Corkery LLC",
+      "lots": 326
+   },
+   {
+      "id": "LEILAO-7009",
+      "date": "06/02/2025",
+      "auction": "Leilão Judicial",
+      "location": "Haleyfurt, Arizona",
+      "status": "canceled",
+      "committer": "Torp - Block",
+      "lots": 157
+   },
+   {
+      "id": "LEILAO-4210",
+      "date": "18/09/2025",
+      "auction": "Leilão Judicial",
+      "location": "Conroyland, Pennsylvania",
+      "status": "todo",
+      "committer": "Prosacco, Schowalter and Heaney",
+      "lots": 411
+   },
+   {
+      "id": "LEILAO-3796",
+      "date": "22/07/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Florianbury, New Hampshire",
+      "status": "backlog",
+      "committer": "Muller - Mertz",
+      "lots": 177
+   },
+   {
+      "id": "LEILAO-8263",
+      "date": "11/07/2025",
+      "auction": "Leilão Judicial",
+      "location": "West Allis, Michigan",
+      "status": "todo",
+      "committer": "Oberbrunner - Kertzmann",
+      "lots": 122
+   },
+   {
+      "id": "LEILAO-3752",
+      "date": "18/05/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Fort Alexandro, Michigan",
+      "status": "done",
+      "committer": "Carter, Lynch and Greenholt",
+      "lots": 352
+   },
+   {
+      "id": "LEILAO-1852",
+      "date": "21/10/2025",
+      "auction": "Leilão de Veículos",
+      "location": "Emardside, Mississippi",
+      "status": "done",
+      "committer": "Jast - Sporer",
+      "lots": 287
+   },
+   {
+      "id": "LEILAO-7244",
+      "date": "12/05/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "Port Sonya, Washington",
+      "status": "backlog",
+      "committer": "Corwin, Champlin and Daugherty",
+      "lots": 70
+   },
+   {
+      "id": "LEILAO-8860",
+      "date": "03/03/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Lake Germanfort, Massachusetts",
+      "status": "in progress",
+      "committer": "Kris, Williamson and Marvin",
+      "lots": 266
+   },
+   {
+      "id": "LEILAO-7027",
+      "date": "19/09/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Florissant, Connecticut",
+      "status": "done",
+      "committer": "Prosacco, Mayert and Zulauf",
+      "lots": 131
+   },
+   {
+      "id": "LEILAO-4619",
+      "date": "23/01/2025",
+      "auction": "Leilão de Veículos",
+      "location": "Port Giovannastad, Maine",
+      "status": "canceled",
+      "committer": "Fahey, Kihn and Block",
+      "lots": 173
+   },
+   {
+      "id": "LEILAO-6861",
+      "date": "30/10/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Jaststad, Washington",
+      "status": "todo",
+      "committer": "Walker - Halvorson",
+      "lots": 427
+   },
+   {
+      "id": "LEILAO-2761",
+      "date": "27/10/2025",
+      "auction": "Leilão Judicial",
+      "location": "Rennerchester, New Hampshire",
+      "status": "in progress",
+      "committer": "Reichel, Veum and Johnson",
+      "lots": 69
+   },
+   {
+      "id": "LEILAO-6627",
+      "date": "29/08/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Elenoraborough, Ohio",
+      "status": "todo",
+      "committer": "Spinka, Bartell and King",
+      "lots": 48
+   },
+   {
+      "id": "LEILAO-1023",
+      "date": "12/07/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Ullrichside, South Carolina",
+      "status": "backlog",
+      "committer": "Baumbach, Lockman and Waters",
+      "lots": 425
+   },
+   {
+      "id": "LEILAO-7065",
+      "date": "15/02/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Biloxi, North Dakota",
+      "status": "canceled",
+      "committer": "Lind Group",
+      "lots": 279
+   },
+   {
+      "id": "LEILAO-3907",
+      "date": "25/09/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Connellyshire, Florida",
+      "status": "backlog",
+      "committer": "Mohr, Parker and Schaden",
+      "lots": 277
+   },
+   {
+      "id": "LEILAO-2683",
+      "date": "17/05/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Ceres, Kansas",
+      "status": "canceled",
+      "committer": "Crist - Von",
+      "lots": 168
+   },
+   {
+      "id": "LEILAO-4791",
+      "date": "09/09/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "East Imatown, Connecticut",
+      "status": "in progress",
+      "committer": "Kuhn - Streich",
+      "lots": 222
+   },
+   {
+      "id": "LEILAO-2924",
+      "date": "24/11/2024",
+      "auction": "Leilão de Veículos",
+      "location": "West Loyce, North Dakota",
+      "status": "done",
+      "committer": "Jacobson, Abshire and Howe",
+      "lots": 462
+   },
+   {
+      "id": "LEILAO-3926",
+      "date": "07/01/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "San Ramon, Louisiana",
+      "status": "canceled",
+      "committer": "Berge - Jacobs",
+      "lots": 109
+   },
+   {
+      "id": "LEILAO-9117",
+      "date": "29/04/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "North Retha, South Dakota",
+      "status": "done",
+      "committer": "Stroman, Wiza and Kuhic",
+      "lots": 221
+   },
+   {
+      "id": "LEILAO-3489",
+      "date": "16/08/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Arlington Heights, Colorado",
+      "status": "canceled",
+      "committer": "Hyatt, Hackett and VonRueden",
+      "lots": 318
+   },
+   {
+      "id": "LEILAO-7944",
+      "date": "24/05/2025",
+      "auction": "Leilão Judicial",
+      "location": "Westfield, New Jersey",
+      "status": "todo",
+      "committer": "Green Inc",
+      "lots": 215
+   },
+   {
+      "id": "LEILAO-5263",
+      "date": "01/02/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "Brannonton, Nevada",
+      "status": "done",
+      "committer": "Lynch and Sons",
+      "lots": 202
+   },
+   {
+      "id": "LEILAO-9315",
+      "date": "11/05/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Dennisland, Vermont",
+      "status": "todo",
+      "committer": "Pfeffer - Abernathy",
+      "lots": 95
+   },
+   {
+      "id": "LEILAO-5650",
+      "date": "07/11/2025",
+      "auction": "Leilão de Veículos",
+      "location": "Port Janischester, New York",
+      "status": "todo",
+      "committer": "Ritchie Group",
+      "lots": 126
+   },
+   {
+      "id": "LEILAO-4642",
+      "date": "15/11/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Anaheim, Louisiana",
+      "status": "todo",
+      "committer": "Hudson, Borer and Koss",
+      "lots": 63
+   },
+   {
+      "id": "LEILAO-8103",
+      "date": "12/07/2025",
+      "auction": "Leilão Judicial",
+      "location": "Waukegan, Alabama",
+      "status": "canceled",
+      "committer": "Mann - Murazik",
+      "lots": 198
+   },
+   {
+      "id": "LEILAO-6865",
+      "date": "15/02/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Leannonton, New Jersey",
+      "status": "in progress",
+      "committer": "Ondricka, Marks and Wuckert",
+      "lots": 126
+   },
+   {
+      "id": "LEILAO-2206",
+      "date": "20/12/2024",
+      "auction": "Leilão Extrajudicial",
+      "location": "East Archibald, Rhode Island",
+      "status": "canceled",
+      "committer": "Hermann, Windler and Volkman",
+      "lots": 372
+   },
+   {
+      "id": "LEILAO-7010",
+      "date": "09/10/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Pacochabury, Nevada",
+      "status": "backlog",
+      "committer": "Friesen LLC",
+      "lots": 194
+   },
+   {
+      "id": "LEILAO-4869",
+      "date": "31/03/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "North Brainboro, Minnesota",
+      "status": "done",
+      "committer": "Bernier and Sons",
+      "lots": 30
+   },
+   {
+      "id": "LEILAO-9898",
+      "date": "26/10/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Canton, Wisconsin",
+      "status": "backlog",
+      "committer": "Cartwright, Kiehn and Dooley",
+      "lots": 169
+   },
+   {
+      "id": "LEILAO-9528",
+      "date": "10/07/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "South Marjolainebury, Rhode Island",
+      "status": "todo",
+      "committer": "Stokes, Balistreri and Ziemann",
+      "lots": 309
+   },
+   {
+      "id": "LEILAO-6706",
+      "date": "11/12/2024",
+      "auction": "Leilão de Veículos",
+      "location": "Pomona, Illinois",
+      "status": "todo",
+      "committer": "Effertz LLC",
+      "lots": 362
+   },
+   {
+      "id": "LEILAO-3525",
+      "date": "22/09/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Monterey Park, New Mexico",
+      "status": "backlog",
+      "committer": "Marks, Senger and Langworth",
+      "lots": 276
+   },
+   {
+      "id": "LEILAO-5409",
+      "date": "12/11/2025",
+      "auction": "Leilão Judicial",
+      "location": "Harveybury, Arizona",
+      "status": "done",
+      "committer": "Cole - Nikolaus",
+      "lots": 43
+   },
+   {
+      "id": "LEILAO-4028",
+      "date": "13/09/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Springfield, Missouri",
+      "status": "canceled",
+      "committer": "Emard and Sons",
+      "lots": 211
+   },
+   {
+      "id": "LEILAO-4787",
+      "date": "25/04/2025",
+      "auction": "Leilão de Veículos",
+      "location": "Luciennechester, Hawaii",
+      "status": "canceled",
+      "committer": "Erdman Inc",
+      "lots": 442
+   },
+   {
+      "id": "LEILAO-1210",
+      "date": "14/10/2025",
+      "auction": "Leilão de Veículos",
+      "location": "Eastonville, Missouri",
+      "status": "backlog",
+      "committer": "Conroy, Cronin and Osinski",
+      "lots": 82
+   },
+   {
+      "id": "LEILAO-7090",
+      "date": "02/01/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Union City, Tennessee",
+      "status": "canceled",
+      "committer": "Erdman, Ryan and Kuphal",
+      "lots": 205
+   },
+   {
+      "id": "LEILAO-4664",
+      "date": "04/03/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Botsfordfield, Ohio",
+      "status": "backlog",
+      "committer": "Prosacco - Mante",
+      "lots": 332
+   },
+   {
+      "id": "LEILAO-9871",
+      "date": "14/01/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Harrisland, Kansas",
+      "status": "canceled",
+      "committer": "Dickinson Group",
+      "lots": 434
+   },
+   {
+      "id": "LEILAO-5720",
+      "date": "11/04/2025",
+      "auction": "Leilão Judicial",
+      "location": "West Maria, Tennessee",
+      "status": "done",
+      "committer": "Ruecker - Abbott",
+      "lots": 468
+   },
+   {
+      "id": "LEILAO-4999",
+      "date": "03/09/2025",
+      "auction": "Leilão de Veículos",
+      "location": "Bergstromton, Alaska",
+      "status": "backlog",
+      "committer": "Lemke - Wintheiser",
+      "lots": 424
+   },
+   {
+      "id": "LEILAO-4891",
+      "date": "04/12/2024",
+      "auction": "Leilão de Veículos",
+      "location": "Port Albertoton, Kansas",
+      "status": "backlog",
+      "committer": "Kuphal, Ernser and Halvorson",
+      "lots": 223
+   },
+   {
+      "id": "LEILAO-4765",
+      "date": "30/04/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Lubowitzmouth, Michigan",
+      "status": "in progress",
+      "committer": "Mayert - Hermiston",
+      "lots": 296
+   },
+   {
+      "id": "LEILAO-3798",
+      "date": "22/03/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Franklin, Oregon",
+      "status": "backlog",
+      "committer": "Maggio Group",
+      "lots": 110
+   },
+   {
+      "id": "LEILAO-1694",
+      "date": "10/01/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Nathanielville, Nevada",
+      "status": "todo",
+      "committer": "Emmerich, Rogahn and Kerluke",
+      "lots": 399
+   },
+   {
+      "id": "LEILAO-6539",
+      "date": "29/06/2025",
+      "auction": "Leilão Judicial",
+      "location": "East Rosalind, Alabama",
+      "status": "done",
+      "committer": "Moen, Reilly and McLaughlin",
+      "lots": 285
+   },
+   {
+      "id": "LEILAO-3610",
+      "date": "17/05/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Josiahside, New Hampshire",
+      "status": "done",
+      "committer": "Gorczany, Yost and Monahan",
+      "lots": 294
+   },
+   {
+      "id": "LEILAO-1533",
+      "date": "25/03/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "Judsonmouth, Nebraska",
+      "status": "in progress",
+      "committer": "Dicki - Bayer",
+      "lots": 8
+   },
+   {
+      "id": "LEILAO-9718",
+      "date": "31/01/2025",
+      "auction": "Leilão de Veículos",
+      "location": "North Bethesda, West Virginia",
+      "status": "done",
+      "committer": "Swift - Lindgren",
+      "lots": 262
+   },
+   {
+      "id": "LEILAO-6972",
+      "date": "15/03/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Fort Hassie, Kentucky",
+      "status": "canceled",
+      "committer": "Zieme - Mitchell",
+      "lots": 315
+   },
+   {
+      "id": "LEILAO-6080",
+      "date": "27/05/2025",
+      "auction": "Leilão de Veículos",
+      "location": "Pleasanton, West Virginia",
+      "status": "todo",
+      "committer": "Hoeger and Sons",
+      "lots": 84
+   },
+   {
+      "id": "LEILAO-3055",
+      "date": "07/01/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Port Shaniya, New Mexico",
+      "status": "done",
+      "committer": "Schaefer, Watsica and Ondricka",
+      "lots": 23
+   },
+   {
+      "id": "LEILAO-3913",
+      "date": "15/09/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Percivalton, Texas",
+      "status": "in progress",
+      "committer": "Tremblay LLC",
+      "lots": 132
+   },
+   {
+      "id": "LEILAO-1304",
+      "date": "04/01/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "Bartellfurt, Delaware",
+      "status": "backlog",
+      "committer": "Cronin Group",
+      "lots": 431
+   },
+   {
+      "id": "LEILAO-6836",
+      "date": "22/01/2025",
+      "auction": "Leilão Judicial",
+      "location": "Midwest City, Alaska",
+      "status": "done",
+      "committer": "Kautzer LLC",
+      "lots": 136
+   },
+   {
+      "id": "LEILAO-4949",
+      "date": "19/10/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Fort Dagmarcester, New Mexico",
+      "status": "in progress",
+      "committer": "Bins - Zieme",
+      "lots": 28
+   },
+   {
+      "id": "LEILAO-1193",
+      "date": "03/11/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "Port Vernerchester, Ohio",
+      "status": "canceled",
+      "committer": "Ankunding - Flatley",
+      "lots": 32
+   },
+   {
+      "id": "LEILAO-6033",
+      "date": "07/04/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "Auburn, South Dakota",
+      "status": "in progress",
+      "committer": "Ferry - Kemmer",
+      "lots": 353
+   },
+   {
+      "id": "LEILAO-1660",
+      "date": "04/12/2024",
+      "auction": "Leilão de Veículos",
+      "location": "Fort Brando, Connecticut",
+      "status": "backlog",
+      "committer": "Brekke, Fahey and Hamill",
+      "lots": 250
+   },
+   {
+      "id": "LEILAO-1503",
+      "date": "28/10/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Passaic, North Carolina",
+      "status": "todo",
+      "committer": "Bergstrom Inc",
+      "lots": 417
+   },
+   {
+      "id": "LEILAO-2679",
+      "date": "26/01/2025",
+      "auction": "Leilão Judicial",
+      "location": "Fort Rebekahchester, Minnesota",
+      "status": "todo",
+      "committer": "Schultz and Sons",
+      "lots": 348
+   },
+   {
+      "id": "LEILAO-9696",
+      "date": "04/04/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Hirtheport, Massachusetts",
+      "status": "todo",
+      "committer": "Christiansen - Schoen",
+      "lots": 166
+   },
+   {
+      "id": "LEILAO-1971",
+      "date": "28/03/2025",
+      "auction": "Leilão Judicial",
+      "location": "Columbia, Alaska",
+      "status": "done",
+      "committer": "Fisher Group",
+      "lots": 348
+   },
+   {
+      "id": "LEILAO-6088",
+      "date": "20/12/2024",
+      "auction": "Leilão de Equipamentos",
+      "location": "Albuquerque, Maryland",
+      "status": "backlog",
+      "committer": "Weissnat - Padberg",
+      "lots": 202
+   },
+   {
+      "id": "LEILAO-4332",
+      "date": "01/12/2024",
+      "auction": "Leilão Judicial",
+      "location": "Lake Citlalli, Oklahoma",
+      "status": "in progress",
+      "committer": "Miller - Kub",
+      "lots": 379
+   },
+   {
+      "id": "LEILAO-2273",
+      "date": "18/03/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Simton, Alabama",
+      "status": "backlog",
+      "committer": "Schneider and Sons",
+      "lots": 487
+   },
+   {
+      "id": "LEILAO-7307",
+      "date": "25/08/2025",
+      "auction": "Leilão Judicial",
+      "location": "Dayton, Delaware",
+      "status": "todo",
+      "committer": "Farrell and Sons",
+      "lots": 82
+   },
+   {
+      "id": "LEILAO-4086",
+      "date": "25/12/2024",
+      "auction": "Leilão de Equipamentos",
+      "location": "North Nayeli, Maine",
+      "status": "backlog",
+      "committer": "Altenwerth Inc",
+      "lots": 342
+   },
+   {
+      "id": "LEILAO-1349",
+      "date": "13/10/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Keenanview, Arizona",
+      "status": "in progress",
+      "committer": "King, Thiel and Abshire",
+      "lots": 232
+   },
+   {
+      "id": "LEILAO-7194",
+      "date": "24/12/2024",
+      "auction": "Leilão de Equipamentos",
+      "location": "Owensboro, Rhode Island",
+      "status": "canceled",
+      "committer": "Tillman, Schiller and Schuppe",
+      "lots": 191
+   },
+   {
+      "id": "LEILAO-4800",
+      "date": "10/06/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Sonyastad, Kansas",
+      "status": "in progress",
+      "committer": "Harber - Stark",
+      "lots": 245
+   },
+   {
+      "id": "LEILAO-3174",
+      "date": "16/04/2025",
+      "auction": "Leilão Extrajudicial",
+      "location": "Arlotown, Maryland",
+      "status": "in progress",
+      "committer": "Waters - Yost",
+      "lots": 498
+   },
+   {
+      "id": "LEILAO-2309",
+      "date": "22/10/2025",
+      "auction": "Leilão de Veículos",
+      "location": "New Chanelleworth, Georgia",
+      "status": "backlog",
+      "committer": "Hand, Raynor and Lesch",
+      "lots": 376
+   },
+   {
+      "id": "LEILAO-1555",
+      "date": "09/10/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Temecula, New York",
+      "status": "backlog",
+      "committer": "Wuckert, Dietrich and Kuhic",
+      "lots": 49
+   },
+   {
+      "id": "LEILAO-1167",
+      "date": "23/10/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "North Solonfield, North Dakota",
+      "status": "backlog",
+      "committer": "Haley, Mitchell and Wunsch",
+      "lots": 418
+   },
+   {
+      "id": "LEILAO-8739",
+      "date": "08/04/2025",
+      "auction": "Leilão Judicial",
+      "location": "Ariannabury, Idaho",
+      "status": "backlog",
+      "committer": "Crooks and Sons",
+      "lots": 296
+   },
+   {
+      "id": "LEILAO-2258",
+      "date": "22/12/2024",
+      "auction": "Leilão de Equipamentos",
+      "location": "Herzogstad, Washington",
+      "status": "in progress",
+      "committer": "Wisozk, Beier and Leannon",
+      "lots": 348
+   },
+   {
+      "id": "LEILAO-1054",
+      "date": "28/10/2025",
+      "auction": "Leilão de Bens Diversos",
+      "location": "Rylanside, Utah",
+      "status": "done",
+      "committer": "Schaefer and Sons",
+      "lots": 20
+   },
+   {
+      "id": "LEILAO-6574",
+      "date": "08/06/2025",
+      "auction": "Leilão de Equipamentos",
+      "location": "Casas Adobes, Mississippi",
+      "status": "backlog",
+      "committer": "Steuber - Hauck",
+      "lots": 157
+   },
+   {
+      "id": "LEILAO-9530",
+      "date": "30/08/2025",
+      "auction": "Leilão de Imóveis",
+      "location": "West Eunice, Texas",
+      "status": "in progress",
+      "committer": "Morissette - Kiehn",
+      "lots": 139
+   }
 ]
