@@ -1,10 +1,10 @@
 import * as React from 'react'
 
-import { columns } from '@/src/features/auction-maintenance/components/columns'
+import { columns } from '@/src/features/pre-auction/auction-maintenance/components/columns'
 import { promises as fs } from 'fs'
 import { z } from 'zod'
 
-import AuctionMaintenance from '@/src/features/auction-maintenance/auction-maintenance'
+import AuctionMaintenance from '@/src/features/pre-auction/auction-maintenance/auction-maintenance'
 import path from 'path'
 
 export const taskSchema = z.object({

@@ -1,4 +1,4 @@
-import { statuses } from '@/src/features/auction-maintenance/data/data'
+import { statuses } from '@/src/features/pre-auction/auction-maintenance/data/data'
 import { faker } from '@faker-js/faker'
 
 import fs from 'fs'
