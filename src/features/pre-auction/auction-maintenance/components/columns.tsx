@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/select'
 import { Auction } from '@/features/pre-auction/auction-maintenance/schemas/auction-mock'
 import { Button } from '@/src/components/ui/button'
-import { Checkbox } from '@/src/components/ui/checkbox'
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
@@ -17,30 +16,30 @@ import { DataTableRowActions } from './data-table-row-actions'
 import React from 'react'
 
 export const columns: ColumnDef<Auction>[] = [
-   {
-      id: 'select',
-      header: ({ table }) => (
-         <Checkbox
-            checked={
-               table.getIsAllPageRowsSelected() ||
-               (table.getIsSomePageRowsSelected() && 'indeterminate')
-            }
-            onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-            aria-label="Select all"
-            className="translate-y-[2px]"
-         />
-      ),
-      cell: ({ row }) => (
-         <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={(value) => row.toggleSelected(!!value)}
-            aria-label="Select row"
-            className="translate-y-[2px]"
-         />
-      ),
-      enableSorting: false,
-      enableHiding: false
-   },
+   //    {
+   //       id: 'select',
+   //       header: ({ table }) => (
+   //          <Checkbox
+   //             checked={
+   //                table.getIsAllPageRowsSelected() ||
+   //                (table.getIsSomePageRowsSelected() && 'indeterminate')
+   //             }
+   //             onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+   //             aria-label="Select all"
+   //             className="translate-y-[2px]"
+   //          />
+   //       ),
+   //       cell: ({ row }) => (
+   //          <Checkbox
+   //             checked={row.getIsSelected()}
+   //             onCheckedChange={(value) => row.toggleSelected(!!value)}
+   //             aria-label="Select row"
+   //             className="translate-y-[2px]"
+   //          />
+   //       ),
+   //       enableSorting: false,
+   //       enableHiding: false
+   //    },
    {
       accessorKey: 'date',
       header: ({ column }) => <DataTableColumnHeader column={column} title="Data" />,

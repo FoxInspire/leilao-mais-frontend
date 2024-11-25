@@ -48,7 +48,7 @@ export function DataTable<TData>({
       columns,
       initialState: {
          pagination: {
-            pageSize: 8,
+            pageSize: 10,
             pageIndex: 0
          }
       },
@@ -80,58 +80,58 @@ export function DataTable<TData>({
 
    return (
       <div className="space-y-4">
-         <div className="rounded-md border">
-            <Table>
-               <TableHeader>
-                  {table.getHeaderGroups().map((headerGroup) => (
-                     <TableRow key={headerGroup.id} className="whitespace-nowrap">
-                        {headerGroup.headers.map((header) => {
-                           return (
-                              <TableHead key={header.id} colSpan={header.colSpan}>
-                                 {header.isPlaceholder
-                                    ? null
-                                    : flexRender(
-                                         header.column.columnDef.header,
-                                         header.getContext()
-                                      )}
-                              </TableHead>
-                           )
-                        })}
+         <Table>
+            <TableHeader>
+               {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id} className="whitespace-nowrap">
+                     {headerGroup.headers.map((header) => {
+                        return (
+                           <TableHead key={header.id} colSpan={header.colSpan}>
+                              {header.isPlaceholder
+                                 ? null
+                                 : flexRender(
+                                      header.column.columnDef.header,
+                                      header.getContext()
+                                   )}
+                           </TableHead>
+                        )
+                     })}
+                  </TableRow>
+               ))}
+            </TableHeader>
+            <TableBody>
+               {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                     <TableRow
+                        key={row.id}
+                        data-state={row.getIsSelected() && 'selected'}
+                        className="whitespace-nowrap"
+                     >
+                        {row.getVisibleCells().map((cell) => (
+                           <TableCell key={cell.id}>
+                              {flexRender(
+                                 cell.column.columnDef.cell,
+                                 cell.getContext()
+                              )}
+                           </TableCell>
+                        ))}
                      </TableRow>
-                  ))}
-               </TableHeader>
-               <TableBody>
-                  {table.getRowModel().rows?.length ? (
-                     table.getRowModel().rows.map((row) => (
-                        <TableRow
-                           key={row.id}
-                           data-state={row.getIsSelected() && 'selected'}
-                           className="whitespace-nowrap"
-                        >
-                           {row.getVisibleCells().map((cell) => (
-                              <TableCell key={cell.id}>
-                                 {flexRender(
-                                    cell.column.columnDef.cell,
-                                    cell.getContext()
-                                 )}
-                              </TableCell>
-                           ))}
-                        </TableRow>
-                     ))
-                  ) : (
-                     <TableRow>
-                        <TableCell
-                           colSpan={columns.length}
-                           className="h-24 text-center"
-                        >
+                  ))
+               ) : (
+                  <TableRow>
+                     <TableCell
+                        colSpan={columns.length}
+                        className="text-center hover:bg-transparent cursor-default"
+                     >
+                        <span className="text-text-secondary text-base">
                            Nenhum resultado encontrado.
-                        </TableCell>
-                     </TableRow>
-                  )}
-               </TableBody>
-            </Table>
-         </div>
-         <DataTablePagination table={table} />
+                        </span>
+                     </TableCell>
+                  </TableRow>
+               )}
+            </TableBody>
+         </Table>
+         {table?.getRowCount() > 0 && <DataTablePagination table={table} />}
       </div>
    )
 }

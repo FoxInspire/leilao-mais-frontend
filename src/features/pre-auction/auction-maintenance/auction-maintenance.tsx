@@ -16,6 +16,7 @@ import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
+import { DataTable } from './components/data-table'
 
 const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
    columns,
@@ -24,14 +25,10 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
 
-   const table_ref = React.useRef<HTMLDivElement>(null)
-
-   console.log('table_ref', table_ref.current?.clientHeight)
-
    return (
       <React.Fragment>
-         <div ref={table_ref} className="grid grid-cols-[1fr_auto] bg-blue-100">
-            <div className="space-y-6">
+         <div className="grid grid-cols-[1fr_auto]">
+            <div className="space-y-6 h-full flex flex-col">
                <div className="space-y-4">
                   <Breadcrumb>
                      <BreadcrumbList>
@@ -86,14 +83,15 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                      </Button>
                   </div>
                </div>
-               <div className="bg-red-100 h-[calc(100vh-889px-32px)]"></div>
-               {/* <div className="h-full overflow-y-auto bg-red-100">
-                  <DataTable
-                     data={data}
-                     columns={columns}
-                     globalFilter={globalFilter}
-                  />
-               </div> */}
+               <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
+                  <div className="flex-1">
+                     <DataTable
+                        data={data}
+                        columns={columns}
+                        globalFilter={globalFilter}
+                     />
+                  </div>
+               </div>
             </div>
             <CollapsibleSidebar
                open={isSidebarOpen}

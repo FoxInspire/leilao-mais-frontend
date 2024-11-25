@@ -172,7 +172,9 @@ export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
                </SidebarContent>
                <SidebarRail />
             </Sidebar>
-            <SidebarInset className="p-6">{children}</SidebarInset>
+            <SidebarInset className="p-6">
+               <div className="h-full flex flex-col">{children}</div>
+            </SidebarInset>
          </SidebarProvider>
       </section>
    )
