@@ -73,7 +73,10 @@ export function DataTableRowActions<TData>({
             {menuItems.map((item, index) => (
                <React.Fragment key={item.label}>
                   {index === menuItems.length - 1 && <DropdownMenuSeparator />}
-                  <DropdownMenuItem onClick={() => onSelect(item.value)}>
+                  <DropdownMenuItem
+                     className="font-medium"
+                     onClick={() => onSelect(item.value)}
+                  >
                      <span
                         className={cn(
                            'material-symbols-outlined text-text-secondary symbol-md',

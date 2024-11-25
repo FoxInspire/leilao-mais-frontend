@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import {
    Table,
    TableBody,
@@ -6,6 +8,7 @@ import {
    TableHeader,
    TableRow
 } from '@/components/ui/table'
+import { DataTablePagination } from '@/features/pre-auction/auction-maintenance/components/data-table-pagination'
 import {
    ColumnDef,
    ColumnFiltersState,
@@ -20,8 +23,6 @@ import {
    getSortedRowModel,
    useReactTable
 } from '@tanstack/react-table'
-import * as React from 'react'
-import { DataTablePagination } from './data-table-pagination'
 
 interface DataTableProps<TData> {
    data: TData[]

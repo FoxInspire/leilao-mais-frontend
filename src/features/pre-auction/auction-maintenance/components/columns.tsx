@@ -78,7 +78,7 @@ export const columns: ColumnDef<Auction>[] = [
             <Select>
                <SelectTrigger
                   unstyled
-                  className="flex items-center gap-2 font-bold font-nunito text-primary-default text-base"
+                  className="flex items-center gap-2 font-bold font-nunito text-primary-default text-sm uppercase"
                >
                   <SelectValue
                      placeholder={

@@ -25,7 +25,7 @@ export function DataTableColumnHeader<TData, TValue>({
    ...props
 }: DataTableColumnHeaderProps<TData, TValue>) {
    if (!column.getCanSort()) {
-      return <div>{title}</div>
+      return <div className="uppercase">{title}</div>
    }
 
    return (

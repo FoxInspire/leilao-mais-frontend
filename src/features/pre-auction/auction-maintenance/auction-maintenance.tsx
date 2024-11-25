@@ -10,13 +10,21 @@ import {
    BreadcrumbPage,
    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import {
+   Dialog,
+   DialogContent,
+   DialogDescription,
+   DialogHeader,
+   DialogTitle,
+   DialogTrigger
+} from '@/components/ui/dialog'
+import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
-import { DataTable } from './components/data-table'
 
 const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
    columns,
@@ -68,12 +76,28 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                            onChange={(e) => setGlobalFilter(e.target.value)}
                            className="min-w-[300px]"
                         />
-                        <Button
-                           variant="ghost"
-                           className="w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap"
-                        >
-                           Busca avançada
-                        </Button>
+                        <Dialog>
+                           <DialogTrigger asChild>
+                              <div>
+                                 <Button
+                                    variant="ghost"
+                                    className="w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap"
+                                 >
+                                    Busca avançada
+                                 </Button>
+                              </div>
+                           </DialogTrigger>
+                           <DialogContent>
+                              <DialogHeader>
+                                 <DialogTitle>Are you absolutely sure?</DialogTitle>
+                                 <DialogDescription>
+                                    This action cannot be undone. This will
+                                    permanently delete your account and remove your
+                                    data from our servers.
+                                 </DialogDescription>
+                              </DialogHeader>
+                           </DialogContent>
+                        </Dialog>
                      </div>
                      <Button
                         variant="default"

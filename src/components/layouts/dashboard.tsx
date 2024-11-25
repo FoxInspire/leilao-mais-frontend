@@ -24,11 +24,11 @@ import {
    useSidebar
 } from '@/components/ui/sidebar'
 import { LogoComplete, LogoSimplified } from '@/src/components/svgs/logo'
+import { useIsMobile } from '@/src/hooks/useMobile'
 import { cn } from '@/src/lib/utils'
 import { dashboard_routes } from '@/src/routes/dashboard'
 import { usePathname } from 'next/navigation'
 
-import { useIsMobile } from '@/src/hooks/useMobile'
 import Link from 'next/link'
 
 export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
