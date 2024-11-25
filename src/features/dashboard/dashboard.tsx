@@ -134,10 +134,7 @@ const Dashboard: React.FC = () => {
                         >
                            chevron_right
                         </span>
-                        <div
-                           className="hide-scrollbar flex w-full overflow-x-auto"
-                           ref={tabsRef}
-                        >
+                        <div className="flex w-full" ref={tabsRef}>
                            <div className="flex">
                               <TabsTrigger
                                  className="min-w-36"

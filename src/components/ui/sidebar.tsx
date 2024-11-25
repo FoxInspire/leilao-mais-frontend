@@ -447,7 +447,7 @@ const SidebarInset = React.forwardRef<HTMLDivElement, React.ComponentProps<'main
             id="sidebar-inset"
             ref={ref}
             className={cn(
-               'relative grid w-screen bg-white dark:bg-dark-background-paper',
+               'relative grid w-full bg-white dark:bg-dark-background-paper overflow-x-auto',
                hasHeaderMenu ? 'mt-14' : '',
                'peer-data-[variant=inset]:h-[calc(100svh-theme(spacing.4))]',
                'md:peer-data-[variant=inset]:m-2',

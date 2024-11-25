@@ -59,9 +59,9 @@ body {
 
 body * {
    box-sizing: inherit;
+   scroll-behavior: smooth;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
-   scroll-behavior: smooth;
    -webkit-overflow-scrolling: touch;
 }
 
@@ -178,9 +178,5 @@ input {
 }
 
 .filled {
-   font-variation-settings:
-      'FILL' 1,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
+   font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
