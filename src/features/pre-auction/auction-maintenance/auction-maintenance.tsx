@@ -13,7 +13,6 @@ import {
 import {
    Dialog,
    DialogContent,
-   DialogDescription,
    DialogHeader,
    DialogTitle,
    DialogTrigger
@@ -69,7 +68,6 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                   <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
                         <Input
-                           size="md"
                            label="Busca geral"
                            placeholder="Descrição, Local, ID"
                            value={globalFilter}
@@ -89,13 +87,46 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                            </DialogTrigger>
                            <DialogContent>
                               <DialogHeader>
-                                 <DialogTitle>Are you absolutely sure?</DialogTitle>
-                                 <DialogDescription>
-                                    This action cannot be undone. This will
-                                    permanently delete your account and remove your
-                                    data from our servers.
-                                 </DialogDescription>
+                                 <DialogTitle>Busca avançada</DialogTitle>
                               </DialogHeader>
+                              <div className="space-y-4 py-4">
+                                 <p className="text-base">
+                                    Preencha os campos necessários para busca
+                                 </p>
+                                 <div className="grid grid-cols-3 gap-2">
+                                    <Input label="Placa" placeholder="000-0000" />
+                                    <Input
+                                       label="Descrição"
+                                       placeholder="Descrição do leilão"
+                                    />
+                                    <Input
+                                       label="Processo"
+                                       placeholder="Número do processo"
+                                    />
+                                 </div>
+                                 <div className="grid grid-cols-3 gap-2">
+                                    <Input label="Placa" placeholder="000-0000" />
+                                    <Input
+                                       label="Descrição"
+                                       placeholder="Descrição do leilão"
+                                    />
+                                    <Input
+                                       label="Processo"
+                                       placeholder="Número do processo"
+                                    />
+                                 </div>
+                                 <div className="grid grid-cols-3 gap-2">
+                                    <Input label="Placa" placeholder="000-0000" />
+                                    <Input
+                                       label="Descrição"
+                                       placeholder="Descrição do leilão"
+                                    />
+                                    <Input
+                                       label="Processo"
+                                       placeholder="Número do processo"
+                                    />
+                                 </div>
+                              </div>
                            </DialogContent>
                         </Dialog>
                      </div>

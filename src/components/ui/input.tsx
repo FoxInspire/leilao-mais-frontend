@@ -98,10 +98,7 @@ export const labelVariants = cva(
 )
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-   (
-      { className, type: initialType, label, error, size = 'default', ...props },
-      ref
-   ) => {
+   ({ className, type: initialType, label, error, size = 'md', ...props }, ref) => {
       const isPassword = initialType === 'password'
       const [type, setType] = React.useState(initialType)
 
