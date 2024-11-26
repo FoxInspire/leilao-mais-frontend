@@ -31,152 +31,203 @@ import { usePathname } from 'next/navigation'
 
 import Link from 'next/link'
 
-export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
-   children
-}: React.PropsWithChildren) => {
+const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
+   const { state } = useSidebar()
    const pathname = usePathname()
    const isActiveRoute = (url: string) => pathname === url
 
    return (
-      <section>
-         <SidebarProvider hasHeaderMenu>
-            <Sidebar collapsible="icon">
-               <SidebarHeader>
-                  <LogoSwitcher />
-               </SidebarHeader>
-               <SidebarContent>
-                  <SidebarGroup>
-                     <SidebarMenu className="gap-3">
-                        {data.menuItems.map((item) =>
-                           item.items && item.items.length > 0 ? (
-                              <Collapsible
-                                 key={item.title}
-                                 asChild
-                                 className={cn('group/collapsible', {
+      <React.Fragment>
+         <Sidebar collapsible="icon">
+            <SidebarHeader>
+               <LogoSwitcher state={state} />
+            </SidebarHeader>
+            <SidebarContent>
+               <SidebarGroup>
+                  <SidebarMenu className="gap-3">
+                     {data.menuItems.map((item) =>
+                        item.items && item.items.length > 0 ? (
+                           <Collapsible
+                              key={item.title}
+                              asChild
+                              className={cn('group/collapsible', {
+                                 'opacity-50 pointer-events-none': item.disabled
+                              })}
+                           >
+                              <SidebarMenuItem>
+                                 <CollapsibleTrigger className="h-10" asChild>
+                                    <SidebarMenuButton
+                                       tooltip={item.title}
+                                       className={cn({
+                                          'pointer-events-none': item.disabled
+                                       })}
+                                       asChild={state === 'collapsed'}
+                                    >
+                                       {state === 'collapsed' ? (
+                                          <Link
+                                             href={item.disabled ? '#' : item.url}
+                                          >
+                                             {item.icon &&
+                                                renderIcon(
+                                                   item.icon,
+                                                   cn('w-6 h-6 block', {
+                                                      'text-primary-default':
+                                                         item.items.some((subItem) =>
+                                                            isActiveRoute(
+                                                               subItem.url
+                                                            )
+                                                         )
+                                                   })
+                                                )}
+                                             <span
+                                                className={cn(
+                                                   'text-sm font-medium',
+                                                   {
+                                                      'text-primary-default':
+                                                         item.items.some((subItem) =>
+                                                            isActiveRoute(
+                                                               subItem.url
+                                                            )
+                                                         )
+                                                   }
+                                                )}
+                                             >
+                                                {item.title}
+                                             </span>
+                                          </Link>
+                                       ) : (
+                                          <>
+                                             {item.icon &&
+                                                renderIcon(
+                                                   item.icon,
+                                                   cn('w-6 h-6 block', {
+                                                      'text-primary-default':
+                                                         item.items.some((subItem) =>
+                                                            isActiveRoute(
+                                                               subItem.url
+                                                            )
+                                                         )
+                                                   })
+                                                )}
+                                             <span
+                                                className={cn(
+                                                   'text-sm font-medium',
+                                                   {
+                                                      'text-primary-default':
+                                                         item.items.some((subItem) =>
+                                                            isActiveRoute(
+                                                               subItem.url
+                                                            )
+                                                         )
+                                                   }
+                                                )}
+                                             >
+                                                {item.title}
+                                             </span>
+                                             <div
+                                                className={cn(
+                                                   'material-symbols-outlined shrink-0 transition-transform duration-200 origin-center text-action-active w-6 h-6 block !text-[24px]',
+                                                   'ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:-rotate-90 dark:text-sidebar-foreground'
+                                                )}
+                                             >
+                                                keyboard_arrow_down
+                                             </div>
+                                          </>
+                                       )}
+                                    </SidebarMenuButton>
+                                 </CollapsibleTrigger>
+                                 <CollapsibleContent>
+                                    <SidebarMenuSub>
+                                       {item.items.map((subItem) => (
+                                          <SidebarMenuSubItem key={subItem.title}>
+                                             <SidebarMenuSubButton
+                                                asChild
+                                                className={cn({
+                                                   'pointer-events-none opacity-50':
+                                                      item.disabled ||
+                                                      subItem.disabled
+                                                })}
+                                             >
+                                                <Link
+                                                   href={
+                                                      item.disabled ||
+                                                      subItem.disabled
+                                                         ? '#'
+                                                         : subItem.url
+                                                   }
+                                                >
+                                                   <span
+                                                      className={cn(
+                                                         'text-sm font-normal',
+                                                         {
+                                                            'text-primary-default':
+                                                               isActiveRoute(
+                                                                  subItem.url
+                                                               )
+                                                         }
+                                                      )}
+                                                   >
+                                                      {subItem.title}
+                                                   </span>
+                                                </Link>
+                                             </SidebarMenuSubButton>
+                                          </SidebarMenuSubItem>
+                                       ))}
+                                    </SidebarMenuSub>
+                                 </CollapsibleContent>
+                              </SidebarMenuItem>
+                           </Collapsible>
+                        ) : (
+                           <SidebarMenuItem key={item.title}>
+                              <SidebarMenuButton
+                                 className={cn('h-10', {
                                     'opacity-50 pointer-events-none': item.disabled
                                  })}
+                                 asChild
                               >
-                                 <SidebarMenuItem>
-                                    <CollapsibleTrigger className="h-10" asChild>
-                                       <SidebarMenuButton
-                                          tooltip={item.title}
-                                          className={cn({
-                                             'pointer-events-none': item.disabled
-                                          })}
-                                       >
-                                          {item.icon &&
-                                             renderIcon(
-                                                item.icon,
-                                                cn('w-6 h-6 block', {
-                                                   'text-primary-default':
-                                                      item.items.some((subItem) =>
-                                                         isActiveRoute(subItem.url)
-                                                      )
-                                                })
-                                             )}
-                                          <span
-                                             className={cn('text-sm font-medium', {
-                                                'text-primary-default':
-                                                   item.items.some((subItem) =>
-                                                      isActiveRoute(subItem.url)
-                                                   )
-                                             })}
-                                          >
-                                             {item.title}
-                                          </span>
-                                          <div
-                                             className={cn(
-                                                'material-symbols-outlined shrink-0 transition-transform duration-200 origin-center text-action-active w-6 h-6 block !text-[24px]',
-                                                'ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:-rotate-90 dark:text-sidebar-foreground'
-                                             )}
-                                          >
-                                             keyboard_arrow_down
-                                          </div>
-                                       </SidebarMenuButton>
-                                    </CollapsibleTrigger>
-                                    <CollapsibleContent>
-                                       <SidebarMenuSub>
-                                          {item.items.map((subItem) => (
-                                             <SidebarMenuSubItem key={subItem.title}>
-                                                <SidebarMenuSubButton
-                                                   asChild
-                                                   className={cn({
-                                                      'pointer-events-none opacity-50':
-                                                         item.disabled ||
-                                                         subItem.disabled
-                                                   })}
-                                                >
-                                                   <Link
-                                                      href={
-                                                         item.disabled ||
-                                                         subItem.disabled
-                                                            ? '#'
-                                                            : subItem.url
-                                                      }
-                                                   >
-                                                      <span
-                                                         className={cn(
-                                                            'text-sm font-normal',
-                                                            {
-                                                               'text-primary-default':
-                                                                  isActiveRoute(
-                                                                     subItem.url
-                                                                  )
-                                                            }
-                                                         )}
-                                                      >
-                                                         {subItem.title}
-                                                      </span>
-                                                   </Link>
-                                                </SidebarMenuSubButton>
-                                             </SidebarMenuSubItem>
-                                          ))}
-                                       </SidebarMenuSub>
-                                    </CollapsibleContent>
-                                 </SidebarMenuItem>
-                              </Collapsible>
-                           ) : (
-                              <SidebarMenuItem key={item.title}>
-                                 <SidebarMenuButton
-                                    className={cn('h-10', {
-                                       'opacity-50 pointer-events-none':
-                                          item.disabled
-                                    })}
-                                    asChild
-                                 >
-                                    <Link href={item.disabled ? '#' : item.url}>
-                                       {item.icon &&
-                                          renderIcon(
-                                             item.icon,
-                                             cn('w-6 h-6 block', {
-                                                'text-primary-default':
-                                                   isActiveRoute(item.url)
-                                             })
-                                          )}
-                                       <span
-                                          className={cn('text-sm font-medium', {
+                                 <Link href={item.disabled ? '#' : item.url}>
+                                    {item.icon &&
+                                       renderIcon(
+                                          item.icon,
+                                          cn('w-6 h-6 block', {
                                              'text-primary-default': isActiveRoute(
                                                 item.url
                                              )
-                                          })}
-                                       >
-                                          {item.title}
-                                       </span>
-                                    </Link>
-                                 </SidebarMenuButton>
-                              </SidebarMenuItem>
-                           )
-                        )}
-                     </SidebarMenu>
-                  </SidebarGroup>
-               </SidebarContent>
-               <SidebarRail />
-            </Sidebar>
-            <SidebarInset className="p-6">
-               <div className="h-full flex flex-col">{children}</div>
-            </SidebarInset>
-         </SidebarProvider>
-      </section>
+                                          })
+                                       )}
+                                    <span
+                                       className={cn('text-sm font-medium', {
+                                          'text-primary-default': isActiveRoute(
+                                             item.url
+                                          )
+                                       })}
+                                    >
+                                       {item.title}
+                                    </span>
+                                 </Link>
+                              </SidebarMenuButton>
+                           </SidebarMenuItem>
+                        )
+                     )}
+                  </SidebarMenu>
+               </SidebarGroup>
+            </SidebarContent>
+            <SidebarRail />
+         </Sidebar>
+         <SidebarInset className="p-6">
+            <div className="h-full flex flex-col">{children}</div>
+         </SidebarInset>
+      </React.Fragment>
+   )
+}
+
+export const DashboardLayout: React.FC<React.PropsWithChildren> = ({
+   children
+}: React.PropsWithChildren) => {
+   return (
+      <SidebarProvider hasHeaderMenu>
+         <DashboardContent>{children}</DashboardContent>
+      </SidebarProvider>
    )
 }
 
@@ -194,7 +245,7 @@ const data = {
       },
       {
          title: 'Pré-leilão',
-         url: dashboard_routes.pre_auction.index,
+         url: dashboard_routes.pre_auction.auction_maintenance,
          icon: (
             <span className="material-symbols-outlined !text-[24px] leading-6 w-6 h-6 block">
                monitor
@@ -256,10 +307,8 @@ const renderIcon = (icon: IconType | JSX.Element, className?: string) => {
    return <IconComponent className={cn(className, 'w-6 h-6 block')} />
 }
 
-const LogoSwitcher: React.FC = () => {
-   const { state } = useSidebar()
+const LogoSwitcher: React.FC<{ state: 'expanded' | 'collapsed' }> = ({ state }) => {
    const isMobile = useIsMobile()
-
    return (
       <div
          className={cn('flex items-center justify-center h-full', {
