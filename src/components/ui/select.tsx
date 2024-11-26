@@ -5,6 +5,7 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 import { Check, ChevronDown, ChevronUp } from 'lucide-react'
+import { inputVariants } from './input'
 
 const Select = SelectPrimitive.Root
 
@@ -17,27 +18,48 @@ const SelectTrigger = React.forwardRef<
    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & {
       hideIcon?: boolean
       unstyled?: boolean
+      variant?: 'default' | 'input'
    }
->(({ className, children, hideIcon = false, unstyled = false, ...props }, ref) => (
-   <SelectPrimitive.Trigger
-      ref={ref}
-      className={cn(
-         !unstyled &&
-            'flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300',
-         className
-      )}
-      {...props}
-   >
-      {children}
-      {!hideIcon && (
-         <SelectPrimitive.Icon asChild>
-            <span className="material-symbols-outlined transition-transform duration-200 data-[state=open]:rotate-180">
-               keyboard_arrow_down
-            </span>
-         </SelectPrimitive.Icon>
-      )}
-   </SelectPrimitive.Trigger>
-))
+>(
+   (
+      {
+         className,
+         children,
+         hideIcon = false,
+         unstyled = false,
+         variant = 'default',
+         ...props
+      },
+      ref
+   ) => (
+      <SelectPrimitive.Trigger
+         ref={ref}
+         className={cn(
+            variant === 'default' &&
+               !unstyled &&
+               'flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300',
+            variant === 'input' &&
+               !unstyled &&
+               inputVariants({
+                  size: 'md',
+                  className: 'font-normal'
+               }),
+            'flex items-center justify-between',
+            className
+         )}
+         {...props}
+      >
+         {children}
+         {!hideIcon && (
+            <SelectPrimitive.Icon asChild>
+               <span className="material-symbols-outlined transition-transform duration-200 data-[state=open]:rotate-180">
+                  keyboard_arrow_down
+               </span>
+            </SelectPrimitive.Icon>
+         )}
+      </SelectPrimitive.Trigger>
+   )
+)
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 
 const SelectScrollUpButton = React.forwardRef<

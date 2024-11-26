@@ -12,7 +12,7 @@ const buttonVariants = cva(
             default:
                'bg-primary-default text-primary-contrast hover:bg-primary-light dark:bg-dark-primary-default dark:hover:bg-dark-primary-light',
             destructive:
-               'bg-error-default text-error-contrast hover:bg-error-light dark:bg-dark-error-default dark:text-dark-error-contrast dark:hover:bg-dark-error-light',
+               'bg-transparent border border-error-default text-error-default hover:bg-error-default/10 dark:border-dark-error-default dark:text-dark-error-default dark:hover:bg-dark-error-default/10',
             outline:
                'border border-primary-default text-primary-default hover:bg-primary-default/10 dark:border-dark-primary-default dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10',
             secondary:

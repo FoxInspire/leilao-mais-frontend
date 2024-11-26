@@ -103,7 +103,7 @@ const Dashboard: React.FC = () => {
          <div className="space-y-6">
             <div className="space-y-2">
                <div className="flex justify-between items-center gap-2">
-                  <h1 className="text-3xl font-semibold font-montserrat">
+                  <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
                      Dashboard
                   </h1>
                   <Button

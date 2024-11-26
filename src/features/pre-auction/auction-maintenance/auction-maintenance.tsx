@@ -17,6 +17,13 @@ import {
    DialogTitle,
    DialogTrigger
 } from '@/components/ui/dialog'
+import {
+   Select,
+   SelectContent,
+   SelectItem,
+   SelectTrigger,
+   SelectValue
+} from '@/components/ui/select'
 import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
@@ -51,7 +58,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                   </Breadcrumb>
                   <div className="space-y-2">
                      <div className="flex flex-wrap justify-between items-center gap-2">
-                        <h1 className="text-3xl font-semibold font-montserrat">
+                        <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
                            Manutenção de leilões
                         </h1>
                         <Button
@@ -70,17 +77,20 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
                         <Input
                            label="Busca geral"
-                           placeholder="Descrição, Local, ID"
                            value={globalFilter}
+                           placeholder="Descrição, Local, ID"
                            onChange={(e) => setGlobalFilter(e.target.value)}
                            className="min-w-[300px]"
                         />
                         <Dialog>
-                           <DialogTrigger asChild>
+                           <DialogTrigger
+                              className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
+                              asChild
+                           >
                               <div>
                                  <Button
                                     variant="ghost"
-                                    className="w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap"
+                                    className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
                                  >
                                     Busca avançada
                                  </Button>
@@ -94,7 +104,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                  <p className="text-base">
                                     Preencha os campos necessários para busca
                                  </p>
-                                 <div className="grid grid-cols-3 gap-2">
+                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
                                     <Input label="Placa" placeholder="000-0000" />
                                     <Input
                                        label="Descrição"
@@ -105,30 +115,52 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                        placeholder="Número do processo"
                                     />
                                  </div>
-                                 <div className="grid grid-cols-3 gap-2">
+                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
                                     <DatePicker
                                        label="Data"
                                        placeholder="DD/MM/YYYY"
                                     />
+                                    <Input label="ID" placeholder="ID do leilão" />
                                     <Input
                                        label="Descrição"
                                        placeholder="Descrição do leilão"
-                                    />
-                                    <Input
-                                       label="Processo"
-                                       placeholder="Número do processo"
                                     />
                                  </div>
-                                 <div className="grid grid-cols-3 gap-2">
-                                    <Input label="Placa" placeholder="000-0000" />
+                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                                    <Select>
+                                       <SelectTrigger variant="input">
+                                          <SelectValue placeholder="Status" />
+                                       </SelectTrigger>
+                                       <SelectContent>
+                                          <SelectItem value="light">
+                                             Light
+                                          </SelectItem>
+                                          <SelectItem value="dark">Dark</SelectItem>
+                                          <SelectItem value="system">
+                                             System
+                                          </SelectItem>
+                                       </SelectContent>
+                                    </Select>
                                     <Input
-                                       label="Descrição"
-                                       placeholder="Descrição do leilão"
+                                       label="Local"
+                                       placeholder="Local do leilão"
                                     />
                                     <Input
-                                       label="Processo"
-                                       placeholder="Número do processo"
+                                       label="Comitente"
+                                       placeholder="Comitente do leilão"
                                     />
+                                 </div>
+                              </div>
+                              <div className="grid md:grid-cols-2 gap-2 mb-6">
+                                 <div className="md:order-1 order-2">
+                                    <Button variant="destructive" className="w-full">
+                                       Cancelar
+                                    </Button>
+                                 </div>
+                                 <div className="md:order-2 order-1">
+                                    <Button variant="default" className="w-full">
+                                       Buscar
+                                    </Button>
                                  </div>
                               </div>
                            </DialogContent>
