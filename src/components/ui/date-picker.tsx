@@ -3,7 +3,11 @@
 import * as React from 'react'
 
 import { Calendar } from '@/components/ui/calendar'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import {
+   Popover,
+   PopoverContent,
+   PopoverTrigger
+} from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 import { cva } from 'class-variance-authority'
 import { format } from 'date-fns'
@@ -133,14 +137,6 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                         aria-invalid={error ? 'true' : undefined}
                         ref={ref}
                         placeholder={label}
-                        onAnimationStart={(e) => {
-                           if (e.animationName === 'onAutoFillStart') {
-                              ;(e.target as HTMLInputElement).setAttribute(
-                                 'data-autofilled',
-                                 'true'
-                              )
-                           }
-                        }}
                         {...props}
                      />
                      <span className="material-symbols-outlined absolute right-2.5 z-10 text-action-active">
@@ -165,14 +161,18 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                      selected={selectedDate || undefined}
                      onSelect={(e) => {
                         if (e !== undefined) {
-                           onSelected && onSelected(e as unknown as Date)
+                           if (onSelected) {
+                              onSelected(e as unknown as Date)
+                           }
                            setSelectedDate(e)
                         }
                      }}
                   />
                </PopoverContent>
             </Popover>
-            {error && <span className="mt-1 text-sm text-red-500">{error}</span>}
+            {error && (
+               <span className="mt-1 text-sm text-red-500">{error}</span>
+            )}
          </React.Fragment>
       )
    }

@@ -69,6 +69,9 @@ if (!fs.existsSync(dir)) {
    fs.mkdirSync(dir, { recursive: true })
 }
 
-fs.writeFileSync(path.join(dir, 'auctions.json'), JSON.stringify(tasks, null, 2))
+fs.writeFileSync(
+   path.join(dir, 'auctions.json'),
+   JSON.stringify(tasks, null, 2)
+)
 
 console.log('✅ Auctions data generated successfully!')

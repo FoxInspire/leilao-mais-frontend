@@ -2,18 +2,19 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-   ({ className, ...props }, ref) => (
-      <div
-         ref={ref}
-         className={cn(
-            'p-4 space-y-4 bg-white rounded-md border border-neutral-300    h-full dark:bg-dark-background-paper dark:text-dark-text-primary dark:border-dark-divider',
-            className
-         )}
-         {...props}
-      />
-   )
-)
+const Card = React.forwardRef<
+   HTMLDivElement,
+   React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+   <div
+      ref={ref}
+      className={cn(
+         'p-4 space-y-4 bg-white rounded-md border border-neutral-300    h-full dark:bg-dark-background-paper dark:text-dark-text-primary dark:border-dark-divider',
+         className
+      )}
+      {...props}
+   />
+))
 Card.displayName = 'Card'
 
 const CardHeader = React.forwardRef<
@@ -34,7 +35,10 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
    <div
       ref={ref}
-      className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
+      className={cn(
+         'text-2xl font-semibold leading-none tracking-tight',
+         className
+      )}
       {...props}
    />
 ))
@@ -46,7 +50,10 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
    <div
       ref={ref}
-      className={cn('text-sm text-neutral-500 dark:text-neutral-400', className)}
+      className={cn(
+         'text-sm text-neutral-500 dark:text-neutral-400',
+         className
+      )}
       {...props}
    />
 ))

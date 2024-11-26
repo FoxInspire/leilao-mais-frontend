@@ -65,17 +65,20 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                     >
                                        {state === 'collapsed' ? (
                                           <Link
-                                             href={item.disabled ? '#' : item.url}
+                                             href={
+                                                item.disabled ? '#' : item.url
+                                             }
                                           >
                                              {item.icon &&
                                                 renderIcon(
                                                    item.icon,
                                                    cn('w-6 h-6 block', {
                                                       'text-primary-default':
-                                                         item.items.some((subItem) =>
-                                                            isActiveRoute(
-                                                               subItem.url
-                                                            )
+                                                         item.items.some(
+                                                            (subItem) =>
+                                                               isActiveRoute(
+                                                                  subItem.url
+                                                               )
                                                          )
                                                    })
                                                 )}
@@ -84,10 +87,11 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                                    'text-sm font-medium',
                                                    {
                                                       'text-primary-default':
-                                                         item.items.some((subItem) =>
-                                                            isActiveRoute(
-                                                               subItem.url
-                                                            )
+                                                         item.items.some(
+                                                            (subItem) =>
+                                                               isActiveRoute(
+                                                                  subItem.url
+                                                               )
                                                          )
                                                    }
                                                 )}
@@ -102,10 +106,11 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                                    item.icon,
                                                    cn('w-6 h-6 block', {
                                                       'text-primary-default':
-                                                         item.items.some((subItem) =>
-                                                            isActiveRoute(
-                                                               subItem.url
-                                                            )
+                                                         item.items.some(
+                                                            (subItem) =>
+                                                               isActiveRoute(
+                                                                  subItem.url
+                                                               )
                                                          )
                                                    })
                                                 )}
@@ -114,10 +119,11 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                                    'text-sm font-medium',
                                                    {
                                                       'text-primary-default':
-                                                         item.items.some((subItem) =>
-                                                            isActiveRoute(
-                                                               subItem.url
-                                                            )
+                                                         item.items.some(
+                                                            (subItem) =>
+                                                               isActiveRoute(
+                                                                  subItem.url
+                                                               )
                                                          )
                                                    }
                                                 )}
@@ -139,7 +145,9 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                  <CollapsibleContent>
                                     <SidebarMenuSub>
                                        {item.items.map((subItem) => (
-                                          <SidebarMenuSubItem key={subItem.title}>
+                                          <SidebarMenuSubItem
+                                             key={subItem.title}
+                                          >
                                              <SidebarMenuSubButton
                                                 asChild
                                                 className={cn({
@@ -181,7 +189,8 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                            <SidebarMenuItem key={item.title}>
                               <SidebarMenuButton
                                  className={cn('h-10', {
-                                    'opacity-50 pointer-events-none': item.disabled
+                                    'opacity-50 pointer-events-none':
+                                       item.disabled
                                  })}
                                  asChild
                               >
@@ -190,9 +199,8 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                        renderIcon(
                                           item.icon,
                                           cn('w-6 h-6 block', {
-                                             'text-primary-default': isActiveRoute(
-                                                item.url
-                                             )
+                                             'text-primary-default':
+                                                isActiveRoute(item.url)
                                           })
                                        )}
                                     <span
@@ -307,7 +315,9 @@ const renderIcon = (icon: IconType | JSX.Element, className?: string) => {
    return <IconComponent className={cn(className, 'w-6 h-6 block')} />
 }
 
-const LogoSwitcher: React.FC<{ state: 'expanded' | 'collapsed' }> = ({ state }) => {
+const LogoSwitcher: React.FC<{ state: 'expanded' | 'collapsed' }> = ({
+   state
+}) => {
    const isMobile = useIsMobile()
    return (
       <div

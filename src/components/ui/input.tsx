@@ -97,7 +97,10 @@ export const labelVariants = cva(
 )
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-   ({ className, type: initialType, label, error, size = 'md', ...props }, ref) => {
+   (
+      { className, type: initialType, label, error, size = 'md', ...props },
+      ref
+   ) => {
       const isPassword = initialType === 'password'
       const [type, setType] = React.useState(initialType)
 
@@ -118,7 +121,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   autoComplete="new-password"
                   autoCorrect="off"
                   autoSave="off"
-                  className={cn(inputVariants({ error: !!error, size }), className)}
+                  className={cn(
+                     inputVariants({ error: !!error, size }),
+                     className
+                  )}
                   aria-invalid={error ? 'true' : undefined}
                   ref={ref}
                   placeholder={label}
@@ -161,7 +167,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   </button>
                )}
             </div>
-            {error && <span className="mt-1 text-sm text-red-500">{error}</span>}
+            {error && (
+               <span className="mt-1 text-sm text-red-500">{error}</span>
+            )}
          </React.Fragment>
       )
    }

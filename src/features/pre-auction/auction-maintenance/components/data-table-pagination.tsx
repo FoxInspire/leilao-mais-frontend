@@ -7,7 +7,12 @@ import {
    SelectValue
 } from '@/components/ui/select'
 import { Table } from '@tanstack/react-table'
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
+import {
+   ChevronLeft,
+   ChevronRight,
+   ChevronsLeft,
+   ChevronsRight
+} from 'lucide-react'
 
 interface DataTablePaginationProps<TData> {
    table: Table<TData>

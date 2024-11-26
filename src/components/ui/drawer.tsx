@@ -9,7 +9,10 @@ const Drawer = ({
    shouldScaleBackground = true,
    ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-   <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />
+   <DrawerPrimitive.Root
+      shouldScaleBackground={shouldScaleBackground}
+      {...props}
+   />
 )
 Drawer.displayName = 'Drawer'
 
@@ -74,7 +77,10 @@ const DrawerFooter = ({
    className,
    ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-   <div className={cn('mt-auto flex flex-col gap-2 p-4', className)} {...props} />
+   <div
+      className={cn('mt-auto flex flex-col gap-2 p-4', className)}
+      {...props}
+   />
 )
 DrawerFooter.displayName = 'DrawerFooter'
 
@@ -84,7 +90,10 @@ const DrawerTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
    <DrawerPrimitive.Title
       ref={ref}
-      className={cn('text-lg font-semibold leading-none tracking-tight', className)}
+      className={cn(
+         'text-lg font-semibold leading-none tracking-tight',
+         className
+      )}
       {...props}
    />
 ))
@@ -96,7 +105,10 @@ const DrawerDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
    <DrawerPrimitive.Description
       ref={ref}
-      className={cn('text-sm text-neutral-500 dark:text-neutral-400', className)}
+      className={cn(
+         'text-sm text-neutral-500 dark:text-neutral-400',
+         className
+      )}
       {...props}
    />
 ))

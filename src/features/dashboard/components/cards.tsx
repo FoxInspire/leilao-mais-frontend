@@ -125,7 +125,9 @@ export const Card: React.FC<CardProps> = ({
       return items.map((item) => `${item.quantity} - ${item.name}`).join('\n')
    }
 
-   const hasTransactions = (items: Array<{ quantity: number; name: string }>) => {
+   const hasTransactions = (
+      items: Array<{ quantity: number; name: string }>
+   ) => {
       return items.some((item) => item.quantity > 0)
    }
    return (
@@ -139,7 +141,12 @@ export const Card: React.FC<CardProps> = ({
                   {yardName}
                </span>
             </div>
-            <Button variant="ghost" size="icon" className="my-auto" onClick={onEdit}>
+            <Button
+               variant="ghost"
+               size="icon"
+               className="my-auto"
+               onClick={onEdit}
+            >
                <span className="material-symbols-outlined filled text-text-secondary dark:text-dark-text-secondary">
                   edit
                </span>
@@ -158,7 +165,9 @@ export const Card: React.FC<CardProps> = ({
                         </TooltipTrigger>
                         <TooltipContent>
                            <p className="whitespace-pre">
-                              {formatTransactionsList(transactions.pending.items)}
+                              {formatTransactionsList(
+                                 transactions.pending.items
+                              )}
                            </p>
                         </TooltipContent>
                      </Tooltip>
@@ -186,7 +195,9 @@ export const Card: React.FC<CardProps> = ({
                         </TooltipTrigger>
                         <TooltipContent>
                            <p className="whitespace-pre">
-                              {formatTransactionsList(transactions.completed.items)}
+                              {formatTransactionsList(
+                                 transactions.completed.items
+                              )}
                            </p>
                         </TooltipContent>
                      </Tooltip>

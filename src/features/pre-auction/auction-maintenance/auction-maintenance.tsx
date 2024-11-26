@@ -51,7 +51,9 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                         </BreadcrumbItem>
                         <BreadcrumbSeparator>/</BreadcrumbSeparator>
                         <BreadcrumbItem>
-                           <BreadcrumbPage>Manutenção de leilões</BreadcrumbPage>
+                           <BreadcrumbPage>
+                              Manutenção de leilões
+                           </BreadcrumbPage>
                         </BreadcrumbItem>
                      </BreadcrumbList>
                   </Breadcrumb>
@@ -104,7 +106,10 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                     Preencha os campos necessários para busca
                                  </p>
                                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                                    <Input label="Placa" placeholder="000-0000" />
+                                    <Input
+                                       label="Placa"
+                                       placeholder="000-0000"
+                                    />
                                     <Input
                                        label="Descrição"
                                        placeholder="Descrição do leilão"
@@ -119,7 +124,10 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                        label="Data"
                                        placeholder="DD/MM/YYYY"
                                     />
-                                    <Input label="ID" placeholder="ID do leilão" />
+                                    <Input
+                                       label="ID"
+                                       placeholder="ID do leilão"
+                                    />
                                     <Input
                                        label="Descrição"
                                        placeholder="Descrição do leilão"
@@ -137,7 +145,9 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                           <SelectItem value="light">
                                              Light
                                           </SelectItem>
-                                          <SelectItem value="dark">Dark</SelectItem>
+                                          <SelectItem value="dark">
+                                             Dark
+                                          </SelectItem>
                                           <SelectItem value="system">
                                              System
                                           </SelectItem>
@@ -155,12 +165,18 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                               </div>
                               <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
                                  <div className="md:order-1 order-2">
-                                    <Button variant="destructive" className="w-full">
+                                    <Button
+                                       variant="destructive"
+                                       className="w-full"
+                                    >
                                        Cancelar
                                     </Button>
                                  </div>
                                  <div className="md:order-2 order-1">
-                                    <Button variant="default" className="w-full">
+                                    <Button
+                                       variant="default"
+                                       className="w-full"
+                                    >
                                        Buscar
                                     </Button>
                                  </div>
@@ -214,23 +230,28 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                   </div>
                   <Separator orientation="horizontal" />
                   <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black font-semibold text-start">Descrição</p>
-                     <p className="text-text-secondary text-start">
-                        A página de Dashboard oferece uma visão geral dos leilões,
-                        exibindo cards com o status das transações. O usuário pode
-                        navegar em abas organizadas por: Em progresso, Inaptos e
-                        Concluídos. Também é possível aplicar filtros por tipo de
-                        erro e transação, facilitando o acompanhamento e a gestão
-                        eficiente dos leilões.
+                     <p className="text-black font-semibold text-start">
+                        Descrição
                      </p>
-                     <p className="text-black font-semibold text-start">Detalhes</p>
+                     <p className="text-text-secondary text-start">
+                        A página de Dashboard oferece uma visão geral dos
+                        leilões, exibindo cards com o status das transações. O
+                        usuário pode navegar em abas organizadas por: Em
+                        progresso, Inaptos e Concluídos. Também é possível
+                        aplicar filtros por tipo de erro e transação,
+                        facilitando o acompanhamento e a gestão eficiente dos
+                        leilões.
+                     </p>
+                     <p className="text-black font-semibold text-start">
+                        Detalhes
+                     </p>
                      <div>
                         <p className="text-black font-normal text-start">
                            Aba Em progresso
                         </p>
                         <p className="text-text-secondary text-start">
-                           Reúne os leilões que iniciaram as transações com o DETRAN
-                           e não apresentam erros.
+                           Reúne os leilões que iniciaram as transações com o
+                           DETRAN e não apresentam erros.
                         </p>
                      </div>
                      <div>
@@ -238,7 +259,8 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                            Aba Inaptos
                         </p>
                         <p className="text-text-secondary text-start">
-                           Reúne os leilões que não aderem a nenhum filtro de erro.
+                           Reúne os leilões que não aderem a nenhum filtro de
+                           erro.
                         </p>
                      </div>
                      <div>
@@ -250,23 +272,27 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                         </p>
                      </div>
                      <div>
-                        <p className="text-black font-normal text-start">Status</p>
+                        <p className="text-black font-normal text-start">
+                           Status
+                        </p>
                         <p className="text-text-secondary text-start">
-                           A cor cinza indica lotes com transações em progresso. A
-                           cor vermelha indica lotes com transações que precisam ser
-                           revisadas. A cor verde indica lotes que necessitam
-                           intervenção manual para a continuidade do processo
-                           automático.
+                           A cor cinza indica lotes com transações em progresso.
+                           A cor vermelha indica lotes com transações que
+                           precisam ser revisadas. A cor verde indica lotes que
+                           necessitam intervenção manual para a continuidade do
+                           processo automático.
                         </p>
                      </div>
                      <div className="bg-[#E6F1F7] px-4 py-4 space-y-2">
-                        <p className="text-black font-normal text-start">Info</p>
+                        <p className="text-black font-normal text-start">
+                           Info
+                        </p>
                         <p className="text-text-secondary text-start">
                            Clique no card para acessar o leilão.
                         </p>
                         <p className="text-text-secondary text-start">
-                           Passe o ponteiro do mouse na cor do status para visualizar
-                           a quantidade de lotes por transação.
+                           Passe o ponteiro do mouse na cor do status para
+                           visualizar a quantidade de lotes por transação.
                         </p>
                      </div>
                   </div>

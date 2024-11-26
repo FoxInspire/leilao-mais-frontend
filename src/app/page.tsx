@@ -75,7 +75,9 @@ export default function Home() {
          <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">
             <div>
                <div className="space-y-1">
-                  <h4 className="text-sm font-medium leading-none">Leilão Mais</h4>
+                  <h4 className="text-sm font-medium leading-none">
+                     Leilão Mais
+                  </h4>
                   <p className="text-sm text-muted-foreground">
                      Sistema completo para gestão de leilões automotivos.
                   </p>
@@ -99,7 +101,9 @@ export default function Home() {
                <TabsContent value="account">
                   Make changes to your account here.
                </TabsContent>
-               <TabsContent value="password">Change your password here.</TabsContent>
+               <TabsContent value="password">
+                  Change your password here.
+               </TabsContent>
             </Tabs>
          </div>
          <div className="m-2 rounded-md p-2 border space-y-4 border-primary-default border-dashed">

@@ -53,7 +53,12 @@ export function DataTableColumnHeader<TData, TValue>({
    }
 
    return (
-      <div className={cn('flex items-center space-x-2', props.className?.container)}>
+      <div
+         className={cn(
+            'flex items-center space-x-2',
+            props.className?.container
+         )}
+      >
          <DropdownMenu>
             <DropdownMenuTrigger asChild>
                <div className="flex items-center space-x-2">

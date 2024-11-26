@@ -91,10 +91,15 @@ const Dashboard: React.FC = () => {
       const tabsContainer = tabsRef.current as unknown as HTMLElement
       if (!tabsContainer) return
 
-      const activeTabElement = tabsContainer.querySelector(`[data-value="${tab}"]`)
+      const activeTabElement = tabsContainer.querySelector(
+         `[data-value="${tab}"]`
+      )
 
       if (activeTabElement) {
-         activeTabElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+         activeTabElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest'
+         })
       }
    }, [tab])
 
@@ -179,7 +184,10 @@ const Dashboard: React.FC = () => {
                               </div>
                            </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="px-1.5 py-2">
+                        <DropdownMenuContent
+                           align="end"
+                           className="px-1.5 py-2"
+                        >
                            <DropdownMenuLabel className="text-sm">
                               Filtrar por
                            </DropdownMenuLabel>
@@ -261,27 +269,33 @@ const Dashboard: React.FC = () => {
                </div>
                <Separator orientation="horizontal" />
                <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                  <p className="text-black font-semibold text-start">Descrição</p>
+                  <p className="text-black font-semibold text-start">
+                     Descrição
+                  </p>
                   <p className="text-text-secondary text-start">
                      A página de Dashboard oferece uma visão geral dos leilões,
                      exibindo cards com o status das transações. O usuário pode
                      navegar em abas organizadas por: Em progresso, Inaptos e
-                     Concluídos. Também é possível aplicar filtros por tipo de erro e
-                     transação, facilitando o acompanhamento e a gestão eficiente dos
-                     leilões.
+                     Concluídos. Também é possível aplicar filtros por tipo de
+                     erro e transação, facilitando o acompanhamento e a gestão
+                     eficiente dos leilões.
                   </p>
-                  <p className="text-black font-semibold text-start">Detalhes</p>
+                  <p className="text-black font-semibold text-start">
+                     Detalhes
+                  </p>
                   <div>
                      <p className="text-black font-normal text-start">
                         Aba Em progresso
                      </p>
                      <p className="text-text-secondary text-start">
-                        Reúne os leilões que iniciaram as transações com o DETRAN e
-                        não apresentam erros.
+                        Reúne os leilões que iniciaram as transações com o
+                        DETRAN e não apresentam erros.
                      </p>
                   </div>
                   <div>
-                     <p className="text-black font-normal text-start">Aba Inaptos</p>
+                     <p className="text-black font-normal text-start">
+                        Aba Inaptos
+                     </p>
                      <p className="text-text-secondary text-start">
                         Reúne os leilões que não aderem a nenhum filtro de erro.
                      </p>
@@ -297,9 +311,9 @@ const Dashboard: React.FC = () => {
                   <div>
                      <p className="text-black font-normal text-start">Status</p>
                      <p className="text-text-secondary text-start">
-                        A cor cinza indica lotes com transações em progresso. A cor
-                        vermelha indica lotes com transações que precisam ser
-                        revisadas. A cor verde indica lotes que necessitam
+                        A cor cinza indica lotes com transações em progresso. A
+                        cor vermelha indica lotes com transações que precisam
+                        ser revisadas. A cor verde indica lotes que necessitam
                         intervenção manual para a continuidade do processo
                         automático.
                      </p>
@@ -310,8 +324,8 @@ const Dashboard: React.FC = () => {
                         Clique no card para acessar o leilão.
                      </p>
                      <p className="text-text-secondary text-start">
-                        Passe o ponteiro do mouse na cor do status para visualizar a
-                        quantidade de lotes por transação.
+                        Passe o ponteiro do mouse na cor do status para
+                        visualizar a quantidade de lotes por transação.
                      </p>
                   </div>
                </div>

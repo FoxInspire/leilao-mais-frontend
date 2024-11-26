@@ -53,7 +53,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {...props}
          >
             <div className="relative flex items-center justify-center">
-               <span className={cn(loading && 'invisible', 'flex items-center')}>
+               <span
+                  className={cn(loading && 'invisible', 'flex items-center')}
+               >
                   {props.children}
                </span>
                {loading && (
