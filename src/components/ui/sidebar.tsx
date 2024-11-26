@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useLayoutEffect } from 'react'
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -17,8 +18,10 @@ import {
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { useIsMobile } from '@/src/hooks/useMobile'
+import { COOKIE_KEYS } from '@/src/utils/cookies-keys'
 import { Slot } from '@radix-ui/react-slot'
 import { VariantProps, cva } from 'class-variance-authority'
+import { getCookie, setCookie } from 'cookies-next'
 import { PanelLeft } from 'lucide-react'
 
 /** @dev Define constants for sidebar state and styles */
@@ -83,27 +86,28 @@ const SidebarProvider = React.forwardRef<
       },
       ref
    ) => {
+      /** @dev State to track if initial cookie check is complete */
+      const [isLoading, setIsLoading] = React.useState(true)
+
       /** @dev Determine if the current view is on a mobile device */
       const isMobile = useIsMobile()
 
       /** @dev State to manage mobile sidebar open status */
       const [openMobile, setOpenMobile] = React.useState(false)
 
-      /** @dev Initialize sidebar open state with default value */
-      const [_open, _setOpen] = React.useState(defaultOpen)
+      /** @dev Get initial state from cookie or default */
+      const [_open, _setOpen] = React.useState(() => {
+         const cookieValue = getCookie(COOKIE_KEYS.SIDEBAR_STATE)
+         return cookieValue === 'true' ? true : defaultOpen
+      })
 
-      /** @dev Effect to load sidebar state from cookies on mount */
-      React.useEffect(() => {
-         /** @dev Retrieve the sidebar state from cookies */
-         const cookie = document.cookie
-            .split('; ')
-            .find((row) => row.startsWith(`${SIDEBAR_COOKIE_NAME}=`))
-
-         /** @dev If cookie exists, set the sidebar state */
-         if (cookie) {
-            const savedState = cookie.split('=')[1] === 'true'
-            _setOpen(savedState)
+      /** @dev Effect to sync state with cookie changes */
+      useLayoutEffect(() => {
+         const cookieValue = getCookie(COOKIE_KEYS.SIDEBAR_STATE)
+         if (cookieValue !== undefined) {
+            _setOpen(cookieValue === 'true')
          }
+         setIsLoading(false)
       }, [])
 
       /** @dev Determine the current open state of the sidebar */
@@ -123,7 +127,10 @@ const SidebarProvider = React.forwardRef<
             }
 
             /** @dev Save the new state to cookies */
-            document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
+            setCookie(COOKIE_KEYS.SIDEBAR_STATE, openState, {
+               maxAge: SIDEBAR_COOKIE_MAX_AGE,
+               path: '/'
+            })
          },
          [setOpenProp, open]
       )
@@ -180,6 +187,11 @@ const SidebarProvider = React.forwardRef<
             hasHeaderMenu
          ]
       )
+
+      /** @dev If still loading, return null or a placeholder */
+      if (isLoading) {
+         return null
+      }
 
       return (
          <SidebarContext.Provider value={contextValue}>
