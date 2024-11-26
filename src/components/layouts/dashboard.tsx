@@ -58,13 +58,18 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                  <CollapsibleTrigger className="h-10" asChild>
                                     <SidebarMenuButton
                                        tooltip={item.title}
-                                       className={cn({
-                                          'pointer-events-none': item.disabled
-                                       })}
+                                       className={cn(
+                                          {
+                                             'pointer-events-none':
+                                                item.disabled
+                                          },
+                                          'justify-normal'
+                                       )}
                                        asChild={state === 'collapsed'}
                                     >
                                        {state === 'collapsed' ? (
                                           <Link
+                                             id="link"
                                              href={
                                                 item.disabled ? '#' : item.url
                                              }
