@@ -21,8 +21,7 @@ import {
    Select,
    SelectContent,
    SelectItem,
-   SelectTrigger,
-   SelectValue
+   SelectTrigger
 } from '@/components/ui/select'
 import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
@@ -101,7 +100,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                  <DialogTitle>Busca avançada</DialogTitle>
                               </DialogHeader>
                               <div className="space-y-4 py-4 pb-6">
-                                 <p className="text-base">
+                                 <p className="text-lg font-montserrat">
                                     Preencha os campos necessários para busca
                                  </p>
                                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
@@ -128,8 +127,11 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                  </div>
                                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
                                     <Select>
-                                       <SelectTrigger variant="input">
-                                          <SelectValue placeholder="Status" />
+                                       <SelectTrigger unstyled hideIcon>
+                                          <Input
+                                             label="Status"
+                                             placeholder="Selecione o status"
+                                          />
                                        </SelectTrigger>
                                        <SelectContent>
                                           <SelectItem value="light">
@@ -151,7 +153,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                     />
                                  </div>
                               </div>
-                              <div className="grid md:grid-cols-2 gap-2 mb-6">
+                              <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
                                  <div className="md:order-1 order-2">
                                     <Button variant="destructive" className="w-full">
                                        Cancelar

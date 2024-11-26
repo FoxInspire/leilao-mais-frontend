@@ -44,7 +44,6 @@ const SelectTrigger = React.forwardRef<
                   size: 'md',
                   className: 'font-normal'
                }),
-            'flex items-center justify-between',
             className
          )}
          {...props}
