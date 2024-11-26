@@ -20,6 +20,7 @@ import {
 import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
+import { DatePicker } from '@/src/components/ui/date-picker'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
@@ -89,7 +90,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                               <DialogHeader>
                                  <DialogTitle>Busca avançada</DialogTitle>
                               </DialogHeader>
-                              <div className="space-y-4 py-4">
+                              <div className="space-y-4 py-4 pb-6">
                                  <p className="text-base">
                                     Preencha os campos necessários para busca
                                  </p>
@@ -105,7 +106,10 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                     />
                                  </div>
                                  <div className="grid grid-cols-3 gap-2">
-                                    <Input label="Placa" placeholder="000-0000" />
+                                    <DatePicker
+                                       label="Data"
+                                       placeholder="DD/MM/YYYY"
+                                    />
                                     <Input
                                        label="Descrição"
                                        placeholder="Descrição do leilão"
