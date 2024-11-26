@@ -6,9 +6,9 @@ import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 import { cva } from 'class-variance-authority'
-import { format, parse } from 'date-fns'
+import { format } from 'date-fns'
 
-export const inputVariants = cva(
+const inputDatePickerVariants = cva(
    [
       'peer block w-full',
       'text-black dark:text-white',
@@ -17,8 +17,8 @@ export const inputVariants = cva(
       'border border-[#1212127f] dark:border-neutral-500 rounded-[4px]',
       'transition-colors duration-200 ease-linear',
 
-      // 'focus-visible:border-primary-default',
-      // 'focus-visible:border-2',
+      'focus-visible:border-2',
+      'focus-visible:border-primary-default',
       'focus-visible:ring-0',
       'focus-visible:outline-2',
       'focus-visible:outline-offset-0',
@@ -59,7 +59,7 @@ export const inputVariants = cva(
    }
 )
 
-export const labelVariants = cva(
+const labelDatePickerVariants = cva(
    [
       'absolute left-[11px] top-[50%]',
       'pointer-events-none',
@@ -74,7 +74,7 @@ export const labelVariants = cva(
       'bg-white dark:bg-dark-background-paper px-1',
       'peer-disabled:bg-transparent peer-disabled:text-neutral-500',
 
-      // 'peer-focus:text-primary-default',
+      'peer-focus:text-primary-default',
       'peer-focus:top-1',
       'peer-focus:scale-75',
       'peer-focus:dark:text-dark-primary-default',
@@ -103,12 +103,7 @@ export const labelVariants = cva(
 
 const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
    ({ className, label, error, size = 'md', onSelected, ...props }, ref) => {
-      // const iconPosition = start ? 'start' : end ? 'end' : 'none'
-      // const disabledStatus = disabled ? true : false
-
       const [selectedDate, setSelectedDate] = React.useState<Date | undefined>()
-      console.log('selectedDate', selectedDate)
-
       return (
          <React.Fragment>
             <Popover>
@@ -132,7 +127,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                               : ''
                         }
                         className={cn(
-                           inputVariants({ error: !!error, size }),
+                           inputDatePickerVariants({ error: !!error, size }),
                            className
                         )}
                         aria-invalid={error ? 'true' : undefined}
@@ -154,7 +149,9 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                      {label && (
                         <label
                            htmlFor={props.id}
-                           className={cn(labelVariants({ error: !!error }))}
+                           className={cn(
+                              labelDatePickerVariants({ error: !!error })
+                           )}
                         >
                            {label}
                         </label>
@@ -165,14 +162,13 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                   <Calendar
                      initialFocus
                      mode="single"
-                     selected={selectedDate}
+                     selected={selectedDate || undefined}
                      onSelect={(e) => {
                         if (e !== undefined) {
                            onSelected && onSelected(e as unknown as Date)
                            setSelectedDate(e)
                         }
                      }}
-                     //  onDayClick={() => setPopOver(false)}
                   />
                </PopoverContent>
             </Popover>
@@ -181,16 +177,6 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
       )
    }
 )
-
-function convertDate(input: string): Date | undefined {
-   try {
-      const parsedDate = parse(input, 'dd/MM/yyyy', new Date())
-      return !isNaN(parsedDate.getTime()) ? parsedDate : undefined
-   } catch (e) {
-      console.error('Error parsing the date: ', e)
-      return undefined
-   }
-}
 
 export interface DatePickerProps
    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
