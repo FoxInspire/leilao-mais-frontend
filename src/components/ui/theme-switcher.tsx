@@ -4,6 +4,7 @@ import { cn } from '@/src/lib/utils'
 import { useTheme } from 'next-themes'
 
 import React from 'react'
+import { toast } from 'sonner'
 
 export const ThemeSwitch: React.FC = () => {
    const { theme, setTheme } = useTheme()
@@ -45,7 +46,7 @@ export const ThemeSwitch: React.FC = () => {
                </span>
             </button>
 
-            <button
+            {/* <button
                onClick={() => setTheme('system')}
                className={cn(
                   'rounded-full h-6 w-6 transition-all duration-200',
@@ -67,10 +68,27 @@ export const ThemeSwitch: React.FC = () => {
                >
                   desktop_windows
                </span>
-            </button>
+            </button> */}
 
             <button
-               onClick={() => setTheme('dark')}
+               onClick={async () => {
+                  setTheme('dark')
+
+                  await new Promise((resolve) => setTimeout(resolve, 1000))
+
+                  toast.info(
+                     'O modo escuro está em desenvolvimento e pode conter inconsistências nos layouts.',
+                     {
+                        duration: 5000
+                     }
+                  )
+                  toast.info(
+                     'Recomendamos usar o modo claro até o fim do desenvolvimento.',
+                     {
+                        duration: 5000
+                     }
+                  )
+               }}
                className={cn(
                   'rounded-full h-6 w-6 transition-all duration-200',
                   'text-gray-500 dark:text-gray-500',

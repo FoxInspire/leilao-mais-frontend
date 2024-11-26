@@ -1,6 +1,7 @@
 import '@/src/styles/globals.css'
 import '@/styles/reset.css'
 
+import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
@@ -76,6 +77,7 @@ export default function RootLayout({
                   disableTransitionOnChange
                >
                   {children}
+                  <Toaster />
                </ThemeProvider>
             </NuqsAdapter>
          </body>

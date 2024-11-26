@@ -73,7 +73,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                                 renderIcon(
                                                    item.icon,
                                                    cn('w-6 h-6 block', {
-                                                      'text-primary-default':
+                                                      'text-primary-default dark:text-dark-primary-default':
                                                          item.items.some(
                                                             (subItem) =>
                                                                isActiveRoute(
@@ -86,7 +86,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                                 className={cn(
                                                    'text-sm font-medium',
                                                    {
-                                                      'text-primary-default':
+                                                      'text-primary-default dark:text-dark-primary-default':
                                                          item.items.some(
                                                             (subItem) =>
                                                                isActiveRoute(
@@ -105,7 +105,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                                 renderIcon(
                                                    item.icon,
                                                    cn('w-6 h-6 block', {
-                                                      'text-primary-default':
+                                                      'text-primary-default dark:text-dark-primary-default':
                                                          item.items.some(
                                                             (subItem) =>
                                                                isActiveRoute(
@@ -118,7 +118,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                                 className={cn(
                                                    'text-sm font-medium',
                                                    {
-                                                      'text-primary-default':
+                                                      'text-primary-default dark:text-dark-primary-default':
                                                          item.items.some(
                                                             (subItem) =>
                                                                isActiveRoute(
@@ -168,7 +168,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                                       className={cn(
                                                          'text-sm font-normal',
                                                          {
-                                                            'text-primary-default':
+                                                            'text-primary-default dark:text-dark-primary-default':
                                                                isActiveRoute(
                                                                   subItem.url
                                                                )
@@ -188,6 +188,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                         ) : (
                            <SidebarMenuItem key={item.title}>
                               <SidebarMenuButton
+                                 tooltip={item.title}
                                  className={cn('h-10', {
                                     'opacity-50 pointer-events-none':
                                        item.disabled
@@ -199,15 +200,14 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                        renderIcon(
                                           item.icon,
                                           cn('w-6 h-6 block', {
-                                             'text-primary-default':
+                                             'text-primary-default dark:text-dark-primary-default':
                                                 isActiveRoute(item.url)
                                           })
                                        )}
                                     <span
                                        className={cn('text-sm font-medium', {
-                                          'text-primary-default': isActiveRoute(
-                                             item.url
-                                          )
+                                          'text-primary-default dark:text-dark-primary-default':
+                                             isActiveRoute(item.url)
                                        })}
                                     >
                                        {item.title}
@@ -259,7 +259,6 @@ const data = {
                monitor
             </span>
          ),
-         isActive: true,
          disabled: false,
          items: [
             {

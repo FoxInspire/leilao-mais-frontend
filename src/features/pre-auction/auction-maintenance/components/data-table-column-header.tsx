@@ -30,7 +30,7 @@ export function DataTableColumnHeader<TData, TValue>({
       return (
          <span
             className={cn(
-               'text-black dark:text-neutral-500',
+               'text-black dark:text-neutral-200',
                props.className?.title
             )}
          >
@@ -43,7 +43,7 @@ export function DataTableColumnHeader<TData, TValue>({
       return (
          <span
             className={cn(
-               'text-black dark:text-neutral-500',
+               'text-black dark:text-neutral-200',
                props.className?.title
             )}
          >
@@ -64,7 +64,7 @@ export function DataTableColumnHeader<TData, TValue>({
                <div className="flex items-center space-x-2">
                   <span
                      className={cn(
-                        'text-black dark:text-neutral-500',
+                        'text-black dark:text-neutral-200',
                         props.className?.title
                      )}
                   >
