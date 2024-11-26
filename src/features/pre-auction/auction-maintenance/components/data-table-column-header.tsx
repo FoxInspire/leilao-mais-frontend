@@ -13,6 +13,7 @@ interface DataTableColumnHeaderProps<TData, TValue>
    extends Omit<React.HTMLAttributes<HTMLDivElement>, 'className'> {
    column: Column<TData, TValue>
    title: string
+   hideSort?: boolean
    className?: {
       container?: string
       title?: string
@@ -22,10 +23,33 @@ interface DataTableColumnHeaderProps<TData, TValue>
 export function DataTableColumnHeader<TData, TValue>({
    column,
    title,
+   hideSort = false,
    ...props
 }: DataTableColumnHeaderProps<TData, TValue>) {
    if (!column.getCanSort()) {
-      return <div className="uppercase">{title}</div>
+      return (
+         <span
+            className={cn(
+               'text-black dark:text-neutral-500',
+               props.className?.title
+            )}
+         >
+            {title}
+         </span>
+      )
+   }
+
+   if (hideSort) {
+      return (
+         <span
+            className={cn(
+               'text-black dark:text-neutral-500',
+               props.className?.title
+            )}
+         >
+            {title}
+         </span>
+      )
    }
 
    return (
@@ -33,7 +57,12 @@ export function DataTableColumnHeader<TData, TValue>({
          <DropdownMenu>
             <DropdownMenuTrigger asChild>
                <div className="flex items-center space-x-2">
-                  <span className={cn('text-black', props.className?.title)}>
+                  <span
+                     className={cn(
+                        'text-black dark:text-neutral-500',
+                        props.className?.title
+                     )}
+                  >
                      {title}
                   </span>
                   {column.getIsSorted() === 'desc' ? (
