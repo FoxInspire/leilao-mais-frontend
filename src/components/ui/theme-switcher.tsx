@@ -2,9 +2,9 @@
 
 import { cn } from '@/src/lib/utils'
 import { useTheme } from 'next-themes'
+import { toast } from 'sonner'
 
 import React from 'react'
-import { toast } from 'sonner'
 
 export const ThemeSwitch: React.FC = () => {
    const { theme, setTheme } = useTheme()
@@ -45,7 +45,6 @@ export const ThemeSwitch: React.FC = () => {
                   light_mode
                </span>
             </button>
-
             {/* <button
                onClick={() => setTheme('system')}
                className={cn(
@@ -69,7 +68,6 @@ export const ThemeSwitch: React.FC = () => {
                   desktop_windows
                </span>
             </button> */}
-
             <button
                onClick={async () => {
                   setTheme('dark')
