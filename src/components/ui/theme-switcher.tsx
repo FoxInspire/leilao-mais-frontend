@@ -43,7 +43,7 @@ export const ThemeSwitch: React.FC = () => {
                   light_mode
                </span>
             </button>
-            {/* <button
+            <button
                onClick={() => setTheme('system')}
                className={cn(
                   'rounded-full h-6 w-6 transition-all duration-200',
@@ -65,7 +65,7 @@ export const ThemeSwitch: React.FC = () => {
                >
                   desktop_windows
                </span>
-            </button> */}
+            </button>
             <button
                onClick={async () => {
                   setTheme('dark')
