@@ -5,7 +5,7 @@ import { auctionEntitySchema } from '@/src/features/pre-auction/auction-maintena
 import { promises as fs } from 'fs'
 import { z } from 'zod'
 
-import AuctionMaintenanceLots from '@/src/features/pre-auction/auction-maintenance/auction-maintenance-lots'
+import AuctionMaintenanceLots from '@/src/features/pre-auction/auction-lots/auction-lots'
 import path from 'path'
 
 async function getAuctions() {
