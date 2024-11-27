@@ -155,7 +155,8 @@ export const auctionLotSchema: AuctionLotSchema = z.object({
    Bidder: z.array(bidderSchema).optional(),
    Inspection: z.array(inspectionSchema).optional(),
    LotHistory: z.array(lotHistorySchema).optional(),
-   VehicleDebt: z.array(vehicleDebtSchema).optional()
+   VehicleDebt: z.array(vehicleDebtSchema).optional(),
+   Vehicle: z.lazy(() => vehicleSchema).optional()
 })
 
 export const tenantSchema = z.object({
@@ -262,3 +263,54 @@ export const auctionEntitySchema = z.object({
 })
 
 export type AuctionEntity = z.infer<typeof auctionEntitySchema>
+
+export const vehicleSchema = z.object({
+   id: z.string().optional(),
+   name: z.string().optional(),
+   description: z.string().optional(),
+   chassis: z.string().optional(),
+   plate: z.string().optional(),
+   type: z
+      .object({
+         id: z.string().optional(),
+         name: z.string().optional(),
+         description: z.string().optional(),
+         category: z.object({
+            id: z.string(),
+            name: z.string(),
+            type: z.string(),
+            dailyValue: z.number(),
+            towingCost: z.number()
+         })
+      })
+      .optional(),
+   brand: z
+      .object({
+         id: z.string().optional(),
+         name: z.string().optional(),
+         typeVehicle: z.string().optional()
+      })
+      .optional(),
+   model: z
+      .object({
+         id: z.string().optional(),
+         name: z.string().optional(),
+         brandId: z.string().optional()
+      })
+      .optional(),
+   equipments: z
+      .array(
+         z.object({
+            id: z.string(),
+            name: z.string(),
+            code: z.number(),
+            required: z.boolean(),
+            vehicleTypes: z.array(z.string()),
+            createdAt: z.coerce.date(),
+            updatedAt: z.coerce.date()
+         })
+      )
+      .optional(),
+   createdAt: z.coerce.date().optional(),
+   updatedAt: z.coerce.date().optional()
+})
