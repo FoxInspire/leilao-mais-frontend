@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { columns } from '@/src/features/pre-auction/auction-maintenance/components/columns'
-import { auctionSchema } from '@/src/features/pre-auction/auction-maintenance/schemas/auction-mock'
+import { auctionEntitySchema } from '@/src/features/pre-auction/auction-maintenance/schemas/auction-maintenance-schemas'
 import { promises as fs } from 'fs'
 import { z } from 'zod'
 
@@ -17,11 +17,11 @@ async function getAuctions() {
          'pre-auction',
          'auction-maintenance',
          'mocks',
-         'auctions.json'
+         'auctions-maintenance.json'
       )
    )
    const auctions = JSON.parse(data.toString())
-   return z.array(auctionSchema).parse(auctions)
+   return z.array(auctionEntitySchema).parse(auctions)
 }
 
 export default async function AuctionMaintenancePage() {

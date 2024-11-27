@@ -1,50 +1,30 @@
 'use client'
 
 import { StatusCell } from '@/features/pre-auction/auction-maintenance/components/status-cell'
-import { Auction } from '@/features/pre-auction/auction-maintenance/schemas/auction-mock'
 import { Button } from '@/src/components/ui/button'
+import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { ColumnDef } from '@tanstack/react-table'
+import { AuctionEntity } from '../types/auction.entity.ts'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
 
-import { pre_auction_routes } from '@/src/routes/pre-auction'
 import Link from 'next/link'
 import React from 'react'
 
-export const columns: ColumnDef<Auction>[] = [
-   //    {
-   //       id: 'select',
-   //       header: ({ table }) => (
-   //          <Checkbox
-   //             checked={
-   //                table.getIsAllPageRowsSelected() ||
-   //                (table.getIsSomePageRowsSelected() && 'indeterminate')
-   //             }
-   //             onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-   //             aria-label="Select all"
-   //             className="translate-y-[2px]"
-   //          />
-   //       ),
-   //       cell: ({ row }) => (
-   //          <Checkbox
-   //             checked={row.getIsSelected()}
-   //             onCheckedChange={(value) => row.toggleSelected(!!value)}
-   //             aria-label="Select row"
-   //             className="translate-y-[2px]"
-   //          />
-   //       ),
-   //       enableSorting: false,
-   //       enableHiding: false
-   //    },
+export const columns: ColumnDef<AuctionEntity>[] = [
    {
-      accessorKey: 'date',
+      accessorKey: 'auctionDate',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Data" />
       ),
-      cell: ({ row }) => <div>{row.getValue('date')}</div>
+      cell: ({ row }) => (
+         <div>
+            {new Date(row.getValue('auctionDate')).toLocaleDateString('pt-BR')}
+         </div>
+      )
    },
    {
-      accessorKey: 'auction',
+      accessorKey: 'auctionCode',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Leilão" />
       ),
@@ -52,20 +32,20 @@ export const columns: ColumnDef<Auction>[] = [
          <div className="font-bold font-nunito text-primary-default dark:text-dark-primary-default uppercase hover:underline">
             <Link
                href={pre_auction_routes.auction_maintenance_lots(
-                  row.getValue('auction')
+                  row.getValue('auctionCode')
                )}
             >
-               {row.getValue('auction')}
+               {row.getValue('auctionCode')}
             </Link>
          </div>
       )
    },
    {
-      accessorKey: 'location',
+      accessorKey: 'addressCity',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Local" />
       ),
-      cell: ({ row }) => <div>{row.getValue('location')}</div>
+      cell: ({ row }) => <div>{row.getValue('addressCity')}</div>
    },
    {
       accessorKey: 'id',
@@ -75,33 +55,33 @@ export const columns: ColumnDef<Auction>[] = [
       cell: ({ row }) => <div>{row.getValue('id')}</div>
    },
    {
-      accessorKey: 'status',
+      accessorKey: 'auctionStatus',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Status do leilão" />
       ),
       cell: ({ row }) => <StatusCell row={row} />
    },
    {
-      accessorKey: 'committer',
+      accessorKey: 'Tenant',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Comitente" />
       ),
-      cell: ({ row }) => <div>{row.getValue('committer')}</div>
+      cell: ({ row }) => <div>{row.original.Tenant?.name}</div>
    },
    {
-      accessorKey: 'lots',
+      accessorKey: 'lotCount',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Lotes" />
       ),
       cell: ({ row }) => (
          <React.Fragment>
-            {row.getValue('lots') === 0 ? (
+            {!row.original.AuctionLot?.length ? (
                <Button variant="icon" size="icon">
                   <span className="material-symbols-outlined">add</span>
                </Button>
             ) : (
                <span className="font-bold font-nunito text-black dark:text-white">
-                  {row.getValue('lots')}
+                  {row.original.AuctionLot.length}
                </span>
             )}
          </React.Fragment>

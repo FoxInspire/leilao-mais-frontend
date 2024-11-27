@@ -15,19 +15,12 @@ import {
 } from '@/components/ui/select'
 import { Button } from '@/src/components/ui/button'
 import { Row } from '@tanstack/react-table'
+import { AuctionEntity } from '../types/auction.entity.ts'
 
 import React from 'react'
 
 interface StatusCellProps {
-   row: Row<{
-      status: string
-      id: string
-      date: string
-      auction: string
-      location: string
-      committer: string
-      lots: number
-   }>
+   row: Row<AuctionEntity>
 }
 
 export const StatusCell: React.FC<StatusCellProps> = ({
@@ -36,7 +29,7 @@ export const StatusCell: React.FC<StatusCellProps> = ({
    const [dialog, setDialog] = React.useState(false)
    const [tempStatus, setTempStatus] = React.useState<string | null>(null)
    const [currentStatus, setCurrentStatus] = React.useState(
-      row.getValue('status') as string
+      row.original.AuctionLot?.[0]?.status || 'PENDING'
    )
 
    const handleValueChange = (value: string) => {
@@ -67,13 +60,7 @@ export const StatusCell: React.FC<StatusCellProps> = ({
    return (
       <React.Fragment>
          <div>
-            <Select
-               onValueChange={handleValueChange}
-               value={
-                  statusOptions.find((option) => option.label === currentStatus)
-                     ?.value || undefined
-               }
-            >
+            <Select onValueChange={handleValueChange} value={currentStatus}>
                <SelectTrigger
                   unstyled
                   className="flex items-center gap-2 font-bold font-nunito text-primary-default dark:text-dark-primary-default text-sm uppercase"
