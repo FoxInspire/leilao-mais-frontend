@@ -7,6 +7,8 @@ import { ColumnDef } from '@tanstack/react-table'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
 
+import { pre_auction_routes } from '@/src/routes/pre-auction'
+import Link from 'next/link'
 import React from 'react'
 
 export const columns: ColumnDef<Auction>[] = [
@@ -47,8 +49,14 @@ export const columns: ColumnDef<Auction>[] = [
          <DataTableColumnHeader column={column} title="Leilão" />
       ),
       cell: ({ row }) => (
-         <div className="font-bold font-nunito text-primary-default dark:text-dark-primary-default uppercase">
-            {row.getValue('auction')}
+         <div className="font-bold font-nunito text-primary-default dark:text-dark-primary-default uppercase hover:underline">
+            <Link
+               href={pre_auction_routes.auction_maintenance_lots(
+                  row.getValue('auction')
+               )}
+            >
+               {row.getValue('auction')}
+            </Link>
          </div>
       )
    },

@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@/src/lib/utils'
 import { useTheme } from 'next-themes'
 import { toast } from 'sonner'

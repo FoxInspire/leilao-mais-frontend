@@ -205,7 +205,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
             <CollapsibleSidebar
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
-               className={cn('h-svh', {
+               className={cn({
                   'overflow-y-auto': isSidebarOpen,
                   'overflow-y-hidden h-0': !isSidebarOpen
                })}
@@ -234,53 +234,31 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                         Descrição
                      </p>
                      <p className="text-text-secondary text-start">
-                        A página de Dashboard oferece uma visão geral dos
-                        leilões, exibindo cards com o status das transações. O
-                        usuário pode navegar em abas organizadas por: Em
-                        progresso, Inaptos e Concluídos. Também é possível
-                        aplicar filtros por tipo de erro e transação,
-                        facilitando o acompanhamento e a gestão eficiente dos
-                        leilões.
+                        A página de Manutenção de Leilões permite visualizar a
+                        lista de leilões cadastrados, alterar o status conforme
+                        o andamento dos processos junto ao DETRAN e buscar
+                        informações específicas. Além disso, é possível
+                        ingressar lotes nos leilões e acessar um menu de opções
+                        avançadas para uma gestão mais detalhada.
                      </p>
                      <p className="text-black font-semibold text-start">
                         Detalhes
                      </p>
                      <div>
                         <p className="text-black font-normal text-start">
-                           Aba Em progresso
+                           Status do leilão
                         </p>
                         <p className="text-text-secondary text-start">
-                           Reúne os leilões que iniciaram as transações com o
-                           DETRAN e não apresentam erros.
+                           É possível alterar o status conforme o avanço dos
+                           processos junto ao DETRAN.
                         </p>
                      </div>
                      <div>
                         <p className="text-black font-normal text-start">
-                           Aba Inaptos
+                           Lotes
                         </p>
                         <p className="text-text-secondary text-start">
-                           Reúne os leilões que não aderem a nenhum filtro de
-                           erro.
-                        </p>
-                     </div>
-                     <div>
-                        <p className="text-black font-normal text-start">
-                           Aba Concluídos
-                        </p>
-                        <p className="text-text-secondary text-start">
-                           Reúne os leilões finalizados.
-                        </p>
-                     </div>
-                     <div>
-                        <p className="text-black font-normal text-start">
-                           Status
-                        </p>
-                        <p className="text-text-secondary text-start">
-                           A cor cinza indica lotes com transações em progresso.
-                           A cor vermelha indica lotes com transações que
-                           precisam ser revisadas. A cor verde indica lotes que
-                           necessitam intervenção manual para a continuidade do
-                           processo automático.
+                           Exibe a quantidade de lotes ingressados no leilão.
                         </p>
                      </div>
                      <div className="bg-[#E6F1F7] px-4 py-4 space-y-2">
@@ -291,8 +269,8 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                            Clique no card para acessar o leilão.
                         </p>
                         <p className="text-text-secondary text-start">
-                           Passe o ponteiro do mouse na cor do status para
-                           visualizar a quantidade de lotes por transação.
+                           Clique no nome do leilão para acessar a lista de
+                           lotes do leilão selecionado.
                         </p>
                      </div>
                   </div>
