@@ -146,7 +146,6 @@ export const auctionLotSchema: AuctionLotSchema = z.object({
    ggvId: z.string(),
    createdAt: z.coerce.date(),
    updatedAt: z.coerce.date(),
-   Auction: z.lazy(() => auctionEntitySchema).optional(),
    Ggv: z.any().optional(),
    Characteristics: characteristicsSchema.optional(),
    FinancialDetails: financialDetailsSchema.optional(),
@@ -156,6 +155,7 @@ export const auctionLotSchema: AuctionLotSchema = z.object({
    Inspection: z.array(inspectionSchema).optional(),
    LotHistory: z.array(lotHistorySchema).optional(),
    VehicleDebt: z.array(vehicleDebtSchema).optional(),
+   Auction: z.lazy(() => auctionEntitySchema).optional(),
    Vehicle: z.lazy(() => vehicleSchema).optional()
 })
 
