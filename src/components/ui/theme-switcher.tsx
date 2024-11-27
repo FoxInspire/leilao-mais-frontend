@@ -77,13 +77,14 @@ export const ThemeSwitch: React.FC = () => {
                   await new Promise((resolve) => setTimeout(resolve, 1000))
 
                   toast.info(
-                     'O modo escuro está em desenvolvimento e pode conter inconsistências nos layouts.',
+                     'Sugerimos utilizar o modo claro até que o desenvolvimento esteja completo.',
                      {
                         duration: 5000
                      }
                   )
+
                   toast.info(
-                     'Recomendamos usar o modo claro até o fim do desenvolvimento.',
+                     'O modo escuro ainda está em desenvolvimento e pode apresentar algumas inconsistências visuais.',
                      {
                         duration: 5000
                      }

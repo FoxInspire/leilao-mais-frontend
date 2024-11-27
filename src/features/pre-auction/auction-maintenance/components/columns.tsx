@@ -1,11 +1,11 @@
 'use client'
 
+import { StatusCell } from '@/features/pre-auction/auction-maintenance/components/status-cell'
 import { Auction } from '@/features/pre-auction/auction-maintenance/schemas/auction-mock'
 import { Button } from '@/src/components/ui/button'
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
-import { StatusCell } from '@/features/pre-auction/auction-maintenance/components/status-cell'
 
 import React from 'react'
 
@@ -92,7 +92,7 @@ export const columns: ColumnDef<Auction>[] = [
                   <span className="material-symbols-outlined">add</span>
                </Button>
             ) : (
-               <span className="font-bold font-nunito text-primary-default dark:text-dark-primary-default">
+               <span className="font-bold font-nunito text-black dark:text-white">
                   {row.getValue('lots')}
                </span>
             )}
