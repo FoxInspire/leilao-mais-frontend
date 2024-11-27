@@ -3,10 +3,11 @@
    "version": "0.1.0",
    "private": true,
    "scripts": {
-      "dev": "npx tsx seed.ts && next dev --turbopack",
+      "dev": "next dev --turbopack",
       "build": "next build",
       "start": "next start",
-      "lint": "next lint"
+      "lint": "next lint",
+      "seed": "npx tsx seed.ts"
    },
    "dependencies": {
       "@radix-ui/react-accordion": "^1.2.1",

@@ -1,3 +1,5 @@
-import { generateAuctionsSeed } from '@/seeds/auctions-seed'
+import { generateAuctionLotsData } from '@/seeds/auction-lots-seed'
+import { generateAuctionsData } from '@/seeds/auctions-seed'
 
-generateAuctionsSeed(200)
+generateAuctionsData()
+generateAuctionLotsData()

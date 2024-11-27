@@ -77,7 +77,7 @@ const parseDate = (dateString: string): Date => {
    return new Date(year, month - 1, day)
 }
 
-export const generateAuctionsSeed = (index: number): AuctionEntity => {
+const generateAuctionsSeed = (): AuctionEntity => {
    const location = faker.helpers.arrayElement(brazilianCities)
 
    const baseAuction = {
@@ -255,44 +255,51 @@ export const generateAuctionsSeed = (index: number): AuctionEntity => {
    }
 }
 
-const tasks = Array.from({ length: 200 }, (_, index) =>
-   generateAuctionsSeed(index)
-)
+export const generateAuctionsData = () => {
+   const auctions = Array.from({ length: 200 }, () => generateAuctionsSeed())
 
-const tasksWithZeroLots = tasks.map((task, index) => {
-   if (zeroLotsIndexes.has(index)) {
-      return {
-         ...task,
-         AuctionLot: [
-            {
-               id: `${task.id}-0-${faker.number.int({ min: 1000, max: 9999 })}`,
-               auctionId: task.id,
-               lotNumber: '1',
-               status: statusOptions[0].value,
-               minumumBid: faker.number.float({
-                  min: 100,
-                  max: 1000,
-                  fractionDigits: 2
-               }),
-               ggvId: faker.number.int({ min: 1000, max: 9999 }).toString(),
-               createdAt: new Date(),
-               updatedAt: new Date()
+   const auctionsWithZeroLots = auctions.map(
+      (auction: AuctionEntity, index) => {
+         if (zeroLotsIndexes.has(index)) {
+            return {
+               ...auction,
+               AuctionLot: [
+                  {
+                     id: `${auction.id}-0-${faker.number.int({
+                        min: 1000,
+                        max: 9999
+                     })}`,
+                     auctionId: auction.id,
+                     lotNumber: '1',
+                     status: statusOptions[0].value,
+                     minumumBid: faker.number.float({
+                        min: 100,
+                        max: 1000,
+                        fractionDigits: 2
+                     }),
+                     ggvId: faker.number
+                        .int({ min: 1000, max: 9999 })
+                        .toString(),
+                     createdAt: new Date(),
+                     updatedAt: new Date()
+                  }
+               ]
             }
-         ]
+         }
+         return auction
       }
-   }
-   return task
-})
+   )
 
-fs.writeFileSync(
-   path.join(
-      process.cwd(),
-      'src',
-      'features',
-      'pre-auction',
-      'auction-maintenance',
-      'mocks',
-      'auctions-maintenance.json'
-   ),
-   JSON.stringify(tasksWithZeroLots, null, 2)
-)
+   fs.writeFileSync(
+      path.join(
+         process.cwd(),
+         'src',
+         'features',
+         'pre-auction',
+         'auction-maintenance',
+         'mocks',
+         'auctions-maintenance.json'
+      ),
+      JSON.stringify(auctionsWithZeroLots, null, 2)
+   )
+}
