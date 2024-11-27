@@ -1,18 +1,12 @@
 'use client'
 
-import { StatusCell } from '@/features/pre-auction/auction-maintenance/components/status-cell'
-import { Button } from '@/src/components/ui/button'
-import { pre_auction_routes } from '@/src/routes/pre-auction'
+import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
+import { DataTableRowActions } from '@/features/pre-auction/auction-maintenance/components/data-table-row-actions'
+import { Checkbox } from '@/src/components/ui/checkbox'
+import { AuctionEntity } from '@/types/entities/auction.entity.ts'
 import { ColumnDef } from '@tanstack/react-table'
-import { AuctionEntity } from '../types/auction.entity.ts'
-import { DataTableColumnHeader } from './data-table-column-header'
-import { DataTableRowActions } from './data-table-row-actions'
 
-import { Checkbox } from '@/src/components/ui/checkbox.jsx'
-import Link from 'next/link'
-import React from 'react'
-
-export const columns: ColumnDef<AuctionEntity>[] = [
+export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
    {
       id: 'select',
       header: ({ table }) => (
@@ -40,79 +34,88 @@ export const columns: ColumnDef<AuctionEntity>[] = [
       enableHiding: false
    },
    {
-      accessorKey: 'auctionDate',
+      accessorKey: 'lotNumber',
       header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Data" />
+         <DataTableColumnHeader column={column} title="Lote" />
+      ),
+      cell: ({ row }) => <div>{row.original.AuctionLot?.[0]?.lotNumber}</div>
+   },
+   {
+      accessorKey: 'process',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Processo" />
+      ),
+      cell: ({ row }) => <div>{row.original.internalAuctionOrder}</div>
+   },
+   {
+      accessorKey: 'plate',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Placa" />
+      ),
+      cell: ({ row }) => (
+         <div>{row.original.AuctionLot?.[0]?.LotHistory?.[0]?.plate}</div>
+      )
+   },
+   {
+      accessorKey: 'chassis',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Chassi" />
+      ),
+      cell: ({ row }) => (
+         <div>{row.original.AuctionLot?.[0]?.LotHistory?.[0]?.chassis}</div>
+      )
+   },
+   {
+      accessorKey: 'brandModel',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Marca/Modelo" />
+      ),
+      cell: ({ row }) => <div>{row.original.description}</div>
+   },
+   {
+      accessorKey: 'color',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Cor" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('color')}</div>
+   },
+   {
+      accessorKey: 'type',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Tipo" />
       ),
       cell: ({ row }) => (
          <div>
-            {new Date(row.getValue('auctionDate')).toLocaleDateString('pt-BR')}
+            {row.original.AuctionLot?.[0]?.Characteristics?.vehicleCondition}
          </div>
       )
    },
    {
-      accessorKey: 'auctionCode',
+      accessorKey: 'lotStatus',
       header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Leilão" />
+         <DataTableColumnHeader column={column} title="Status do lote" />
       ),
       cell: ({ row }) => (
-         <div className="font-bold font-nunito text-primary-default dark:text-dark-primary-default uppercase hover:underline">
-            <Link
-               href={pre_auction_routes.auction_maintenance_lots(
-                  row.getValue('auctionCode')
+         <div>Status do lote: {row.original.AuctionLot?.[0]?.status}</div>
+      )
+   },
+   {
+      accessorKey: 'alerts',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Alertas" />
+      ),
+      cell: ({ row }) => {
+         const debts = row.original.VehicleDebt?.length || 0
+         return (
+            <div className="flex items-center">
+               {debts > 0 && (
+                  <span className="material-symbols-outlined text-red-500">
+                     warning
+                  </span>
                )}
-            >
-               {row.getValue('auctionCode')}
-            </Link>
-         </div>
-      )
-   },
-   {
-      accessorKey: 'addressCity',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Local" />
-      ),
-      cell: ({ row }) => <div>{row.getValue('addressCity')}</div>
-   },
-   {
-      accessorKey: 'id',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="ID" />
-      ),
-      cell: ({ row }) => <div>{row.getValue('id')}</div>
-   },
-   {
-      accessorKey: 'auctionStatus',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Status do leilão" />
-      ),
-      cell: ({ row }) => <StatusCell row={row} />
-   },
-   {
-      accessorKey: 'Tenant',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Comitente" />
-      ),
-      cell: ({ row }) => <div>{row.original.Tenant?.name}</div>
-   },
-   {
-      accessorKey: 'lotCount',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Lotes" />
-      ),
-      cell: ({ row }) => (
-         <React.Fragment>
-            {!row.original.AuctionLot?.length ? (
-               <Button variant="icon" size="icon">
-                  <span className="material-symbols-outlined">add</span>
-               </Button>
-            ) : (
-               <span className="font-bold font-nunito text-black dark:text-white">
-                  {row.original.AuctionLot.length}
-               </span>
-            )}
-         </React.Fragment>
-      )
+            </div>
+         )
+      }
    },
    {
       id: 'actions',

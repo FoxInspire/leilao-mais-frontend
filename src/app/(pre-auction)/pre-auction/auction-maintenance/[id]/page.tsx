@@ -1,11 +1,11 @@
 import * as React from 'react'
+import * as z from 'zod'
 
-import { columns } from '@/src/features/pre-auction/auction-maintenance/components/columns'
 import { auctionEntitySchema } from '@/src/features/pre-auction/auction-maintenance/schemas/auction-maintenance-schemas'
 import { promises as fs } from 'fs'
-import { z } from 'zod'
 
-import AuctionMaintenanceLots from '@/src/features/pre-auction/auction-lots/auction-lots'
+import AuctionLots from '@/src/features/pre-auction/auction-lots/auction-lots'
+import { columns_auction_lots } from '@/src/features/pre-auction/auction-lots/components/columns'
 import path from 'path'
 
 async function getAuctions() {
@@ -31,9 +31,17 @@ export default async function AuctionMaintenanceLotsPage({
 }) {
    const id = (await params).id
    const auctions = await getAuctions()
+   const filteredAuctions = auctions.filter(
+      (auction) => auction?.auctionCode?.toLowerCase() === id?.toLowerCase()
+   )
+
    return (
       <React.Suspense>
-         <AuctionMaintenanceLots id={id} data={auctions} columns={columns} />
+         <AuctionLots
+            id={id}
+            data={filteredAuctions}
+            columns={columns_auction_lots}
+         />
       </React.Suspense>
    )
 }

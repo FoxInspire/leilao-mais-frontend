@@ -23,7 +23,6 @@ import {
    SelectItem,
    SelectTrigger
 } from '@/components/ui/select'
-import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DatePicker } from '@/src/components/ui/date-picker'
@@ -32,13 +31,15 @@ import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { ColumnDef } from '@tanstack/react-table'
+import { TableAuctionLots } from './components/data-table'
 
-const AuctionMaintenanceLots: React.FC<AuctionMaintenanceLotsProps> = ({
+const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
    id,
    columns,
    data
 }: AuctionMaintenanceLotsProps) => {
    console.log('id', id)
+   console.log('data', data)
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
 
@@ -203,7 +204,7 @@ const AuctionMaintenanceLots: React.FC<AuctionMaintenanceLotsProps> = ({
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
                   <div className="flex-1 overflow-auto">
-                     <DataTable
+                     <TableAuctionLots
                         data={data}
                         columns={columns}
                         globalFilter={globalFilter}
@@ -296,4 +297,4 @@ type AuctionMaintenanceLotsProps = {
    columns: ColumnDef<any>[]
 }
 
-export default AuctionMaintenanceLots
+export default AuctionLots

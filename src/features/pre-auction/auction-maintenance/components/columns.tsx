@@ -1,12 +1,12 @@
 'use client'
 
+import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
+import { DataTableRowActions } from '@/features/pre-auction/auction-maintenance/components/data-table-row-actions'
 import { StatusCell } from '@/features/pre-auction/auction-maintenance/components/status-cell'
 import { Button } from '@/src/components/ui/button'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
+import { AuctionEntity } from '@/types/entities/auction.entity.ts'
 import { ColumnDef } from '@tanstack/react-table'
-import { AuctionEntity } from '../types/auction.entity.ts'
-import { DataTableColumnHeader } from './data-table-column-header'
-import { DataTableRowActions } from './data-table-row-actions'
 
 import Link from 'next/link'
 import React from 'react'

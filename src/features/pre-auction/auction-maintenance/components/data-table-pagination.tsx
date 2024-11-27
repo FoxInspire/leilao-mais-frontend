@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import {
    Select,
@@ -13,6 +15,7 @@ import {
    ChevronsLeft,
    ChevronsRight
 } from 'lucide-react'
+
 import React from 'react'
 
 interface DataTablePaginationProps<TData> {

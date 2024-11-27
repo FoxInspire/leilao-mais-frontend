@@ -2,7 +2,7 @@ import {
    AuctionLot,
    Characteristics,
    FinancialDetails
-} from '@/features/pre-auction/auction-lots/types/auction.entity.ts'
+} from '@/types/entities/auction.entity.ts'
 import { faker } from '@faker-js/faker'
 
 import fs from 'fs'

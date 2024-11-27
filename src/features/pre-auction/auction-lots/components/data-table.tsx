@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 import {
@@ -31,7 +33,7 @@ interface DataTableProps<TData> {
    setGlobalFilter?: (value: string) => void
 }
 
-export function DataTable<TData>({
+export function TableAuctionLots<TData>({
    columns,
    data,
    globalFilter,

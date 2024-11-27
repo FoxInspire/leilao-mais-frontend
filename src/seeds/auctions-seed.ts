@@ -6,7 +6,7 @@ import {
    ExpenseReport,
    LotHistory,
    VehicleDebt
-} from '@/features/pre-auction/auction-maintenance/types/auction.entity.ts'
+} from '@/types/entities/auction.entity.ts'
 import { faker } from '@faker-js/faker'
 
 import fs from 'fs'

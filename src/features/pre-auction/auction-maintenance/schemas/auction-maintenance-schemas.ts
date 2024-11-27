@@ -1,5 +1,6 @@
-import { z } from 'zod'
-import { AuctionLot } from '../types/auction.entity.ts'
+import * as z from 'zod'
+
+import { AuctionLot } from '@/types/entities/auction.entity.ts'
 
 export const lotTransactionSchema = z.object({
    id: z.string(),
