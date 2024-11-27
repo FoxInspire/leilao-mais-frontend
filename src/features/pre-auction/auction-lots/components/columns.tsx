@@ -45,7 +45,7 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Processo" />
       ),
-      cell: ({ row }) => <div>{row.original.internalAuctionOrder}</div>
+      cell: ({ row }) => <div>{row.original.auctionCode}</div>
    },
    {
       accessorKey: 'plate',
@@ -53,7 +53,7 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
          <DataTableColumnHeader column={column} title="Placa" />
       ),
       cell: ({ row }) => (
-         <div>{row.original.AuctionLot?.[0]?.LotHistory?.[0]?.plate}</div>
+         <div>{row.original.AuctionLot?.[0]?.Vehicle?.plate}</div>
       )
    },
    {
@@ -62,22 +62,21 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
          <DataTableColumnHeader column={column} title="Chassi" />
       ),
       cell: ({ row }) => (
-         <div>{row.original.AuctionLot?.[0]?.LotHistory?.[0]?.chassis}</div>
+         <div>{row.original.AuctionLot?.[0]?.Vehicle?.chassis}</div>
       )
    },
    {
-      accessorKey: 'brandModel',
+      accessorKey: 'model',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Marca/Modelo" />
       ),
-      cell: ({ row }) => <div>{row.original.description}</div>
-   },
-   {
-      accessorKey: 'color',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Cor" />
-      ),
-      cell: ({ row }) => <div>{row.getValue('color')}</div>
+      cell: ({ row }) => (
+         <div>
+            {`${row.original.AuctionLot?.[0]?.Vehicle?.brand?.name || ''} / ${
+               row.original.AuctionLot?.[0]?.Vehicle?.model?.name || ''
+            }`}
+         </div>
+      )
    },
    {
       accessorKey: 'type',
@@ -85,19 +84,24 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
          <DataTableColumnHeader column={column} title="Tipo" />
       ),
       cell: ({ row }) => (
-         <div>
-            {row.original.AuctionLot?.[0]?.Characteristics?.vehicleCondition}
-         </div>
+         <div>{row.original.AuctionLot?.[0]?.Vehicle?.type?.name || ''}</div>
       )
    },
    {
-      accessorKey: 'lotStatus',
+      accessorKey: 'status',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Status do lote" />
       ),
-      cell: ({ row }) => (
-         <div>Status do lote: {row.original.AuctionLot?.[0]?.status}</div>
-      )
+      cell: ({ row }) => {
+         const status = row.original.AuctionLot?.[0]?.status || 'pending'
+         const statusMap: Record<string, string> = {
+            assembly: 'Em montagem',
+            organs_evaluation: 'Avaliação dos órgãos',
+            payment_confirmation: 'Confirmação de pagamento',
+            pending: 'Pendente'
+         }
+         return <div>{statusMap[status]}</div>
+      }
    },
    {
       accessorKey: 'alerts',
@@ -105,13 +109,26 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
          <DataTableColumnHeader column={column} title="Alertas" />
       ),
       cell: ({ row }) => {
-         const debts = row.original.VehicleDebt?.length || 0
+         const debts = row.original.VehicleDebt || []
+         const hasDebt = debts.length > 0
+         const totalDebtValue = debts.reduce(
+            (sum, debt) => sum + (debt.value || 0),
+            0
+         )
+
          return (
-            <div className="flex items-center">
-               {debts > 0 && (
-                  <span className="material-symbols-outlined text-red-500">
-                     warning
-                  </span>
+            <div className="flex items-center gap-2">
+               {hasDebt && (
+                  <>
+                     <span className="material-symbols-outlined text-red-500">
+                        warning
+                     </span>
+                     <span className="text-sm text-red-500">
+                        {`${debts.length} débito${
+                           debts.length > 1 ? 's' : ''
+                        } (R$ ${totalDebtValue.toFixed(2)})`}
+                     </span>
+                  </>
                )}
             </div>
          )

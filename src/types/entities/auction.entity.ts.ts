@@ -1,3 +1,5 @@
+import { VehicleEntity } from '@/types/entities/vehicle.entity'
+
 export interface LotTransaction {
    id: string
    auctionLotId: string
@@ -113,6 +115,7 @@ export interface AuctionLot {
    Characteristics?: Characteristics
    FinancialDetails?: FinancialDetails
    SaleNotification?: SaleNotification
+   Vehicle?: VehicleEntity
    LotTransaction?: LotTransaction[]
    Bidder?: Bidder[]
    Inspection?: Inspection[]

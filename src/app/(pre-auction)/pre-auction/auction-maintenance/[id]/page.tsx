@@ -1,11 +1,13 @@
+export const dynamic = 'force-dynamic'
+
 import * as React from 'react'
 import * as z from 'zod'
 
+import { columns_auction_lots } from '@/src/features/pre-auction/auction-lots/components/columns'
 import { auctionEntitySchema } from '@/src/features/pre-auction/auction-maintenance/schemas/auction-maintenance-schemas'
 import { promises as fs } from 'fs'
 
 import AuctionLots from '@/src/features/pre-auction/auction-lots/auction-lots'
-import { columns_auction_lots } from '@/src/features/pre-auction/auction-lots/components/columns'
 import path from 'path'
 
 async function getAuctions() {

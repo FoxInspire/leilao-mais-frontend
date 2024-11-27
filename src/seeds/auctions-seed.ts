@@ -7,6 +7,7 @@ import {
    LotHistory,
    VehicleDebt
 } from '@/types/entities/auction.entity.ts'
+import { VehicleEntity } from '@/types/entities/vehicle.entity'
 import { faker } from '@faker-js/faker'
 
 import fs from 'fs'
@@ -47,16 +48,38 @@ const brazilianCities = [
    { city: 'PORTO ALEGRE', state: 'RS' }
 ]
 
+const vehicleTypes = [
+   { id: '1', name: 'Carro', description: 'Veículo de passeio' },
+   { id: '2', name: 'Moto', description: 'Motocicleta' },
+   { id: '3', name: 'Caminhão', description: 'Veículo de carga' },
+   { id: '4', name: 'Van', description: 'Veículo utilitário' },
+   { id: '5', name: 'Ônibus', description: 'Veículo de transporte coletivo' }
+]
+
+const vehicleBrands = [
+   { id: '1', name: 'Volkswagen', typeVehicle: '1' },
+   { id: '2', name: 'Honda', typeVehicle: '2' },
+   { id: '3', name: 'Volvo', typeVehicle: '3' },
+   { id: '4', name: 'Toyota', typeVehicle: '1' },
+   { id: '5', name: 'Yamaha', typeVehicle: '2' },
+   { id: '6', name: 'Mercedes-Benz', typeVehicle: '3' },
+   { id: '7', name: 'Fiat', typeVehicle: '1' },
+   { id: '8', name: 'Suzuki', typeVehicle: '2' },
+   { id: '9', name: 'Scania', typeVehicle: '3' },
+   { id: '10', name: 'Renault', typeVehicle: '4' },
+   { id: '11', name: 'Marcopolo', typeVehicle: '5' }
+]
+
+const zeroLotsIndexes = new Set<number>()
+while (zeroLotsIndexes.size < 8) {
+   zeroLotsIndexes.add(faker.number.int({ min: 0, max: 99 }))
+}
+
 const generateAuctionCode = (city: string) => {
    const prefix = city.slice(0, 3).toLowerCase()
    const num = faker.number.int({ min: 1, max: 99 }).toString().padStart(2, '0')
    const year = new Date().getFullYear().toString().slice(-2)
    return `${prefix}${num}.${year}-DP`
-}
-
-const zeroLotsIndexes = new Set<number>()
-while (zeroLotsIndexes.size < 8) {
-   zeroLotsIndexes.add(faker.number.int({ min: 0, max: 99 }))
 }
 
 const generateBrazilianCEP = () => {
@@ -75,6 +98,83 @@ const generateBrazilianPhone = () => {
 const parseDate = (dateString: string): Date => {
    const [day, month, year] = dateString.split('/').map(Number)
    return new Date(year, month - 1, day)
+}
+
+const generateVehicleData = (): VehicleEntity => {
+   const selectedType = faker.helpers.arrayElement(vehicleTypes)
+   const compatibleBrands = vehicleBrands.filter(
+      (brand) => brand.typeVehicle === selectedType.id
+   )
+   const selectedBrand = faker.helpers.arrayElement(compatibleBrands)
+
+   return {
+      id: faker.string.uuid(),
+      name: faker.vehicle.model(),
+      description: faker.vehicle.type(),
+      chassis: faker.string.numeric(17).toUpperCase(),
+      plate: faker.string.numeric(7).toUpperCase(),
+      type: {
+         id: selectedType.id,
+         name: selectedType.name,
+         description: selectedType.description,
+         category: {
+            id: faker.string.uuid(),
+            name: faker.helpers.arrayElement([
+               'Básico',
+               'Luxo',
+               'Premium',
+               'Especial',
+               'Executivo'
+            ]),
+            type: selectedType.name,
+            dailyValue: faker.number.float({
+               min: 100,
+               max: 1000,
+               fractionDigits: 2
+            }),
+            towingCost: faker.number.float({
+               min: 200,
+               max: 800,
+               fractionDigits: 2
+            })
+         }
+      },
+      brand: {
+         id: selectedBrand.id,
+         name: selectedBrand.name,
+         typeVehicle: selectedBrand.typeVehicle
+      },
+      model: {
+         id: faker.string.uuid(),
+         name: faker.vehicle.model(),
+         brandId: selectedBrand.id
+      },
+      equipments: Array.from(
+         { length: faker.number.int({ min: 2, max: 6 }) },
+         () => ({
+            id: faker.string.uuid(),
+            name: faker.helpers.arrayElement([
+               'GPS',
+               'Ar Condicionado',
+               'Câmera de Ré',
+               'Sensor de Estacionamento',
+               'Airbag',
+               'Freios ABS',
+               'Controle de Tração',
+               'Piloto Automático',
+               'Central Multimídia',
+               'Bancos em Couro'
+            ]),
+            code: faker.number.int({ min: 1000, max: 9999 }),
+            required: faker.datatype.boolean(),
+            vehicleTypes: [selectedType.id],
+            createdAt: faker.date.past(),
+            updatedAt: faker.date.recent()
+         })
+      ),
+      createdAt: faker.date.past(),
+      updatedAt: faker.date.recent()
+   }
 }
 
 const generateAuctionsSeed = (): AuctionEntity => {
@@ -211,37 +311,42 @@ const generateAuctionsSeed = (): AuctionEntity => {
       updatedAt: new Date()
    }))
 
-   const auctionLots: AuctionLot[] = Array.from({ length: 5 }, (_, index) => ({
-      id: `${baseAuction.id}-${index}-${faker.number.int({
-         min: 1000,
-         max: 9999
-      })}`,
-      auctionId: baseAuction.id,
-      lotNumber: faker.number.int({ min: 1, max: 999 }).toString(),
-      description: faker.lorem.sentence(),
-      initialValue: faker.number.float({
-         min: 1000,
-         max: 10000,
-         fractionDigits: 2
-      }),
-      minimumValue: faker.number.float({
-         min: 500,
-         max: 5000,
-         fractionDigits: 2
-      }),
-      minumumBid: faker.number.float({
-         min: 100,
-         max: 1000,
-         fractionDigits: 2
-      }),
-      ggvId: faker.number.int({ min: 1000, max: 9999 }).toString(),
-      status:
-         statusOptions[
-            faker.number.int({ min: 0, max: statusOptions.length - 1 })
-         ].value,
-      createdAt: new Date(),
-      updatedAt: new Date()
-   }))
+   const auctionLots: AuctionLot[] = Array.from({ length: 5 }, (_, index) => {
+      const vehicle = generateVehicleData()
+
+      return {
+         id: `${baseAuction.id}-${index}-${faker.number.int({
+            min: 1000,
+            max: 9999
+         })}`,
+         auctionId: baseAuction.id,
+         lotNumber: faker.number.int({ min: 1, max: 999 }).toString(),
+         description: faker.lorem.sentence(),
+         initialValue: faker.number.float({
+            min: 1000,
+            max: 10000,
+            fractionDigits: 2
+         }),
+         minimumValue: faker.number.float({
+            min: 500,
+            max: 5000,
+            fractionDigits: 2
+         }),
+         minumumBid: faker.number.float({
+            min: 100,
+            max: 1000,
+            fractionDigits: 2
+         }),
+         ggvId: faker.number.int({ min: 1000, max: 9999 }).toString(),
+         status:
+            statusOptions[
+               faker.number.int({ min: 0, max: statusOptions.length - 1 })
+            ].value,
+         Vehicle: vehicle,
+         createdAt: new Date(),
+         updatedAt: new Date()
+      }
+   })
 
    return {
       ...baseAuction,
@@ -261,6 +366,7 @@ export const generateAuctionsData = () => {
    const auctionsWithZeroLots = auctions.map(
       (auction: AuctionEntity, index) => {
          if (zeroLotsIndexes.has(index)) {
+            const vehicle = generateVehicleData()
             return {
                ...auction,
                AuctionLot: [
@@ -280,6 +386,7 @@ export const generateAuctionsData = () => {
                      ggvId: faker.number
                         .int({ min: 1000, max: 9999 })
                         .toString(),
+                     Vehicle: vehicle,
                      createdAt: new Date(),
                      updatedAt: new Date()
                   }
@@ -303,3 +410,5 @@ export const generateAuctionsData = () => {
       JSON.stringify(auctionsWithZeroLots, null, 2)
    )
 }
+
+export default generateAuctionsData
