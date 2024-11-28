@@ -45,7 +45,7 @@ export function CollapsibleSidebar({
                data-sidebar="sidebar"
                data-mobile="true"
                side={side}
-               className="w-full"
+               className="w-full px-4 pt-0"
                hasCloseButton={false}
             >
                <SheetHeader>

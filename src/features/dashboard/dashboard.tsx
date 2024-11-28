@@ -131,32 +131,35 @@ const Dashboard: React.FC = () => {
                      setTab(value as Tab)
                   }}
                >
-                  <TabsList className="flex justify-between">
-                     <div className="grid grid-flow-col items-center gap-4">
+                  <TabsList className="flex justify-between w-full">
+                     <div className="grid grid-flow-col items-center gap-4 overflow-x-auto hide-scrollbar">
                         <span
-                           className="material-symbols-outlined rotate-180 cursor-pointer !text-[32px] hover:scale-110 lg:!hidden"
+                           className="material-symbols-outlined rotate-180 cursor-pointer !text-[32px] hover:scale-110 lg:!hidden shrink-0"
                            onClick={previousTab}
                         >
                            chevron_right
                         </span>
-                        <div className="flex w-full" ref={tabsRef}>
-                           <div className="flex">
+                        <div
+                           className="flex w-full overflow-x-auto hide-scrollbar"
+                           ref={tabsRef}
+                        >
+                           <div className="flex shrink-0">
                               <TabsTrigger
-                                 className="min-w-36"
+                                 className="min-w-36 shrink-0"
                                  value={Tab.InProgress}
                                  data-value={Tab.InProgress}
                               >
                                  Em progresso
                               </TabsTrigger>
                               <TabsTrigger
-                                 className="min-w-36"
+                                 className="min-w-36 shrink-0"
                                  value={Tab.Unfit}
                                  data-value={Tab.Unfit}
                               >
                                  Inaptos
                               </TabsTrigger>
                               <TabsTrigger
-                                 className="min-w-36"
+                                 className="min-w-36 shrink-0"
                                  value={Tab.Completed}
                                  data-value={Tab.Completed}
                               >
@@ -165,7 +168,7 @@ const Dashboard: React.FC = () => {
                            </div>
                         </div>
                         <span
-                           className="material-symbols-outlined cursor-pointer !text-[32px] hover:scale-110 lg:!hidden"
+                           className="material-symbols-outlined cursor-pointer !text-[32px] hover:scale-110 lg:!hidden shrink-0"
                            onClick={nextTab}
                         >
                            chevron_right
@@ -249,7 +252,7 @@ const Dashboard: React.FC = () => {
             onOpenChange={setIsSidebarOpen}
             className="h-[calc(100vh-1.5rem-56px)]"
          >
-            <div className="space-y-2 h-full overflow-y-auto ml-4">
+            <div className="space-y-2 h-full overflow-y-auto md:ml-4">
                <div className="flex justify-between items-center gap-2">
                   <h1 className="text-2xl font-semibold font-montserrat">
                      Sobre a página
@@ -268,7 +271,7 @@ const Dashboard: React.FC = () => {
                   </Button>
                </div>
                <Separator orientation="horizontal" />
-               <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
+               <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
                   <p className="text-black font-semibold text-start">
                      Descrição
                   </p>

@@ -23,6 +23,7 @@ import {
    SelectItem,
    SelectTrigger
 } from '@/components/ui/select'
+import { TableAuctionLots } from '@/features/pre-auction/auction-lots/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DatePicker } from '@/src/components/ui/date-picker'
@@ -32,7 +33,6 @@ import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionLot } from '@/src/types/entities/auction.entity.ts'
 import { ColumnDef } from '@tanstack/react-table'
-import { TableAuctionLots } from './components/data-table'
 
 const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
    id,
@@ -231,7 +231,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                   'overflow-y-hidden h-0': !isSidebarOpen
                })}
             >
-               <div className="space-y-2 h-full overflow-y-auto ml-4 mt-[28px]">
+               <div className="space-y-2 h-full overflow-y-auto md:ml-4 md:mt-9">
                   <div className="flex justify-between items-center gap-2">
                      <h1 className="text-2xl font-semibold font-montserrat">
                         Sobre a página
@@ -250,24 +250,24 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      </Button>
                   </div>
                   <Separator orientation="horizontal" />
-                  <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
+                  <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
                      <p className="text-black font-semibold text-start">
                         Descrição
                      </p>
                      <p className="text-text-secondary text-start">
-                        A página de Manutenção de Leilões permite visualizar a
-                        lista de leilões cadastrados, alterar o status conforme
-                        o andamento dos processos junto ao DETRAN e buscar
-                        informações específicas. Além disso, é possível
-                        ingressar lotes nos leilões e acessar um menu de opções
-                        avançadas para uma gestão mais detalhada.
+                        A página de Lista de Lotes permite visualizar todos os
+                        lotes ingressados no leilão selecionado e acompanhar ou
+                        alterar o status de cada um. O usuário pode criar ou
+                        zerar a numeração de identificação dos lotes, acessar o
+                        histórico de notificações, inserir informações de
+                        perícia e monitorar os alertas relacionados a cada lote.
                      </p>
                      <p className="text-black font-semibold text-start">
                         Detalhes
                      </p>
                      <div>
                         <p className="text-black font-normal text-start">
-                           Status do leilão
+                           Status do lote
                         </p>
                         <p className="text-text-secondary text-start">
                            É possível alterar o status conforme o avanço dos
@@ -276,23 +276,36 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      </div>
                      <div>
                         <p className="text-black font-normal text-start">
-                           Lotes
+                           Importar numeração lotes
                         </p>
                         <p className="text-text-secondary text-start">
-                           Exibe a quantidade de lotes ingressados no leilão.
+                           Importa e atualiza os dados de GRV e numeração a
+                           partir da planilha enviada.
                         </p>
                      </div>
-                     <div className="bg-[#E6F1F7] px-4 py-4 space-y-2">
+                     <div>
                         <p className="text-black font-normal text-start">
-                           Info
+                           Alertas
                         </p>
-                        <p className="text-text-secondary text-start">
-                           Clique no card para acessar o leilão.
-                        </p>
-                        <p className="text-text-secondary text-start">
-                           Clique no nome do leilão para acessar a lista de
-                           lotes do leilão selecionado.
-                        </p>
+                        <div className="space-y-2">
+                           <p className="text-text-secondary text-start">
+                              Exibe os alertas pertinentes ao lote, sendo eles:
+                           </p>
+                           <ul className="list-disc list-inside text-text-secondary">
+                              <li>
+                                 <strong>Restrições:</strong> Exibe a lista de
+                                 restrições adicionadas ao lote.
+                              </li>
+                              <li>
+                                 <strong>Notificações:</strong> Indica que a
+                                 notificação de liberados foi enviada.
+                              </li>
+                              <li>
+                                 <strong>Leilão como sobra:</strong> Indica a
+                                 quantidade de leilões que o lote já participou.
+                              </li>
+                           </ul>
+                        </div>
                      </div>
                   </div>
                </div>
