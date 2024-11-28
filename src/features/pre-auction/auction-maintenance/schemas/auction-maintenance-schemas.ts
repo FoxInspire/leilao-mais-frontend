@@ -1,6 +1,7 @@
 import * as z from 'zod'
 
-import { AuctionLot } from '@/types/entities/auction.entity.ts'
+import { VehicleEntity } from '@/src/types/entities/vehicle.entity'
+import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity.ts'
 
 export const lotTransactionSchema = z.object({
    id: z.string(),
@@ -221,7 +222,7 @@ export const committeeSchema = z.object({
    updatedAt: z.coerce.date()
 })
 
-export const auctionEntitySchema = z.object({
+export const auctionEntitySchema: z.ZodType<AuctionEntity> = z.object({
    id: z.string(),
    auctionCode: z.string(),
    description: z.string(),
@@ -262,14 +263,13 @@ export const auctionEntitySchema = z.object({
    VehicleDebt: z.array(vehicleDebtSchema).optional()
 })
 
-export type AuctionEntity = z.infer<typeof auctionEntitySchema>
-
-export const vehicleSchema = z.object({
+export const vehicleSchema: z.ZodType<VehicleEntity> = z.object({
    id: z.string().optional(),
    name: z.string().optional(),
    description: z.string().optional(),
    chassis: z.string().optional(),
    plate: z.string().optional(),
+   status: z.string().optional(),
    type: z
       .object({
          id: z.string().optional(),

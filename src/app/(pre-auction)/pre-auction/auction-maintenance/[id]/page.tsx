@@ -23,7 +23,7 @@ async function getAuctions() {
       )
    )
    const auctions = JSON.parse(data.toString())
-   return z.array(auctionEntitySchema).parse(auctions)
+   return z.lazy(() => z.array(auctionEntitySchema)).parse(auctions)
 }
 
 export default async function AuctionMaintenanceLotsPage({

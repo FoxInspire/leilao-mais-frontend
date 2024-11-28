@@ -4,6 +4,7 @@ export interface VehicleEntity {
    description?: string
    chassis?: string
    plate?: string
+   status?: string
    type?: {
       id?: string
       name?: string

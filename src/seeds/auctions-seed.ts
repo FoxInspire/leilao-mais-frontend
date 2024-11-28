@@ -70,6 +70,50 @@ const vehicleBrands = [
    { id: '11', name: 'Marcopolo', typeVehicle: '5' }
 ]
 
+const vehicleStatusOptions = [
+   { value: 'unpaid_auction', label: 'Arrematação não paga' },
+   { value: 'preserved', label: 'Conservado' },
+   { value: 'fix_report', label: 'Corrigir laudo' },
+   { value: 'police_station', label: 'Delegacia' },
+   { value: 'disassociated_payment', label: 'Desassociado boleto' },
+   { value: 'under_analysis', label: 'Em análise' },
+   { value: 'canceled_grv', label: 'GRV cancelada' },
+   { value: 'inspection_identification', label: 'Ident na vistoria' },
+   { value: 'unanalyzed_report', label: 'Laudo não analisado' },
+   { value: 'auctioned_preserved', label: 'Leiloado - conservado' },
+   { value: 'auctioned_usable_scrap', label: 'Leiloado - sucata aproveitavel' },
+   {
+      value: 'auctioned_usable_scrap_unusable_engine',
+      label: 'Leiloado - sucata aproveitavel com motor inservível'
+   },
+   {
+      value: 'auctioned_unusable_scrap_identified',
+      label: 'Leiloado - sucata inservível identificada'
+   },
+   {
+      value: 'auctioned_unusable_scrap_unidentified',
+      label: 'Leiloado - sucata inservível não identificada'
+   },
+   {
+      value: 'lot_auctioned_other_auction',
+      label: 'Lote arrematado em outro leilão'
+   },
+   { value: 'expertise_not_performed', label: 'Pericia não realizada' },
+   {
+      value: 'expertise_without_publication',
+      label: 'Periciado sem publicação'
+   },
+   { value: 'removed_from_auction', label: 'Removido de leilão' },
+   { value: 'administrative_restriction', label: 'Restrição administrativa' },
+   { value: 'judicial_restriction', label: 'Restrição judicial' },
+   { value: 'theft_restriction', label: 'Restrição roubo/furto' },
+   { value: 'no_notification_return', label: 'Sem retorno de notificação' },
+   { value: 'clone_suspicion', label: 'Suspeita de clone' },
+   { value: 'vehicle_written_off', label: 'Veículo baixado' },
+   { value: 'vehicle_released', label: 'Veículo liberado' },
+   { value: 'vehicle_not_found', label: 'Veículo não localizado' }
+]
+
 const zeroLotsIndexes = new Set<number>()
 while (zeroLotsIndexes.size < 8) {
    zeroLotsIndexes.add(faker.number.int({ min: 0, max: 99 }))
@@ -113,6 +157,7 @@ const generateVehicleData = (): VehicleEntity => {
       description: faker.vehicle.type(),
       chassis: faker.string.numeric(17).toUpperCase(),
       plate: faker.string.numeric(7).toUpperCase(),
+      status: faker.helpers.arrayElement(vehicleStatusOptions).value,
       type: {
          id: selectedType.id,
          name: selectedType.name,
@@ -182,18 +227,13 @@ const generateAuctionsSeed = (): AuctionEntity => {
 
    const baseAuction = {
       id: faker.number.int({ min: 1000, max: 9999 }).toString(),
-      auctionCode: generateAuctionCode(location.city),
+      auctionCode: generateAuctionCode(location.city)?.toUpperCase(),
       description: faker.lorem.sentence(),
       auctionDate: parseDate(faker.date.future().toLocaleDateString('pt-BR')),
       cep: generateBrazilianCEP(),
       address: faker.location.street(),
       addressNumber: faker.number.int({ min: 1, max: 9999 }).toString(),
-      addressComplement: faker.helpers.arrayElement([
-         'Sala',
-         'Loja',
-         'Galpão',
-         ''
-      ]),
+      addressComplement: faker.helpers.arrayElement(['Sala', 'Loja', 'Galpão']),
       neighborhood: faker.location.county(),
       addressState: location.state,
       addressCity: location.city,
@@ -338,10 +378,7 @@ const generateAuctionsSeed = (): AuctionEntity => {
             fractionDigits: 2
          }),
          ggvId: faker.number.int({ min: 1000, max: 9999 }).toString(),
-         status:
-            statusOptions[
-               faker.number.int({ min: 0, max: statusOptions.length - 1 })
-            ].value,
+         status: faker.helpers.arrayElement(statusOptions).value,
          Vehicle: vehicle,
          createdAt: new Date(),
          updatedAt: new Date()

@@ -30,6 +30,7 @@ import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
+import { AuctionLot } from '@/src/types/entities/auction.entity.ts'
 import { ColumnDef } from '@tanstack/react-table'
 import { TableAuctionLots } from './components/data-table'
 
@@ -42,6 +43,16 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
    console.log('data', data)
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
+
+   const transformedData = React.useMemo(() => {
+      return data.flatMap(
+         (auction) =>
+            auction.AuctionLot?.map((lot: AuctionLot) => ({
+               ...auction,
+               AuctionLot: [lot]
+            })) || []
+      )
+   }, [data])
 
    return (
       <React.Fragment>
@@ -205,8 +216,8 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
                   <div className="flex-1 overflow-auto">
                      <TableAuctionLots
-                        data={data}
                         columns={columns}
+                        data={transformedData}
                         globalFilter={globalFilter}
                      />
                   </div>

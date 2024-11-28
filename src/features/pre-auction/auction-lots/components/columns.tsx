@@ -5,6 +5,8 @@ import { DataTableRowActions } from '@/features/pre-auction/auction-maintenance/
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { AuctionEntity } from '@/types/entities/auction.entity.ts'
 import { ColumnDef } from '@tanstack/react-table'
+import * as React from 'react'
+import { LotStatus } from './lot-status'
 
 export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
    {
@@ -38,7 +40,16 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Lote" />
       ),
-      cell: ({ row }) => <div>{row.original.AuctionLot?.[0]?.lotNumber}</div>
+      cell: ({ row }) => {
+         const lots = row.original.AuctionLot || []
+         return (
+            <div className="space-y-1">
+               {lots.map((lot) => (
+                  <div key={lot.id}>{lot.lotNumber}</div>
+               ))}
+            </div>
+         )
+      }
    },
    {
       accessorKey: 'process',
@@ -52,56 +63,75 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Placa" />
       ),
-      cell: ({ row }) => (
-         <div>{row.original.AuctionLot?.[0]?.Vehicle?.plate}</div>
-      )
+      cell: ({ row }) => {
+         const lots = row.original.AuctionLot || []
+         return (
+            <div className="space-y-1">
+               {lots.map((lot) => (
+                  <div key={lot.id}>{lot.Vehicle?.plate}</div>
+               ))}
+            </div>
+         )
+      }
    },
    {
       accessorKey: 'chassis',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Chassi" />
       ),
-      cell: ({ row }) => (
-         <div>{row.original.AuctionLot?.[0]?.Vehicle?.chassis}</div>
-      )
+      cell: ({ row }) => {
+         const lots = row.original.AuctionLot || []
+         return (
+            <div className="space-y-1">
+               {lots.map((lot) => (
+                  <div key={lot.id}>{lot.Vehicle?.chassis}</div>
+               ))}
+            </div>
+         )
+      }
    },
    {
       accessorKey: 'model',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Marca/Modelo" />
       ),
-      cell: ({ row }) => (
-         <div>
-            {`${row.original.AuctionLot?.[0]?.Vehicle?.brand?.name || ''} / ${
-               row.original.AuctionLot?.[0]?.Vehicle?.model?.name || ''
-            }`}
-         </div>
-      )
+      cell: ({ row }) => {
+         const lots = row.original.AuctionLot || []
+         return (
+            <div className="space-y-1">
+               {lots.map((lot) => (
+                  <div key={lot.id}>
+                     {`${lot.Vehicle?.brand?.name || ''} / ${
+                        lot.Vehicle?.model?.name || ''
+                     }`}
+                  </div>
+               ))}
+            </div>
+         )
+      }
    },
    {
       accessorKey: 'type',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Tipo" />
       ),
-      cell: ({ row }) => (
-         <div>{row.original.AuctionLot?.[0]?.Vehicle?.type?.name || ''}</div>
-      )
+      cell: ({ row }) => {
+         const lots = row.original.AuctionLot || []
+         return (
+            <div className="space-y-1">
+               {lots.map((lot) => (
+                  <div key={lot.id}>{lot.Vehicle?.type?.name || ''}</div>
+               ))}
+            </div>
+         )
+      }
    },
    {
       accessorKey: 'status',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Status do lote" />
       ),
-      cell: ({ row }) => {
-         const status = row.original.AuctionLot?.[0]?.status || 'pending'
-         const statusMap: Record<string, string> = {
-            assembly: 'Em montagem',
-            organs_evaluation: 'Avaliação dos órgãos',
-            payment_confirmation: 'Confirmação de pagamento',
-            pending: 'Pendente'
-         }
-         return <div>{statusMap[status]}</div>
-      }
+      cell: ({ row }) => <LotStatus row={row} />
    },
    {
       accessorKey: 'alerts',
@@ -115,11 +145,10 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
             (sum, debt) => sum + (debt.value || 0),
             0
          )
-
          return (
             <div className="flex items-center gap-2">
                {hasDebt && (
-                  <>
+                  <React.Fragment>
                      <span className="material-symbols-outlined text-red-500">
                         warning
                      </span>
@@ -128,7 +157,7 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
                            debts.length > 1 ? 's' : ''
                         } (R$ ${totalDebtValue.toFixed(2)})`}
                      </span>
-                  </>
+                  </React.Fragment>
                )}
             </div>
          )
