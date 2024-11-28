@@ -23,7 +23,10 @@ import {
    SelectItem,
    SelectTrigger
 } from '@/components/ui/select'
-import { TableAuctionLots } from '@/features/pre-auction/auction-lots/components/data-table'
+import {
+   TableAuctionLots,
+   TableAuctionLotsHandle
+} from '@/features/pre-auction/auction-lots/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DatePicker } from '@/src/components/ui/date-picker'
@@ -33,14 +36,13 @@ import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
+import { toast } from 'sonner'
 
 const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
    id,
    columns,
    data
 }: AuctionMaintenanceLotsProps) => {
-   console.log('id', id)
-   console.log('data', data)
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
 
@@ -53,6 +55,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
             })) || []
       )
    }, [data])
+
+   const tableRef = React.useRef<TableAuctionLotsHandle>(null)
+   const [selectedRows, setSelectedRows] = React.useState<AuctionLot[]>([])
 
    return (
       <React.Fragment>
@@ -95,130 +100,221 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      </div>
                      <Separator orientation="horizontal" />
                   </div>
-                  <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
-                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
-                        <Input
-                           label="Busca geral"
-                           value={globalFilter}
-                           placeholder="Processo, placa, chassi"
-                           onChange={(e) => setGlobalFilter(e.target.value)}
-                           className="min-w-[300px]"
-                        />
-                        <Dialog>
-                           <DialogTrigger
-                              className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
-                              asChild
-                           >
-                              <div>
-                                 <Button
-                                    variant="ghost"
-                                    className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
-                                 >
-                                    Busca avançada
-                                 </Button>
-                              </div>
-                           </DialogTrigger>
-                           <DialogContent>
-                              <DialogHeader>
-                                 <DialogTitle>Busca avançada</DialogTitle>
-                              </DialogHeader>
-                              <div className="space-y-4 py-4 pb-6">
-                                 <p className="text-lg font-montserrat">
-                                    Preencha os campos necessários para busca
-                                 </p>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                                    <Input
-                                       label="Placa"
-                                       placeholder="000-0000"
-                                    />
-                                    <Input
-                                       label="Descrição"
-                                       placeholder="Descrição do leilão"
-                                    />
-                                    <Input
-                                       label="Processo"
-                                       placeholder="Número do processo"
-                                    />
-                                 </div>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                                    <DatePicker
-                                       label="Data"
-                                       placeholder="DD/MM/YYYY"
-                                    />
-                                    <Input
-                                       label="ID"
-                                       placeholder="ID do leilão"
-                                    />
-                                    <Input
-                                       label="Descrição"
-                                       placeholder="Descrição do leilão"
-                                    />
-                                 </div>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                                    <Select>
-                                       <SelectTrigger unstyled hideIcon>
-                                          <Input
-                                             label="Status"
-                                             placeholder="Selecione o status"
-                                          />
-                                       </SelectTrigger>
-                                       <SelectContent>
-                                          <SelectItem value="light">
-                                             Light
-                                          </SelectItem>
-                                          <SelectItem value="dark">
-                                             Dark
-                                          </SelectItem>
-                                          <SelectItem value="system">
-                                             System
-                                          </SelectItem>
-                                       </SelectContent>
-                                    </Select>
-                                    <Input
-                                       label="Local"
-                                       placeholder="Local do leilão"
-                                    />
-                                    <Input
-                                       label="Comitente"
-                                       placeholder="Comitente do leilão"
-                                    />
-                                 </div>
-                              </div>
-                              <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
-                                 <div className="md:order-1 order-2">
+                  {selectedRows.length === 0 && (
+                     <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
+                           <Input
+                              label="Busca geral"
+                              value={globalFilter}
+                              placeholder="Processo, placa, chassi"
+                              onChange={(e) => setGlobalFilter(e.target.value)}
+                              className="min-w-[300px]"
+                           />
+                           <Dialog>
+                              <DialogTrigger
+                                 className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
+                                 asChild
+                              >
+                                 <div>
                                     <Button
-                                       variant="destructive"
-                                       className="w-full"
+                                       variant="ghost"
+                                       className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
                                     >
-                                       Cancelar
+                                       Busca avançada
                                     </Button>
                                  </div>
-                                 <div className="md:order-2 order-1">
-                                    <Button
-                                       variant="default"
-                                       className="w-full"
-                                    >
-                                       Buscar
-                                    </Button>
+                              </DialogTrigger>
+                              <DialogContent>
+                                 <DialogHeader>
+                                    <DialogTitle>Busca avançada</DialogTitle>
+                                 </DialogHeader>
+                                 <div className="space-y-4 py-4 pb-6">
+                                    <p className="text-lg font-montserrat">
+                                       Preencha os campos necessários para busca
+                                    </p>
+                                    <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                                       <Input
+                                          label="Placa"
+                                          placeholder="000-0000"
+                                       />
+                                       <Input
+                                          label="Descrição"
+                                          placeholder="Descrição do leilão"
+                                       />
+                                       <Input
+                                          label="Processo"
+                                          placeholder="Número do processo"
+                                       />
+                                    </div>
+                                    <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                                       <DatePicker
+                                          label="Data"
+                                          placeholder="DD/MM/YYYY"
+                                       />
+                                       <Input
+                                          label="ID"
+                                          placeholder="ID do leilão"
+                                       />
+                                       <Input
+                                          label="Descrição"
+                                          placeholder="Descrição do leilão"
+                                       />
+                                    </div>
+                                    <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                                       <Select>
+                                          <SelectTrigger unstyled hideIcon>
+                                             <Input
+                                                label="Status"
+                                                placeholder="Selecione o status"
+                                             />
+                                          </SelectTrigger>
+                                          <SelectContent>
+                                             <SelectItem value="light">
+                                                Light
+                                             </SelectItem>
+                                             <SelectItem value="dark">
+                                                Dark
+                                             </SelectItem>
+                                             <SelectItem value="system">
+                                                System
+                                             </SelectItem>
+                                          </SelectContent>
+                                       </Select>
+                                       <Input
+                                          label="Local"
+                                          placeholder="Local do leilão"
+                                       />
+                                       <Input
+                                          label="Comitente"
+                                          placeholder="Comitente do leilão"
+                                       />
+                                    </div>
                                  </div>
-                              </div>
-                           </DialogContent>
-                        </Dialog>
+                                 <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
+                                    <div className="md:order-1 order-2">
+                                       <Button
+                                          variant="destructive"
+                                          className="w-full"
+                                       >
+                                          Cancelar
+                                       </Button>
+                                    </div>
+                                    <div className="md:order-2 order-1">
+                                       <Button
+                                          variant="default"
+                                          className="w-full"
+                                       >
+                                          Buscar
+                                       </Button>
+                                    </div>
+                                 </div>
+                              </DialogContent>
+                           </Dialog>
+                        </div>
+                        <Button
+                           variant="default"
+                           className="w-full sm:w-auto px-12 sm:min-w-[150px] whitespace-nowrap"
+                        >
+                           Importar numeração lotes
+                        </Button>
                      </div>
-                     <Button
-                        variant="default"
-                        className="w-full sm:w-auto px-12 sm:min-w-[150px] whitespace-nowrap"
-                     >
-                        Importar numeração lotes
-                     </Button>
-                  </div>
+                  )}
+                  {selectedRows.length > 0 && (
+                     <div className="flex items-center gap-4 w-full">
+                        <Button
+                           variant="ghost"
+                           size="icon"
+                           onClick={() => tableRef.current?.resetSelection()}
+                        >
+                           <span className="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">
+                              close
+                           </span>
+                        </Button>
+
+                        <span className="text-sm text-text-secondary whitespace-nowrap dark:text-dark-text-secondary">
+                           {selectedRows?.length} selecionado
+                        </span>
+
+                        <div className="flex items-center gap-2">
+                           <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => {
+                                 selectedRows.map((row) => {
+                                    toast.loading(
+                                       `Zerando numeração do lote ${row.id}`
+                                    )
+
+                                    tableRef.current?.resetSelection()
+
+                                    setTimeout(() => {
+                                       toast.dismiss()
+                                       toast.success(
+                                          `Numeração do lote ${row.id} zerada`
+                                       )
+                                    }, 3000)
+                                 })
+                              }}
+                           >
+                              <span className="material-symbols-outlined text-primary-default dark:text-dark-primary-default">
+                                 content_cut
+                              </span>
+                           </Button>
+                           <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => {
+                                 selectedRows.map((row) => {
+                                    toast.loading(
+                                       `Criando numeração do lote ${row.id}`
+                                    )
+                                    tableRef.current?.resetSelection()
+
+                                    setTimeout(() => {
+                                       toast.dismiss()
+                                       toast.success(
+                                          `Numeração do lote ${row.id} criada`
+                                       )
+                                    }, 3000)
+                                 })
+                              }}
+                           >
+                              <span className="material-symbols-outlined text-primary-default dark:text-dark-primary-default">
+                                 content_paste
+                              </span>
+                           </Button>
+                           <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => {
+                                 selectedRows.map((row) => {
+                                    toast.loading(`Deletando lote ${row.id}`)
+
+                                    tableRef.current?.resetSelection()
+
+                                    setTimeout(() => {
+                                       toast.dismiss()
+                                       toast.success(`Lote ${row.id} deletado`)
+                                    }, 3000)
+                                 })
+                              }}
+                           >
+                              <span className="material-symbols-outlined text-primary-default dark:text-dark-primary-default">
+                                 delete
+                              </span>
+                           </Button>
+                        </div>
+                     </div>
+                  )}
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
                   <div className="flex-1 overflow-auto">
                      <TableAuctionLots
+                        ref={tableRef}
                         columns={columns}
                         data={transformedData}
                         globalFilter={globalFilter}
+                        onSelectionChange={setSelectedRows}
                      />
                   </div>
                </div>
@@ -318,7 +414,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
 type AuctionMaintenanceLotsProps = {
    id: string
    data: any[]
-   columns: ColumnDef<any>[]
+   columns: ColumnDef<AuctionLot>[]
 }
 
 export default AuctionLots

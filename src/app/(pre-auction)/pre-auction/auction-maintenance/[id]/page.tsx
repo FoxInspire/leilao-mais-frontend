@@ -3,10 +3,11 @@ export const dynamic = 'force-dynamic'
 import * as React from 'react'
 
 import { columns_auction_lots } from '@/src/features/pre-auction/auction-lots/components/columns'
-import { AuctionEntity } from '@/types/entities/auction.entity'
+import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
 import { promises as fs } from 'fs'
 
 import AuctionLots from '@/src/features/pre-auction/auction-lots/auction-lots'
+import { ColumnDef } from '@tanstack/react-table'
 import path from 'path'
 
 async function getAuctions() {
@@ -42,7 +43,7 @@ export default async function AuctionMaintenanceLotsPage({
          <AuctionLots
             id={id}
             data={filteredAuctions}
-            columns={columns_auction_lots}
+            columns={columns_auction_lots as ColumnDef<AuctionLot>[]}
          />
       </React.Suspense>
    )
