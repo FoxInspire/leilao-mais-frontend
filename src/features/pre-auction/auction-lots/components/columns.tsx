@@ -56,7 +56,16 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Processo" />
       ),
-      cell: ({ row }) => <div>{row.original.auctionCode}</div>
+      cell: ({ row }) => {
+         const lots = row.original.AuctionLot || []
+         return (
+            <div className="space-y-1">
+               {lots.map((lot) => (
+                  <div key={lot.id}>{lot.Auction?.auctionCode || '-'}</div>
+               ))}
+            </div>
+         )
+      }
    },
    {
       accessorKey: 'plate',

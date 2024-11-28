@@ -85,8 +85,28 @@ export const TableAuctionLots = React.forwardRef<
          onGlobalFilterChange: setGlobalFilter,
          globalFilterFn: (row, columnId, filterValue) => {
             const searchValue = filterValue.toLowerCase()
-            const cellValue = String(row.getValue(columnId)).toLowerCase()
-            return cellValue.includes(searchValue)
+
+            const lot = row.original.lotNumber
+            const vehicle = row.original.Vehicle
+            const id = row.original.auctionId
+            const auctionCode = row.original.Auction?.auctionCode
+
+            const searchFields = [
+               lot,
+               id,
+               auctionCode,
+               vehicle?.plate,
+               vehicle?.chassis,
+               vehicle?.brand?.name,
+               vehicle?.model?.name,
+               vehicle?.type?.name
+            ]
+
+            return searchFields.some((field) =>
+               String(field || '')
+                  .toLowerCase()
+                  .includes(searchValue)
+            )
          }
       })
 

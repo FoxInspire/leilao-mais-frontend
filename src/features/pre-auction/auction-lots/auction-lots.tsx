@@ -47,13 +47,21 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
    const [globalFilter, setGlobalFilter] = React.useState('')
 
    const transformedData = React.useMemo(() => {
-      return data.flatMap(
-         (auction) =>
-            auction.AuctionLot?.map((lot: AuctionLot) => ({
-               ...auction,
-               AuctionLot: [lot]
-            })) || []
-      )
+      return data.flatMap((auction) => {
+         if (!auction.AuctionLot?.length) return []
+
+         return auction.AuctionLot.map((lot: AuctionLot) => ({
+            ...auction,
+            AuctionLot: [lot],
+            lotNumber: lot.lotNumber,
+            process: auction.auctionCode,
+            plate: lot.Vehicle?.plate,
+            chassis: lot.Vehicle?.chassis,
+            brand: lot.Vehicle?.brand?.name,
+            model: lot.Vehicle?.model?.name,
+            type: lot.Vehicle?.type?.name
+         }))
+      })
    }, [data])
 
    const tableRef = React.useRef<TableAuctionLotsHandle>(null)
