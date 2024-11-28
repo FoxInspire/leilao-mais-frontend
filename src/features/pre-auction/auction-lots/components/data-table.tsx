@@ -52,6 +52,7 @@ export const TableAuctionLots = React.forwardRef<
          React.useState<VisibilityState>({})
       const [columnFilters, setColumnFilters] =
          React.useState<ColumnFiltersState>([])
+
       const [sorting, setSorting] = React.useState<SortingState>([])
 
       const table = useReactTable({
@@ -89,13 +90,15 @@ export const TableAuctionLots = React.forwardRef<
          }
       })
 
+      const rowSelectionState = table.getState().rowSelection
+
       React.useEffect(() => {
          const selectedRows = table
             .getSelectedRowModel()
             .rows.map((row) => row.original)
 
          onSelectionChange?.(selectedRows)
-      }, [table.getState().rowSelection])
+      }, [table, onSelectionChange, rowSelectionState])
 
       React.useImperativeHandle(ref, () => ({
          resetSelection: () => {

@@ -220,10 +220,11 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      </div>
                   )}
                   {selectedRows.length > 0 && (
-                     <div className="flex items-center gap-4 w-full">
+                     <div className="flex items-center gap-4 w-full min-h-12">
                         <Button
                            variant="ghost"
                            size="icon"
+                           className="my-auto"
                            onClick={() => tableRef.current?.resetSelection()}
                         >
                            <span className="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">
