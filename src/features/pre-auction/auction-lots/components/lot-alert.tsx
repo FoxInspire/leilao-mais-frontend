@@ -6,13 +6,13 @@ import {
    DialogHeader,
    DialogTitle
 } from '@/components/ui/dialog'
+import { TableAuctionLots } from '@/features/pre-auction/auction-lots/components/data-table'
+import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Button } from '@/src/components/ui/button'
 import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef, Row } from '@tanstack/react-table'
 
 import React from 'react'
-import { DataTableColumnHeader } from '../../auction-maintenance/components/data-table-column-header'
-import { TableAuctionLots } from './data-table'
 
 interface LotAlertsProps {
    row: Row<AuctionEntity>
@@ -27,58 +27,38 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
    const hasEmailNotification =
       row.original.AuctionLot?.[0]?.hasEmailNotification || false
 
-   const handleOpenModal = () => setDialog(true)
-
    return (
       <React.Fragment>
          <div>
-            {/* <Select onValueChange={handleValueChange} value={currentStatus}>
-               <SelectTrigger
-                  unstyled
-                  className="flex items-center gap-2 font-bold font-nunito text-primary-default dark:text-dark-primary-default text-sm uppercase"
-               >
-                  <SelectValue
-                     placeholder={
-                        statusOptions.find(
-                           (option) => option.value === currentStatus
-                        )?.label || ''
-                     }
-                  />
-               </SelectTrigger>
-               <SelectContent>
-                  {statusOptions.map((option) => (
-                     <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                     </SelectItem>
-                  ))}
-               </SelectContent>
-            </Select> */}
             <div className="flex items-center">
                <React.Fragment>
-                  {/* abre o modal */}
-                  <Button variant="ghost" size="icon" onClick={handleOpenModal}>
-                     <span className="material-symbols-outlined text-primary-default dark:text-dark-primary-default cursor-pointer">
-                        warning
-                     </span>
-                  </Button>
-
-                  {/* só exibe a quantidade de leilões que esse lote já participou */}
-                  <Button
-                     variant="ghost"
-                     size="icon"
-                     className="w-auto px-2 hover:bg-transparent cursor-default"
-                  >
-                     <div className="flex items-center justify-center gap-1">
-                        <span className="text-sm text-text-secondary">
-                           {auctionCount}
+                  {row.original.AuctionLot?.[0]?.Ggv?.Grv?.Restriction?.[0] && (
+                     <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setDialog(true)}
+                     >
+                        <span className="material-symbols-outlined text-primary-default dark:text-dark-primary-default cursor-pointer">
+                           warning
                         </span>
-                        <span className="material-symbols-outlined text-text-secondary">
-                           sync
-                        </span>
-                     </div>
-                  </Button>
-
-                  {/* se foi enviado notificação, exibe o ícone de email */}
+                     </Button>
+                  )}
+                  {auctionCount > 0 && (
+                     <Button
+                        variant="ghost"
+                        size="icon"
+                        className="w-auto px-2 hover:bg-transparent cursor-default"
+                     >
+                        <div className="flex items-center justify-center gap-1">
+                           <span className="text-sm text-text-secondary">
+                              {auctionCount}
+                           </span>
+                           <span className="material-symbols-outlined text-text-secondary">
+                              sync
+                           </span>
+                        </div>
+                     </Button>
+                  )}
                   {hasEmailNotification && (
                      <Button
                         variant="ghost"
@@ -104,7 +84,7 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                         </p>
                      </div>
                      <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
-                        <div className="flex-1 overflow-auto">
+                        <div className="flex-1 overflow-auto pb-4">
                            <TableAuctionLots
                               data={row.original.AuctionLot || []}
                               columns={process_columns}
@@ -154,12 +134,18 @@ const process_columns: ColumnDef<AuctionLot>[] = [
       ),
       cell: ({ row }) => {
          const restriction = row.original.Ggv?.Grv?.Restriction?.[0]
+
+         const subRestrictionMapper: Record<string, string> = {
+            administrative: 'Administrativa',
+            judicial: 'Judicial',
+            theft: 'Roubo',
+            alienation: 'Alienação'
+         }
          return (
             <div className="space-y-1">
                <div>
                   {restriction?.type
-                     ? restriction?.type.charAt(0).toUpperCase() +
-                       restriction?.type.slice(1).toLowerCase()
+                     ? subRestrictionMapper[restriction.type] || '-'
                      : '-'}
                </div>
             </div>
