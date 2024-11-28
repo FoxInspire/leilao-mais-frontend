@@ -4,6 +4,8 @@ import {
    Auctioneer,
    Committee,
    ExpenseReport,
+   Ggv,
+   Grv,
    LotHistory,
    VehicleDebt
 } from '@/types/entities/auction.entity'
@@ -222,6 +224,125 @@ const generateVehicleData = (): VehicleEntity => {
    }
 }
 
+const generateGrvData = (): Grv => {
+   const vehicle = generateVehicleData()
+   const restrictions = Array.from(
+      { length: faker.number.int({ min: 1, max: 4 }) },
+      () => ({
+         id: faker.string.uuid(),
+         code: faker.string.numeric(4),
+         name: faker.helpers.arrayElement([
+            'Restrição Administrativa',
+            'Restrição Judicial',
+            'Restrição de Roubo',
+            'Restrição de Alienação'
+         ]),
+         type: faker.helpers.arrayElement([
+            'administrative',
+            'judicial',
+            'theft',
+            'alienation'
+         ]),
+         grvId: faker.string.uuid()
+      })
+   )
+
+   return {
+      id: faker.string.uuid(),
+      tenantId: faker.string.uuid(),
+      grvCode: faker.string.numeric(8),
+      formStatus: faker.helpers.arrayElement(['pending', 'completed']),
+      destinationStorage: faker.location.streetAddress(),
+      removalDate: faker.date.recent(),
+      reasonSeizure: faker.helpers.arrayElement([
+         'Infração de trânsito',
+         'Veículo abandonado',
+         'Ordem judicial',
+         'Irregularidade documental'
+      ]),
+      towTruckDriverId: faker.string.uuid(),
+      towTruckId: faker.string.uuid(),
+      responsibleAuthorityId: faker.string.uuid(),
+      agentRegistrationNumber: faker.string.numeric(6),
+      agentName: faker.person.fullName(),
+      cep: generateBrazilianCEP(),
+      address: faker.location.streetAddress(),
+      addressNumber: faker.location.buildingNumber(),
+      addressComplement: faker.location.secondaryAddress(),
+      neighborhood: faker.location.county(),
+      addressState: faker.location.state(),
+      addressCity: faker.location.city(),
+      addressReference: faker.location.street(),
+      addressReferencePoint: faker.location.cardinalDirection(),
+      talaoNumber: faker.string.numeric(5),
+      driverSignatureStatus: faker.helpers.arrayElement([
+         'pending',
+         'signed',
+         'refused'
+      ]),
+      documentLeftOnVehicle: faker.datatype.boolean(),
+      keyNumber: faker.string.alphanumeric(5),
+      keyLeftOnVehicle: faker.datatype.boolean(),
+      additionalInformation: faker.lorem.sentence(),
+      Vehicle: vehicle,
+      Restriction: restrictions,
+      Tenant: {
+         id: faker.string.uuid(),
+         name: faker.company.name(),
+         document: faker.string.uuid(),
+         email: faker.internet.email(),
+         address: faker.location.streetAddress(),
+         addressNumber: faker.location.buildingNumber(),
+         addressComplement: faker.location.secondaryAddress(),
+         addressState: faker.location.state(),
+         addressCity: faker.location.city(),
+         neighborhood: faker.location.county(),
+         phone: faker.phone.number(),
+         createdAt: new Date(),
+         updatedAt: new Date(),
+         municipioCode: faker.number.int({ min: 1000, max: 9999 }),
+         patioCode: faker.number.int({ min: 1000, max: 9999 }),
+         nfProvider: 'omie',
+         nfProviderClientKey: null,
+         nfProviderClientSecret: null,
+         accountCCNumber: null
+      },
+      stolenVehicle: faker.datatype.boolean(),
+      notUsedTowTruck: faker.datatype.boolean(),
+      vehicleNotHasPlate: faker.datatype.boolean(),
+      unidentifiedVehicle: faker.datatype.boolean(),
+      unregisteredVehicle: faker.datatype.boolean(),
+      removalTerm: faker.string.uuid(),
+      detranReleased: faker.datatype.boolean(),
+      createdAt: faker.date.past(),
+      updatedAt: faker.date.recent()
+   }
+}
+
+const generateGgvData = (grv: Grv): Ggv => {
+   return {
+      id: faker.string.uuid(),
+      grvId: grv.id,
+      grvCode: grv.grvCode,
+      formStatus: faker.helpers.arrayElement(['pending', 'completed']),
+      status: faker.helpers.arrayElement(['released', 'pending']),
+      guardDate: faker.date.recent(),
+      vancacyNumber: faker.string.numeric(4),
+      sector: faker.helpers.arrayElement(['A', 'B', 'C', 'D']),
+      depositKey: faker.datatype.boolean(),
+      depositLocation: faker.location.streetAddress(),
+      transhipment: faker.datatype.boolean(),
+      transhipmentDate: faker.date.recent(),
+      isSamePickupCondition: faker.datatype.boolean(),
+      divergencesHistory: faker.lorem.paragraph(),
+      tenantId: faker.string.uuid(),
+      createdAt: faker.date.past(),
+      updatedAt: faker.date.recent(),
+      Grv: grv,
+      AuctionLot: []
+   }
+}
+
 const generateAuctionsSeed = (): AuctionEntity => {
    const location = faker.helpers.arrayElement(brazilianCities)
 
@@ -353,8 +474,10 @@ const generateAuctionsSeed = (): AuctionEntity => {
 
    const auctionLots: AuctionLot[] = Array.from({ length: 5 }, (_, index) => {
       const vehicle = generateVehicleData()
+      const grv = generateGrvData()
+      const ggv = generateGgvData(grv)
 
-      return {
+      const lot = {
          id: `${baseAuction.id}-${index}-${faker.number.int({
             min: 1000,
             max: 9999
@@ -377,12 +500,18 @@ const generateAuctionsSeed = (): AuctionEntity => {
             max: 1000,
             fractionDigits: 2
          }),
-         ggvId: faker.number.int({ min: 1000, max: 9999 }).toString(),
+         ggvId: ggv.id,
          status: faker.helpers.arrayElement(statusOptions).value,
          Vehicle: vehicle,
+         hasEmailNotification: faker.datatype.boolean(),
+         Ggv: ggv,
          createdAt: new Date(),
          updatedAt: new Date()
       }
+
+      ggv.AuctionLot = [lot]
+
+      return lot
    })
 
    return {
@@ -398,39 +527,60 @@ const generateAuctionsSeed = (): AuctionEntity => {
 }
 
 export const generateAuctionsData = () => {
-   const auctions = Array.from({ length: 200 }, () => generateAuctionsSeed())
+   const auctions = Array.from({ length: 50 }, () => generateAuctionsSeed())
 
    const auctionsWithZeroLots = auctions.map(
       (auction: AuctionEntity, index) => {
          if (zeroLotsIndexes.has(index)) {
             const vehicle = generateVehicleData()
+            const grv = generateGrvData()
+            const ggv = generateGgvData(grv)
+
+            const lot = {
+               id: `${auction.id}-0-${faker.number.int({
+                  min: 1000,
+                  max: 9999
+               })}`,
+               auctionId: auction.id,
+               lotNumber: '1',
+               status: statusOptions[0].value,
+               minumumBid: faker.number.float({
+                  min: 100,
+                  max: 1000,
+                  fractionDigits: 2
+               }),
+               ggvId: ggv.id,
+               Vehicle: vehicle,
+               Ggv: ggv,
+               createdAt: new Date(),
+               updatedAt: new Date()
+            }
+
+            const ggvWithoutCircularRef = {
+               ...ggv,
+               AuctionLot: undefined
+            }
+
             return {
                ...auction,
                AuctionLot: [
                   {
-                     id: `${auction.id}-0-${faker.number.int({
-                        min: 1000,
-                        max: 9999
-                     })}`,
-                     auctionId: auction.id,
-                     lotNumber: '1',
-                     status: statusOptions[0].value,
-                     minumumBid: faker.number.float({
-                        min: 100,
-                        max: 1000,
-                        fractionDigits: 2
-                     }),
-                     ggvId: faker.number
-                        .int({ min: 1000, max: 9999 })
-                        .toString(),
-                     Vehicle: vehicle,
-                     createdAt: new Date(),
-                     updatedAt: new Date()
+                     ...lot,
+                     Ggv: ggvWithoutCircularRef
                   }
                ]
             }
          }
-         return auction
+         return {
+            ...auction,
+            AuctionLot: auction?.AuctionLot?.map((lot) => ({
+               ...lot,
+               Ggv: {
+                  ...lot.Ggv,
+                  AuctionLot: undefined
+               }
+            }))
+         }
       }
    )
 

@@ -112,6 +112,7 @@ export interface AuctionLot {
    updatedAt: Date
    Auction?: AuctionEntity
    Ggv?: Ggv
+   hasEmailNotification?: boolean
    Characteristics?: Characteristics
    FinancialDetails?: FinancialDetails
    SaleNotification?: SaleNotification
