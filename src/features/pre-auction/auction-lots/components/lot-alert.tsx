@@ -7,10 +7,12 @@ import {
    DialogTitle
 } from '@/components/ui/dialog'
 import { Button } from '@/src/components/ui/button'
-import { AuctionEntity } from '@/types/entities/auction.entity'
-import { Row } from '@tanstack/react-table'
+import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
+import { ColumnDef, Row } from '@tanstack/react-table'
 
 import React from 'react'
+import { DataTableColumnHeader } from '../../auction-maintenance/components/data-table-column-header'
+import { TableAuctionLots } from './data-table'
 
 interface LotAlertsProps {
    row: Row<AuctionEntity>
@@ -20,79 +22,12 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
    row
 }: LotAlertsProps) => {
    const [dialog, setDialog] = React.useState(false)
-   const [tempStatus, setTempStatus] = React.useState<string | null>(null)
-   const [currentStatus, setCurrentStatus] = React.useState(
-      row.original.AuctionLot?.[0]?.Vehicle?.status || 'PENDING'
-   )
 
-   const handleValueChange = (value: string) => {
-      setTempStatus(value)
-      setDialog(true)
-   }
+   const auctionCount = row.original.AuctionLot?.length || 0
+   const hasEmailNotification =
+      row.original.AuctionLot?.[0]?.hasEmailNotification || false
 
-   const handleConfirm = () => {
-      if (tempStatus) {
-         setCurrentStatus(tempStatus)
-         console.log('Novo status:', tempStatus)
-      }
-      setTempStatus(null)
-      setDialog(false)
-   }
-
-   const handleCancel = () => {
-      setTempStatus(null)
-      setDialog(false)
-   }
-
-   const statusOptions = [
-      { value: 'unpaid_auction', label: 'Arrematação não paga' },
-      { value: 'preserved', label: 'Conservado' },
-      { value: 'fix_report', label: 'Corrigir laudo' },
-      { value: 'police_station', label: 'Delegacia' },
-      { value: 'disassociated_payment', label: 'Desassociado boleto' },
-      { value: 'under_analysis', label: 'Em análise' },
-      { value: 'canceled_grv', label: 'GRV cancelada' },
-      { value: 'inspection_identification', label: 'Ident na vistoria' },
-      { value: 'unanalyzed_report', label: 'Laudo não analisado' },
-      { value: 'auctioned_preserved', label: 'Leiloado - conservado' },
-      {
-         value: 'auctioned_usable_scrap',
-         label: 'Leiloado - sucata aproveitavel'
-      },
-      {
-         value: 'auctioned_usable_scrap_unusable_engine',
-         label: 'Leiloado - sucata aproveitavel com motor inservível'
-      },
-      {
-         value: 'auctioned_unusable_scrap_identified',
-         label: 'Leiloado - sucata inservível identificada'
-      },
-      {
-         value: 'auctioned_unusable_scrap_unidentified',
-         label: 'Leiloado - sucata inservível não identificada'
-      },
-      {
-         value: 'lot_auctioned_other_auction',
-         label: 'Lote arrematado em outro leilão'
-      },
-      { value: 'expertise_not_performed', label: 'Pericia não realizada' },
-      {
-         value: 'expertise_without_publication',
-         label: 'Periciado sem publicação'
-      },
-      { value: 'removed_from_auction', label: 'Removido de leilão' },
-      {
-         value: 'administrative_restriction',
-         label: 'Restrição administrativa'
-      },
-      { value: 'judicial_restriction', label: 'Restrição judicial' },
-      { value: 'theft_restriction', label: 'Restrição roubo/furto' },
-      { value: 'no_notification_return', label: 'Sem retorno de notificação' },
-      { value: 'clone_suspicion', label: 'Suspeita de clone' },
-      { value: 'vehicle_written_off', label: 'Veículo baixado' },
-      { value: 'vehicle_released', label: 'Veículo liberado' },
-      { value: 'vehicle_not_found', label: 'Veículo não localizado' }
-   ]
+   const handleOpenModal = () => setDialog(true)
 
    return (
       <React.Fragment>
@@ -121,11 +56,12 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
             <div className="flex items-center">
                <React.Fragment>
                   {/* abre o modal */}
-                  <Button variant="ghost" size="icon">
+                  <Button variant="ghost" size="icon" onClick={handleOpenModal}>
                      <span className="material-symbols-outlined text-primary-default dark:text-dark-primary-default cursor-pointer">
                         warning
                      </span>
                   </Button>
+
                   {/* só exibe a quantidade de leilões que esse lote já participou */}
                   <Button
                      variant="ghost"
@@ -133,63 +69,47 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                      className="w-auto px-2 hover:bg-transparent cursor-default"
                   >
                      <div className="flex items-center justify-center gap-1">
-                        <span className="text-sm text-text-secondary">1</span>
+                        <span className="text-sm text-text-secondary">
+                           {auctionCount}
+                        </span>
                         <span className="material-symbols-outlined text-text-secondary">
                            sync
                         </span>
                      </div>
                   </Button>
+
                   {/* se foi enviado notificação, exibe o ícone de email */}
-                  <Button
-                     variant="ghost"
-                     size="icon"
-                     className="w-auto px-2 hover:bg-transparent cursor-default"
-                  >
-                     <span className="material-symbols-outlined text-text-secondary">
-                        mail
-                     </span>
-                  </Button>
+                  {hasEmailNotification && (
+                     <Button
+                        variant="ghost"
+                        size="icon"
+                        className="w-auto px-2 hover:bg-transparent cursor-default"
+                     >
+                        <span className="material-symbols-outlined text-text-secondary">
+                           mail
+                        </span>
+                     </Button>
+                  )}
                </React.Fragment>
             </div>
             <Dialog open={dialog} onOpenChange={setDialog}>
-               <DialogContent className="md:max-w-lg">
+               <DialogContent className="md:max-w-6xl">
                   <DialogHeader>
-                     <DialogTitle>Alterar status</DialogTitle>
+                     <DialogTitle>Restrições</DialogTitle>
                   </DialogHeader>
                   <div className="space-y-4 py-4 pb-6">
-                     <div className="flex flex-1 justify-center items-center">
-                        <span className="material-symbols-outlined text-error-default symbol-xl">
-                           warning
-                        </span>
-                     </div>
                      <div className="space-y-2">
-                        <p className="text-lg text-center font-montserrat font-medium">
-                           Alterar o status do leilão
-                        </p>
-                        <p className="text-center text-sm font-montserrat">
-                           Esta ação irá notificar o Pátio/DETRAN. Deseja
-                           continuar?
+                        <p className="text-lg font-montserrat font-medium">
+                           PROCESSO - {row.original.id}
                         </p>
                      </div>
-                  </div>
-                  <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
-                     <div className="md:order-1 order-2">
-                        <Button
-                           variant="destructive"
-                           className="w-full"
-                           onClick={handleCancel}
-                        >
-                           Cancelar
-                        </Button>
-                     </div>
-                     <div className="md:order-2 order-1">
-                        <Button
-                           variant="default"
-                           className="w-full"
-                           onClick={handleConfirm}
-                        >
-                           Confirmar
-                        </Button>
+                     <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
+                        <div className="flex-1 overflow-auto">
+                           <TableAuctionLots
+                              data={row.original.AuctionLot || []}
+                              columns={process_columns}
+                           />
+                        </div>
                      </div>
                   </div>
                </DialogContent>
@@ -198,3 +118,65 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
       </React.Fragment>
    )
 }
+
+const process_columns: ColumnDef<AuctionLot>[] = [
+   {
+      accessorKey: 'origin',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Origem" />
+      ),
+      cell: ({ row }) => {
+         return (
+            <div className="space-y-1">
+               <div>{row.original.Ggv?.grvCode || '-'}</div>
+            </div>
+         )
+      }
+   },
+   {
+      accessorKey: 'restriction',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Restrição" />
+      ),
+      cell: ({ row }) => {
+         const restriction = row.original.Ggv?.Grv?.Restriction?.[0]
+         return (
+            <div className="space-y-1">
+               <div>{restriction?.name || '-'}</div>
+            </div>
+         )
+      }
+   },
+   {
+      accessorKey: 'subRestriction',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Sub-restrição" />
+      ),
+      cell: ({ row }) => {
+         const restriction = row.original.Ggv?.Grv?.Restriction?.[0]
+         return (
+            <div className="space-y-1">
+               <div>
+                  {restriction?.type
+                     ? restriction?.type.charAt(0).toUpperCase() +
+                       restriction?.type.slice(1).toLowerCase()
+                     : '-'}
+               </div>
+            </div>
+         )
+      }
+   },
+   {
+      accessorKey: 'observation',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Observação" />
+      ),
+      cell: ({ row }) => {
+         return (
+            <div className="space-y-1">
+               <div>{'-'}</div>
+            </div>
+         )
+      }
+   }
+]
