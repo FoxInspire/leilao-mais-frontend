@@ -6,26 +6,19 @@ import {
    DialogHeader,
    DialogTitle
 } from '@/components/ui/dialog'
-import {
-   Select,
-   SelectContent,
-   SelectItem,
-   SelectTrigger,
-   SelectValue
-} from '@/components/ui/select'
 import { Button } from '@/src/components/ui/button'
 import { AuctionEntity } from '@/types/entities/auction.entity'
 import { Row } from '@tanstack/react-table'
 
 import React from 'react'
 
-interface LotStatusProps {
+interface LotAlertsProps {
    row: Row<AuctionEntity>
 }
 
-export const LotStatus: React.FC<LotStatusProps> = ({
+export const LotAlerts: React.FC<LotAlertsProps> = ({
    row
-}: LotStatusProps) => {
+}: LotAlertsProps) => {
    const [dialog, setDialog] = React.useState(false)
    const [tempStatus, setTempStatus] = React.useState<string | null>(null)
    const [currentStatus, setCurrentStatus] = React.useState(
@@ -104,7 +97,7 @@ export const LotStatus: React.FC<LotStatusProps> = ({
    return (
       <React.Fragment>
          <div>
-            <Select onValueChange={handleValueChange} value={currentStatus}>
+            {/* <Select onValueChange={handleValueChange} value={currentStatus}>
                <SelectTrigger
                   unstyled
                   className="flex items-center gap-2 font-bold font-nunito text-primary-default dark:text-dark-primary-default text-sm uppercase"
@@ -124,7 +117,40 @@ export const LotStatus: React.FC<LotStatusProps> = ({
                      </SelectItem>
                   ))}
                </SelectContent>
-            </Select>
+            </Select> */}
+            <div className="flex items-center">
+               <React.Fragment>
+                  {/* abre o modal */}
+                  <Button variant="ghost" size="icon">
+                     <span className="material-symbols-outlined text-primary-default dark:text-dark-primary-default cursor-pointer">
+                        warning
+                     </span>
+                  </Button>
+                  {/* só exibe a quantidade de leilões que esse lote já participou */}
+                  <Button
+                     variant="ghost"
+                     size="icon"
+                     className="w-auto px-2 hover:bg-transparent cursor-default"
+                  >
+                     <div className="flex items-center justify-center gap-1">
+                        <span className="text-sm text-text-secondary">1</span>
+                        <span className="material-symbols-outlined text-text-secondary">
+                           sync
+                        </span>
+                     </div>
+                  </Button>
+                  {/* se foi enviado notificação, exibe o ícone de email */}
+                  <Button
+                     variant="ghost"
+                     size="icon"
+                     className="w-auto px-2 hover:bg-transparent cursor-default"
+                  >
+                     <span className="material-symbols-outlined text-text-secondary">
+                        mail
+                     </span>
+                  </Button>
+               </React.Fragment>
+            </div>
             <Dialog open={dialog} onOpenChange={setDialog}>
                <DialogContent className="md:max-w-lg">
                   <DialogHeader>

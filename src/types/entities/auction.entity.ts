@@ -111,7 +111,7 @@ export interface AuctionLot {
    createdAt: Date
    updatedAt: Date
    Auction?: AuctionEntity
-   Ggv?: any
+   Ggv?: Ggv
    Characteristics?: Characteristics
    FinancialDetails?: FinancialDetails
    SaleNotification?: SaleNotification
@@ -256,4 +256,91 @@ export interface AuctionEntity {
    LotHistory?: LotHistory[]
    ExpenseReport?: ExpenseReport[]
    VehicleDebt?: VehicleDebt[]
+}
+
+export interface Grv {
+   id: string
+   tenantId: string
+   grvCode: string
+   formStatus: string
+   destinationStorage: string
+   removalDate: Date
+   reasonSeizure: string
+   towTruckDriverId?: string
+   towTruckId?: string
+   responsibleAuthorityId: string
+   agentRegistrationNumber?: string
+   agentName?: string
+   cep?: string
+   address?: string
+   addressNumber?: string
+   addressComplement?: string
+   neighborhood?: string
+   addressState?: string
+   addressCity?: string
+   addressReference?: string
+   addressReferencePoint?: string
+   talaoNumber: string
+   driverSignatureStatus: string
+   documentLeftOnVehicle: boolean
+   keyNumber: string
+   keyLeftOnVehicle: boolean
+   additionalInformation: string
+   Vehicle: VehicleEntity
+   Restriction: Restriction[]
+   Tenant: Tenant
+   stolenVehicle: boolean
+   notUsedTowTruck?: boolean
+   vehicleNotHasPlate?: boolean
+   unidentifiedVehicle?: boolean
+   unregisteredVehicle?: boolean
+   ggvs?: Ggv[]
+   removalTerm: string
+   detranReleased: boolean
+   createdAt: Date
+   updatedAt: Date
+}
+
+export interface Restriction {
+   id: string
+   code: string
+   name: string
+   type: string
+   grvId: string
+}
+
+export interface Vehicle {
+   plate: string
+   totalPlates?: number | null
+   chassisNumber: string
+   renavam: string
+   rfi: string
+   colorVehicle: string
+   modelVehicle: string
+   brandVehicle: string
+   typeVehicle: string
+   categoryId?: string
+}
+
+export interface Ggv {
+   id: string
+   grvId?: string
+   grvCode?: string
+   formStatus?: string
+   status: string
+   guardDate?: Date
+   vancacyNumber?: string
+   sector?: string
+   depositKey?: boolean
+   depositLocation?: string
+   transhipment?: boolean
+   transhipmentDate?: Date
+   isSamePickupCondition?: boolean
+   divergencesHistory?: string
+   tenantId: string
+   createdAt: Date
+   updatedAt: Date
+   Tenant?: Tenant
+   Grv?: Grv
+   AuctionLot: AuctionLot[]
 }

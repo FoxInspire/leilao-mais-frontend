@@ -1,12 +1,12 @@
 'use client'
 
+import { LotAlerts } from '@/features/pre-auction/auction-lots/components/lot-alert'
+import { LotStatus } from '@/features/pre-auction/auction-lots/components/lot-status'
 import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { DataTableRowActions } from '@/features/pre-auction/auction-maintenance/components/data-table-row-actions'
 import { Checkbox } from '@/src/components/ui/checkbox'
-import { AuctionEntity } from '@/types/entities/auction.entity.ts'
+import { AuctionEntity } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
-import * as React from 'react'
-import { LotStatus } from './lot-status'
 
 export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
    {
@@ -139,28 +139,8 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
          <DataTableColumnHeader column={column} title="Alertas" />
       ),
       cell: ({ row }) => {
-         const debts = row.original.VehicleDebt || []
-         const hasDebt = debts.length > 0
-         const totalDebtValue = debts.reduce(
-            (sum, debt) => sum + (debt.value || 0),
-            0
-         )
-         return (
-            <div className="flex items-center gap-2">
-               {hasDebt && (
-                  <React.Fragment>
-                     <span className="material-symbols-outlined text-red-500">
-                        warning
-                     </span>
-                     <span className="text-sm text-red-500">
-                        {`${debts.length} débito${
-                           debts.length > 1 ? 's' : ''
-                        } (R$ ${totalDebtValue.toFixed(2)})`}
-                     </span>
-                  </React.Fragment>
-               )}
-            </div>
-         )
+         console.log('row.original', row.original)
+         return <LotAlerts row={row} />
       }
    },
    {

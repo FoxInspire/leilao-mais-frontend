@@ -5,7 +5,7 @@ import { DataTableRowActions } from '@/features/pre-auction/auction-maintenance/
 import { StatusCell } from '@/features/pre-auction/auction-maintenance/components/status-cell'
 import { Button } from '@/src/components/ui/button'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
-import { AuctionEntity } from '@/types/entities/auction.entity.ts'
+import { AuctionEntity } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 
 import Link from 'next/link'

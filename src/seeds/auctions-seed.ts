@@ -6,7 +6,7 @@ import {
    ExpenseReport,
    LotHistory,
    VehicleDebt
-} from '@/types/entities/auction.entity.ts'
+} from '@/types/entities/auction.entity'
 import { VehicleEntity } from '@/types/entities/vehicle.entity'
 import { faker } from '@faker-js/faker'
 

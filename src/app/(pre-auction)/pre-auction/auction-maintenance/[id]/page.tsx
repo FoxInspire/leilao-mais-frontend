@@ -1,10 +1,9 @@
 export const dynamic = 'force-dynamic'
 
 import * as React from 'react'
-import * as z from 'zod'
 
 import { columns_auction_lots } from '@/src/features/pre-auction/auction-lots/components/columns'
-import { auctionEntitySchema } from '@/src/features/pre-auction/auction-maintenance/schemas/auction-maintenance-schemas'
+import { AuctionEntity } from '@/types/entities/auction.entity'
 import { promises as fs } from 'fs'
 
 import AuctionLots from '@/src/features/pre-auction/auction-lots/auction-lots'
@@ -23,7 +22,7 @@ async function getAuctions() {
       )
    )
    const auctions = JSON.parse(data.toString())
-   return z.lazy(() => z.array(auctionEntitySchema)).parse(auctions)
+   return auctions
 }
 
 export default async function AuctionMaintenanceLotsPage({
@@ -34,7 +33,8 @@ export default async function AuctionMaintenanceLotsPage({
    const id = (await params).id
    const auctions = await getAuctions()
    const filteredAuctions = auctions.filter(
-      (auction) => auction?.auctionCode?.toLowerCase() === id?.toLowerCase()
+      (auction: AuctionEntity) =>
+         auction?.auctionCode?.toLowerCase() === id?.toLowerCase()
    )
 
    return (

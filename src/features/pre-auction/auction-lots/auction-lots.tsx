@@ -31,7 +31,7 @@ import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
-import { AuctionLot } from '@/src/types/entities/auction.entity.ts'
+import { AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 
 const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({

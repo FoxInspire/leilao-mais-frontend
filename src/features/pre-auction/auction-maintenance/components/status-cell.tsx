@@ -14,7 +14,7 @@ import {
    SelectValue
 } from '@/components/ui/select'
 import { Button } from '@/src/components/ui/button'
-import { AuctionEntity } from '@/types/entities/auction.entity.ts'
+import { AuctionEntity } from '@/types/entities/auction.entity'
 import { Row } from '@tanstack/react-table'
 
 import React from 'react'
