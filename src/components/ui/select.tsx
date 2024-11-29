@@ -1,65 +1,54 @@
 'use client'
 
 import * as SelectPrimitive from '@radix-ui/react-select'
+import { Check, ChevronDown, ChevronUp } from 'lucide-react'
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
-import { Check, ChevronDown, ChevronUp } from 'lucide-react'
-import { inputVariants } from './input'
 
 const Select = SelectPrimitive.Root
 
 const SelectGroup = SelectPrimitive.Group
 
-const SelectValue = SelectPrimitive.Value
+const SelectValue = React.forwardRef<
+   React.ElementRef<typeof SelectPrimitive.Value>,
+   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Value> & {
+      variant?: 'default' | 'input'
+   }
+>(({ className, variant = 'default', ...props }, ref) => (
+   <SelectPrimitive.Value
+      ref={ref}
+      className={cn(
+         variant === 'input' && 'text-sm text-neutral-950 dark:text-neutral-50',
+         className
+      )}
+      {...props}
+   />
+))
+SelectValue.displayName = SelectPrimitive.Value.displayName
 
 const SelectTrigger = React.forwardRef<
    React.ElementRef<typeof SelectPrimitive.Trigger>,
    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & {
       hideIcon?: boolean
-      unstyled?: boolean
-      variant?: 'default' | 'input'
    }
->(
-   (
-      {
-         className,
-         children,
-         hideIcon = false,
-         unstyled = false,
-         variant = 'default',
-         ...props
-      },
-      ref
-   ) => (
-      <SelectPrimitive.Trigger
-         ref={ref}
-         className={cn(
-            variant === 'default' &&
-               !unstyled &&
-               'flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 dark:border-neutral-800 dark:bg-dark-background-default dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300 focus:ring-dark-primary-contrast',
-            variant === 'input' &&
-               !unstyled &&
-               inputVariants({
-                  size: 'md',
-                  className: 'font-normal'
-               }),
-            'transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-4 dark:focus-visible:ring-neutral-300 rounded-sm',
-            className
-         )}
-         {...props}
-      >
-         {children}
-         {!hideIcon && (
-            <SelectPrimitive.Icon asChild>
-               <span className="material-symbols-outlined transition-transform duration-200 data-[state=open]:rotate-180">
-                  keyboard_arrow_down
-               </span>
-            </SelectPrimitive.Icon>
-         )}
-      </SelectPrimitive.Trigger>
-   )
-)
+>(({ className, children, hideIcon, ...props }, ref) => (
+   <SelectPrimitive.Trigger
+      ref={ref}
+      className={cn(
+         'flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300',
+         className
+      )}
+      {...props}
+   >
+      {children}
+      {!hideIcon && (
+         <SelectPrimitive.Icon asChild>
+            <ChevronDown className="h-4 w-4 opacity-50" />
+         </SelectPrimitive.Icon>
+      )}
+   </SelectPrimitive.Trigger>
+))
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName
 
 const SelectScrollUpButton = React.forwardRef<
