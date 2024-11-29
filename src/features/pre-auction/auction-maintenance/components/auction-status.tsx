@@ -19,13 +19,13 @@ import { Row } from '@tanstack/react-table'
 
 import React from 'react'
 
-interface StatusCellProps {
+interface AuctionStatusProps {
    row: Row<AuctionEntity>
 }
 
-export const StatusCell: React.FC<StatusCellProps> = ({
+export const AuctionStatus: React.FC<AuctionStatusProps> = ({
    row
-}: StatusCellProps) => {
+}: AuctionStatusProps) => {
    const [dialog, setDialog] = React.useState(false)
    const [tempStatus, setTempStatus] = React.useState<string | null>(null)
    const [currentStatus, setCurrentStatus] = React.useState(
@@ -61,7 +61,7 @@ export const StatusCell: React.FC<StatusCellProps> = ({
       <React.Fragment>
          <div>
             <Select onValueChange={handleValueChange} value={currentStatus}>
-               <SelectTrigger className="flex items-center gap-2 font-bold font-nunito text-primary-default dark:text-dark-primary-default text-sm uppercase border-none bg-transparent">
+               <SelectTrigger className="flex items-center gap-2 font-bold font-nunito text-primary-default dark:text-dark-primary-default text-sm uppercase border-none bg-transparent w-fit">
                   <SelectValue
                      placeholder={
                         statusOptions.find(

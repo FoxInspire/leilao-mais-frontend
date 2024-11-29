@@ -1,8 +1,8 @@
 'use client'
 
+import { AuctionStatus } from '@/features/pre-auction/auction-maintenance/components/auction-status'
 import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { DataTableRowActions } from '@/features/pre-auction/auction-maintenance/components/data-table-row-actions'
-import { StatusCell } from '@/features/pre-auction/auction-maintenance/components/status-cell'
 import { Button } from '@/src/components/ui/button'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionEntity } from '@/types/entities/auction.entity'
@@ -59,7 +59,7 @@ export const columns: ColumnDef<AuctionEntity>[] = [
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Status do leilão" />
       ),
-      cell: ({ row }) => <StatusCell row={row} />
+      cell: ({ row }) => <AuctionStatus row={row} />
    },
    {
       accessorKey: 'Tenant',

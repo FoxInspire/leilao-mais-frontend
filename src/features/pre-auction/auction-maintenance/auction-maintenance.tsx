@@ -17,12 +17,7 @@ import {
    DialogTitle,
    DialogTrigger
 } from '@/components/ui/dialog'
-import {
-   Select,
-   SelectContent,
-   SelectItem,
-   SelectTrigger
-} from '@/components/ui/select'
+import { SelectInput } from '@/components/ui/select'
 import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
@@ -135,25 +130,17 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                     />
                                  </div>
                                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                                    <Select>
-                                       <SelectTrigger hideIcon>
-                                          <Input
-                                             label="Status"
-                                             placeholder="Selecione o status"
-                                          />
-                                       </SelectTrigger>
-                                       <SelectContent>
-                                          <SelectItem value="light">
-                                             Light
-                                          </SelectItem>
-                                          <SelectItem value="dark">
-                                             Dark
-                                          </SelectItem>
-                                          <SelectItem value="system">
-                                             System
-                                          </SelectItem>
-                                       </SelectContent>
-                                    </Select>
+                                    <SelectInput
+                                       label="Status"
+                                       placeholder="Selecione o status"
+                                       options={[
+                                          { label: 'Ativo', value: 'active' },
+                                          {
+                                             label: 'Inativo',
+                                             value: 'inactive'
+                                          }
+                                       ]}
+                                    />
                                     <Input
                                        label="Local"
                                        placeholder="Local do leilão"

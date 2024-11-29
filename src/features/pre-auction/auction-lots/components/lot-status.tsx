@@ -105,7 +105,7 @@ export const LotStatus: React.FC<LotStatusProps> = ({
       <React.Fragment>
          <div>
             <Select onValueChange={handleValueChange} value={currentStatus}>
-               <SelectTrigger className="flex items-center gap-2 font-bold font-nunito text-primary-default dark:text-dark-primary-default text-sm uppercase border-none bg-transparent">
+               <SelectTrigger className="flex items-center gap-2 font-bold font-nunito text-primary-default dark:text-dark-primary-default text-sm uppercase border-none bg-transparent w-fit">
                   <SelectValue
                      placeholder={
                         statusOptions.find(
