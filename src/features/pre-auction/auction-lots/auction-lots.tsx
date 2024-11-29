@@ -16,20 +16,13 @@ import {
    DialogHeader,
    DialogTitle
 } from '@/components/ui/dialog'
-import {
-   Select,
-   SelectContent,
-   SelectInput,
-   SelectItem,
-   SelectTrigger
-} from '@/components/ui/select'
+import { SelectInput, SelectInputValue } from '@/components/ui/select'
 import {
    TableAuctionLots,
    TableAuctionLotsHandle
 } from '@/features/pre-auction/auction-lots/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
-import { DatePicker } from '@/src/components/ui/date-picker'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
@@ -348,45 +341,169 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            { label: 'Opção 3', value: 'option3' },
                            { label: 'Opção 4', value: 'option4' }
                         ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
+                     />
+                     <SelectInput
+                        label="Perícia"
+                        placeholder="Selecione a perícia"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
+                     />
+                     <SelectInput
+                        label="Status"
+                        placeholder="Selecione o status"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
                      />
                   </div>
                   <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                     <DatePicker label="Data" placeholder="DD/MM/YYYY" />
-                     <Input label="ID" placeholder="ID do leilão" />
-                     <Input
-                        label="Descrição"
-                        placeholder="Descrição do leilão"
+                     <SelectInput
+                        label="Restrição"
+                        placeholder="Selecione a restrição"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
+                     />
+                     <SelectInput
+                        label="Sub-restrição"
+                        placeholder="Selecione a sub-restrição"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
+                     />
+                     <SelectInput
+                        label="Processo"
+                        placeholder="0000000000"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
                      />
                   </div>
                   <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                     <Select>
-                        <SelectTrigger hideIcon>
-                           <Input
-                              label="Status"
-                              placeholder="Selecione o status"
-                           />
-                        </SelectTrigger>
-                        <SelectContent>
-                           <SelectItem value="light">Light</SelectItem>
-                           <SelectItem value="dark">Dark</SelectItem>
-                           <SelectItem value="system">System</SelectItem>
-                        </SelectContent>
-                     </Select>
-                     <Input label="Local" placeholder="Local do leilão" />
-                     <Input
-                        label="Comitente"
-                        placeholder="Comitente do leilão"
+                     <SelectInput
+                        label="Placa"
+                        placeholder="000-0000"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
+                     />
+                     <SelectInput
+                        label="Chassi"
+                        placeholder="00000000000000000"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
+                     />
+                     <SelectInput
+                        label="Marca/Modelo"
+                        placeholder="Selecione a marca/modelo"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
+                     />
+                  </div>
+                  <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
+                     <SelectInput
+                        label="Cor"
+                        placeholder="Selecione a cor"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
+                     />
+                     <SelectInput
+                        label="Tipo"
+                        placeholder="Selecione o tipo"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                        onValueChange={(value: SelectInputValue) => {
+                           console.log('value', value)
+                        }}
                      />
                   </div>
                </div>
                <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
                   <div className="md:order-1 order-2">
-                     <Button variant="destructive" className="w-full">
+                     <Button
+                        variant="destructive"
+                        className="w-full"
+                        onClick={() => {
+                           setDialog(false)
+                        }}
+                     >
                         Cancelar
                      </Button>
                   </div>
                   <div className="md:order-2 order-1">
-                     <Button variant="default" className="w-full">
+                     <Button
+                        variant="default"
+                        className="w-full"
+                        onClick={() => {
+                           console.log('buscar')
+                           setDialog(false)
+                        }}
+                     >
                         Buscar
                      </Button>
                   </div>

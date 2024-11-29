@@ -178,17 +178,19 @@ const SelectSeparator = React.forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
+export type SelectInputValue = {
+   label: string
+   value: string
+}
+
 const SelectInput = React.forwardRef<
    React.ElementRef<typeof Input>,
    React.ComponentPropsWithoutRef<typeof Input> & {
       menu_label?: string
-      options: {
-         label: string
-         value: string
-      }[]
-      onChange?: (value: { label: string; value: string }) => void
+      options: SelectInputValue[]
+      onValueChange?: (value: SelectInputValue) => void
    }
->(({ className, menu_label, options, onChange, ...props }, ref) => {
+>(({ className, menu_label, options, onValueChange, ...props }, ref) => {
    const [_value, setValue] = React.useState(props.value)
 
    const handleValueChange = (selectedValue: string) => {
@@ -197,7 +199,7 @@ const SelectInput = React.forwardRef<
          (option) => option.value === selectedValue
       )
       if (selectedOption) {
-         onChange?.(selectedOption)
+         onValueChange?.(selectedOption)
       }
    }
 
