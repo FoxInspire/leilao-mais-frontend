@@ -12,6 +12,7 @@ import {
    DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
+import { useElementSize } from '@/hooks/useElementSize'
 import { cn } from '@/lib/utils'
 import { Check, ChevronDown, ChevronUp } from 'lucide-react'
 
@@ -199,14 +200,17 @@ const SelectInput = React.forwardRef<
          onChange?.(selectedOption)
       }
    }
+
+   const { ref: elementRef, width } = useElementSize<HTMLInputElement>()
+
    return (
       <div className="relative w-full">
          <DropdownMenu>
             <DropdownMenuTrigger asChild>
-               <div>
+               <div ref={elementRef}>
                   <Input
-                     readOnly
                      ref={ref}
+                     readOnly
                      className={cn(className)}
                      defaultValue={
                         options.find((option) => option.value === _value)
@@ -216,7 +220,7 @@ const SelectInput = React.forwardRef<
                   />
                </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
+            <DropdownMenuContent align="start" style={{ width: `${width}px` }}>
                {menu_label && (
                   <React.Fragment>
                      <DropdownMenuLabel>{menu_label}</DropdownMenuLabel>
