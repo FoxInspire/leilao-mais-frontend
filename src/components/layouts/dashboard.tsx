@@ -1,5 +1,6 @@
 'use client'
 
+import { getCookie, setCookie } from 'cookies-next'
 import * as React from 'react'
 
 import {
@@ -27,6 +28,7 @@ import { LogoComplete, LogoSimplified } from '@/src/components/svgs/logo'
 import { useIsMobile } from '@/src/hooks/useMobile'
 import { cn } from '@/src/lib/utils'
 import { dashboard_routes } from '@/src/routes/dashboard'
+import { COOKIE_KEYS } from '@/src/utils/cookies-keys'
 import { usePathname } from 'next/navigation'
 
 import Link from 'next/link'
@@ -34,6 +36,28 @@ import Link from 'next/link'
 const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
    const { state } = useSidebar()
    const pathname = usePathname()
+
+   const [collapsedItems, setCollapsedItems] = React.useState<string[]>(() => {
+      const savedState = getCookie(COOKIE_KEYS.SIDEBAR_COLLAPSED_ITEMS)
+      return savedState ? JSON.parse(savedState as string) : []
+   })
+
+   const handleCollapseChange = (itemTitle: string, isOpen: boolean) => {
+      const newCollapsedItems = isOpen
+         ? collapsedItems.filter((item) => item !== itemTitle)
+         : [...collapsedItems, itemTitle]
+
+      setCollapsedItems(newCollapsedItems)
+      setCookie(
+         COOKIE_KEYS.SIDEBAR_COLLAPSED_ITEMS,
+         JSON.stringify(newCollapsedItems),
+         {
+            maxAge: 60 * 60 * 24 * 7,
+            path: '/'
+         }
+      )
+   }
+
    const isActiveRoute = (url: string) => pathname === url
 
    return (
@@ -50,6 +74,10 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                            <Collapsible
                               key={item.title}
                               asChild
+                              defaultOpen={!collapsedItems.includes(item.title)}
+                              onOpenChange={(isOpen) =>
+                                 handleCollapseChange(item.title, isOpen)
+                              }
                               className={cn('group/collapsible', {
                                  'opacity-50 pointer-events-none': item.disabled
                               })}

@@ -18,7 +18,10 @@ function Calendar({
    return (
       <DayPicker
          showOutsideDays={showOutsideDays}
-         className={cn('p-3', className)}
+         className={cn(
+            'p-3 dark:bg-dark-background-paper dark:shadow-2xl',
+            className
+         )}
          classNames={{
             months:
                'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
@@ -44,9 +47,9 @@ function Calendar({
             ),
             day_range_end: 'day-range-end',
             day_selected:
-               'bg-primary-default focus-within:bg-primary-default text-neutral-50 hover:bg-primary-light hover:text-neutral-50 focus:bg-primary-default focus:text-neutral-50 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50 dark:hover:text-neutral-900 dark:focus:bg-neutral-50 dark:focus:text-neutral-900',
+               'bg-primary-default dark:bg-dark-primary-default dark:text-white dark:focus-within:bg-dark-primary-default text-neutral-50 hover:bg-primary-light hover:text-neutral-50 focus:bg-primary-default focus:text-neutral-50 dark:text-dark-text-primary dark:hover:bg-dark-primary-light dark:hover:text-dark-text-primary dark:focus:bg-dark-primary-default dark:focus:text-dark-text-primary',
             day_today:
-               'bg-[#1057E114] text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50',
+               'bg-[#1057E114] dark:bg-dark-primary-default/30 text-neutral-900 dark:text-dark-text-primary',
             day_outside:
                'day-outside text-neutral-500 aria-selected:bg-neutral-100/50 aria-selected:text-neutral-500 dark:text-neutral-400 dark:aria-selected:bg-neutral-800/50 dark:aria-selected:text-neutral-400',
             day_disabled: 'text-neutral-500 opacity-50 dark:text-neutral-400',

@@ -43,7 +43,7 @@ const DialogContent = React.forwardRef<
             'md:left-[50%] md:top-[50%] md:bottom-auto md:right-auto md:translate-x-[-50%] md:translate-y-[-50%] md:max-w-4xl md:rounded-xl pb-12 md:pb-0',
             'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
             'md:data-[state=closed]:slide-out-to-left-1/2 md:data-[state=closed]:slide-out-to-top-[48%] md:data-[state=open]:slide-in-from-left-1/2 md:data-[state=open]:slide-in-from-top-[48%]',
-            'dark:border-neutral-800 dark:bg-neutral-950',
+            'dark:border-neutral-800 dark:bg-dark-background-paper',
             className
          )}
          {...props}
@@ -86,7 +86,7 @@ const DialogTitle = React.forwardRef<
    React.ElementRef<typeof DialogPrimitive.Title>,
    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
-   <div className="flex justify-between items-center bg-dark-background-paper text-white py-4 px-6 -mx-6">
+   <div className="flex justify-between items-center bg-dark-background-paper text-white py-4 px-6 -mx-6 dark:bg-dark-primary-default">
       <DialogPrimitive.Title
          ref={ref}
          className={cn(

@@ -139,7 +139,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                         placeholder={label}
                         {...props}
                      />
-                     <span className="material-symbols-outlined absolute right-2.5 z-10 text-action-active">
+                     <span className="material-symbols-outlined absolute right-2.5 z-10 text-action-active dark:text-dark-text-secondary">
                         event
                      </span>
                      {label && (
