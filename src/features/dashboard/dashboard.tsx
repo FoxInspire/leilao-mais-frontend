@@ -12,11 +12,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardProps } from '@/features/dashboard/components/cards'
-import { cards_mock } from '@/features/dashboard/mocks/cards_mock'
-import {
-   filter_options,
-   transaction_options
-} from '@/features/dashboard/mocks/filter_options_mock'
 import { Button } from '@/src/components/ui/button'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
@@ -25,7 +20,17 @@ import { Separator } from '@/src/components/ui/separator'
 import { CheckedState } from '@radix-ui/react-checkbox'
 import { useQueryState } from 'nuqs'
 
-const Dashboard: React.FC = () => {
+interface DashboardProps {
+   filterOptions: typeof import('@/src/features/dashboard/mocks/filter-options.json')['options']
+   transactionOptions: typeof import('@/src/features/dashboard/mocks/filter-transactions.json')['options']
+   cardsMock: typeof import('@/src/features/dashboard/mocks/cards-mock.json')
+}
+
+const Dashboard: React.FC<DashboardProps> = ({
+   filterOptions,
+   transactionOptions,
+   cardsMock
+}) => {
    const getAuctionStatus = (auction: CardProps) => {
       const hasPending = auction.transactions.pending.items.length > 0
       const hasUnfit = auction.transactions.unfit.items.length > 0
@@ -37,14 +42,14 @@ const Dashboard: React.FC = () => {
    }
 
    const filteredAuctions = {
-      'in-progress': cards_mock.filter(
-         (auction) => getAuctionStatus(auction as CardProps) === 'in-progress'
+      'in-progress': cardsMock.filter(
+         (auction) => getAuctionStatus(auction) === 'in-progress'
       ),
-      unfit: cards_mock.filter(
-         (auction) => getAuctionStatus(auction as CardProps) === 'unfit'
+      unfit: cardsMock.filter(
+         (auction) => getAuctionStatus(auction) === 'unfit'
       ),
-      completed: cards_mock.filter(
-         (auction) => getAuctionStatus(auction as CardProps) === 'completed'
+      completed: cardsMock.filter(
+         (auction) => getAuctionStatus(auction) === 'completed'
       )
    }
 
@@ -198,7 +203,7 @@ const Dashboard: React.FC = () => {
                            <DropdownMenuLabel className="text-sm">
                               Tipo de Erro
                            </DropdownMenuLabel>
-                           {filter_options.map((option) => (
+                           {filterOptions.map((option) => (
                               <DropdownMenuItem key={option.id}>
                                  <Checkbox
                                     size="md"
@@ -215,7 +220,7 @@ const Dashboard: React.FC = () => {
                            <DropdownMenuLabel className="text-sm">
                               Transação
                            </DropdownMenuLabel>
-                           {transaction_options.map((option) => (
+                           {transactionOptions.map((option) => (
                               <DropdownMenuItem key={option.id}>
                                  <Checkbox
                                     size="md"
@@ -239,6 +244,7 @@ const Dashboard: React.FC = () => {
                                  key={auction.auctionCode}
                                  {...auction}
                                  onEdit={() => console.log('Editar leilão')}
+                                 date={new Date(auction.date)}
                               />
                            ))}
                         </div>
@@ -263,7 +269,7 @@ const Dashboard: React.FC = () => {
                      onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                   >
                      <span
-                        className="material-symbols-outlined text-action-active"
+                        className="material-symbols-outlined text-action-active dark:text-dark-action-active/70"
                         style={{ fontSize: '1.5rem' }}
                      >
                         close
@@ -272,10 +278,10 @@ const Dashboard: React.FC = () => {
                </div>
                <Separator orientation="horizontal" />
                <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                  <p className="text-black font-semibold text-start">
+                  <p className="text-black dark:text-dark-text-primary font-semibold text-start">
                      Descrição
                   </p>
-                  <p className="text-text-secondary text-start">
+                  <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                      A página de Dashboard oferece uma visão geral dos leilões,
                      exibindo cards com o status das transações. O usuário pode
                      navegar em abas organizadas por: Em progresso, Inaptos e
@@ -283,37 +289,39 @@ const Dashboard: React.FC = () => {
                      erro e transação, facilitando o acompanhamento e a gestão
                      eficiente dos leilões.
                   </p>
-                  <p className="text-black font-semibold text-start">
+                  <p className="text-black dark:text-dark-text-primary font-semibold text-start">
                      Detalhes
                   </p>
                   <div>
-                     <p className="text-black font-normal text-start">
+                     <p className="text-black dark:text-dark-text-primary font-normal text-start">
                         Aba Em progresso
                      </p>
-                     <p className="text-text-secondary text-start">
+                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                         Reúne os leilões que iniciaram as transações com o
                         DETRAN e não apresentam erros.
                      </p>
                   </div>
                   <div>
-                     <p className="text-black font-normal text-start">
+                     <p className="text-black dark:text-dark-text-primary font-normal text-start">
                         Aba Inaptos
                      </p>
-                     <p className="text-text-secondary text-start">
+                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                         Reúne os leilões que não aderem a nenhum filtro de erro.
                      </p>
                   </div>
                   <div>
-                     <p className="text-black font-normal text-start">
+                     <p className="text-black dark:text-dark-text-primary font-normal text-start">
                         Aba Concluídos
                      </p>
-                     <p className="text-text-secondary text-start">
+                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                         Reúne os leilões finalizados.
                      </p>
                   </div>
                   <div>
-                     <p className="text-black font-normal text-start">Status</p>
-                     <p className="text-text-secondary text-start">
+                     <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        Status
+                     </p>
+                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                         A cor cinza indica lotes com transações em progresso. A
                         cor vermelha indica lotes com transações que precisam
                         ser revisadas. A cor verde indica lotes que necessitam
@@ -321,7 +329,7 @@ const Dashboard: React.FC = () => {
                         automático.
                      </p>
                   </div>
-                  <div className="bg-[#E6F1F7] px-4 py-4 space-y-2">
+                  <div className="bg-[#E6F1F7] px-4 py-4 space-y-2 rounded-md">
                      <p className="text-black font-normal text-start">Info</p>
                      <p className="text-text-secondary text-start">
                         Clique no card para acessar o leilão.

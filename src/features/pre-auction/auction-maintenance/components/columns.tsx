@@ -1,5 +1,7 @@
 'use client'
 
+import * as React from 'react'
+
 import { AuctionStatus } from '@/features/pre-auction/auction-maintenance/components/auction-status'
 import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { DataTableRowActions } from '@/features/pre-auction/auction-maintenance/components/data-table-row-actions'
@@ -9,7 +11,6 @@ import { AuctionEntity } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 
 import Link from 'next/link'
-import React from 'react'
 
 export const columns: ColumnDef<AuctionEntity>[] = [
    {

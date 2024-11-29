@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/tooltip'
 import { Button } from '@/src/components/ui/button'
 
-export type CardProps = {
+export interface CardProps {
    /**
     * Código identificador único do leilão no formato LEI-YYYY-XXX
     * onde YYYY é o ano e XXX é um número sequencial
@@ -44,7 +44,7 @@ export type CardProps = {
     * Utilizada para ordenação e filtragem dos leilões
     * @type {Date}
     */
-   date: Date
+   date: string | Date
 
    /**
     * Endereço onde o leilão será realizado,
@@ -59,7 +59,7 @@ export type CardProps = {
     * Deve abrir o formulário de edição do leilão
     * @type {() => void}
     */
-   onEdit: () => void
+   onEdit?: () => void
 
    /**
     * Agrupamento das transações do leilão por status,
@@ -219,7 +219,7 @@ export const Card: React.FC<CardProps> = ({
                   Data
                </span>
                <span className="text-base font-normal text-black dark:text-dark-text-primary">
-                  {date.toLocaleDateString()}
+                  {date instanceof Date ? date.toLocaleDateString() : date}
                </span>
             </div>
             <div className="flex flex-col">

@@ -1,8 +1,10 @@
+'use client'
+
+import * as React from 'react'
+
 import { cn } from '@/src/lib/utils'
 import { useTheme } from 'next-themes'
 import { toast } from 'sonner'
-
-import React from 'react'
 
 export const ThemeSwitch: React.FC = () => {
    const { theme, setTheme } = useTheme()

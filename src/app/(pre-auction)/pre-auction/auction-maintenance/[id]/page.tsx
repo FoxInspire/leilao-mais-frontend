@@ -1,29 +1,19 @@
-export const dynamic = 'force-dynamic'
-
 import * as React from 'react'
 
 import { columns_auction_lots } from '@/src/features/pre-auction/auction-lots/components/columns'
-import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
-import { promises as fs } from 'fs'
+import { readJSONFile } from '@/src/utils/file-path-utils'
+import { AuctionLot } from '@/types/entities/auction.entity'
+import { ColumnDef } from '@tanstack/react-table'
 
 import AuctionLots from '@/src/features/pre-auction/auction-lots/auction-lots'
-import { ColumnDef } from '@tanstack/react-table'
-import path from 'path'
+
+export const dynamic = 'force-dynamic'
 
 async function getAuctions() {
-   const data = await fs.readFile(
-      path.join(
-         process.cwd(),
-         'src',
-         'features',
-         'pre-auction',
-         'auction-maintenance',
-         'mocks',
-         'auctions-maintenance.json'
-      )
-   )
-   const auctions = JSON.parse(data.toString())
-   return auctions
+   const data = (await readJSONFile(
+      'src/features/pre-auction/auction-maintenance/mocks/auctions-maintenance.json'
+   )) as typeof import('@/src/features/pre-auction/auction-maintenance/mocks/auctions-maintenance.json')
+   return data
 }
 
 export default async function AuctionMaintenanceLotsPage({
@@ -34,8 +24,7 @@ export default async function AuctionMaintenanceLotsPage({
    const id = (await params).id
    const auctions = await getAuctions()
    const filteredAuctions = auctions.filter(
-      (auction: AuctionEntity) =>
-         auction?.auctionCode?.toLowerCase() === id?.toLowerCase()
+      (auction) => auction?.auctionCode?.toLowerCase() === id?.toLowerCase()
    )
 
    return (

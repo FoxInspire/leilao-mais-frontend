@@ -3,26 +3,15 @@ export const dynamic = 'force-dynamic'
 import * as React from 'react'
 
 import { columns } from '@/src/features/pre-auction/auction-maintenance/components/columns'
-import { AuctionEntity } from '@/types/entities/auction.entity'
-import { promises as fs } from 'fs'
+import { readJSONFile } from '@/src/utils/file-path-utils'
 
 import AuctionMaintenance from '@/src/features/pre-auction/auction-maintenance/auction-maintenance'
-import path from 'path'
 
 async function getAuctions() {
-   const data = await fs.readFile(
-      path.join(
-         process.cwd(),
-         'src',
-         'features',
-         'pre-auction',
-         'auction-maintenance',
-         'mocks',
-         'auctions-maintenance.json'
-      )
-   )
-   const auctions = JSON.parse(data.toString())
-   return auctions as AuctionEntity[]
+   const data = (await readJSONFile(
+      'src/features/pre-auction/auction-maintenance/mocks/auctions-maintenance.json'
+   )) as typeof import('@/src/features/pre-auction/auction-maintenance/mocks/auctions-maintenance.json')
+   return data
 }
 
 export default async function AuctionMaintenancePage() {

@@ -18,6 +18,12 @@ import {
    DialogTrigger
 } from '@/components/ui/dialog'
 import { SelectInput } from '@/components/ui/select'
+import {
+   Tooltip,
+   TooltipContent,
+   TooltipProvider,
+   TooltipTrigger
+} from '@/components/ui/tooltip'
 import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
@@ -172,12 +178,26 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                            </DialogContent>
                         </Dialog>
                      </div>
-                     <Button
-                        variant="default"
-                        className="w-full sm:w-auto sm:min-w-[150px] whitespace-nowrap"
-                     >
-                        Novo leilão
-                     </Button>
+                     <TooltipProvider>
+                        <Tooltip delayDuration={0}>
+                           <TooltipTrigger asChild>
+                              <div>
+                                 <Button
+                                    variant="default"
+                                    className="w-full sm:w-auto sm:min-w-[150px] whitespace-nowrap"
+                                    disabled
+                                 >
+                                    Novo leilão
+                                 </Button>
+                              </div>
+                           </TooltipTrigger>
+                           <TooltipContent>
+                              <p className="text-sm">
+                                 Funcionalidade em desenvolvimento.
+                              </p>
+                           </TooltipContent>
+                        </Tooltip>
+                     </TooltipProvider>
                   </div>
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
@@ -209,7 +229,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                      >
                         <span
-                           className="material-symbols-outlined text-action-active"
+                           className="material-symbols-outlined text-action-active dark:text-dark-action-active/70"
                            style={{ fontSize: '1.5rem' }}
                         >
                            close
@@ -218,10 +238,10 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                   </div>
                   <Separator orientation="horizontal" />
                   <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black font-semibold text-start">
+                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
                         Descrição
                      </p>
-                     <p className="text-text-secondary text-start">
+                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                         A página de Manutenção de Leilões permite visualizar a
                         lista de leilões cadastrados, alterar o status conforme
                         o andamento dos processos junto ao DETRAN e buscar
@@ -229,27 +249,27 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                         ingressar lotes nos leilões e acessar um menu de opções
                         avançadas para uma gestão mais detalhada.
                      </p>
-                     <p className="text-black font-semibold text-start">
+                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
                         Detalhes
                      </p>
                      <div>
-                        <p className="text-black font-normal text-start">
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
                            Status do leilão
                         </p>
-                        <p className="text-text-secondary text-start">
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                            É possível alterar o status conforme o avanço dos
                            processos junto ao DETRAN.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black font-normal text-start">
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
                            Lotes
                         </p>
-                        <p className="text-text-secondary text-start">
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                            Exibe a quantidade de lotes ingressados no leilão.
                         </p>
                      </div>
-                     <div className="bg-[#E6F1F7] px-4 py-4 space-y-2">
+                     <div className="bg-[#E6F1F7] px-4 py-4 space-y-2 rounded-md">
                         <p className="text-black font-normal text-start">
                            Info
                         </p>

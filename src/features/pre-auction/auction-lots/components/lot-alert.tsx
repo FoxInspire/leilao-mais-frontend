@@ -1,5 +1,7 @@
 'use client'
 
+import * as React from 'react'
+
 import {
    Dialog,
    DialogContent,
@@ -11,8 +13,6 @@ import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenanc
 import { Button } from '@/src/components/ui/button'
 import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef, Row } from '@tanstack/react-table'
-
-import React from 'react'
 
 interface LotAlertsProps {
    row: Row<AuctionEntity>

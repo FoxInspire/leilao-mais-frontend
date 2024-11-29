@@ -1,5 +1,7 @@
 'use client'
 
+import * as React from 'react'
+
 import {
    Dialog,
    DialogContent,
@@ -16,8 +18,6 @@ import {
 import { Button } from '@/src/components/ui/button'
 import { AuctionEntity } from '@/types/entities/auction.entity'
 import { Row } from '@tanstack/react-table'
-
-import React from 'react'
 
 interface AuctionStatusProps {
    row: Row<AuctionEntity>

@@ -36,6 +36,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
    columns,
    data
 }: AuctionMaintenanceLotsProps) => {
+   const tableRef = React.useRef<TableAuctionLotsHandle>(null)
+
+   const [selectedRows, setSelectedRows] = React.useState<AuctionLot[]>([])
+   const [dialog, setDialog] = React.useState(false)
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
 
@@ -56,15 +60,6 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
          }))
       })
    }, [data])
-
-   const [dialog, setDialog] = React.useState(true)
-
-   const tableRef = React.useRef<TableAuctionLotsHandle>(null)
-   const [selectedRows, setSelectedRows] = React.useState<AuctionLot[]>([])
-
-   const [inputValues, setInputValues] = React.useState({
-      notification: ''
-   })
 
    return (
       <React.Fragment>
@@ -244,7 +239,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
             >
                <div className="space-y-2 h-full overflow-y-auto md:ml-4 md:mt-9">
                   <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-2xl font-semibold font-montserrat">
+                     <h1 className="text-2xl font-semibold font-montserrat dark:text-dark-text-primary">
                         Sobre a página
                      </h1>
                      <Button
@@ -253,7 +248,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                      >
                         <span
-                           className="material-symbols-outlined text-action-active"
+                           className="material-symbols-outlined text-action-active dark:text-dark-action-active/70"
                            style={{ fontSize: '1.5rem' }}
                         >
                            close
@@ -262,10 +257,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                   </div>
                   <Separator orientation="horizontal" />
                   <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black font-semibold text-start">
+                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
                         Descrição
                      </p>
-                     <p className="text-text-secondary text-start">
+                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                         A página de Lista de Lotes permite visualizar todos os
                         lotes ingressados no leilão selecionado e acompanhar ou
                         alterar o status de cada um. O usuário pode criar ou
@@ -273,36 +268,36 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         histórico de notificações, inserir informações de
                         perícia e monitorar os alertas relacionados a cada lote.
                      </p>
-                     <p className="text-black font-semibold text-start">
+                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
                         Detalhes
                      </p>
                      <div>
-                        <p className="text-black font-normal text-start">
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
                            Status do lote
                         </p>
-                        <p className="text-text-secondary text-start">
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                            É possível alterar o status conforme o avanço dos
                            processos junto ao DETRAN.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black font-normal text-start">
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
                            Importar numeração lotes
                         </p>
-                        <p className="text-text-secondary text-start">
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                            Importa e atualiza os dados de GRV e numeração a
                            partir da planilha enviada.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black font-normal text-start">
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
                            Alertas
                         </p>
                         <div className="space-y-2">
-                           <p className="text-text-secondary text-start">
+                           <p className="text-text-secondary dark:text-dark-text-secondary text-start">
                               Exibe os alertas pertinentes ao lote, sendo eles:
                            </p>
-                           <ul className="list-disc list-inside text-text-secondary">
+                           <ul className="list-disc list-inside text-text-secondary dark:text-dark-text-secondary text-start">
                               <li>
                                  <strong>Restrições:</strong> Exibe a lista de
                                  restrições adicionadas ao lote.

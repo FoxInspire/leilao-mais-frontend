@@ -1,5 +1,7 @@
 'use client'
 
+import * as React from 'react'
+
 import { Button } from '@/components/ui/button'
 import {
    Select,
@@ -9,14 +11,6 @@ import {
    SelectValue
 } from '@/components/ui/select'
 import { Table } from '@tanstack/react-table'
-import {
-   ChevronLeft,
-   ChevronRight,
-   ChevronsLeft,
-   ChevronsRight
-} from 'lucide-react'
-
-import React from 'react'
 
 interface DataTablePaginationProps<TData> {
    table: Table<TData>
@@ -62,7 +56,9 @@ export function DataTablePagination<TData>({
                      disabled={!table.getCanPreviousPage()}
                   >
                      <span className="sr-only">Go to first page</span>
-                     <ChevronsLeft />
+                     <span className="material-symbols-outlined">
+                        chevron_left
+                     </span>
                   </Button>
                   <Button
                      variant="outline"
@@ -71,7 +67,9 @@ export function DataTablePagination<TData>({
                      disabled={!table.getCanPreviousPage()}
                   >
                      <span className="sr-only">Go to previous page</span>
-                     <ChevronLeft />
+                     <span className="material-symbols-outlined">
+                        chevron_left
+                     </span>
                   </Button>
                   <Button
                      variant="outline"
@@ -80,7 +78,9 @@ export function DataTablePagination<TData>({
                      disabled={!table.getCanNextPage()}
                   >
                      <span className="sr-only">Go to next page</span>
-                     <ChevronRight />
+                     <span className="material-symbols-outlined">
+                        chevron_right
+                     </span>
                   </Button>
                   <Button
                      variant="outline"
@@ -91,7 +91,9 @@ export function DataTablePagination<TData>({
                      disabled={!table.getCanNextPage()}
                   >
                      <span className="sr-only">Go to last page</span>
-                     <ChevronsRight />
+                     <span className="material-symbols-outlined">
+                        chevron_right
+                     </span>
                   </Button>
                </div>
             </div>
