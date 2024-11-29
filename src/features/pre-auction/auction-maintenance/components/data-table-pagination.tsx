@@ -57,7 +57,7 @@ export function DataTablePagination<TData>({
                   >
                      <span className="sr-only">Go to first page</span>
                      <span className="material-symbols-outlined">
-                        chevron_left
+                        first_page
                      </span>
                   </Button>
                   <Button
@@ -92,7 +92,7 @@ export function DataTablePagination<TData>({
                   >
                      <span className="sr-only">Go to last page</span>
                      <span className="material-symbols-outlined">
-                        chevron_right
+                        last_page
                      </span>
                   </Button>
                </div>
