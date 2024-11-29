@@ -14,12 +14,12 @@ import {
    Dialog,
    DialogContent,
    DialogHeader,
-   DialogTitle,
-   DialogTrigger
+   DialogTitle
 } from '@/components/ui/dialog'
 import {
    Select,
    SelectContent,
+   SelectInput,
    SelectItem,
    SelectTrigger
 } from '@/components/ui/select'
@@ -64,8 +64,14 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
       })
    }, [data])
 
+   const [dialog, setDialog] = React.useState(true)
+
    const tableRef = React.useRef<TableAuctionLotsHandle>(null)
    const [selectedRows, setSelectedRows] = React.useState<AuctionLot[]>([])
+
+   const [inputValues, setInputValues] = React.useState({
+      notification: ''
+   })
 
    return (
       <React.Fragment>
@@ -118,151 +124,13 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                               onChange={(e) => setGlobalFilter(e.target.value)}
                               className="min-w-[300px]"
                            />
-                           <Dialog>
-                              <DialogTrigger
-                                 className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
-                                 asChild
-                              >
-                                 <div>
-                                    <Button
-                                       variant="ghost"
-                                       className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
-                                    >
-                                       Busca avançada
-                                    </Button>
-                                 </div>
-                              </DialogTrigger>
-                              <DialogContent>
-                                 <DialogHeader>
-                                    <DialogTitle>Busca avançada</DialogTitle>
-                                 </DialogHeader>
-                                 <div className="space-y-4 py-4 pb-6">
-                                    <p className="text-lg font-montserrat">
-                                       Preencha os campos necessários para busca
-                                    </p>
-                                    <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                                       <Select>
-                                          <SelectTrigger unstyled hideIcon>
-                                             <Input
-                                                label="Notificação liberado"
-                                                placeholder="Selecione a notificação"
-                                             />
-                                          </SelectTrigger>
-                                          <SelectContent>
-                                             <SelectItem value="light">
-                                                Light
-                                             </SelectItem>
-                                             <SelectItem value="dark">
-                                                Dark
-                                             </SelectItem>
-                                             <SelectItem value="system">
-                                                System
-                                             </SelectItem>
-                                          </SelectContent>
-                                       </Select>
-                                       <Select>
-                                          <SelectTrigger unstyled hideIcon>
-                                             <Input
-                                                label="Perícia"
-                                                placeholder="Selecione a perícia"
-                                             />
-                                          </SelectTrigger>
-                                          <SelectContent>
-                                             <SelectItem value="light">
-                                                Light
-                                             </SelectItem>
-                                             <SelectItem value="dark">
-                                                Dark
-                                             </SelectItem>
-                                             <SelectItem value="system">
-                                                System
-                                             </SelectItem>
-                                          </SelectContent>
-                                       </Select>
-                                       <Select>
-                                          <SelectTrigger unstyled hideIcon>
-                                             <Input
-                                                label="Status"
-                                                placeholder="Selecione o status"
-                                             />
-                                          </SelectTrigger>
-                                          <SelectContent>
-                                             <SelectItem value="light">
-                                                Light
-                                             </SelectItem>
-                                             <SelectItem value="dark">
-                                                Dark
-                                             </SelectItem>
-                                             <SelectItem value="system">
-                                                System
-                                             </SelectItem>
-                                          </SelectContent>
-                                       </Select>
-                                    </div>
-                                    <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                                       <DatePicker
-                                          label="Data"
-                                          placeholder="DD/MM/YYYY"
-                                       />
-                                       <Input
-                                          label="ID"
-                                          placeholder="ID do leilão"
-                                       />
-                                       <Input
-                                          label="Descrição"
-                                          placeholder="Descrição do leilão"
-                                       />
-                                    </div>
-                                    <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                                       <Select>
-                                          <SelectTrigger unstyled hideIcon>
-                                             <Input
-                                                label="Status"
-                                                placeholder="Selecione o status"
-                                             />
-                                          </SelectTrigger>
-                                          <SelectContent>
-                                             <SelectItem value="light">
-                                                Light
-                                             </SelectItem>
-                                             <SelectItem value="dark">
-                                                Dark
-                                             </SelectItem>
-                                             <SelectItem value="system">
-                                                System
-                                             </SelectItem>
-                                          </SelectContent>
-                                       </Select>
-                                       <Input
-                                          label="Local"
-                                          placeholder="Local do leilão"
-                                       />
-                                       <Input
-                                          label="Comitente"
-                                          placeholder="Comitente do leilão"
-                                       />
-                                    </div>
-                                 </div>
-                                 <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
-                                    <div className="md:order-1 order-2">
-                                       <Button
-                                          variant="destructive"
-                                          className="w-full"
-                                       >
-                                          Cancelar
-                                       </Button>
-                                    </div>
-                                    <div className="md:order-2 order-1">
-                                       <Button
-                                          variant="default"
-                                          className="w-full"
-                                       >
-                                          Buscar
-                                       </Button>
-                                    </div>
-                                 </div>
-                              </DialogContent>
-                           </Dialog>
+                           <Button
+                              variant="ghost"
+                              className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
+                              onClick={() => setDialog(true)}
+                           >
+                              Busca avançada
+                           </Button>
                         </div>
                         <Button
                            variant="default"
@@ -461,6 +329,70 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                </div>
             </CollapsibleSidebar>
          </div>
+         <Dialog open={dialog} onOpenChange={setDialog}>
+            <DialogContent>
+               <DialogHeader>
+                  <DialogTitle>Busca avançada</DialogTitle>
+               </DialogHeader>
+               <div className="space-y-4 py-4 pb-6">
+                  <p className="text-lg font-montserrat">
+                     Preencha os campos necessários para busca
+                  </p>
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                     <SelectInput
+                        label="Notificação liberado"
+                        placeholder="Selecione a notificação"
+                        options={[
+                           { label: 'Opção 1', value: 'option1' },
+                           { label: 'Opção 2', value: 'option2' },
+                           { label: 'Opção 3', value: 'option3' },
+                           { label: 'Opção 4', value: 'option4' }
+                        ]}
+                     />
+                  </div>
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                     <DatePicker label="Data" placeholder="DD/MM/YYYY" />
+                     <Input label="ID" placeholder="ID do leilão" />
+                     <Input
+                        label="Descrição"
+                        placeholder="Descrição do leilão"
+                     />
+                  </div>
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                     <Select>
+                        <SelectTrigger hideIcon>
+                           <Input
+                              label="Status"
+                              placeholder="Selecione o status"
+                           />
+                        </SelectTrigger>
+                        <SelectContent>
+                           <SelectItem value="light">Light</SelectItem>
+                           <SelectItem value="dark">Dark</SelectItem>
+                           <SelectItem value="system">System</SelectItem>
+                        </SelectContent>
+                     </Select>
+                     <Input label="Local" placeholder="Local do leilão" />
+                     <Input
+                        label="Comitente"
+                        placeholder="Comitente do leilão"
+                     />
+                  </div>
+               </div>
+               <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
+                  <div className="md:order-1 order-2">
+                     <Button variant="destructive" className="w-full">
+                        Cancelar
+                     </Button>
+                  </div>
+                  <div className="md:order-2 order-1">
+                     <Button variant="default" className="w-full">
+                        Buscar
+                     </Button>
+                  </div>
+               </div>
+            </DialogContent>
+         </Dialog>
       </React.Fragment>
    )
 }

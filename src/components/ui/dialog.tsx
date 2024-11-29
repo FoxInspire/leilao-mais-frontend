@@ -34,6 +34,7 @@ const DialogContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
    <DialogPortal>
       <DialogOverlay />
+      <DialogDescription />
       <DialogPrimitive.Content
          ref={ref}
          onPointerDownOutside={(e) => e.preventDefault()}

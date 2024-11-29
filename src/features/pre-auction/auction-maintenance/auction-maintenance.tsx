@@ -136,7 +136,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                  </div>
                                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
                                     <Select>
-                                       <SelectTrigger unstyled hideIcon>
+                                       <SelectTrigger hideIcon>
                                           <Input
                                              label="Status"
                                              placeholder="Selecione o status"

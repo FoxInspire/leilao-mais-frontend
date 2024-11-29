@@ -1,10 +1,19 @@
 'use client'
 
 import * as SelectPrimitive from '@radix-ui/react-select'
-import { Check, ChevronDown, ChevronUp } from 'lucide-react'
 import * as React from 'react'
 
+import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuLabel,
+   DropdownMenuSeparator,
+   DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
+import { Check, ChevronDown, ChevronUp } from 'lucide-react'
 
 const Select = SelectPrimitive.Root
 
@@ -168,10 +177,72 @@ const SelectSeparator = React.forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
+const SelectInput = React.forwardRef<
+   React.ElementRef<typeof Input>,
+   React.ComponentPropsWithoutRef<typeof Input> & {
+      menu_label?: string
+      options: {
+         label: string
+         value: string
+      }[]
+      onChange?: (value: { label: string; value: string }) => void
+   }
+>(({ className, menu_label, options, onChange, ...props }, ref) => {
+   const [_value, setValue] = React.useState(props.value)
+
+   const handleValueChange = (selectedValue: string) => {
+      setValue(selectedValue)
+      const selectedOption = options.find(
+         (option) => option.value === selectedValue
+      )
+      if (selectedOption) {
+         onChange?.(selectedOption)
+      }
+   }
+   return (
+      <div className="relative w-full">
+         <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+               <div>
+                  <Input
+                     readOnly
+                     ref={ref}
+                     className={cn(className)}
+                     defaultValue={
+                        options.find((option) => option.value === _value)
+                           ?.label || undefined
+                     }
+                     {...props}
+                  />
+               </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+               {menu_label && (
+                  <React.Fragment>
+                     <DropdownMenuLabel>{menu_label}</DropdownMenuLabel>
+                     <DropdownMenuSeparator />
+                  </React.Fragment>
+               )}
+               {options.map((option) => (
+                  <DropdownMenuItem
+                     key={option.value}
+                     onClick={() => handleValueChange(option.value)}
+                  >
+                     {option.label}
+                  </DropdownMenuItem>
+               ))}
+            </DropdownMenuContent>
+         </DropdownMenu>
+      </div>
+   )
+})
+SelectInput.displayName = 'SelectInput'
+
 export {
    Select,
    SelectContent,
    SelectGroup,
+   SelectInput,
    SelectItem,
    SelectLabel,
    SelectScrollDownButton,
