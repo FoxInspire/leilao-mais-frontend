@@ -141,18 +141,63 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                                        Preencha os campos necessários para busca
                                     </p>
                                     <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
-                                       <Input
-                                          label="Placa"
-                                          placeholder="000-0000"
-                                       />
-                                       <Input
-                                          label="Descrição"
-                                          placeholder="Descrição do leilão"
-                                       />
-                                       <Input
-                                          label="Processo"
-                                          placeholder="Número do processo"
-                                       />
+                                       <Select>
+                                          <SelectTrigger unstyled hideIcon>
+                                             <Input
+                                                label="Notificação liberado"
+                                                placeholder="Selecione a notificação"
+                                             />
+                                          </SelectTrigger>
+                                          <SelectContent>
+                                             <SelectItem value="light">
+                                                Light
+                                             </SelectItem>
+                                             <SelectItem value="dark">
+                                                Dark
+                                             </SelectItem>
+                                             <SelectItem value="system">
+                                                System
+                                             </SelectItem>
+                                          </SelectContent>
+                                       </Select>
+                                       <Select>
+                                          <SelectTrigger unstyled hideIcon>
+                                             <Input
+                                                label="Perícia"
+                                                placeholder="Selecione a perícia"
+                                             />
+                                          </SelectTrigger>
+                                          <SelectContent>
+                                             <SelectItem value="light">
+                                                Light
+                                             </SelectItem>
+                                             <SelectItem value="dark">
+                                                Dark
+                                             </SelectItem>
+                                             <SelectItem value="system">
+                                                System
+                                             </SelectItem>
+                                          </SelectContent>
+                                       </Select>
+                                       <Select>
+                                          <SelectTrigger unstyled hideIcon>
+                                             <Input
+                                                label="Status"
+                                                placeholder="Selecione o status"
+                                             />
+                                          </SelectTrigger>
+                                          <SelectContent>
+                                             <SelectItem value="light">
+                                                Light
+                                             </SelectItem>
+                                             <SelectItem value="dark">
+                                                Dark
+                                             </SelectItem>
+                                             <SelectItem value="system">
+                                                System
+                                             </SelectItem>
+                                          </SelectContent>
+                                       </Select>
                                     </div>
                                     <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
                                        <DatePicker
