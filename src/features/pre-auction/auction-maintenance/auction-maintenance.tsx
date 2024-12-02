@@ -31,7 +31,13 @@ import { DatePicker } from '@/src/components/ui/date-picker'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
+import { AuctionEntity } from '@/src/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
+
+interface AuctionMaintenanceProps {
+   data: AuctionEntity[]
+   columns: ColumnDef<any>[]
+}
 
 const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
    columns,
@@ -287,11 +293,6 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
          </div>
       </React.Fragment>
    )
-}
-
-type AuctionMaintenanceProps = {
-   data: any[]
-   columns: ColumnDef<any>[]
 }
 
 export default AuctionMaintenance
