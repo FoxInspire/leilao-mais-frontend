@@ -171,6 +171,7 @@ const SelectSeparator = React.forwardRef<
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
 export type SelectInputValue = {
+   id: string
    label: string
    value: string
 }
@@ -185,9 +186,14 @@ const SelectInput = React.forwardRef<
 >(({ className, menu_label, options, onValueChange, ...props }, ref) => {
    const [_value, setValue] = React.useState(props.value)
 
+   const uniqueOptions = options.filter(
+      (option, index, self) =>
+         index === self.findIndex((o) => o.value === option.value)
+   )
+
    const handleValueChange = (selectedValue: string) => {
       setValue(selectedValue)
-      const selectedOption = options.find(
+      const selectedOption = uniqueOptions.find(
          (option) => option.value === selectedValue
       )
       if (selectedOption) {
@@ -211,7 +217,7 @@ const SelectInput = React.forwardRef<
                      labelStatus="on"
                      className={cn(className)}
                      defaultValue={
-                        options.find((option) => option.value === _value)
+                        uniqueOptions.find((option) => option.value === _value)
                            ?.label || undefined
                      }
                      placeholder={props.placeholder}
@@ -221,9 +227,9 @@ const SelectInput = React.forwardRef<
             </SelectTrigger>
             <SelectContent style={{ width: `${width}px` }}>
                {menu_label && <SelectLabel>{menu_label}</SelectLabel>}
-               {options.map((option) => (
+               {uniqueOptions.map((option) => (
                   <SelectItem
-                     key={option.value}
+                     key={option.id}
                      value={option.value}
                      onClick={() => handleValueChange(option.value)}
                   >

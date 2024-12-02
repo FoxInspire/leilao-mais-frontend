@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import * as z from 'zod'
 
 import {
    Breadcrumb,
@@ -10,21 +11,52 @@ import {
    BreadcrumbPage,
    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import {
+   Form,
+   FormControl,
+   FormField,
+   FormItem,
+   FormMessage
+} from '@/components/ui/form'
 import { OperationsMonitorIllustation } from '@/src/components/svgs/operations-monitor'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
-import { SelectInput } from '@/src/components/ui/select'
+import { SelectInput, SelectInputValue } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
+import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionEntity } from '@/src/types/entities/auction.entity'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
 
 interface SearchOperationsProps {
    auctions: AuctionEntity[]
 }
 
+const searchOperationsSchema = z.object({
+   auctionCode: z.string().min(1, {
+      message: 'Selecione um leilão para continuar'
+   })
+})
+
 export const SearchOperations: React.FC<SearchOperationsProps> = ({
    auctions
 }: SearchOperationsProps) => {
+   const router = useRouter()
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
+
+   const form = useForm<z.infer<typeof searchOperationsSchema>>({
+      resolver: zodResolver(searchOperationsSchema),
+      defaultValues: {
+         auctionCode: ''
+      }
+   })
+
+   async function onSubmit(data: z.infer<typeof searchOperationsSchema>) {
+      router.push(
+         pre_auction_routes.operation_monitor_details(data.auctionCode)
+      )
+   }
 
    return (
       <React.Fragment>
@@ -65,17 +97,47 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                   <h3 className="text-center text-2xl font-semibold font-montserrat">
                      Selecione um leilão para carregar lista de lotes
                   </h3>
-                  <SelectInput
-                     label="Leilão"
-                     placeholder="Selecione o leilão"
-                     options={
-                        auctions?.map((auction) => ({
-                           label: auction.auctionCode,
-                           value: auction.id
-                        })) || []
-                     }
-                  />
-                  <Button className="w-full">Continuar</Button>
+                  <Form {...form}>
+                     <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-4"
+                     >
+                        <FormField
+                           control={form.control}
+                           name="auctionCode"
+                           render={({ field }) => (
+                              <FormItem>
+                                 <FormControl>
+                                    <SelectInput
+                                       label="Leilão"
+                                       placeholder="Selecione o leilão"
+                                       onValueChange={(
+                                          value: SelectInputValue
+                                       ) => {
+                                          form.setValue(
+                                             'auctionCode',
+                                             value.value
+                                          )
+                                       }}
+                                       options={
+                                          auctions?.map((auction) => ({
+                                             id: auction.id,
+                                             label: auction.auctionCode,
+                                             value: auction.auctionCode
+                                          })) || []
+                                       }
+                                       {...field}
+                                    />
+                                 </FormControl>
+                                 <FormMessage />
+                              </FormItem>
+                           )}
+                        />
+                        <Button type="submit" className="w-full">
+                           Continuar
+                        </Button>
+                     </form>
+                  </Form>
                </div>
             </div>
             <CollapsibleSidebar
