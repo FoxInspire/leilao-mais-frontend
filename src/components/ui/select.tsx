@@ -211,13 +211,15 @@ const SelectInput = React.forwardRef<
             <DropdownMenuTrigger asChild>
                <div ref={elementRef}>
                   <Input
-                     ref={ref}
                      readOnly
+                     ref={ref}
+                     labelStatus="on"
                      className={cn(className)}
                      defaultValue={
                         options.find((option) => option.value === _value)
                            ?.label || undefined
                      }
+                     placeholder={props.placeholder}
                      {...props}
                   />
                </div>
@@ -239,6 +241,9 @@ const SelectInput = React.forwardRef<
                ))}
             </DropdownMenuContent>
          </DropdownMenu>
+         <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-action-active">
+            arrow_drop_down
+         </span>
       </div>
    )
 })
