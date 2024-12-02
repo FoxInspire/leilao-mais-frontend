@@ -29,7 +29,7 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
 
    return (
       <React.Fragment>
-         <div className="min-h-svh space-y-10">
+         <div className="max-h-svh space-y-10">
             <div className="space-y-4">
                <Breadcrumb>
                   <BreadcrumbList>
@@ -68,7 +68,16 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                <SelectInput
                   label="Leilão"
                   placeholder="Selecione o leilão"
-                  options={[]}
+                  options={[
+                     {
+                        label: 'Leilão 1',
+                        value: '1'
+                     },
+                     {
+                        label: 'Leilão 2',
+                        value: '2'
+                     }
+                  ]}
                />
                <Button className="w-full">Continuar</Button>
             </div>
