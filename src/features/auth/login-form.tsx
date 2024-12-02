@@ -1,5 +1,7 @@
 'use client'
 
+import * as React from 'react'
+
 import {
    LoginIllustrationDark,
    LoginIllustrationLight
@@ -9,8 +11,6 @@ import { Button } from '@/src/components/ui/button'
 import { Input } from '@/src/components/ui/input'
 import { ThemeSwitch } from '@/src/components/ui/theme-switcher'
 import { useTheme } from 'next-themes'
-
-import * as React from 'react'
 
 const LoginForm: React.FC = () => {
    const { theme } = useTheme()

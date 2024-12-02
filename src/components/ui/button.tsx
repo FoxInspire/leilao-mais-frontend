@@ -12,12 +12,13 @@ const buttonVariants = cva(
             default:
                'bg-primary-default text-primary-contrast hover:bg-primary-light dark:bg-dark-primary-default dark:hover:bg-dark-primary-light',
             destructive:
-               'bg-error-default text-error-contrast hover:bg-error-light dark:bg-dark-error-default dark:text-dark-error-contrast dark:hover:bg-dark-error-light',
+               'bg-transparent border border-error-default text-error-default hover:bg-error-default/10 dark:border-dark-error-default dark:text-dark-error-default dark:hover:bg-dark-error-default/10',
             outline:
-               'border border-primary-default bg-transparent text-primary-default hover:bg-primary-default/10 dark:border-dark-primary-default dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10',
+               'border border-primary-default text-primary-default hover:bg-primary-default/10 dark:border-dark-primary-default dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10',
             secondary:
                'bg-secondary-default text-secondary-contrast hover:bg-secondary-light dark:bg-dark-secondary-default dark:text-dark-secondary-contrast dark:hover:bg-dark-secondary-light',
-            ghost: 'bg-transparent text-primary-default hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10',
+            icon: 'text-primary-default hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 items-center justify-center',
+            ghost: 'text-primary-default hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10',
             link: 'text-primary-default underline-offset-4 hover:underline dark:text-dark-primary-default'
          },
          size: {
@@ -52,7 +53,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {...props}
          >
             <div className="relative flex items-center justify-center">
-               <span className={cn(loading && 'invisible', 'flex items-center')}>
+               <span
+                  className={cn(loading && 'invisible', 'flex items-center')}
+               >
                   {props.children}
                </span>
                {loading && (

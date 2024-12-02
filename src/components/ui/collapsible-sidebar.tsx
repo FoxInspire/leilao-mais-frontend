@@ -1,8 +1,13 @@
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
+import * as React from 'react'
+
+import {
+   Sheet,
+   SheetContent,
+   SheetHeader,
+   SheetTitle
+} from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 import { useIsMobile } from '@/src/hooks/useMobile'
-
-import * as React from 'react'
 
 type CollapsibleSidebarProps = {
    side?: 'left' | 'right'
@@ -40,7 +45,7 @@ export function CollapsibleSidebar({
                data-sidebar="sidebar"
                data-mobile="true"
                side={side}
-               className="w-full"
+               className="w-full px-4 pt-0"
                hasCloseButton={false}
             >
                <SheetHeader>

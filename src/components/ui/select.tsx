@@ -3,6 +3,16 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 import * as React from 'react'
 
+import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuLabel,
+   DropdownMenuSeparator,
+   DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
+import { useElementSize } from '@/hooks/useElementSize'
 import { cn } from '@/lib/utils'
 import { Check, ChevronDown, ChevronUp } from 'lucide-react'
 
@@ -10,18 +20,33 @@ const Select = SelectPrimitive.Root
 
 const SelectGroup = SelectPrimitive.Group
 
-const SelectValue = SelectPrimitive.Value
+const SelectValue = React.forwardRef<
+   React.ElementRef<typeof SelectPrimitive.Value>,
+   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Value> & {
+      variant?: 'default' | 'input'
+   }
+>(({ className, variant = 'default', ...props }, ref) => (
+   <SelectPrimitive.Value
+      ref={ref}
+      className={cn(
+         variant === 'input' && 'text-sm text-neutral-950 dark:text-neutral-50',
+         className
+      )}
+      {...props}
+   />
+))
+SelectValue.displayName = SelectPrimitive.Value.displayName
 
 const SelectTrigger = React.forwardRef<
    React.ElementRef<typeof SelectPrimitive.Trigger>,
    React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & {
       hideIcon?: boolean
    }
->(({ className, children, hideIcon = false, ...props }, ref) => (
+>(({ className, children, hideIcon, ...props }, ref) => (
    <SelectPrimitive.Trigger
       ref={ref}
       className={cn(
-         'flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300',
+         'flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 dark:bg-transparent',
          className
       )}
       {...props}
@@ -68,7 +93,8 @@ const SelectScrollDownButton = React.forwardRef<
       <ChevronDown className="h-4 w-4" />
    </SelectPrimitive.ScrollDownButton>
 ))
-SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName
+SelectScrollDownButton.displayName =
+   SelectPrimitive.ScrollDownButton.displayName
 
 const SelectContent = React.forwardRef<
    React.ElementRef<typeof SelectPrimitive.Content>,
@@ -78,7 +104,7 @@ const SelectContent = React.forwardRef<
       <SelectPrimitive.Content
          ref={ref}
          className={cn(
-            'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-neutral-200 bg-white text-neutral-950 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50',
+            'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-neutral-200 bg-white text-neutral-950 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:border-neutral-800 dark:text-neutral-50 dark:bg-dark-background-default dark:shadow-2xl dark:border-dark-secondary-contrast/5',
             position === 'popper' &&
                'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
             className
@@ -121,7 +147,7 @@ const SelectItem = React.forwardRef<
    <SelectPrimitive.Item
       ref={ref}
       className={cn(
-         'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-neutral-100 focus:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-neutral-800 dark:focus:text-neutral-50',
+         'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-neutral-100 focus:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-white/5 dark:focus:text-neutral-50',
          className
       )}
       {...props}
@@ -143,16 +169,86 @@ const SelectSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
    <SelectPrimitive.Separator
       ref={ref}
-      className={cn('-mx-1 my-1 h-px bg-neutral-100 dark:bg-neutral-800', className)}
+      className={cn(
+         '-mx-1 my-1 h-px bg-neutral-100 dark:bg-neutral-800',
+         className
+      )}
       {...props}
    />
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
+export type SelectInputValue = {
+   label: string
+   value: string
+}
+
+const SelectInput = React.forwardRef<
+   React.ElementRef<typeof Input>,
+   React.ComponentPropsWithoutRef<typeof Input> & {
+      menu_label?: string
+      options: SelectInputValue[]
+      onValueChange?: (value: SelectInputValue) => void
+   }
+>(({ className, menu_label, options, onValueChange, ...props }, ref) => {
+   const [_value, setValue] = React.useState(props.value)
+
+   const handleValueChange = (selectedValue: string) => {
+      setValue(selectedValue)
+      const selectedOption = options.find(
+         (option) => option.value === selectedValue
+      )
+      if (selectedOption) {
+         onValueChange?.(selectedOption)
+      }
+   }
+
+   const { ref: elementRef, width } = useElementSize<HTMLInputElement>()
+
+   return (
+      <div className="relative w-full">
+         <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+               <div ref={elementRef}>
+                  <Input
+                     ref={ref}
+                     readOnly
+                     className={cn(className)}
+                     defaultValue={
+                        options.find((option) => option.value === _value)
+                           ?.label || undefined
+                     }
+                     {...props}
+                  />
+               </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" style={{ width: `${width}px` }}>
+               {menu_label && (
+                  <React.Fragment>
+                     <DropdownMenuLabel>{menu_label}</DropdownMenuLabel>
+                     <DropdownMenuSeparator />
+                  </React.Fragment>
+               )}
+               {options.map((option) => (
+                  <DropdownMenuItem
+                     key={option.value}
+                     onClick={() => handleValueChange(option.value)}
+                  >
+                     {option.label}
+                  </DropdownMenuItem>
+               ))}
+            </DropdownMenuContent>
+         </DropdownMenu>
+      </div>
+   )
+})
+SelectInput.displayName = 'SelectInput'
+
 export {
    Select,
    SelectContent,
    SelectGroup,
+   SelectInput,
    SelectItem,
    SelectLabel,
    SelectScrollDownButton,

@@ -37,7 +37,11 @@ export const LogoComplete: React.FC<React.SVGProps<SVGSVGElement>> = (
          </g>
          <defs>
             <clipPath id="clip0_13723_28901">
-               <path fill="#fff" transform="translate(16)" d="M0 0H194.036V50H0z" />
+               <path
+                  fill="#fff"
+                  transform="translate(16)"
+                  d="M0 0H194.036V50H0z"
+               />
             </clipPath>
          </defs>
       </svg>

@@ -22,11 +22,13 @@
          "@/routes/*": ["./src/routes/*"],
          "@/lib/*": ["./src/lib/*"],
          "@/types/*": ["./src/types/*"],
+         "@/entities/*": ["./src/types/entities/*"],
          "@/features/*": ["./src/features/*"],
          "@/styles/*": ["./src/styles/*"],
          "@/hooks/*": ["./src/hooks/*"],
          "@/utils/*": ["./src/utils/*"],
-         "@/svgs/*": ["./src/components/svgs/*"]
+         "@/svgs/*": ["./src/components/svgs/*"],
+         "@/seeds/*": ["./src/seeds/*"]
       }
    },
    "include": [

@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/tooltip'
 import { Button } from '@/src/components/ui/button'
 
-export type CardProps = {
+export interface CardProps {
    /**
     * Código identificador único do leilão no formato LEI-YYYY-XXX
     * onde YYYY é o ano e XXX é um número sequencial
@@ -44,7 +44,7 @@ export type CardProps = {
     * Utilizada para ordenação e filtragem dos leilões
     * @type {Date}
     */
-   date: Date
+   date: string | Date
 
    /**
     * Endereço onde o leilão será realizado,
@@ -59,7 +59,7 @@ export type CardProps = {
     * Deve abrir o formulário de edição do leilão
     * @type {() => void}
     */
-   onEdit: () => void
+   onEdit?: () => void
 
    /**
     * Agrupamento das transações do leilão por status,
@@ -125,7 +125,9 @@ export const Card: React.FC<CardProps> = ({
       return items.map((item) => `${item.quantity} - ${item.name}`).join('\n')
    }
 
-   const hasTransactions = (items: Array<{ quantity: number; name: string }>) => {
+   const hasTransactions = (
+      items: Array<{ quantity: number; name: string }>
+   ) => {
       return items.some((item) => item.quantity > 0)
    }
    return (
@@ -139,7 +141,12 @@ export const Card: React.FC<CardProps> = ({
                   {yardName}
                </span>
             </div>
-            <Button variant="ghost" size="icon" className="my-auto" onClick={onEdit}>
+            <Button
+               variant="ghost"
+               size="icon"
+               className="my-auto"
+               onClick={onEdit}
+            >
                <span className="material-symbols-outlined filled text-text-secondary dark:text-dark-text-secondary">
                   edit
                </span>
@@ -158,7 +165,9 @@ export const Card: React.FC<CardProps> = ({
                         </TooltipTrigger>
                         <TooltipContent>
                            <p className="whitespace-pre">
-                              {formatTransactionsList(transactions.pending.items)}
+                              {formatTransactionsList(
+                                 transactions.pending.items
+                              )}
                            </p>
                         </TooltipContent>
                      </Tooltip>
@@ -186,7 +195,9 @@ export const Card: React.FC<CardProps> = ({
                         </TooltipTrigger>
                         <TooltipContent>
                            <p className="whitespace-pre">
-                              {formatTransactionsList(transactions.completed.items)}
+                              {formatTransactionsList(
+                                 transactions.completed.items
+                              )}
                            </p>
                         </TooltipContent>
                      </Tooltip>
@@ -208,7 +219,7 @@ export const Card: React.FC<CardProps> = ({
                   Data
                </span>
                <span className="text-base font-normal text-black dark:text-dark-text-primary">
-                  {date.toLocaleDateString()}
+                  {date instanceof Date ? date.toLocaleDateString() : date}
                </span>
             </div>
             <div className="flex flex-col">

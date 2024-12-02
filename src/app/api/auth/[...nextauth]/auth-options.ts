@@ -28,7 +28,8 @@ export const authOptions: NextAuthOptions = {
                   }
                )
 
-               const data: { user: UserProps; token: string } = await response.json()
+               const data: { user: UserProps; token: string } =
+                  await response.json()
 
                const user = {
                   ...{ email: credentials?.email },

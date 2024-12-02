@@ -1,6 +1,7 @@
 import '@/src/styles/globals.css'
 import '@/styles/reset.css'
 
+import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
@@ -42,56 +43,37 @@ export default function RootLayout({
    return (
       <html lang="pt-BR" suppressHydrationWarning>
          <head>
-            {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link
+               rel="preconnect"
+               href="https://fonts.googleapis.com"
+               crossOrigin="anonymous"
+            />
             <link
                rel="preconnect"
                href="https://fonts.gstatic.com"
                crossOrigin="anonymous"
             />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font */}
             <link
                rel="preload"
-               href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+               href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
                as="style"
             />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font */}
             <link
-               href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
                rel="stylesheet"
+               href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
             />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
             <link
                rel="preload"
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0"
+               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block"
                as="style"
             />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
             <link
                rel="stylesheet"
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0"
+               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block"
             />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
-            <link
-               rel="preload"
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite,home,search,settings&display=block"
-               as="style"
-            />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
-            <link
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite,home,search,settings&display=block"
-               rel="stylesheet"
-            />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
-            <link
-               rel="preload"
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-               as="style"
-            />
-            {/* eslint-disable-next-line @next/next/no-page-custom-font, @next/next/google-font-display */}
             <link
                rel="stylesheet"
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+               href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap"
             />
          </head>
          <body className="antialiased bg-background-default dark:bg-dark-background-default">
@@ -103,6 +85,7 @@ export default function RootLayout({
                   disableTransitionOnChange
                >
                   {children}
+                  <Toaster />
                </ThemeProvider>
             </NuqsAdapter>
          </body>

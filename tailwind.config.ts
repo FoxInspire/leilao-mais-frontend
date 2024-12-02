@@ -165,7 +165,10 @@ const config: Config = {
          },
          fontFamily: {
             montserrat: ['Montserrat', 'sans-serif'],
-            nunito: ['Nunito', 'sans-serif']
+            nunito: ['Nunito', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+            raleway: ['Raleway', 'sans-serif'],
+            roboto: ['Roboto', 'sans-serif']
          },
          boxShadow: {
             'elevation-8':
