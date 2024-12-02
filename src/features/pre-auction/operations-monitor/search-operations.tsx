@@ -2,9 +2,6 @@
 
 import * as React from 'react'
 
-import { OperationsMonitorIllustation } from '@/src/components/svgs/operations-monitor'
-import { AuctionEntity } from '@/src/types/entities/auction.entity'
-
 import {
    Breadcrumb,
    BreadcrumbItem,
@@ -13,9 +10,11 @@ import {
    BreadcrumbPage,
    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { OperationsMonitorIllustation } from '@/src/components/svgs/operations-monitor'
 import { Button } from '@/src/components/ui/button'
 import { SelectInput } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
+import { AuctionEntity } from '@/src/types/entities/auction.entity'
 
 interface SearchOperationsProps {
    auctions: AuctionEntity[]
@@ -68,16 +67,12 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                <SelectInput
                   label="Leilão"
                   placeholder="Selecione o leilão"
-                  options={[
-                     {
-                        label: 'Leilão 1',
-                        value: '1'
-                     },
-                     {
-                        label: 'Leilão 2',
-                        value: '2'
-                     }
-                  ]}
+                  options={
+                     auctions?.map((auction) => ({
+                        label: auction.auctionCode,
+                        value: auction.id
+                     })) || []
+                  }
                />
                <Button className="w-full">Continuar</Button>
             </div>

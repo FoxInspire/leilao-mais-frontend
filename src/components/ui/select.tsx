@@ -3,14 +3,6 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 import * as React from 'react'
 
-import {
-   DropdownMenu,
-   DropdownMenuContent,
-   DropdownMenuItem,
-   DropdownMenuLabel,
-   DropdownMenuSeparator,
-   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { useElementSize } from '@/hooks/useElementSize'
 import { cn } from '@/lib/utils'
@@ -207,9 +199,12 @@ const SelectInput = React.forwardRef<
 
    return (
       <div className="relative w-full">
-         <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-               <div ref={elementRef}>
+         <Select onValueChange={handleValueChange}>
+            <SelectTrigger
+               hideIcon
+               className="border-none w-full px-0 py-0 m-0"
+            >
+               <div ref={elementRef} className="w-full">
                   <Input
                      readOnly
                      ref={ref}
@@ -223,24 +218,20 @@ const SelectInput = React.forwardRef<
                      {...props}
                   />
                </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" style={{ width: `${width}px` }}>
-               {menu_label && (
-                  <React.Fragment>
-                     <DropdownMenuLabel>{menu_label}</DropdownMenuLabel>
-                     <DropdownMenuSeparator />
-                  </React.Fragment>
-               )}
+            </SelectTrigger>
+            <SelectContent style={{ width: `${width}px` }}>
+               {menu_label && <SelectLabel>{menu_label}</SelectLabel>}
                {options.map((option) => (
-                  <DropdownMenuItem
+                  <SelectItem
                      key={option.value}
+                     value={option.value}
                      onClick={() => handleValueChange(option.value)}
                   >
                      {option.label}
-                  </DropdownMenuItem>
+                  </SelectItem>
                ))}
-            </DropdownMenuContent>
-         </DropdownMenu>
+            </SelectContent>
+         </Select>
          <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-action-active">
             arrow_drop_down
          </span>
