@@ -28,7 +28,6 @@ import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
-import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionLot } from '@/types/entities/auction.entity'
 import { toast } from 'sonner'
@@ -251,14 +250,11 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
             <CollapsibleSidebar
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
-               className={cn({
-                  'overflow-y-auto': isSidebarOpen,
-                  'overflow-y-hidden h-0': !isSidebarOpen
-               })}
+               className="h-[calc(100vh-1.5rem-56px)]"
             >
-               <div className="space-y-2 h-full overflow-y-auto md:ml-4 md:mt-9">
-                  <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-2xl font-semibold font-montserrat dark:text-dark-text-primary">
+               <div className="space-y-2 h-full overflow-y-auto md:ml-4">
+                  <div className="flex justify-between items-center gap-2 mt-9">
+                     <h1 className="text-2xl font-semibold font-montserrat">
                         Sobre a página
                      </h1>
                      <Button
@@ -280,12 +276,13 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                         Descrição
                      </p>
                      <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                        A página de Lista de Lotes permite visualizar todos os
-                        lotes ingressados no leilão selecionado e acompanhar ou
-                        alterar o status de cada um. O usuário pode criar ou
-                        zerar a numeração de identificação dos lotes, acessar o
-                        histórico de notificações, inserir informações de
-                        perícia e monitorar os alertas relacionados a cada lote.
+                        A página de Monitor de Operações permite acompanhar em
+                        tempo real as transações dos lotes em um leilão ativo
+                        junto ao DETRAN. O usuário pode alterar o status do lote
+                        conforme o retorno do órgão, consultar informações do
+                        veículo, agendar, cancelar ou reiniciar transações e
+                        monitorar mensagens e notificações relevantes para cada
+                        lote.
                      </p>
                      <p className="text-black dark:text-dark-text-primary font-semibold text-start">
                         Detalhes
@@ -301,36 +298,30 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                      </div>
                      <div>
                         <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Importar numeração lotes
+                           Transação
                         </p>
                         <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                           Importa e atualiza os dados de GRV e numeração a
-                           partir da planilha enviada.
+                           Operações e processos necessários ao lote junto ao
+                           DETRAN. A cor verde indica sucesso
                         </p>
                      </div>
                      <div>
                         <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Alertas
+                           Agendado
                         </p>
-                        <div className="space-y-2">
-                           <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                              Exibe os alertas pertinentes ao lote, sendo eles:
-                           </p>
-                           <ul className="list-disc list-inside text-text-secondary dark:text-dark-text-secondary text-start">
-                              <li>
-                                 <strong>Restrições:</strong> Exibe a lista de
-                                 restrições adicionadas ao lote.
-                              </li>
-                              <li>
-                                 <strong>Notificações:</strong> Indica que a
-                                 notificação de liberados foi enviada.
-                              </li>
-                              <li>
-                                 <strong>Leilão como sobra:</strong> Indica a
-                                 quantidade de leilões que o lote já participou.
-                              </li>
-                           </ul>
-                        </div>
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           Exibe o ícone quando a transação do lote for
+                           agendada.
+                        </p>
+                     </div>
+                     <div>
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                           Consultas
+                        </p>
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           É possível consultar mais informações sobre o veículo
+                           na base de dados.
+                        </p>
                      </div>
                   </div>
                </div>
@@ -345,33 +336,7 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                   <p className="text-lg font-montserrat">
                      Preencha os campos necessários para busca
                   </p>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
-                     <SelectInput
-                        label="Notificação liberado"
-                        placeholder="Selecione a notificação"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
-                     <SelectInput
-                        label="Perícia"
-                        placeholder="Selecione a perícia"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-6">
                      <SelectInput
                         label="Status"
                         placeholder="Selecione o status"
@@ -385,11 +350,9 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                            console.log('value', value)
                         }}
                      />
-                  </div>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                      <SelectInput
-                        label="Restrição"
-                        placeholder="Selecione a restrição"
+                        label="Transação"
+                        placeholder="Selecione a transação"
                         options={[
                            { id: '1', label: 'Opção 1', value: 'option1' },
                            { id: '2', label: 'Opção 2', value: 'option2' },
@@ -401,21 +364,8 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                         }}
                      />
                      <SelectInput
-                        label="Sub-restrição"
-                        placeholder="Selecione a sub-restrição"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
-                     <SelectInput
-                        label="Processo"
-                        placeholder="0000000000"
+                        label="Agendado"
+                        placeholder="Selecione agendamento"
                         options={[
                            { id: '1', label: 'Opção 1', value: 'option1' },
                            { id: '2', label: 'Opção 2', value: 'option2' },
@@ -428,74 +378,15 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                      />
                   </div>
                   <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
-                     <SelectInput
-                        label="Placa"
-                        placeholder="000-0000"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
-                     <SelectInput
-                        label="Chassi"
-                        placeholder="00000000000000000"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
-                     <SelectInput
-                        label="Marca/Modelo"
-                        placeholder="Selecione a marca/modelo"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
+                     <Input label="Processo" placeholder="Número do processo" />
+                     <Input label="Placa" placeholder="000-0000" />
+                     <Input label="Chassi" placeholder="00000000000000000" />
                   </div>
-                  <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
-                     <SelectInput
-                        label="Cor"
-                        placeholder="Selecione a cor"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
-                     <SelectInput
-                        label="Tipo"
-                        placeholder="Selecione o tipo"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
-                  </div>
+                  <Input
+                     className="col-span-3"
+                     label="Marca/Modelo"
+                     placeholder="Ex: Fiat, VW"
+                  />
                </div>
                <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
                   <div className="md:order-1 order-2">
