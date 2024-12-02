@@ -146,8 +146,13 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                        label="Status"
                                        placeholder="Selecione o status"
                                        options={[
-                                          { label: 'Ativo', value: 'active' },
                                           {
+                                             id: '1',
+                                             label: 'Ativo',
+                                             value: 'active'
+                                          },
+                                          {
+                                             id: '2',
                                              label: 'Inativo',
                                              value: 'inactive'
                                           }

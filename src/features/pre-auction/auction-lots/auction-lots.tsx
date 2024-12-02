@@ -331,10 +331,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Notificação liberado"
                         placeholder="Selecione a notificação"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)
@@ -344,10 +344,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Perícia"
                         placeholder="Selecione a perícia"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)
@@ -357,10 +357,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Status"
                         placeholder="Selecione o status"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)
@@ -372,10 +372,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Restrição"
                         placeholder="Selecione a restrição"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)
@@ -385,10 +385,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Sub-restrição"
                         placeholder="Selecione a sub-restrição"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)
@@ -398,10 +398,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Processo"
                         placeholder="0000000000"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)
@@ -413,10 +413,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Placa"
                         placeholder="000-0000"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)
@@ -426,10 +426,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Chassi"
                         placeholder="00000000000000000"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)
@@ -439,10 +439,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Marca/Modelo"
                         placeholder="Selecione a marca/modelo"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)
@@ -454,10 +454,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Cor"
                         placeholder="Selecione a cor"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)
@@ -467,10 +467,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         label="Tipo"
                         placeholder="Selecione o tipo"
                         options={[
-                           { label: 'Opção 1', value: 'option1' },
-                           { label: 'Opção 2', value: 'option2' },
-                           { label: 'Opção 3', value: 'option3' },
-                           { label: 'Opção 4', value: 'option4' }
+                           { id: '1', label: 'Opção 1', value: 'option1' },
+                           { id: '2', label: 'Opção 2', value: 'option2' },
+                           { id: '3', label: 'Opção 3', value: 'option3' },
+                           { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
                         onValueChange={(value: SelectInputValue) => {
                            console.log('value', value)

@@ -5,7 +5,7 @@ import { readJSONFile } from '@/src/utils/file-path-utils'
 import { AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 
-import AuctionLots from '@/src/features/pre-auction/auction-lots/auction-lots'
+import { OperationsMonitor } from '@/src/features/pre-auction/operations-monitor/operations-monitor'
 
 export const dynamic = 'force-dynamic'
 
@@ -29,7 +29,7 @@ export default async function AuctionMaintenanceLotsPage({
 
    return (
       <React.Suspense>
-         <AuctionLots
+         <OperationsMonitor
             id={id}
             data={filteredAuctions}
             columns={columns_auction_lots as ColumnDef<AuctionLot>[]}
