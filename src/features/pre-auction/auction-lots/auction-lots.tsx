@@ -322,11 +322,11 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                <DialogHeader>
                   <DialogTitle>Busca avançada</DialogTitle>
                </DialogHeader>
-               <div className="space-y-4 py-4 pb-6">
+               <div className="space-y-6 py-4 pb-6">
                   <p className="text-lg font-montserrat">
                      Preencha os campos necessários para busca
                   </p>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                      <SelectInput
                         label="Notificação liberado"
                         placeholder="Selecione a notificação"
@@ -367,7 +367,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         }}
                      />
                   </div>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
                      <SelectInput
                         label="Restrição"
                         placeholder="Selecione a restrição"
@@ -408,7 +408,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         }}
                      />
                   </div>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
                      <SelectInput
                         label="Placa"
                         placeholder="000-0000"
@@ -449,7 +449,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         }}
                      />
                   </div>
-                  <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
+                  <div className="grid md:grid-cols-2 grid-cols-1 gap-4 items-center">
                      <SelectInput
                         label="Cor"
                         placeholder="Selecione a cor"

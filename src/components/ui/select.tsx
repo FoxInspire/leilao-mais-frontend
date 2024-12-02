@@ -225,17 +225,23 @@ const SelectInput = React.forwardRef<
                   />
                </div>
             </SelectTrigger>
-            <SelectContent style={{ width: `${width}px` }}>
+            <SelectContent style={{ width: `${width}px` }} sideOffset={4}>
                {menu_label && <SelectLabel>{menu_label}</SelectLabel>}
-               {uniqueOptions.map((option) => (
-                  <SelectItem
-                     key={option.id}
-                     value={option.value}
-                     onClick={() => handleValueChange(option.value)}
-                  >
-                     {option.label}
-                  </SelectItem>
-               ))}
+               {uniqueOptions.length === 0 ? (
+                  <div className="py-2 px-2 text-sm text-neutral-500 text-center">
+                     Não há opções disponíveis
+                  </div>
+               ) : (
+                  uniqueOptions.map((option) => (
+                     <SelectItem
+                        key={option.id}
+                        value={option.value}
+                        onClick={() => handleValueChange(option.value)}
+                     >
+                        {option.label}
+                     </SelectItem>
+                  ))
+               )}
             </SelectContent>
          </Select>
          <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-action-active">

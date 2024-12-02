@@ -25,6 +25,7 @@ import {
 } from '@/features/pre-auction/auction-lots/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
+import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
@@ -109,14 +110,23 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                      <Separator orientation="horizontal" />
                   </div>
                   {selectedRows.length === 0 && (
-                     <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
+                     <div className="flex flex-col gap-4 w-full md:flex-row sm:items-center sm:justify-between">
+                        <div className="grid md:grid-cols-4 items-start sm:items-center gap-4 md:max-w-[70%] w-full">
                            <Input
                               label="Busca geral"
                               value={globalFilter}
                               placeholder="Processo, placa, chassi"
                               onChange={(e) => setGlobalFilter(e.target.value)}
-                              className="min-w-[300px]"
+                           />
+                           <SelectInput
+                              options={[]}
+                              placeholder="Selecione a transação"
+                              label="Transação"
+                           />
+                           <SelectInput
+                              options={[]}
+                              placeholder="Selecione o status"
+                              label="Status"
                            />
                            <Button
                               variant="ghost"
@@ -126,12 +136,15 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                               Busca avançada
                            </Button>
                         </div>
-                        <Button
-                           variant="default"
-                           className="w-full sm:w-auto px-12 sm:min-w-[150px] whitespace-nowrap"
-                        >
-                           Importar numeração lotes
-                        </Button>
+                        <DisabledFeature>
+                           <Button
+                              disabled
+                              variant="default"
+                              className="w-full sm:w-auto px-12 sm:min-w-[150px] whitespace-nowrap"
+                           >
+                              Consultas
+                           </Button>
+                        </DisabledFeature>
                      </div>
                   )}
                   {selectedRows.length > 0 && (
@@ -328,11 +341,11 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                <DialogHeader>
                   <DialogTitle>Busca avançada</DialogTitle>
                </DialogHeader>
-               <div className="space-y-4 py-4 pb-6">
+               <div className="space-y-6 py-4 pb-6">
                   <p className="text-lg font-montserrat">
                      Preencha os campos necessários para busca
                   </p>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                      <SelectInput
                         label="Notificação liberado"
                         placeholder="Selecione a notificação"
@@ -373,7 +386,7 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                         }}
                      />
                   </div>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                      <SelectInput
                         label="Restrição"
                         placeholder="Selecione a restrição"
@@ -414,7 +427,7 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                         }}
                      />
                   </div>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                      <SelectInput
                         label="Placa"
                         placeholder="000-0000"
@@ -455,7 +468,7 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                         }}
                      />
                   </div>
-                  <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
+                  <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
                      <SelectInput
                         label="Cor"
                         placeholder="Selecione a cor"

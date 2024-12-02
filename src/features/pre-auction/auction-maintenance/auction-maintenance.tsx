@@ -18,16 +18,11 @@ import {
    DialogTrigger
 } from '@/components/ui/dialog'
 import { SelectInput } from '@/components/ui/select'
-import {
-   Tooltip,
-   TooltipContent,
-   TooltipProvider,
-   TooltipTrigger
-} from '@/components/ui/tooltip'
 import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DatePicker } from '@/src/components/ui/date-picker'
+import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
@@ -113,7 +108,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                  <p className="text-lg font-montserrat">
                                     Preencha os campos necessários para busca
                                  </p>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                                     <Input
                                        label="Placa"
                                        placeholder="000-0000"
@@ -127,7 +122,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                        placeholder="Número do processo"
                                     />
                                  </div>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                                     <DatePicker
                                        label="Data"
                                        placeholder="DD/MM/YYYY"
@@ -141,7 +136,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                        placeholder="Descrição do leilão"
                                     />
                                  </div>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
                                     <SelectInput
                                        label="Status"
                                        placeholder="Selecione o status"
@@ -189,26 +184,15 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                            </DialogContent>
                         </Dialog>
                      </div>
-                     <TooltipProvider>
-                        <Tooltip delayDuration={0}>
-                           <TooltipTrigger asChild>
-                              <div>
-                                 <Button
-                                    variant="default"
-                                    className="w-full sm:w-auto sm:min-w-[150px] whitespace-nowrap"
-                                    disabled
-                                 >
-                                    Novo leilão
-                                 </Button>
-                              </div>
-                           </TooltipTrigger>
-                           <TooltipContent>
-                              <p className="text-sm">
-                                 Funcionalidade em desenvolvimento.
-                              </p>
-                           </TooltipContent>
-                        </Tooltip>
-                     </TooltipProvider>
+                     <DisabledFeature>
+                        <Button
+                           variant="default"
+                           className="w-full sm:w-auto sm:min-w-[150px] whitespace-nowrap"
+                           disabled
+                        >
+                           Novo leilão
+                        </Button>
+                     </DisabledFeature>
                   </div>
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
