@@ -19,30 +19,26 @@ import {
    DialogTitle
 } from '@/components/ui/dialog'
 import { SelectInput, SelectInputValue } from '@/components/ui/select'
-import {
-   TableAuctionLots,
-   TableAuctionLotsHandle
-} from '@/features/pre-auction/auction-lots/components/data-table'
+import { TableAuctionLotsHandle } from '@/features/pre-auction/auction-lots/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
-import { AuctionLot } from '@/types/entities/auction.entity'
+import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
 import { toast } from 'sonner'
+import { TableOperationMonitorDetails } from './components/data-table'
 
-interface OperationsMonitorProps {
+interface OperationsMonitorDetailsProps {
    id: string
    columns: ColumnDef<AuctionLot>[]
-   data: any[]
+   data: AuctionEntity[]
 }
 
-export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
-   id,
-   columns,
-   data
-}: OperationsMonitorProps) => {
+export const OperationsMonitorDetails: React.FC<
+   OperationsMonitorDetailsProps
+> = ({ id, columns, data }: OperationsMonitorDetailsProps) => {
    const tableRef = React.useRef<TableAuctionLotsHandle>(null)
 
    const [selectedRows, setSelectedRows] = React.useState<AuctionLot[]>([])
@@ -50,22 +46,21 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
 
-   const transformedData = React.useMemo(() => {
-      return data.flatMap((auction) => {
-         if (!auction.AuctionLot?.length) return []
-
-         return auction.AuctionLot.map((lot: AuctionLot) => ({
-            ...auction,
-            AuctionLot: [lot],
-            lotNumber: lot.lotNumber,
-            process: auction.auctionCode,
-            plate: lot.Vehicle?.plate,
-            chassis: lot.Vehicle?.chassis,
-            brand: lot.Vehicle?.brand?.name,
-            model: lot.Vehicle?.model?.name,
-            type: lot.Vehicle?.type?.name
+   const transformed_data = React.useMemo(() => {
+      return data.flatMap(({ auctionCode, AuctionLot = [], ...auctionRest }) =>
+         AuctionLot.map(({ Vehicle, lotNumber, ...lotRest }) => ({
+            ...auctionRest,
+            ...lotRest,
+            lotNumber,
+            process: auctionCode,
+            plate: Vehicle?.plate,
+            chassis: Vehicle?.chassis,
+            brand: Vehicle?.brand?.name,
+            model: Vehicle?.model?.name,
+            type: Vehicle?.type?.name,
+            AuctionLot: [{ Vehicle, lotNumber, ...lotRest }]
          }))
-      })
+      )
    }, [data])
    return (
       <React.Fragment>
@@ -237,10 +232,10 @@ export const OperationsMonitor: React.FC<OperationsMonitorProps> = ({
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
                   <div className="flex-1 overflow-auto">
-                     <TableAuctionLots
+                     <TableOperationMonitorDetails
                         ref={tableRef}
                         columns={columns}
-                        data={transformedData}
+                        data={transformed_data || []}
                         globalFilter={globalFilter}
                         onSelectionChange={setSelectedRows}
                      />
