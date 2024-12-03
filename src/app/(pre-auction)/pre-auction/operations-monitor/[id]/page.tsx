@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { columns_operation_monitor_details } from '@/src/features/pre-auction/operations-monitor/components/columns'
-import { OperationsMonitorDetails } from '@/src/features/pre-auction/operations-monitor/operations-monitor'
+import { OperationsMonitorDetails } from '@/src/features/pre-auction/operations-monitor/operations-monitor-details'
 import { readJSONFile } from '@/src/utils/file-path-utils'
 import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
