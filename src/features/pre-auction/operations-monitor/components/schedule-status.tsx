@@ -10,5 +10,11 @@ interface ScheduleStatusProps {
 export const ScheduleStatus: React.FC<ScheduleStatusProps> = ({
    row
 }: ScheduleStatusProps) => {
-   return <React.Fragment>Agendamento</React.Fragment>
+   return (
+      <React.Fragment>
+         <span className="material-symbols-outlined text-text-secondary symbol-md dark:text-dark-text-secondary">
+            schedule
+         </span>
+      </React.Fragment>
+   )
 }

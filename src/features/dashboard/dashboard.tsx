@@ -130,11 +130,9 @@ const Dashboard: React.FC<DashboardProps> = ({
             </div>
             <div>
                <Tabs
-                  defaultValue={Tab.InProgress}
                   value={tab as Tab}
-                  onValueChange={(value) => {
-                     setTab(value as Tab)
-                  }}
+                  defaultValue={Tab.InProgress}
+                  onValueChange={(value) => setTab(value as Tab)}
                >
                   <TabsList className="flex justify-between w-full">
                      <div className="grid grid-flow-col items-center gap-4 overflow-x-auto hide-scrollbar">

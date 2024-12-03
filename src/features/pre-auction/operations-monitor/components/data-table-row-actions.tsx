@@ -7,55 +7,36 @@ import {
    DropdownMenu,
    DropdownMenuContent,
    DropdownMenuItem,
-   DropdownMenuSeparator,
    DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/src/lib/utils'
 import { Row } from '@tanstack/react-table'
 
-interface DataTableRowActionsProps<TData> {
+interface OperationsMonitorDataTableRowActionsProps<TData> {
    row?: Row<TData>
    onSelect: (value: string) => void
 }
 
-export function DataTableRowActions<TData>({
+export function OperationsMonitorDataTableRowActions<TData>({
    onSelect
-}: DataTableRowActionsProps<TData>) {
+}: OperationsMonitorDataTableRowActionsProps<TData>) {
    const menuItems = [
       {
-         icon: 'edit',
-         label: 'Editar lote',
-         value: 'edit-lot',
+         icon: 'schedule',
+         label: 'Agendar transação',
+         value: 'schedule-transaction',
          filled: false
       },
       {
-         icon: 'check_circle',
-         label: 'Lançar perícia',
-         value: 'launch-expertise',
+         icon: 'cancel',
+         label: 'Cancelar agendamento',
+         value: 'cancel-schedule',
          filled: false
       },
       {
-         icon: 'calendar_today',
-         label: 'Histórico',
-         value: 'history',
-         filled: false
-      },
-      {
-         icon: 'content_cut',
-         label: 'Zerar numeração',
-         value: 'reset-numbering',
-         filled: false
-      },
-      {
-         icon: 'content_paste',
-         label: 'Criar numeração lote',
-         value: 'create-lot-numbering',
-         filled: false
-      },
-      {
-         icon: 'delete',
-         label: 'Deletar lote',
-         value: 'delete-lot',
+         icon: 'sync',
+         label: 'Reiniciar transações',
+         value: 'restart-transactions',
          filled: false
       }
    ]
@@ -67,7 +48,7 @@ export function DataTableRowActions<TData>({
                size="icon"
                className="flex data-[state=open]:bg-muted"
             >
-               <span className="material-symbols-outlined text-text-secondary">
+               <span className="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">
                   more_vert
                </span>
                <span className="sr-only">Open menu</span>
@@ -76,16 +57,13 @@ export function DataTableRowActions<TData>({
          <DropdownMenuContent align="end">
             {menuItems.map((item, index) => (
                <React.Fragment key={item.label}>
-                  {index === Math.floor(menuItems.length / 2) && (
-                     <DropdownMenuSeparator />
-                  )}
                   <DropdownMenuItem
                      className="font-medium"
                      onClick={() => onSelect(item.value)}
                   >
                      <span
                         className={cn(
-                           'material-symbols-outlined text-text-secondary symbol-md',
+                           'material-symbols-outlined text-text-secondary symbol-md dark:text-dark-text-secondary',
                            item.filled && 'filled'
                         )}
                      >

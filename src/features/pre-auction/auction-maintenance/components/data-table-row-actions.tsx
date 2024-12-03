@@ -74,7 +74,7 @@ export function DataTableRowActions<TData>({
                size="icon"
                className="flex data-[state=open]:bg-muted"
             >
-               <span className="material-symbols-outlined text-text-secondary">
+               <span className="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">
                   more_vert
                </span>
                <span className="sr-only">Open menu</span>
@@ -90,7 +90,7 @@ export function DataTableRowActions<TData>({
                   >
                      <span
                         className={cn(
-                           'material-symbols-outlined text-text-secondary symbol-md',
+                           'material-symbols-outlined text-text-secondary symbol-md dark:text-dark-text-secondary',
                            item.filled && 'filled'
                         )}
                      >

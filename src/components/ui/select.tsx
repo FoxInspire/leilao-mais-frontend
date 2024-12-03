@@ -244,7 +244,7 @@ const SelectInput = React.forwardRef<
                )}
             </SelectContent>
          </Select>
-         <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-action-active">
+         <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-action-active dark:text-white">
             arrow_drop_down
          </span>
       </div>

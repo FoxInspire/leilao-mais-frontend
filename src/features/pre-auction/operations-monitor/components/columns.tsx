@@ -1,11 +1,12 @@
 'use client'
 
-import { DataTableRowActions } from '@/features/pre-auction/auction-lots/components/data-table-row-actions'
 import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { AuctionEntity } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 
+import { OperationsMonitorDataTableRowActions } from './data-table-row-actions'
+import { OperationLotStatus } from './lot-status'
 import { ScheduleStatus } from './schedule-status'
 import { TransactionStatus } from './transaction-status'
 
@@ -105,36 +106,12 @@ export const columns_operation_monitor_details: ColumnDef<AuctionEntity>[] = [
       }
    },
    {
-      accessorKey: 'lotNumber',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Lote" />
-      ),
-      cell: ({ row }) => {
-         const lots = row.original.AuctionLot || []
-         return (
-            <div className="space-y-1">
-               {lots.map((lot) => (
-                  <div key={lot.id}>{lot.lotNumber}</div>
-               ))}
-            </div>
-         )
-      }
-   },
-
-   {
-      accessorKey: 'auction_status',
+      accessorKey: 'lot_status',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Status do lote" />
       ),
       cell: ({ row }) => {
-         const lots = row.original.AuctionLot || []
-         return (
-            <div className="space-y-1">
-               {lots.map((lot) => (
-                  <div key={lot.id}>{lot.Vehicle?.type?.name || ''}</div>
-               ))}
-            </div>
-         )
+         return <OperationLotStatus row={row} />
       }
    },
    {
@@ -165,7 +142,7 @@ export const columns_operation_monitor_details: ColumnDef<AuctionEntity>[] = [
    {
       id: 'actions',
       cell: ({ row }) => (
-         <DataTableRowActions
+         <OperationsMonitorDataTableRowActions
             row={row}
             onSelect={(value) => console.log(value)}
          />

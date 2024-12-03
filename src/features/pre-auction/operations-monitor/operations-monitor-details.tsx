@@ -114,13 +114,13 @@ export const OperationsMonitorDetails: React.FC<
                            />
                            <SelectInput
                               options={[]}
-                              placeholder="Selecione a transação"
-                              label="Transação"
+                              placeholder="Selecione o status"
+                              label="Status"
                            />
                            <SelectInput
                               options={[]}
-                              placeholder="Selecione o status"
-                              label="Status"
+                              placeholder="Selecione a transação"
+                              label="Transação"
                            />
                            <Button
                               variant="ghost"
