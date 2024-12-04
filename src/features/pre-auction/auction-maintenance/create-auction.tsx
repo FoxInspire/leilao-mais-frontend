@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import * as z from 'zod'
 
 import {
    Breadcrumb,
@@ -13,9 +14,22 @@ import {
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Separator } from '@/src/components/ui/separator'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+
+const createAuctionSchema = z.object({})
 
 export const CreateAuction: React.FC = () => {
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
+
+   const form = useForm<z.infer<typeof createAuctionSchema>>({
+      resolver: zodResolver(createAuctionSchema),
+      defaultValues: {}
+   })
+
+   async function onSubmit(data: z.infer<typeof createAuctionSchema>) {
+      console.log('data', data)
+   }
 
    return (
       <React.Fragment>

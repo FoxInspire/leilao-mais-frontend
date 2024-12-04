@@ -9,7 +9,7 @@ import {
 import { cn } from '@/lib/utils'
 import { useIsMobile } from '@/src/hooks/useMobile'
 
-type CollapsibleSidebarProps = {
+interface CollapsibleSidebarProps {
    side?: 'left' | 'right'
    className?: string
    children: React.ReactNode
