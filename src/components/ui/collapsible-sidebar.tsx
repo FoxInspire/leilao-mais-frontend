@@ -63,6 +63,10 @@ export function CollapsibleSidebar({
             'relative transition-[width] duration-300 ease-in-out',
             open ? 'w-96' : 'w-0',
             hasHeaderMenu ? 'mt-14' : '',
+            {
+               'overflow-y-auto': open,
+               'overflow-y-hidden h-0': !open
+            },
             className
          )}
       >

@@ -34,9 +34,9 @@ interface SearchOperationsProps {
 }
 
 const searchOperationsSchema = z.object({
-   auctionCode: z.string().min(1, {
-      message: 'Selecione um leilão para continuar'
-   })
+   auctionCode: z
+      .string()
+      .min(1, { message: 'Selecione um leilão para continuar' })
 })
 
 export const SearchOperations: React.FC<SearchOperationsProps> = ({

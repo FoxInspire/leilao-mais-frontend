@@ -25,11 +25,16 @@ import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
-import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
+
+interface AuctionMaintenanceLotsProps {
+   id: string
+   data: any[] // is a AuctionLot[]
+   columns: ColumnDef<AuctionLot>[]
+}
 
 const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
    id,
@@ -232,10 +237,6 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
             <CollapsibleSidebar
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
-               className={cn({
-                  'overflow-y-auto': isSidebarOpen,
-                  'overflow-y-hidden h-0': !isSidebarOpen
-               })}
             >
                <div className="space-y-2 h-full overflow-y-auto md:ml-4 md:mt-9">
                   <div className="flex justify-between items-center gap-2">
@@ -502,12 +503,6 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
          </Dialog>
       </React.Fragment>
    )
-}
-
-type AuctionMaintenanceLotsProps = {
-   id: string
-   data: any[]
-   columns: ColumnDef<AuctionLot>[]
 }
 
 export default AuctionLots

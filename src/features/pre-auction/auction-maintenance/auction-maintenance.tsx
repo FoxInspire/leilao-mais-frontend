@@ -24,10 +24,10 @@ import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DatePicker } from '@/src/components/ui/date-picker'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
-import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionEntity } from '@/src/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
+
 import Link from 'next/link'
 
 interface AuctionMaintenanceProps {
@@ -210,10 +210,6 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
             <CollapsibleSidebar
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
-               className={cn({
-                  'overflow-y-auto': isSidebarOpen,
-                  'overflow-y-hidden h-0': !isSidebarOpen
-               })}
             >
                <div className="space-y-2 h-full overflow-y-auto ml-4 mt-[28px]">
                   <div className="flex justify-between items-center gap-2">
