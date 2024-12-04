@@ -33,6 +33,8 @@ export const inputVariants = cva(
       'focus:placeholder:opacity-100',
       'disabled:cursor-not-allowed disabled:opacity-50',
       'disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none',
+      'aria-[invalid=true]:border-red-500 aria-[invalid=true]:dark:border-red-500',
+      'aria-[invalid=true]:text-red-600 aria-[invalid=true]:dark:text-red-600',
       'invalid:border-red-500 invalid:text-red-600',
       'focus:invalid:border-red-500 focus:invalid:ring-red-500'
    ],
@@ -92,7 +94,9 @@ export const labelVariants = cva(
       'transition-all duration-200 ease-out',
 
       'peer-[&[data-autofilled="true"]]:top-1',
-      'peer-[&[data-autofilled="true"]]:scale-75'
+      'peer-[&[data-autofilled="true"]]:scale-75',
+      'peer-aria-[invalid=true]:text-red-500',
+      'peer-aria-[invalid=true]:dark:text-red-500'
    ],
    {
       variants: {
@@ -128,6 +132,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
          ? () => setType(type === 'password' ? 'text' : 'password')
          : undefined
 
+      const onAnimationStart = (e: React.AnimationEvent<HTMLInputElement>) => {
+         if (e.animationName === 'onAutoFillStart') {
+            const target = e.target as HTMLInputElement
+            target.setAttribute('data-autofilled', 'true')
+         }
+      }
+
       return (
          <React.Fragment>
             <div
@@ -135,35 +146,26 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                data-twe-input-wrapper-init
             >
                <input
+                  ref={ref}
                   type={type}
-                  data-value={props.value}
-                  data-type={type}
-                  autoComplete="new-password"
-                  autoCorrect="off"
                   autoSave="off"
+                  data-type={type}
+                  autoCorrect="off"
+                  data-value={props.value}
+                  autoComplete="new-password"
+                  aria-invalid={props['aria-invalid']}
                   className={cn(
-                     inputVariants({ error: !!error, size, labelStatus }),
+                     inputVariants({ size, labelStatus }),
                      className
                   )}
-                  aria-invalid={error ? 'true' : undefined}
-                  ref={ref}
                   placeholder={label}
-                  onAnimationStart={(e) => {
-                     if (e.animationName === 'onAutoFillStart') {
-                        ;(e.target as HTMLInputElement).setAttribute(
-                           'data-autofilled',
-                           'true'
-                        )
-                     }
-                  }}
+                  onAnimationStart={(e) => onAnimationStart(e)}
                   {...props}
                />
                {label && (
                   <label
                      htmlFor={props.id}
-                     className={cn(
-                        labelVariants({ error: !!error, labelStatus })
-                     )}
+                     className={cn(labelVariants({ labelStatus }))}
                   >
                      {label}
                   </label>
