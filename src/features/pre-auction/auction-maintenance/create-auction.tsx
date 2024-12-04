@@ -102,89 +102,24 @@ export const CreateAuction: React.FC = () => {
                <Form {...form}>
                   <form
                      onSubmit={form.handleSubmit(onSubmit)}
-                     className="space-y-6"
+                     className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)] hide-scrollbar"
                   >
-                     {/* Dados do leilão */}
-                     <div className="space-y-4">
-                        <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
-                           Dados do leilão
-                        </p>
-                        <div className="grid grid-cols-2 gap-4">
-                           <FormField
-                              control={form.control}
-                              name="description"
-                              render={({ field }) => (
-                                 <FormItem>
-                                    <FormControl>
-                                       <Input
-                                          label="Descrição *"
-                                          placeholder="Digite a descrição"
-                                          {...field}
-                                       />
-                                    </FormControl>
-                                    <FormMessage />
-                                 </FormItem>
-                              )}
-                           />
-                           <FormField
-                              control={form.control}
-                              name="auctionDate"
-                              render={({ field }) => (
-                                 <FormItem>
-                                    <FormControl>
-                                       <DatePicker
-                                          showTime
-                                          label="Data e hora do leilão *"
-                                          placeholder="DD/MM/YYYY hh:mm aa"
-                                          {...field}
-                                       />
-                                    </FormControl>
-                                    <FormMessage />
-                                 </FormItem>
-                              )}
-                           />
-                        </div>
-                     </div>
-
-                     {/* Localização */}
-                     <div className="space-y-4">
-                        <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
-                           Localização
-                        </p>
-                        <div className="space-y-6">
-                           <div className="flex gap-2">
+                     <div className="flex-1 space-y-6 overflow-auto">
+                        {/* Dados do leilão */}
+                        <div className="space-y-4">
+                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                              Dados do leilão
+                           </p>
+                           <div className="grid grid-cols-2 gap-4">
                               <FormField
                                  control={form.control}
-                                 name="cep"
+                                 name="description"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
                                           <Input
-                                             label="CEP *"
-                                             placeholder="00000-000"
-                                             type="number"
-                                             className="min-w-[172px]"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <Button variant="ghost" type="button">
-                                 Buscar
-                              </Button>
-                           </div>
-                           <div className="grid grid-cols-[0.6fr_0.2fr_0.2fr] gap-4">
-                              <FormField
-                                 control={form.control}
-                                 name="address"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="Endereço *"
-                                             placeholder="Digite o endereço"
+                                             label="Descrição *"
+                                             placeholder="Digite a descrição"
                                              {...field}
                                           />
                                        </FormControl>
@@ -194,174 +129,14 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="addressNumber"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="Número *"
-                                             placeholder="0000000000"
-                                             type="number"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="addressComplement"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="Complemento"
-                                             placeholder="Digite o complemento"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                           </div>
-                           <div className="grid grid-cols-3 gap-4 items-center">
-                              <FormField
-                                 control={form.control}
-                                 name="neighborhood"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="Bairro *"
-                                             placeholder="Digite o bairro"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="addressState"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="UF *"
-                                             options={[]}
-                                             placeholder="Selecione o estado"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="addressCity"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="Município *"
-                                             placeholder="Digite o município"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                           </div>
-                        </div>
-                     </div>
-
-                     {/* Datas gerais */}
-                     <div className="space-y-4">
-                        <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
-                           Datas gerais
-                        </p>
-                        <div className="space-y-6">
-                           <div className="grid grid-cols-[0.6fr_0.2fr_0.2fr] gap-4">
-                              <FormField
-                                 control={form.control}
-                                 name="scheduleDate"
+                                 name="auctionDate"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
                                           <DatePicker
-                                             label="Agendamento *"
-                                             placeholder="DD/MM/YYYY"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="startRemovalDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <DatePicker
-                                             label="Início da Retirada *"
-                                             placeholder="DD/MM/YYYY"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="endRemovalDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <DatePicker
-                                             label="Fim da Retirada *"
-                                             placeholder="DD/MM/YYYY"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                           </div>
-                           <div className="grid grid-cols-2 gap-4 items-center">
-                              <FormField
-                                 control={form.control}
-                                 name="noticeDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <DatePicker
-                                             label="Edital do Leilão *"
-                                             placeholder="DD/MM/YYYY"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="notificationDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <DatePicker
-                                             label="Notificação *"
-                                             placeholder="DD/MM/YYYY"
+                                             showTime
+                                             label="Data e hora do leilão *"
+                                             placeholder="DD/MM/YYYY hh:mm aa"
                                              {...field}
                                           />
                                        </FormControl>
@@ -371,231 +146,467 @@ export const CreateAuction: React.FC = () => {
                               />
                            </div>
                         </div>
-                     </div>
 
-                     {/* Dados complementares */}
-                     <div className="space-y-4">
-                        <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
-                           Dados complementares
-                        </p>
-                        <div className="space-y-6">
-                           <div className="grid grid-cols-3 gap-4">
-                              <FormField
-                                 control={form.control}
-                                 name="auctioneerId"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="Leiloeiro *"
-                                             placeholder="Selecione o leiloeiro"
-                                             options={[]}
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="auctionCompanyId"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="Empresa *"
-                                             placeholder="Selecione a empresa"
-                                             options={[]}
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="committeeId"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="Comitente *"
-                                             placeholder="Selecione o comitente"
-                                             options={[]}
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
+                        {/* Localização */}
+                        <div className="space-y-4">
+                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                              Localização
+                           </p>
+                           <div className="space-y-6">
+                              <div className="flex gap-2">
+                                 <FormField
+                                    control={form.control}
+                                    name="cep"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="CEP *"
+                                                placeholder="00000-000"
+                                                type="number"
+                                                className="min-w-[172px]"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <Button variant="ghost" type="button">
+                                    Buscar
+                                 </Button>
+                              </div>
+                              <div className="grid grid-cols-[0.6fr_0.2fr_0.2fr] gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="address"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Endereço *"
+                                                placeholder="Digite o endereço"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="addressNumber"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Número *"
+                                                placeholder="0000000000"
+                                                type="number"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="addressComplement"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Complemento"
+                                                placeholder="Digite o complemento"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
+                              <div className="grid grid-cols-3 gap-4 items-center">
+                                 <FormField
+                                    control={form.control}
+                                    name="neighborhood"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Bairro *"
+                                                placeholder="Digite o bairro"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="addressState"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="UF *"
+                                                options={[]}
+                                                placeholder="Selecione o estado"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="addressCity"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Município *"
+                                                placeholder="Digite o município"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
                            </div>
-                           <div className="grid grid-cols-2 gap-4 items-center">
-                              <FormField
-                                 control={form.control}
-                                 name="exhibitorId"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="Expositor *"
-                                             placeholder="Selecione o expositor"
-                                             options={[]}
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="accountRule"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="Regra Prestação de Contas *"
-                                             placeholder="Selecione a regra"
-                                             options={[]}
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
+                        </div>
+
+                        {/* Datas gerais */}
+                        <div className="space-y-4">
+                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                              Datas gerais
+                           </p>
+                           <div className="space-y-6">
+                              <div className="grid grid-cols-[0.6fr_0.2fr_0.2fr] gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="scheduleDate"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <DatePicker
+                                                label="Agendamento *"
+                                                placeholder="DD/MM/YYYY"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="startRemovalDate"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <DatePicker
+                                                label="Início da Retirada *"
+                                                placeholder="DD/MM/YYYY"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="endRemovalDate"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <DatePicker
+                                                label="Fim da Retirada *"
+                                                placeholder="DD/MM/YYYY"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
+                              <div className="grid grid-cols-2 gap-4 items-center">
+                                 <FormField
+                                    control={form.control}
+                                    name="noticeDate"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <DatePicker
+                                                label="Edital do Leilão *"
+                                                placeholder="DD/MM/YYYY"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="notificationDate"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <DatePicker
+                                                label="Notificação *"
+                                                placeholder="DD/MM/YYYY"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
+                           </div>
+                        </div>
+
+                        {/* Dados complementares */}
+                        <div className="space-y-4">
+                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                              Dados complementares
+                           </p>
+                           <div className="space-y-6">
+                              <div className="grid grid-cols-3 gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="auctioneerId"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Leiloeiro *"
+                                                placeholder="Selecione o leiloeiro"
+                                                options={[]}
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="auctionCompanyId"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Empresa *"
+                                                placeholder="Selecione a empresa"
+                                                options={[]}
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="committeeId"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Comitente *"
+                                                placeholder="Selecione o comitente"
+                                                options={[]}
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
+                              <div className="grid grid-cols-2 gap-4 items-center">
+                                 <FormField
+                                    control={form.control}
+                                    name="exhibitorId"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Expositor *"
+                                                placeholder="Selecione o expositor"
+                                                options={[]}
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="accountRule"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Regra Prestação de Contas *"
+                                                placeholder="Selecione a regra"
+                                                options={[]}
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
+                           </div>
+                        </div>
+
+                        {/* E-mail para Notificação */}
+                        <div className="space-y-4">
+                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                              E-mail para Notificação
+                           </p>
+                           <div className="space-y-6">
+                              <div className="grid grid-cols-1 gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="notificationEmails"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="E-mail *"
+                                                placeholder="Digite o e-mail"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormDescription>
+                                             Para adicionar mais de um e-mail,
+                                             separe por vírgula e pressione{' '}
+                                             <strong>Enter</strong>.
+                                          </FormDescription>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
+                           </div>
+                        </div>
+
+                        {/* Diário oficial */}
+                        <div className="space-y-4">
+                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                              Diário oficial
+                           </p>
+                           <div className="space-y-6">
+                              <div className="grid grid-cols-2 items-center gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="officialPublicationDate"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <DatePicker
+                                                label="Data da Publicação D.O. *"
+                                                placeholder="DD/MM/YYYY"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="officialPublicationNumber"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Número D.O. *"
+                                                placeholder="0000000000"
+                                                type="number"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
+                           </div>
+                        </div>
+
+                        {/* Ordem Interna */}
+                        <div className="space-y-4">
+                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                              Ordem Interna
+                           </p>
+                           <div className="space-y-6">
+                              <div className="grid grid-cols-2 items-center gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="internalMatrixOrder"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Ordem Interna Matriz"
+                                                placeholder="0000000000"
+                                                type="number"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="internalAuctionOrder"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Ordem Interna Leilão "
+                                                placeholder="0000000000"
+                                                type="number"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
                            </div>
                         </div>
                      </div>
-
-                     {/* E-mail para Notificação */}
-                     <div className="space-y-4">
-                        <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
-                           E-mail para Notificação
-                        </p>
-                        <div className="space-y-6">
-                           <div className="grid grid-cols-1 gap-4">
-                              <FormField
-                                 control={form.control}
-                                 name="notificationEmails"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="E-mail *"
-                                             placeholder="Digite o e-mail"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormDescription>
-                                          Para adicionar mais de um e-mail,
-                                          separe por vírgula e pressione{' '}
-                                          <strong>Enter</strong>.
-                                       </FormDescription>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                           </div>
-                        </div>
-                     </div>
-
-                     {/* Diário oficial */}
-                     <div className="space-y-4">
-                        <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
-                           Diário oficial
-                        </p>
-                        <div className="space-y-6">
-                           <div className="grid grid-cols-2 items-center gap-4">
-                              <FormField
-                                 control={form.control}
-                                 name="officialPublicationDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <DatePicker
-                                             label="Data da Publicação D.O. *"
-                                             placeholder="DD/MM/YYYY"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="officialPublicationNumber"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="Número D.O. *"
-                                             placeholder="0000000000"
-                                             type="number"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                           </div>
-                        </div>
-                     </div>
-
-                     {/* Ordem Interna */}
-                     <div className="space-y-4">
-                        <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
-                           Ordem Interna
-                        </p>
-                        <div className="space-y-6">
-                           <div className="grid grid-cols-2 items-center gap-4">
-                              <FormField
-                                 control={form.control}
-                                 name="internalMatrixOrder"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="Ordem Interna Matriz"
-                                             placeholder="0000000000"
-                                             type="number"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="internalAuctionOrder"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="Ordem Interna Leilão "
-                                             placeholder="0000000000"
-                                             type="number"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                           </div>
-                        </div>
-                     </div>
-
-                     <Button type="submit" className="w-full">
+                  </form>
+                  <div className="flex flex-1 justify-between items-center">
+                     <Button
+                        variant="ghost"
+                        className={
+                           'w-fit bg-transparent text-error-default hover:bg-error-default/10 dark:border-dark-error-default dark:text-dark-error-default dark:hover:bg-dark-error-default/10'
+                        }
+                     >
+                        Cancelar cadastro
+                     </Button>
+                     <Button type="submit" className="w-fit">
                         Continuar
                      </Button>
-                  </form>
+                  </div>
                </Form>
             </div>
             <CollapsibleSidebar
