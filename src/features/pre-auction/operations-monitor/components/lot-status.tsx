@@ -40,7 +40,6 @@ export const OperationLotStatus: React.FC<OperationLotStatusProps> = ({
    const handleConfirm = () => {
       if (tempStatus) {
          setCurrentStatus(tempStatus)
-         console.log('Novo status:', tempStatus)
       }
       setTempStatus(null)
       setDialog(false)

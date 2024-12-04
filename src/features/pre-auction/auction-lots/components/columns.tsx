@@ -154,10 +154,7 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
    {
       id: 'actions',
       cell: ({ row }) => (
-         <DataTableRowActions
-            row={row}
-            onSelect={(value) => console.log(value)}
-         />
+         <DataTableRowActions row={row} onSelect={(value) => {}} />
       )
    }
 ]

@@ -144,7 +144,7 @@ export const columns_operation_monitor_details: ColumnDef<AuctionEntity>[] = [
       cell: ({ row }) => (
          <OperationsMonitorDataTableRowActions
             row={row}
-            onSelect={(value) => console.log(value)}
+            onSelect={(value) => {}}
          />
       )
    }

@@ -336,9 +336,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                      <SelectInput
                         label="Perícia"
@@ -349,9 +349,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                      <SelectInput
                         label="Status"
@@ -362,9 +362,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                   </div>
                   <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
@@ -377,9 +377,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                      <SelectInput
                         label="Sub-restrição"
@@ -390,9 +390,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                      <SelectInput
                         label="Processo"
@@ -403,9 +403,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                   </div>
                   <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
@@ -459,9 +459,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                      <SelectInput
                         label="Tipo"
@@ -472,9 +472,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                   </div>
                </div>
@@ -483,9 +483,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      <Button
                         variant="destructive"
                         className="w-full"
-                        onClick={() => {
-                           setDialog(false)
-                        }}
+                        onClick={() => setDialog(false)}
                      >
                         Cancelar
                      </Button>
@@ -494,10 +492,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      <Button
                         variant="default"
                         className="w-full"
-                        onClick={() => {
-                           console.log('buscar')
-                           setDialog(false)
-                        }}
+                        onClick={() => setDialog(false)}
                      >
                         Buscar
                      </Button>

@@ -206,11 +206,9 @@ const Dashboard: React.FC<DashboardProps> = ({
                                  <Checkbox
                                     size="md"
                                     label={option.label}
-                                    onCheckedChange={(checked: CheckedState) =>
-                                       console.log(
-                                          `checked: ${checked}; id: ${option.id}`
-                                       )
-                                    }
+                                    onCheckedChange={(
+                                       checked: CheckedState
+                                    ) => {}}
                                  />
                               </DropdownMenuItem>
                            ))}
@@ -223,11 +221,9 @@ const Dashboard: React.FC<DashboardProps> = ({
                                  <Checkbox
                                     size="md"
                                     label={option.label}
-                                    onCheckedChange={(checked: CheckedState) =>
-                                       console.log(
-                                          `checked: ${checked}; id: ${option.id}`
-                                       )
-                                    }
+                                    onCheckedChange={(
+                                       checked: CheckedState
+                                    ) => {}}
                                  />
                               </DropdownMenuItem>
                            ))}
@@ -241,7 +237,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               <Card
                                  key={auction.auctionCode}
                                  {...auction}
-                                 onEdit={() => console.log('Editar leilão')}
+                                 onEdit={() => {}}
                                  date={new Date(auction.date)}
                               />
                            ))}

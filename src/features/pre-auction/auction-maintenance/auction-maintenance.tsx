@@ -31,14 +31,13 @@ import { ColumnDef } from '@tanstack/react-table'
 
 interface AuctionMaintenanceProps {
    data: AuctionEntity[]
-   columns: ColumnDef<any>[]
+   columns: ColumnDef<AuctionEntity>[]
 }
 
 const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
    columns,
    data
 }: AuctionMaintenanceProps) => {
-   console.log('data', data)
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
 

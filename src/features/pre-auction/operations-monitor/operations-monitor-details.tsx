@@ -340,9 +340,9 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                      <SelectInput
                         label="Transação"
@@ -353,9 +353,9 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                      <SelectInput
                         label="Agendado"
@@ -366,9 +366,9 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) => {
+                        onValueChange={(value: SelectInputValue) =>
                            console.log('value', value)
-                        }}
+                        }
                      />
                   </div>
                   <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
@@ -398,10 +398,7 @@ export const OperationsMonitorDetails: React.FC<
                      <Button
                         variant="default"
                         className="w-full"
-                        onClick={() => {
-                           console.log('buscar')
-                           setDialog(false)
-                        }}
+                        onClick={() => setDialog(false)}
                      >
                         Buscar
                      </Button>
