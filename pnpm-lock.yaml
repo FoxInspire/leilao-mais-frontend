@@ -83,6 +83,9 @@ importers:
       next-auth:
         specifier: ^4.24.10
         version: 4.24.10(next@15.0.2(@babel/core@7.26.0)(@playwright/test@1.48.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next-nprogress-bar:
+        specifier: ^2.3.15
+        version: 2.3.15
       next-themes:
         specifier: ^0.4.3
         version: 0.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2814,6 +2817,9 @@ packages:
       nodemailer:
         optional: true
 
+  next-nprogress-bar@2.3.15:
+    resolution: {integrity: sha512-8s8slKMUXvDrl7wWzKyWt6BJQThOJREpCicdbi66xAOzQ23DeIauEzMGPg1BMixnqlIRY3ayUO/ey9dafkgWcA==}
+
   next-themes@0.4.3:
     resolution: {integrity: sha512-nG84VPkTdUHR2YeD89YchvV4I9RbiMAql3GiLEQlPvq1ioaqPaIReK+yMRdg/zgiXws620qS1rU30TiWmmG9lA==}
     peerDependencies:
@@ -2854,6 +2860,9 @@ packages:
   normalize-range@0.1.2:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
+
+  nprogress@0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
@@ -6491,6 +6500,10 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       uuid: 8.3.2
 
+  next-nprogress-bar@2.3.15:
+    dependencies:
+      nprogress: 0.2.0
+
   next-themes@0.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
@@ -6532,6 +6545,8 @@ snapshots:
   normalize-path@3.0.0: {}
 
   normalize-range@0.1.2: {}
+
+  nprogress@0.2.0: {}
 
   nth-check@2.1.1:
     dependencies:
