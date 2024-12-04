@@ -200,6 +200,7 @@ export const CreateAuction: React.FC = () => {
                                           <Input
                                              label="Número *"
                                              placeholder="0000000000"
+                                             type="number"
                                              {...field}
                                           />
                                        </FormControl>
