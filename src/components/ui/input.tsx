@@ -69,7 +69,7 @@ export const labelVariants = cva(
       'mb-0 max-w-[90%]',
       'origin-[0_0]',
 
-      'truncate leading-6',
+      'truncate leading-6 text-base',
       'text-neutral-500',
       'dark:text-neutral-400',
 
@@ -116,7 +116,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
          label,
          error,
          size = 'md',
-         labelStatus = 'inherit',
+         labelStatus = 'on',
          ...props
       },
       ref
