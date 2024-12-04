@@ -27,156 +27,42 @@ import { Separator } from '@/src/components/ui/separator'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/
-
-const createAuctionSchema = z.object({
-   description: z.string({
-      required_error: 'Description is required',
-      invalid_type_error: 'Description must be a string'
-   }),
-   auctionDate: z
-      .string({
-         required_error: 'Auction date is required',
-         invalid_type_error: 'Auction date must be a string'
-      })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Auction date must be in ISO 8601 format'
-      }),
-   cep: z.string({
-      required_error: 'CEP is required',
-      invalid_type_error: 'CEP must be a string'
-   }),
-   address: z.string({
-      required_error: 'Address is required',
-      invalid_type_error: 'Address must be a string'
-   }),
-   addressNumber: z.string({
-      required_error: 'Address number is required',
-      invalid_type_error: 'Address number must be a string'
-   }),
-   addressComplement: z
-      .string({
-         invalid_type_error: 'Address complement must be a string'
-      })
-      .optional(),
-   neighborhood: z.string({
-      required_error: 'Neighborhood is required',
-      invalid_type_error: 'Neighborhood must be a string'
-   }),
-   addressState: z.string({
-      required_error: 'Address state is required',
-      invalid_type_error: 'Address state must be a string'
-   }),
-   addressCity: z.string({
-      required_error: 'Address city is required',
-      invalid_type_error: 'Address city must be a string'
-   }),
-   scheduleDate: z
-      .string({
-         required_error: 'Schedule date is required',
-         invalid_type_error: 'Schedule date must be a string'
-      })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Schedule date must be in ISO 8601 format'
-      }),
-   startRemovalDate: z
-      .string({
-         required_error: 'Start removal date is required',
-         invalid_type_error: 'Start removal date must be a string'
-      })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Start removal date must be in ISO 8601 format'
-      }),
-   endRemovalDate: z
-      .string({
-         required_error: 'End removal date is required',
-         invalid_type_error: 'End removal date must be a string'
-      })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'End removal date must be in ISO 8601 format'
-      }),
-   notificationDate: z
-      .string({
-         required_error: 'Notification date is required',
-         invalid_type_error: 'Notification date must be a string'
-      })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Notification date must be in ISO 8601 format'
-      }),
-   noticeDate: z
-      .string({
-         required_error: 'Notice date is required',
-         invalid_type_error: 'Notice date must be a string'
-      })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Notice date must be in ISO 8601 format'
-      }),
-   notificationEmails: z.array(
-      z.string({
-         required_error: 'Notification email is required',
-         invalid_type_error: 'Notification email must be a string'
-      })
-   ),
-   auctioneerId: z.string({
-      required_error: 'Auctioneer ID is required',
-      invalid_type_error: 'Auctioneer ID must be a string'
-   }),
-   auctionCompanyId: z.string({
-      required_error: 'Auction company ID is required',
-      invalid_type_error: 'Auction company ID must be a string'
-   }),
-   committeeId: z.string({
-      required_error: 'Committee ID is required',
-      invalid_type_error: 'Committee ID must be a string'
-   }),
-   exhibitorId: z.string({
-      required_error: 'Exhibitor ID is required',
-      invalid_type_error: 'Exhibitor ID must be a string'
-   }),
-   accountRule: z.string({
-      required_error: 'Account rule is required',
-      invalid_type_error: 'Account rule must be a string'
-   }),
-   officialPublicationDate: z
-      .string({
-         required_error: 'Official publication date is required',
-         invalid_type_error: 'Official publication date must be a string'
-      })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Official publication date must be in ISO 8601 format'
-      }),
-   officialPublicationNumber: z.string({
-      required_error: 'Official publication number is required',
-      invalid_type_error: 'Official publication number must be a string'
-   }),
-   internalMatrixOrder: z
-      .string({
-         invalid_type_error: 'Internal matrix order must be a string'
-      })
-      .optional(),
-   internalAuctionOrder: z
-      .string({
-         invalid_type_error: 'Internal auction order must be a string'
-      })
-      .optional(),
-   vehicleObservations: z
-      .string({
-         invalid_type_error: 'Vehicle observations must be a string'
-      })
-      .optional(),
-   tenantId: z.string({
-      required_error: 'Tenant ID is required',
-      invalid_type_error: 'Tenant ID must be a string'
-   })
-})
-
 export const CreateAuction: React.FC = () => {
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
 
    const form = useForm<z.infer<typeof createAuctionSchema>>({
       resolver: zodResolver(createAuctionSchema),
-      defaultValues: {}
+      defaultValues: {
+         description: '',
+         auctionDate: '',
+         cep: '',
+         address: '',
+         addressNumber: '',
+         addressComplement: '',
+         neighborhood: '',
+         addressState: '',
+         addressCity: '',
+         scheduleDate: '',
+         startRemovalDate: '',
+         endRemovalDate: '',
+         notificationDate: '',
+         noticeDate: '',
+         notificationEmails: [],
+         auctioneerId: '',
+         auctionCompanyId: '',
+         committeeId: '',
+         exhibitorId: '',
+         accountRule: '',
+         officialPublicationDate: '',
+         officialPublicationNumber: '',
+         internalMatrixOrder: '',
+         internalAuctionOrder: '',
+         vehicleObservations: '',
+         tenantId: ''
+      }
    })
+
+   console.log('form', form.watch())
 
    async function onSubmit(data: z.infer<typeof createAuctionSchema>) {
       console.log('data', data)
@@ -291,7 +177,7 @@ export const CreateAuction: React.FC = () => {
                            <div className="grid grid-cols-[0.6fr_0.2fr_0.2fr] gap-4">
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="address"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -307,7 +193,7 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="addressNumber"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -323,7 +209,7 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="addressComplement"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -341,7 +227,7 @@ export const CreateAuction: React.FC = () => {
                            <div className="grid grid-cols-3 gap-4 items-center">
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="neighborhood"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -357,7 +243,7 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="addressState"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -401,7 +287,7 @@ export const CreateAuction: React.FC = () => {
                            <div className="grid grid-cols-[0.6fr_0.2fr_0.2fr] gap-4">
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="scheduleDate"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -418,7 +304,7 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="startRemovalDate"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -435,7 +321,7 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="endRemovalDate"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -454,7 +340,7 @@ export const CreateAuction: React.FC = () => {
                            <div className="grid grid-cols-2 gap-4 items-center">
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="noticeDate"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -471,7 +357,7 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="notificationDate"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -499,7 +385,7 @@ export const CreateAuction: React.FC = () => {
                            <div className="grid grid-cols-3 gap-4">
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="auctioneerId"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -516,7 +402,7 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="auctionCompanyId"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -533,7 +419,7 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="committeeId"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -549,10 +435,10 @@ export const CreateAuction: React.FC = () => {
                                  )}
                               />
                            </div>
-                           <div className="grid grid-cols-3 gap-4 items-center">
+                           <div className="grid grid-cols-2 gap-4 items-center">
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="exhibitorId"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -567,26 +453,9 @@ export const CreateAuction: React.FC = () => {
                                     </FormItem>
                                  )}
                               />
-
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="ID de Leilão *"
-                                             placeholder="Digite o ID de leilão"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="auctionDate"
+                                 name="accountRule"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -611,10 +480,10 @@ export const CreateAuction: React.FC = () => {
                            E-mail para Notificação
                         </p>
                         <div className="space-y-6">
-                           <div className="grid grid-cols-3 gap-4">
+                           <div className="grid grid-cols-1 gap-4">
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="notificationEmails"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -626,95 +495,9 @@ export const CreateAuction: React.FC = () => {
                                        </FormControl>
                                        <FormDescription>
                                           Para adicionar mais de um e-mail,
-                                          separe por vírgula.
+                                          separe por vírgula e pressione{' '}
+                                          <strong>Enter</strong>.
                                        </FormDescription>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="auctionDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="Empresa *"
-                                             placeholder="Selecione a empresa"
-                                             options={[]}
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="auctionDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="Comitente *"
-                                             placeholder="Selecione o comitente"
-                                             options={[]}
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                           </div>
-                           <div className="grid grid-cols-3 gap-4 items-center">
-                              <FormField
-                                 control={form.control}
-                                 name="auctionDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="Expositor *"
-                                             placeholder="Selecione o expositor"
-                                             options={[]}
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-
-                              <FormField
-                                 control={form.control}
-                                 name="auctionDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="ID de Leilão *"
-                                             placeholder="Digite o ID de leilão"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="auctionDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="Regra Prestação de Contas *"
-                                             placeholder="Selecione a regra"
-                                             options={[]}
-                                             {...field}
-                                          />
-                                       </FormControl>
                                        <FormMessage />
                                     </FormItem>
                                  )}
@@ -723,6 +506,7 @@ export const CreateAuction: React.FC = () => {
                         </div>
                      </div>
 
+                     {/* Diário oficial */}
                      <div className="space-y-4">
                         <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
                            Diário oficial
@@ -748,14 +532,14 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="officialPublicationNumber"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
-                                          <SelectInput
-                                             label="Empresa *"
-                                             placeholder="Selecione a empresa"
-                                             options={[]}
+                                          <Input
+                                             label="Número D.O. *"
+                                             placeholder="0000000000"
+                                             type="number"
                                              {...field}
                                           />
                                        </FormControl>
@@ -764,34 +548,26 @@ export const CreateAuction: React.FC = () => {
                                  )}
                               />
                            </div>
-                           <div className="grid grid-cols-3 gap-4 items-center">
-                              <FormField
-                                 control={form.control}
-                                 name="auctionDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <SelectInput
-                                             label="Expositor *"
-                                             placeholder="Selecione o expositor"
-                                             options={[]}
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
+                        </div>
+                     </div>
 
+                     {/* Ordem Interna */}
+                     <div className="space-y-4">
+                        <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                           Ordem Interna
+                        </p>
+                        <div className="space-y-6">
+                           <div className="grid grid-cols-2 items-center gap-4">
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="internalMatrixOrder"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
                                           <Input
-                                             label="ID de Leilão *"
-                                             placeholder="Digite o ID de leilão"
+                                             label="Ordem Interna Matriz"
+                                             placeholder="0000000000"
+                                             type="number"
                                              {...field}
                                           />
                                        </FormControl>
@@ -801,14 +577,14 @@ export const CreateAuction: React.FC = () => {
                               />
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="internalAuctionOrder"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
-                                          <SelectInput
-                                             label="Regra Prestação de Contas *"
-                                             placeholder="Selecione a regra"
-                                             options={[]}
+                                          <Input
+                                             label="Ordem Interna Leilão "
+                                             placeholder="0000000000"
+                                             type="number"
                                              {...field}
                                           />
                                        </FormControl>
@@ -913,3 +689,101 @@ export const CreateAuction: React.FC = () => {
       </React.Fragment>
    )
 }
+
+const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/
+
+const createAuctionSchema = z.object({
+   description: z.string().min(1, { message: 'Descrição é obrigatória' }),
+   auctionDate: z
+      .string()
+      .min(1, { message: 'Data do leilão é obrigatória' })
+      .refine((value) => isoDateRegex.test(value), {
+         message: 'Data do leilão deve estar em formato ISO 8601'
+      }),
+
+   cep: z
+      .string()
+      .min(1, { message: 'CEP é obrigatório' })
+      .regex(/^\d{5}-?\d{3}$/, {
+         message: 'CEP deve estar no formato 00000-000'
+      }),
+   address: z.string().min(1, { message: 'Endereço é obrigatório' }),
+   addressNumber: z
+      .string()
+      .min(1, { message: 'Número é obrigatório' })
+      .regex(/^\d+$/, { message: 'Número deve conter apenas dígitos' }),
+   addressComplement: z.string().optional(),
+   neighborhood: z.string().min(1, { message: 'Bairro é obrigatório' }),
+   addressState: z.string().min(1, { message: 'Estado é obrigatório' }),
+   addressCity: z.string().min(1, { message: 'Cidade é obrigatória' }),
+
+   scheduleDate: z
+      .string()
+      .min(1, { message: 'Data de agendamento é obrigatória' })
+      .refine((value) => isoDateRegex.test(value), {
+         message: 'Data deve estar em formato ISO 8601'
+      }),
+   startRemovalDate: z
+      .string()
+      .min(1, { message: 'Data de início da retirada é obrigatória' })
+      .refine((value) => isoDateRegex.test(value), {
+         message: 'Data deve estar em formato ISO 8601'
+      }),
+   endRemovalDate: z
+      .string()
+      .min(1, { message: 'Data final da retirada é obrigatória' })
+      .refine((value) => isoDateRegex.test(value), {
+         message: 'Data deve estar em formato ISO 8601'
+      }),
+   notificationDate: z
+      .string()
+      .min(1, { message: 'Data de notificação é obrigatória' })
+      .refine((value) => isoDateRegex.test(value), {
+         message: 'Data deve estar em formato ISO 8601'
+      }),
+   noticeDate: z
+      .string()
+      .min(1, { message: 'Data do edital é obrigatória' })
+      .refine((value) => isoDateRegex.test(value), {
+         message: 'Data deve estar em formato ISO 8601'
+      }),
+
+   auctioneerId: z.string().min(1, { message: 'Leiloeiro é obrigatório' }),
+   auctionCompanyId: z.string().min(1, { message: 'Empresa é obrigatória' }),
+   committeeId: z.string().min(1, { message: 'Comitente é obrigatório' }),
+   exhibitorId: z.string().min(1, { message: 'Expositor é obrigatório' }),
+   accountRule: z
+      .string()
+      .min(1, { message: 'Regra de prestação de contas é obrigatória' }),
+
+   notificationEmails: z
+      .array(z.string().email({ message: 'E-mail inválido' }))
+      .min(1, { message: 'Pelo menos um e-mail é obrigatório' }),
+
+   officialPublicationDate: z
+      .string()
+      .min(1, { message: 'Data de publicação oficial é obrigatória' })
+      .refine((value) => isoDateRegex.test(value), {
+         message: 'Data deve estar em formato ISO 8601'
+      }),
+   officialPublicationNumber: z
+      .string()
+      .min(1, { message: 'Número de publicação oficial é obrigatório' })
+      .regex(/^\d+$/, { message: 'Número deve conter apenas dígitos' }),
+
+   internalMatrixOrder: z
+      .string()
+      .regex(/^\d+$/, {
+         message: 'Ordem interna matriz deve conter apenas dígitos'
+      })
+      .optional(),
+   internalAuctionOrder: z
+      .string()
+      .regex(/^\d+$/, {
+         message: 'Ordem interna leilão deve conter apenas dígitos'
+      })
+      .optional(),
+   vehicleObservations: z.string().optional(),
+
+   tenantId: z.string().min(1, { message: 'ID do tenant é obrigatório' })
+})
