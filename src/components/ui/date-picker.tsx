@@ -4,119 +4,121 @@ import * as React from 'react'
 
 import { Calendar } from '@/components/ui/calendar'
 import {
+   Input,
+   inputVariants as inputDatePickerVariants,
+   InputProps,
+   labelVariants as labelDatePickerVariants
+} from '@/components/ui/input'
+import {
    Popover,
    PopoverContent,
    PopoverTrigger
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
-import { cva } from 'class-variance-authority'
-import { format } from 'date-fns'
-
-const inputDatePickerVariants = cva(
-   [
-      'peer block w-full',
-      'text-black dark:text-white',
-      'bg-transparent',
-      'outline-2 outline-transparent',
-      'border border-[#1212127f] dark:border-neutral-500 rounded-[4px]',
-      'transition-colors duration-200 ease-linear',
-
-      'focus-visible:border-2',
-      'focus-visible:border-primary-default',
-      'focus-visible:ring-0',
-      'focus-visible:outline-2',
-      'focus-visible:outline-offset-0',
-      'focus-visible:outline-primary-default',
-
-      'dark:focus-visible:border-dark-primary-default',
-      'dark:focus-visible:outline-dark-primary-default',
-      'dark:focus-visible:outline-2',
-      'dark:focus-visible:border-2',
-      'dark:focus-visible:outline-offset-0',
-
-      'placeholder:opacity-0',
-      'placeholder:transition-opacity placeholder:duration-200',
-      'focus:placeholder:opacity-100',
-      'disabled:cursor-not-allowed disabled:opacity-50',
-      'disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none',
-      'read-only:bg-slate-50 read-only:border-slate-200',
-      'invalid:border-red-500 invalid:text-red-600',
-      'focus:invalid:border-red-500 focus:invalid:ring-red-500',
-      'read-only:cursor-default read-only:bg-transparent read-only:border read-only:border-[#1212127f]'
-   ],
-   {
-      variants: {
-         error: {
-            true: 'border-red-500 dark:border-red-500 text-red-600 dark:text-red-600'
-         },
-         size: {
-            xs: 'min-h-[32px] px-[8px] py-[4px] text-sm leading-5',
-            sm: 'min-h-[40px] px-[10px] py-[6px] text-sm leading-5',
-            md: 'min-h-[48px] px-[12px] py-[8px] text-sm leading-6',
-            lg: 'min-h-[56px] px-[14px] py-[10px] text-base leading-6',
-            default: 'min-h-[56px] px-[14px] py-[16.5px] text-base leading-6'
-         }
-      },
-      defaultVariants: {
-         size: 'default'
-      }
-   }
-)
-
-const labelDatePickerVariants = cva(
-   [
-      'absolute left-[11px] top-[50%]',
-      'pointer-events-none',
-      '-translate-y-[50%]',
-      'mb-0 max-w-[90%]',
-      'origin-[0_0]',
-
-      'truncate leading-6',
-      'text-neutral-500',
-      'dark:text-neutral-400',
-
-      'bg-white dark:bg-dark-background-paper px-1',
-      'peer-disabled:bg-transparent peer-disabled:text-neutral-500',
-
-      'peer-focus:text-primary-default',
-      'peer-focus:top-1',
-      'peer-focus:scale-75',
-      'peer-focus:dark:text-dark-primary-default',
-
-      'peer-[&:not(:placeholder-shown)]:top-1',
-      'peer-[&:not(:placeholder-shown)]:scale-75',
-
-      'peer-data-[twe-input-state-active]:top-1',
-      'peer-data-[twe-input-state-active]:scale-75',
-
-      'placeholder-opacity-0',
-
-      'transition-all duration-200 ease-out',
-
-      'peer-[&[data-autofilled="true"]]:top-1',
-      'peer-[&[data-autofilled="true"]]:scale-75'
-   ],
-   {
-      variants: {
-         error: {
-            true: 'text-red-500'
-         }
-      }
-   }
-)
+import { format, setHours, setMinutes } from 'date-fns'
 
 const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
-   ({ className, label, error, size = 'md', onSelected, ...props }, ref) => {
+   (
+      {
+         className,
+         label,
+         error,
+         size = 'md',
+         onSelected,
+         showTime = false,
+         labelStatus = 'on',
+         ...props
+      },
+      ref
+   ) => {
       const [selectedDate, setSelectedDate] = React.useState<Date | undefined>()
+      const [timeValue, setTimeValue] = React.useState('12:00')
+
+      const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+         if (!showTime) return
+
+         const time = e.target.value
+         setTimeValue(time)
+
+         if (!selectedDate) {
+            props.onChange?.({
+               target: { value: time }
+            } as React.ChangeEvent<HTMLInputElement>)
+            return
+         }
+
+         const [hours, minutes] = time
+            .split(':')
+            .map((str) => parseInt(str, 10))
+         const newSelectedDate = setHours(
+            setMinutes(selectedDate, minutes),
+            hours
+         )
+         setSelectedDate(newSelectedDate)
+
+         if (onSelected) {
+            onSelected(newSelectedDate)
+         }
+
+         props.onChange?.({
+            target: { value: format(newSelectedDate, 'dd/MM/yyyy HH:mm') }
+         } as React.ChangeEvent<HTMLInputElement>)
+      }
+
+      const handleDaySelect = (date: Date | undefined) => {
+         if (!date) {
+            setSelectedDate(undefined)
+            return
+         }
+
+         let newDate = date
+         if (showTime) {
+            const [hours, minutes] = timeValue
+               .split(':')
+               .map((str) => parseInt(str, 10))
+            newDate = new Date(
+               date.getFullYear(),
+               date.getMonth(),
+               date.getDate(),
+               hours,
+               minutes
+            )
+         } else {
+            newDate = new Date(
+               date.getFullYear(),
+               date.getMonth(),
+               date.getDate(),
+               0,
+               0
+            )
+         }
+
+         setSelectedDate(newDate)
+         if (onSelected) {
+            onSelected(newDate)
+         }
+
+         props.onChange?.({
+            target: {
+               value: format(
+                  newDate,
+                  showTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy'
+               )
+            }
+         } as React.ChangeEvent<HTMLInputElement>)
+      }
+
+      const hasSelectedDate =
+         selectedDate && !isNaN(selectedDate.getTime())
+            ? format(selectedDate, showTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy')
+            : ''
+
       return (
          <React.Fragment>
             <Popover>
                <PopoverTrigger asChild>
-                  <div
-                     className="relative flex flex-col self-stretch p-0 isolate items-center justify-center"
-                     data-twe-input-wrapper-init
-                  >
-                     <input
+                  <div className="relative flex flex-col self-stretch p-0 isolate items-center justify-center">
+                     <Input
                         readOnly
                         type="text"
                         data-value={props.value}
@@ -125,13 +127,14 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                         autoComplete="new-password"
                         autoCorrect="off"
                         autoSave="off"
-                        value={
-                           selectedDate && !isNaN(selectedDate.getTime())
-                              ? format(selectedDate, 'dd/MM/yyyy')
-                              : ''
-                        }
+                        labelStatus={labelStatus}
+                        value={hasSelectedDate}
                         className={cn(
-                           inputDatePickerVariants({ error: !!error, size }),
+                           inputDatePickerVariants({
+                              error: !!error,
+                              size,
+                              labelStatus
+                           }),
                            className
                         )}
                         aria-invalid={error ? 'true' : undefined}
@@ -146,7 +149,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                         <label
                            htmlFor={props.id}
                            className={cn(
-                              labelDatePickerVariants({ error: !!error })
+                              labelDatePickerVariants({ labelStatus })
                            )}
                         >
                            {label}
@@ -155,18 +158,21 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                   </div>
                </PopoverTrigger>
                <PopoverContent className="w-auto p-0">
+                  {showTime && (
+                     <div className="p-3 border-b">
+                        <input
+                           type="time"
+                           value={timeValue}
+                           onChange={handleTimeChange}
+                           className="w-full px-2 py-1 border rounded"
+                        />
+                     </div>
+                  )}
                   <Calendar
                      initialFocus
                      mode="single"
-                     selected={selectedDate || undefined}
-                     onSelect={(e) => {
-                        if (e !== undefined) {
-                           if (onSelected) {
-                              onSelected(e as unknown as Date)
-                           }
-                           setSelectedDate(e)
-                        }
-                     }}
+                     selected={selectedDate}
+                     onSelect={handleDaySelect}
                   />
                </PopoverContent>
             </Popover>
@@ -178,12 +184,12 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
    }
 )
 
-export interface DatePickerProps
-   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface DatePickerProps extends InputProps {
    label?: string
    error?: string
    size?: 'default' | 'xs' | 'sm' | 'md' | 'lg'
    onSelected?: (date: Date) => void
+   showTime?: boolean
 }
 
 DatePicker.displayName = 'DatePicker'
