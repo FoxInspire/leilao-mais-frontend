@@ -61,6 +61,7 @@ export const OperationsMonitorDetails: React.FC<
          }))
       )
    }, [data])
+
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto]">

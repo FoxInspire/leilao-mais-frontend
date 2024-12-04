@@ -11,13 +11,23 @@ import {
    BreadcrumbPage,
    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import {
+   Form,
+   FormControl,
+   FormField,
+   FormItem,
+   FormMessage
+} from '@/components/ui/form'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
+import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-const createAuctionSchema = z.object({})
+const createAuctionSchema = z.object({
+   description: z.string().min(1, { message: 'Descrição é obrigatória' })
+})
 
 export const CreateAuction: React.FC = () => {
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
@@ -61,6 +71,32 @@ export const CreateAuction: React.FC = () => {
                   </div>
                   <Separator orientation="horizontal" />
                </div>
+               <Form {...form}>
+                  <form
+                     onSubmit={form.handleSubmit(onSubmit)}
+                     className="space-y-6"
+                  >
+                     <FormField
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                           <FormItem>
+                              <FormControl>
+                                 <Input
+                                    label="Descrição"
+                                    placeholder="Digite a descrição"
+                                    {...field}
+                                 />
+                              </FormControl>
+                              <FormMessage />
+                           </FormItem>
+                        )}
+                     />
+                     <Button type="submit" className="w-full">
+                        Continuar
+                     </Button>
+                  </form>
+               </Form>
             </div>
             <CollapsibleSidebar
                open={isSidebarOpen}
