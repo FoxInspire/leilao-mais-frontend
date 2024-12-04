@@ -22,12 +22,13 @@ import { DataTable } from '@/features/pre-auction/auction-maintenance/components
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DatePicker } from '@/src/components/ui/date-picker'
-import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
+import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionEntity } from '@/src/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
+import Link from 'next/link'
 
 interface AuctionMaintenanceProps {
    data: AuctionEntity[]
@@ -183,15 +184,17 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                            </DialogContent>
                         </Dialog>
                      </div>
-                     <DisabledFeature>
+                     <Link
+                        href={pre_auction_routes.create_auction}
+                        prefetch={false}
+                     >
                         <Button
                            variant="default"
                            className="w-full sm:w-auto sm:min-w-[150px] whitespace-nowrap"
-                           disabled
                         >
                            Novo leilão
                         </Button>
-                     </DisabledFeature>
+                     </Link>
                   </div>
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
