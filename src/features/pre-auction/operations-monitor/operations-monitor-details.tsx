@@ -2,8 +2,6 @@
 
 import * as React from 'react'
 
-import { ColumnDef } from '@tanstack/react-table'
-
 import {
    Breadcrumb,
    BreadcrumbItem,
@@ -20,6 +18,7 @@ import {
 } from '@/components/ui/dialog'
 import { SelectInput, SelectInputValue } from '@/components/ui/select'
 import { TableAuctionLotsHandle } from '@/features/pre-auction/auction-lots/components/data-table'
+import { TableOperationMonitorDetails } from '@/features/pre-auction/operations-monitor/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DisabledFeature } from '@/src/components/ui/disabled-feature'
@@ -27,8 +26,8 @@ import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
+import { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
-import { TableOperationMonitorDetails } from './components/data-table'
 
 interface OperationsMonitorDetailsProps {
    id: string

@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 import { AuctionEntity } from '@/src/types/entities/auction.entity'
@@ -12,9 +14,11 @@ export const ScheduleStatus: React.FC<ScheduleStatusProps> = ({
 }: ScheduleStatusProps) => {
    return (
       <React.Fragment>
-         <span className="material-symbols-outlined text-text-secondary symbol-md dark:text-dark-text-secondary">
-            schedule
-         </span>
+         <div className="flex items-center">
+            <span className="material-symbols-outlined text-text-secondary symbol-md dark:text-dark-text-secondary">
+               schedule
+            </span>
+         </div>
       </React.Fragment>
    )
 }
