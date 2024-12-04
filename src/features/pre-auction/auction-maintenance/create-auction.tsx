@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/form'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
+import { DatePicker } from '@/src/components/ui/date-picker'
 import { Input } from '@/src/components/ui/input'
 import { SelectInput } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
@@ -131,10 +132,10 @@ export const CreateAuction: React.FC = () => {
                               render={({ field }) => (
                                  <FormItem>
                                     <FormControl>
-                                       <Input
+                                       <DatePicker
+                                          showTime
                                           label="Data e hora do leilão *"
                                           placeholder="DD/MM/YYYY hh:mm aa"
-                                          type="datetime-local"
                                           {...field}
                                        />
                                     </FormControl>
@@ -292,10 +293,9 @@ export const CreateAuction: React.FC = () => {
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
-                                          <Input
+                                          <DatePicker
                                              label="Agendamento *"
                                              placeholder="DD/MM/YYYY"
-                                             type="date"
                                              {...field}
                                           />
                                        </FormControl>
@@ -309,10 +309,9 @@ export const CreateAuction: React.FC = () => {
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
-                                          <Input
+                                          <DatePicker
                                              label="Início da Retirada *"
                                              placeholder="DD/MM/YYYY"
-                                             type="date"
                                              {...field}
                                           />
                                        </FormControl>
@@ -326,10 +325,9 @@ export const CreateAuction: React.FC = () => {
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
-                                          <Input
+                                          <DatePicker
                                              label="Fim da Retirada *"
                                              placeholder="DD/MM/YYYY"
-                                             type="date"
                                              {...field}
                                           />
                                        </FormControl>
@@ -345,10 +343,9 @@ export const CreateAuction: React.FC = () => {
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
-                                          <Input
+                                          <DatePicker
                                              label="Edital do Leilão *"
                                              placeholder="DD/MM/YYYY"
-                                             type="date"
                                              {...field}
                                           />
                                        </FormControl>
@@ -362,10 +359,9 @@ export const CreateAuction: React.FC = () => {
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
-                                          <Input
+                                          <DatePicker
                                              label="Notificação *"
                                              placeholder="DD/MM/YYYY"
-                                             type="date"
                                              {...field}
                                           />
                                        </FormControl>
@@ -516,14 +512,13 @@ export const CreateAuction: React.FC = () => {
                            <div className="grid grid-cols-2 items-center gap-4">
                               <FormField
                                  control={form.control}
-                                 name="auctionDate"
+                                 name="officialPublicationDate"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
-                                          <Input
+                                          <DatePicker
                                              label="Data da Publicação D.O. *"
                                              placeholder="DD/MM/YYYY"
-                                             type="date"
                                              {...field}
                                           />
                                        </FormControl>
