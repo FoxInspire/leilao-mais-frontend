@@ -302,7 +302,7 @@ const data = {
             {
                title: 'Monitor de operações',
                url: dashboard_routes.pre_auction.operations_monitor,
-               disabled: true
+               disabled: false
             }
          ]
       },

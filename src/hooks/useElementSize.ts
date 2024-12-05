@@ -1,18 +1,20 @@
-import { useEffect, useRef, useState } from 'react'
+import * as React from 'react'
 
 interface ElementSize {
    width: number
    height: number
 }
 
-export function useElementSize<T extends HTMLElement>() {
-   const [dimensions, setDimensions] = useState<ElementSize>({
+export const useElementSize = <T extends HTMLElement>() => {
+   const [dimensions, setDimensions] = React.useState<ElementSize>({
       width: 0,
       height: 0
    })
-   const elementRef = useRef<T | null>(null) as React.MutableRefObject<T | null>
+   const elementRef = React.useRef<T | null>(
+      null
+   ) as React.MutableRefObject<T | null>
 
-   useEffect(() => {
+   React.useEffect(() => {
       const element = elementRef.current
       if (!element) return
 

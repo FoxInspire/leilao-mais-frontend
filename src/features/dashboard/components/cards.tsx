@@ -130,6 +130,7 @@ export const Card: React.FC<CardProps> = ({
    ) => {
       return items.some((item) => item.quantity > 0)
    }
+
    return (
       <CardContainer>
          <div className="flex justify-between items-center">

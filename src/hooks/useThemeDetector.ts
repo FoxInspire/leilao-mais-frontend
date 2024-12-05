@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-const useThemeDetector = (): { theme: 'dark' | 'light' } => {
+export const useThemeDetector = (): { theme: 'dark' | 'light' } => {
    const getCurrentTheme = () => {
       if (typeof window === 'undefined') return false
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -22,5 +22,3 @@ const useThemeDetector = (): { theme: 'dark' | 'light' } => {
       theme: isDarkTheme ? 'dark' : 'light'
    }
 }
-
-export { useThemeDetector }

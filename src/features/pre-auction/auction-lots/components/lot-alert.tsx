@@ -53,7 +53,7 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                            <span className="text-sm text-text-secondary">
                               {auctionCount}
                            </span>
-                           <span className="material-symbols-outlined text-text-secondary">
+                           <span className="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">
                               sync
                            </span>
                         </div>
@@ -65,7 +65,7 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                         size="icon"
                         className="w-auto px-2 hover:bg-transparent cursor-default"
                      >
-                        <span className="material-symbols-outlined text-text-secondary">
+                        <span className="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">
                            mail
                         </span>
                      </Button>
@@ -83,7 +83,7 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                            PROCESSO - {row.original.id}
                         </p>
                      </div>
-                     <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
+                     <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
                         <div className="flex-1 overflow-auto pb-4">
                            <TableAuctionLots
                               data={row.original.AuctionLot || []}

@@ -1,41 +1,23 @@
 import * as React from 'react'
 
-import { readMultipleJSONFiles } from '@/src/utils/file-path-utils'
-
-import Dashboard from '@/src/features/dashboard/dashboard'
+import { SearchOperations } from '@/src/features/pre-auction/operations-monitor/search-operations'
+import { AuctionEntity } from '@/src/types/entities/auction.entity'
+import { readJSONFile } from '@/src/utils/file-path-utils'
 
 export const dynamic = 'force-dynamic'
 
-async function getDashboardData() {
-   const [filterOptions, transactionOptions, cardsMock] =
-      (await readMultipleJSONFiles([
-         '@/src/features/dashboard/mocks/filter-options.json',
-         '@/src/features/dashboard/mocks/filter-transactions.json',
-         '@/src/features/dashboard/mocks/cards-mock.json'
-      ])) as [
-         typeof import('@/src/features/dashboard/mocks/filter-options.json'),
-         typeof import('@/src/features/dashboard/mocks/filter-transactions.json'),
-         typeof import('@/src/features/dashboard/mocks/cards-mock.json')
-      ]
-
-   return {
-      filterOptions,
-      transactionOptions,
-      cardsMock
-   }
+async function getAuctions() {
+   const data = (await readJSONFile(
+      'src/features/pre-auction/auction-maintenance/mocks/auctions-maintenance.json'
+   )) as AuctionEntity[]
+   return data
 }
 
-export default async function DashboardPage() {
-   const { filterOptions, transactionOptions, cardsMock } =
-      await getDashboardData()
-
+export default async function OperationsMonitorPage() {
+   const auctions = await getAuctions()
    return (
       <React.Suspense>
-         <Dashboard
-            filterOptions={filterOptions.options}
-            transactionOptions={transactionOptions.options}
-            cardsMock={cardsMock}
-         />
+         <SearchOperations auctions={auctions} />
       </React.Suspense>
    )
 }

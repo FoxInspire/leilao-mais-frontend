@@ -1,14 +1,16 @@
 'use client'
 
-import { DataTableRowActions } from '@/features/pre-auction/auction-lots/components/data-table-row-actions'
-import { LotAlerts } from '@/features/pre-auction/auction-lots/components/lot-alert'
-import { LotStatus } from '@/features/pre-auction/auction-lots/components/lot-status'
 import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { AuctionEntity } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 
-export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
+import { OperationsMonitorDataTableRowActions } from './data-table-row-actions'
+import { OperationLotStatus } from './lot-status'
+import { ScheduleStatus } from './schedule-status'
+import { TransactionStatus } from './transaction-status'
+
+export const columns_operation_monitor_details: ColumnDef<AuctionEntity>[] = [
    {
       id: 'select',
       header: ({ table }) => (
@@ -34,22 +36,6 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
       ),
       enableSorting: false,
       enableHiding: false
-   },
-   {
-      accessorKey: 'lotNumber',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Lote" />
-      ),
-      cell: ({ row }) => {
-         const lots = row.original.AuctionLot || []
-         return (
-            <div className="space-y-1">
-               {lots.map((lot) => (
-                  <div key={lot.id}>{lot.lotNumber}</div>
-               ))}
-            </div>
-         )
-      }
    },
    {
       accessorKey: 'process',
@@ -120,41 +106,46 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
       }
    },
    {
-      accessorKey: 'type',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Tipo" />
-      ),
-      cell: ({ row }) => {
-         const lots = row.original.AuctionLot || []
-         return (
-            <div className="space-y-1">
-               {lots.map((lot) => (
-                  <div key={lot.id}>{lot.Vehicle?.type?.name || ''}</div>
-               ))}
-            </div>
-         )
-      }
-   },
-   {
-      accessorKey: 'status',
+      accessorKey: 'lot_status',
       header: ({ column }) => (
          <DataTableColumnHeader column={column} title="Status do lote" />
       ),
-      cell: ({ row }) => <LotStatus row={row} />
+      cell: ({ row }) => {
+         return <OperationLotStatus row={row} />
+      }
    },
    {
-      accessorKey: 'alerts',
+      accessorKey: 'transaction',
       header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Alertas" />
+         <DataTableColumnHeader column={column} title="Transação" />
       ),
       cell: ({ row }) => {
-         return <LotAlerts row={row} />
+         return <TransactionStatus row={row} />
       }
+   },
+   {
+      accessorKey: 'message',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Mensagem" />
+      ),
+      cell: ({ row }) => {
+         return <div>{row.original.description}</div>
+      }
+   },
+   {
+      id: 'schedule',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Agendamento" />
+      ),
+      cell: ({ row }) => <ScheduleStatus row={row} />
    },
    {
       id: 'actions',
       cell: ({ row }) => (
-         <DataTableRowActions row={row} onSelect={(value) => {}} />
+         <OperationsMonitorDataTableRowActions
+            row={row}
+            onSelect={(value) => {}}
+         />
       )
    }
 ]

@@ -1,6 +1,7 @@
 import '@/src/styles/globals.css'
 import '@/styles/reset.css'
 
+import { NProgress } from '@/components/ui/nprogress'
 import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
@@ -85,6 +86,7 @@ export default function RootLayout({
                   disableTransitionOnChange
                >
                   {children}
+                  <NProgress />
                   <Toaster />
                </ThemeProvider>
             </NuqsAdapter>

@@ -19,13 +19,13 @@ import { Button } from '@/src/components/ui/button'
 import { AuctionEntity } from '@/types/entities/auction.entity'
 import { Row } from '@tanstack/react-table'
 
-interface LotStatusProps {
+interface OperationLotStatusProps {
    row: Row<AuctionEntity>
 }
 
-export const LotStatus: React.FC<LotStatusProps> = ({
+export const OperationLotStatus: React.FC<OperationLotStatusProps> = ({
    row
-}: LotStatusProps) => {
+}: OperationLotStatusProps) => {
    const [dialog, setDialog] = React.useState(false)
    const [tempStatus, setTempStatus] = React.useState<string | null>(null)
    const [currentStatus, setCurrentStatus] = React.useState(

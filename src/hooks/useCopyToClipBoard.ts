@@ -1,14 +1,12 @@
-'use client'
-
 import * as React from 'react'
 
-export function useCopyToClipboard({
+export const useCopyToClipboard = ({
    timeout = 2000,
    onCopy
 }: {
    timeout?: number
    onCopy?: () => void
-} = {}) {
+} = {}) => {
    const [isCopied, setIsCopied] = React.useState(false)
 
    const copyToClipboard = (value: string) => {
