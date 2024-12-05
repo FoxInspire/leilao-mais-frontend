@@ -27,9 +27,11 @@ import { SelectInput, SelectInputValue } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
 import { useZipCode } from '@/src/hooks/useZipCode'
 import { cn } from '@/src/lib/utils'
+import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { ZIP_CODE_MASK, isValidEmail, isValidZipCode } from '@/src/utils/masks'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 interface CreateAuctionProps {
@@ -39,6 +41,8 @@ interface CreateAuctionProps {
 export const CreateAuction: React.FC<CreateAuctionProps> = ({
    countries
 }: CreateAuctionProps) => {
+   const router = useRouter()
+
    const { handleZipCode } = useZipCode()
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
@@ -76,10 +80,24 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
       }
    })
 
-   console.log('form', form.watch())
+   const onSubmit: SubmitHandler<z.infer<typeof createAuctionSchema>> = async (
+      data
+   ) => {
+      try {
+         const isValid = await form.trigger()
 
-   async function onSubmit(data: z.infer<typeof createAuctionSchema>) {
-      console.log('data', data)
+         if (!isValid) {
+            toast.error(
+               'Por favor, preencha todos os campos obrigatórios corretamente.'
+            )
+            return
+         }
+
+         console.log('data', data)
+      } catch (error) {
+         console.error('Erro ao enviar formulário:', error)
+         toast.error('Erro ao enviar formulário. Tente novamente.')
+      }
    }
 
    const addEmails = () => {
@@ -730,7 +748,6 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                              <Input
                                                 label="Número D.O. *"
                                                 placeholder="0000000000"
-                                                type="number"
                                                 {...field}
                                              />
                                           </FormControl>
@@ -758,7 +775,6 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                              <Input
                                                 label="Ordem Interna Matriz"
                                                 placeholder="0000000000"
-                                                type="number"
                                                 {...field}
                                              />
                                           </FormControl>
@@ -775,7 +791,6 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                              <Input
                                                 label="Ordem Interna Leilão "
                                                 placeholder="0000000000"
-                                                type="number"
                                                 {...field}
                                              />
                                           </FormControl>
@@ -791,13 +806,20 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                   <div className="flex flex-1 justify-between items-center">
                      <Button
                         variant="ghost"
+                        onClick={() =>
+                           router.push(pre_auction_routes.auction_maintenance)
+                        }
                         className={
                            'w-fit bg-transparent text-error-default hover:bg-error-default/10 dark:border-dark-error-default dark:text-dark-error-default dark:hover:bg-dark-error-default/10'
                         }
                      >
                         Cancelar cadastro
                      </Button>
-                     <Button type="submit" className="w-fit">
+                     <Button
+                        type="submit"
+                        className="w-fit"
+                        onClick={form.handleSubmit(onSubmit)}
+                     >
                         Continuar
                      </Button>
                   </div>
@@ -831,57 +853,22 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                         Descrição
                      </p>
                      <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                        A página de Lista de Lotes permite visualizar todos os
-                        lotes ingressados no leilão selecionado e acompanhar ou
-                        alterar o status de cada um. O usuário pode criar ou
-                        zerar a numeração de identificação dos lotes, acessar o
-                        histórico de notificações, inserir informações de
-                        perícia e monitorar os alertas relacionados a cada lote.
+                        A página de Cadastrar Novo Leilão permite registrar um
+                        leilão inserindo seus Dados Gerais, como nome,
+                        localização e datas. Também é possível preencher Dados
+                        Complementares, como leiloeiro, comitente e empresa,
+                        além de definir um e-mail para envio de notificações
+                        relacionadas ao leilão.
                      </p>
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
-                        Detalhes
-                     </p>
-                     <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Status do lote
+                     <div className="bg-[#E6F1F7] px-4 py-4 space-y-2 rounded-md">
+                        <p className="text-black font-normal text-start">
+                           Info
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                           É possível alterar o status conforme o avanço dos
-                           processos junto ao DETRAN.
+                        <p className="text-text-secondary text-start">
+                           Os dados deste formulário são para o Edital do
+                           leilão, sendo enviadas ao DETRAN na criação do leilão
+                           e no resultado do leilão.
                         </p>
-                     </div>
-                     <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Importar numeração lotes
-                        </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                           Importa e atualiza os dados de GRV e numeração a
-                           partir da planilha enviada.
-                        </p>
-                     </div>
-                     <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Alertas
-                        </p>
-                        <div className="space-y-2">
-                           <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                              Exibe os alertas pertinentes ao lote, sendo eles:
-                           </p>
-                           <ul className="list-disc list-inside text-text-secondary dark:text-dark-text-secondary text-start">
-                              <li>
-                                 <strong>Restrições:</strong> Exibe a lista de
-                                 restrições adicionadas ao lote.
-                              </li>
-                              <li>
-                                 <strong>Notificações:</strong> Indica que a
-                                 notificação de liberados foi enviada.
-                              </li>
-                              <li>
-                                 <strong>Leilão como sobra:</strong> Indica a
-                                 quantidade de leilões que o lote já participou.
-                              </li>
-                           </ul>
-                        </div>
                      </div>
                   </div>
                </div>
@@ -891,17 +878,9 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
    )
 }
 
-const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/
-
 const createAuctionSchema = z.object({
    description: z.string().min(1, { message: 'Descrição é obrigatória' }),
-   auctionDate: z
-      .string()
-      .min(1, { message: 'Data do leilão é obrigatória' })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Data do leilão deve estar em formato ISO 8601'
-      }),
-
+   auctionDate: z.string().min(1, { message: 'Data do leilão é obrigatória' }),
    cep: z
       .string()
       .min(1, { message: 'CEP é obrigatório' })
@@ -920,35 +899,17 @@ const createAuctionSchema = z.object({
 
    scheduleDate: z
       .string()
-      .min(1, { message: 'Data de agendamento é obrigatória' })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Data deve estar em formato ISO 8601'
-      }),
+      .min(1, { message: 'Data de agendamento é obrigatória' }),
    startRemovalDate: z
       .string()
-      .min(1, { message: 'Data de início da retirada é obrigatória' })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Data deve estar em formato ISO 8601'
-      }),
+      .min(1, { message: 'Data de início da retirada é obrigatória' }),
    endRemovalDate: z
       .string()
-      .min(1, { message: 'Data final da retirada é obrigatória' })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Data deve estar em formato ISO 8601'
-      }),
+      .min(1, { message: 'Data final da retirada é obrigatória' }),
    notificationDate: z
       .string()
-      .min(1, { message: 'Data de notificação é obrigatória' })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Data deve estar em formato ISO 8601'
-      }),
-   noticeDate: z
-      .string()
-      .min(1, { message: 'Data do edital é obrigatória' })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Data deve estar em formato ISO 8601'
-      }),
-
+      .min(1, { message: 'Data de notificação é obrigatória' }),
+   noticeDate: z.string().min(1, { message: 'Data do edital é obrigatória' }),
    auctioneerId: z.string().min(1, { message: 'Leiloeiro é obrigatório' }),
    auctionCompanyId: z.string().min(1, { message: 'Empresa é obrigatória' }),
    committeeId: z.string().min(1, { message: 'Comitente é obrigatório' }),
@@ -963,10 +924,7 @@ const createAuctionSchema = z.object({
 
    officialPublicationDate: z
       .string()
-      .min(1, { message: 'Data de publicação oficial é obrigatória' })
-      .refine((value) => isoDateRegex.test(value), {
-         message: 'Data deve estar em formato ISO 8601'
-      }),
+      .min(1, { message: 'Data de publicação oficial é obrigatória' }),
    officialPublicationNumber: z
       .string()
       .min(1, { message: 'Número de publicação oficial é obrigatório' })
