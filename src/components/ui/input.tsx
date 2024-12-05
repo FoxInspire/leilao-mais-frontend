@@ -27,6 +27,7 @@ export const inputVariants = cva(
       'dark:focus-visible:border-2',
       'dark:focus-visible:outline-offset-0',
 
+      'placeholder:text-[#737373]',
       'placeholder:opacity-0',
       'placeholder:transition-opacity placeholder:duration-200',
       'focus:placeholder:opacity-100',
@@ -46,10 +47,16 @@ export const inputVariants = cva(
             md: 'min-h-[48px] px-[12px] py-[8px] text-sm leading-6',
             lg: 'min-h-[56px] px-[14px] py-[10px] text-base leading-6',
             default: 'min-h-[56px] px-[14px] py-[16.5px] text-base leading-6'
+         },
+         labelStatus: {
+            on: 'placeholder:opacity-100 ',
+            off: 'placeholder:opacity-0',
+            inherit: 'placeholder:opacity-0'
          }
       },
       defaultVariants: {
-         size: 'default'
+         size: 'default',
+         labelStatus: 'inherit'
       }
    }
 )
@@ -91,6 +98,11 @@ export const labelVariants = cva(
       variants: {
          error: {
             true: 'text-red-500'
+         },
+         labelStatus: {
+            on: 'top-1 scale-75',
+            off: '',
+            inherit: ''
          }
       }
    }
@@ -98,7 +110,15 @@ export const labelVariants = cva(
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
    (
-      { className, type: initialType, label, error, size = 'md', ...props },
+      {
+         className,
+         type: initialType,
+         label,
+         error,
+         size = 'md',
+         labelStatus = 'inherit',
+         ...props
+      },
       ref
    ) => {
       const isPassword = initialType === 'password'
@@ -122,7 +142,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   autoCorrect="off"
                   autoSave="off"
                   className={cn(
-                     inputVariants({ error: !!error, size }),
+                     inputVariants({ error: !!error, size, labelStatus }),
                      className
                   )}
                   aria-invalid={error ? 'true' : undefined}
@@ -141,7 +161,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                {label && (
                   <label
                      htmlFor={props.id}
-                     className={cn(labelVariants({ error: !!error }))}
+                     className={cn(
+                        labelVariants({ error: !!error, labelStatus })
+                     )}
                   >
                      {label}
                   </label>
@@ -180,6 +202,7 @@ export interface InputProps
    label?: string
    error?: string
    size?: 'default' | 'xs' | 'sm' | 'md' | 'lg'
+   labelStatus?: 'on' | 'off' | 'inherit'
 }
 
 Input.displayName = 'Input'

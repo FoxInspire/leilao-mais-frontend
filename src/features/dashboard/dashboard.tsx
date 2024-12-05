@@ -130,11 +130,9 @@ const Dashboard: React.FC<DashboardProps> = ({
             </div>
             <div>
                <Tabs
-                  defaultValue={Tab.InProgress}
                   value={tab as Tab}
-                  onValueChange={(value) => {
-                     setTab(value as Tab)
-                  }}
+                  defaultValue={Tab.InProgress}
+                  onValueChange={(value) => setTab(value as Tab)}
                >
                   <TabsList className="flex justify-between w-full">
                      <div className="grid grid-flow-col items-center gap-4 overflow-x-auto hide-scrollbar">
@@ -208,11 +206,9 @@ const Dashboard: React.FC<DashboardProps> = ({
                                  <Checkbox
                                     size="md"
                                     label={option.label}
-                                    onCheckedChange={(checked: CheckedState) =>
-                                       console.log(
-                                          `checked: ${checked}; id: ${option.id}`
-                                       )
-                                    }
+                                    onCheckedChange={(
+                                       checked: CheckedState
+                                    ) => {}}
                                  />
                               </DropdownMenuItem>
                            ))}
@@ -225,11 +221,9 @@ const Dashboard: React.FC<DashboardProps> = ({
                                  <Checkbox
                                     size="md"
                                     label={option.label}
-                                    onCheckedChange={(checked: CheckedState) =>
-                                       console.log(
-                                          `checked: ${checked}; id: ${option.id}`
-                                       )
-                                    }
+                                    onCheckedChange={(
+                                       checked: CheckedState
+                                    ) => {}}
                                  />
                               </DropdownMenuItem>
                            ))}
@@ -243,7 +237,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                               <Card
                                  key={auction.auctionCode}
                                  {...auction}
-                                 onEdit={() => console.log('Editar leilão')}
+                                 onEdit={() => {}}
                                  date={new Date(auction.date)}
                               />
                            ))}

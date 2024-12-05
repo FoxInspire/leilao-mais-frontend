@@ -9,6 +9,7 @@ const config: Config = {
       './src/components/ui/**/*.{js,ts,jsx,tsx,mdx}',
       './src/features/**/*.{js,ts,jsx,tsx,mdx}'
    ],
+   mode: 'jit',
    theme: {
       extend: {
          container: {
@@ -45,7 +46,7 @@ const config: Config = {
                contrast: '#FAFAFA'
             },
             success: {
-               default: '#19B26B',
+               default: '#2E7D32',
                light: '#4DE89D',
                contrast: '#FAFAFA'
             },

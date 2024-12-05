@@ -53,7 +53,7 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                            <span className="text-sm text-text-secondary">
                               {auctionCount}
                            </span>
-                           <span className="material-symbols-outlined text-text-secondary">
+                           <span className="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">
                               sync
                            </span>
                         </div>
@@ -65,7 +65,7 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                         size="icon"
                         className="w-auto px-2 hover:bg-transparent cursor-default"
                      >
-                        <span className="material-symbols-outlined text-text-secondary">
+                        <span className="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">
                            mail
                         </span>
                      </Button>
