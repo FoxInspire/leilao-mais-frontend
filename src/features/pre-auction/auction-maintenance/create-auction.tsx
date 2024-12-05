@@ -26,9 +26,11 @@ import { Input } from '@/src/components/ui/input'
 import { SelectInput, SelectInputValue } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
 import { useZipCode } from '@/src/hooks/useZipCode'
-import { ZIP_CODE_MASK, isValidZipCode } from '@/src/utils/masks'
+import { cn } from '@/src/lib/utils'
+import { ZIP_CODE_MASK, isValidEmail, isValidZipCode } from '@/src/utils/masks'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 interface CreateAuctionProps {
    countries: SelectInputValue[]
@@ -40,6 +42,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
    const { handleZipCode } = useZipCode()
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
+   const [emailTemp, setEmailTemp] = React.useState('')
 
    const form = useForm<z.infer<typeof createAuctionSchema>>({
       resolver: zodResolver(createAuctionSchema),
@@ -79,6 +82,91 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
       console.log('data', data)
    }
 
+   const addEmails = () => {
+      try {
+         if (emailTemp && emailTemp.trim() !== '') {
+            const emails = emailTemp.split(',').map((email) => email.trim())
+
+            const validEmails = []
+            const invalidEmails = []
+            const duplicatedEmails = []
+
+            for (const email of emails) {
+               if (email !== '') {
+                  if (isValidEmail(email)) {
+                     if (
+                        !form.getValues('notificationEmails')?.includes(email)
+                     ) {
+                        validEmails.push(email)
+                     } else {
+                        duplicatedEmails.push(email)
+                     }
+                  } else {
+                     invalidEmails.push(email)
+                  }
+               }
+            }
+
+            if (invalidEmails.length > 0) {
+               toast.error(`E-mails inválidos: ${invalidEmails.join(', ')}`, {
+                  duration: 4000,
+                  position: 'top-right'
+               })
+            }
+
+            if (duplicatedEmails.length > 0) {
+               toast.error(
+                  `E-mails duplicados: ${duplicatedEmails.join(', ')}`,
+                  {
+                     duration: 4000,
+                     position: 'top-right'
+                  }
+               )
+            }
+
+            if (validEmails.length > 0) {
+               form.setValue('notificationEmails', [
+                  ...(form.getValues('notificationEmails') || []),
+                  ...validEmails
+               ])
+
+               toast.success(
+                  `E-mail${validEmails.length > 1 ? 's' : ''} adicionado${
+                     validEmails.length > 1 ? 's' : ''
+                  } com sucesso: ${validEmails.join(', ')}`,
+                  {
+                     duration: 4000,
+                     position: 'top-right'
+                  }
+               )
+            }
+
+            setEmailTemp('')
+         }
+      } catch (error) {
+         console.error('Erro ao adicionar emails:', error)
+         toast.error('Erro ao adicionar e-mails. Tente novamente.')
+      }
+   }
+
+   const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+         e.preventDefault()
+         addEmails()
+      }
+   }
+
+   const removeEmail = (indexToRemove: number) => {
+      const currentEmails = form.getValues('notificationEmails')
+      form.setValue(
+         'notificationEmails',
+         currentEmails.filter((_, index) => index !== indexToRemove)
+      )
+      toast.success(
+         `E-mail removido com sucesso: ${currentEmails[indexToRemove]}`
+      )
+   }
+
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto]">
@@ -112,9 +200,9 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                <Form {...form}>
                   <form
                      onSubmit={form.handleSubmit(onSubmit)}
-                     className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)] hide-scrollbar"
+                     className="grid w-full overflow-x-visible overflow-y-scroll max-h-[calc(100vh-17.4125rem)] hide-scrollbar"
                   >
-                     <div className="flex-1 space-y-6 overflow-auto">
+                     <div className="flex-1 space-y-6 overflow-x-visible overflow-y-scroll">
                         {/* Dados do leilão */}
                         <div className="space-y-4">
                            <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
@@ -534,17 +622,74 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                     render={({ field }) => (
                                        <FormItem>
                                           <FormControl>
-                                             <Input
-                                                label="E-mail *"
-                                                placeholder="Digite o e-mail"
-                                                {...field}
-                                             />
+                                             <div className="grid grid-cols-[1fr_auto] items-center gap-2 w-full">
+                                                <Input
+                                                   label="E-mail *"
+                                                   placeholder="Digite o e-mail"
+                                                   className="w-full"
+                                                   value={emailTemp || ''}
+                                                   onInput={(e) =>
+                                                      setEmailTemp(
+                                                         e.currentTarget.value
+                                                      )
+                                                   }
+                                                   onKeyDown={(e) =>
+                                                      handleEmailKeyDown(e)
+                                                   }
+                                                />
+                                                <Button
+                                                   type="button"
+                                                   variant="outline"
+                                                   size="icon"
+                                                   className="w-12 h-12"
+                                                   onClick={() => addEmails()}
+                                                >
+                                                   <span className="material-symbols-outlined">
+                                                      add
+                                                   </span>
+                                                </Button>
+                                             </div>
                                           </FormControl>
                                           <FormDescription>
                                              Para adicionar mais de um e-mail,
                                              separe por vírgula e pressione{' '}
-                                             <strong>Enter</strong>.
+                                             <kbd className="px-1 py-0.5 rounded-sm bg-gray-100 dark:bg-gray-600 text-xs dark:text-dark-text-primary">
+                                                Enter
+                                             </kbd>
+                                             .
                                           </FormDescription>
+                                          <div
+                                             className={cn(
+                                                'flex flex-wrap gap-2',
+                                                {
+                                                   'mt-2':
+                                                      (field.value?.length ||
+                                                         0) > 0
+                                                }
+                                             )}
+                                          >
+                                             {field.value?.map(
+                                                (email, index) => (
+                                                   <div
+                                                      key={index}
+                                                      className="flex items-center gap-2 bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded"
+                                                   >
+                                                      <span className="text-sm">
+                                                         {email}
+                                                      </span>
+
+                                                      <span
+                                                         className="material-symbols-outlined symbol-xs w-4 h-4 hover:text-error-default hover:scale-110 transition-all duration-300 cursor-pointer my-auto mt-0.5"
+                                                         onClick={() =>
+                                                            removeEmail(index)
+                                                         }
+                                                      >
+                                                         close
+                                                      </span>
+                                                   </div>
+                                                )
+                                             )}
+                                          </div>
                                           <FormMessage />
                                        </FormItem>
                                     )}
