@@ -33,6 +33,14 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
    ) => {
       const [selectedDate, setSelectedDate] = React.useState<Date | undefined>()
       const [timeValue, setTimeValue] = React.useState('12:00')
+      const [open, setOpen] = React.useState(false)
+
+      const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+         if (e.key === 'Enter') {
+            e.preventDefault()
+            setOpen(!open)
+         }
+      }
 
       const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
          if (!showTime) return
@@ -115,12 +123,13 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
 
       return (
          <React.Fragment>
-            <Popover>
+            <Popover open={open} onOpenChange={setOpen}>
                <PopoverTrigger asChild>
                   <div className="relative flex flex-col self-stretch p-0 isolate items-center justify-center">
                      <Input
                         readOnly
                         type="text"
+                        onKeyDown={handleKeyDown}
                         data-value={props.value}
                         data-date={selectedDate}
                         data-type="date"
