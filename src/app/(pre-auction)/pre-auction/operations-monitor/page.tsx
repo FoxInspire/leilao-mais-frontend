@@ -13,7 +13,7 @@ async function getAuctions() {
    return data
 }
 
-export default async function DashboardPage() {
+export default async function OperationsMonitorPage() {
    const auctions = await getAuctions()
    return (
       <React.Suspense>

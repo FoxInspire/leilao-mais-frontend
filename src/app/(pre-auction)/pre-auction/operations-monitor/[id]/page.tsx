@@ -15,7 +15,7 @@ async function getAuctions() {
    return data
 }
 
-export default async function AuctionMaintenanceLotsPage({
+export default async function OperationsMonitorDetailsPage({
    params
 }: {
    params: Promise<{ id: string }>

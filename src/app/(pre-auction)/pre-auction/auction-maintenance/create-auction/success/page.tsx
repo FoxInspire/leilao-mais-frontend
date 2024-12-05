@@ -13,7 +13,7 @@ async function getCountries() {
    return data
 }
 
-export default async function CreateAuctionPage() {
+export default async function AuctionMaintenancePage() {
    const countries = await getCountries()
 
    return (
