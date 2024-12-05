@@ -228,7 +228,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                            <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
                               Dados do leilão
                            </p>
-                           <div className="grid grid-cols-2 gap-4">
+                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
                               <FormField
                                  control={form.control}
                                  name="description"
@@ -271,17 +271,17 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                               Localização
                            </p>
                            <div className="space-y-6">
-                              <div className="flex gap-2">
+                              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="cep"
                                     render={({ field }) => (
-                                       <FormItem>
+                                       <FormItem className="flex-1">
                                           <FormControl>
                                              <Input
                                                 label="CEP *"
                                                 placeholder="00000-000"
-                                                className="min-w-[172px]"
+                                                className="w-full md:min-w-[172px]"
                                                 mask={ZIP_CODE_MASK}
                                                 onInput={(e) => {
                                                    if (
@@ -329,11 +329,6 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                        </FormItem>
                                     )}
                                  />
-                                 <Button variant="ghost" type="button">
-                                    Buscar
-                                 </Button>
-                              </div>
-                              <div className="grid grid-cols-[0.6fr_0.2fr_0.2fr] gap-4">
                                  <FormField
                                     control={form.control}
                                     name="address"
@@ -384,7 +379,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                     )}
                                  />
                               </div>
-                              <div className="grid grid-cols-3 gap-4 items-center">
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 items-center">
                                  <FormField
                                     control={form.control}
                                     name="neighborhood"
@@ -444,7 +439,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                               Datas gerais
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-[0.6fr_0.2fr_0.2fr] gap-4">
+                              <div className="grid grid-cols-1 md:grid-cols-[0.6fr_0.2fr_0.2fr] gap-6 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="scheduleDate"
@@ -494,7 +489,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                     )}
                                  />
                               </div>
-                              <div className="grid grid-cols-2 gap-4 items-center">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 items-center">
                                  <FormField
                                     control={form.control}
                                     name="noticeDate"
@@ -537,7 +532,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                               Dados complementares
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-3 gap-4">
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="auctioneerId"
@@ -590,7 +585,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                     )}
                                  />
                               </div>
-                              <div className="grid grid-cols-2 gap-4 items-center">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 items-center">
                                  <FormField
                                     control={form.control}
                                     name="exhibitorId"
@@ -670,13 +665,18 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                                 </Button>
                                              </div>
                                           </FormControl>
-                                          <FormDescription>
+                                          <FormDescription className="hidden md:block">
                                              Para adicionar mais de um e-mail,
                                              separe por vírgula e pressione{' '}
                                              <kbd className="px-1 py-0.5 rounded-sm bg-gray-100 dark:bg-gray-600 text-xs dark:text-dark-text-primary">
                                                 Enter
                                              </kbd>
                                              .
+                                          </FormDescription>
+                                          <FormDescription className="block md:hidden">
+                                             Para adicionar mais de um e-mail,
+                                             separe por vírgula e pressione o
+                                             botão de adicionar.
                                           </FormDescription>
                                           <div
                                              className={cn(
@@ -724,7 +724,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                               Diário oficial
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-2 items-center gap-4">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 items-center">
                                  <FormField
                                     control={form.control}
                                     name="officialPublicationDate"
@@ -767,7 +767,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                               Ordem Interna
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-2 items-center gap-4">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 items-center">
                                  <FormField
                                     control={form.control}
                                     name="internalMatrixOrder"
@@ -812,14 +812,14 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                            router.push(pre_auction_routes.auction_maintenance)
                         }
                         className={
-                           'w-fit bg-transparent text-error-default hover:bg-error-default/10 dark:border-dark-error-default dark:text-dark-error-default dark:hover:bg-dark-error-default/10'
+                           'w-fit bg-transparent text-error-default hover:bg-error-default/10 dark:border-dark-error-default dark:text-dark-error-default dark:hover:bg-dark-error-default/10 text-xs md:text-base'
                         }
                      >
                         Cancelar cadastro
                      </Button>
                      <Button
                         type="submit"
-                        className="w-fit"
+                        className="w-fit text-xs md:text-base"
                         onClick={form.handleSubmit(onSubmit)}
                      >
                         Continuar
