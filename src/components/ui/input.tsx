@@ -4,6 +4,7 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 import { cva } from 'class-variance-authority'
+import MaskedInput, { Mask } from 'react-text-mask'
 
 export const inputVariants = cva(
    [
@@ -121,6 +122,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
          error,
          size = 'md',
          labelStatus = 'on',
+         mask,
          ...props
       },
       ref
@@ -137,6 +139,71 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             const target = e.target as HTMLInputElement
             target.setAttribute('data-autofilled', 'true')
          }
+      }
+
+      if (mask) {
+         return (
+            <React.Fragment>
+               <div
+                  className="relative flex flex-col self-stretch p-0 isolate items-center justify-center"
+                  data-twe-input-wrapper-init
+               >
+                  <MaskedInput
+                     ref={ref as React.LegacyRef<MaskedInput>}
+                     mask={mask}
+                     type={type}
+                     autoSave="off"
+                     data-type={type}
+                     autoCorrect="off"
+                     data-value={props.value}
+                     autoComplete="new-password"
+                     aria-invalid={props['aria-invalid']}
+                     className={cn(
+                        inputVariants({ size, labelStatus }),
+                        className
+                     )}
+                     placeholder={label}
+                     onAnimationStart={(e) => onAnimationStart(e)}
+                     {...props}
+                  />
+                  {label && (
+                     <label
+                        htmlFor={props.id}
+                        className={cn(labelVariants({ labelStatus }))}
+                     >
+                        {label}
+                     </label>
+                  )}
+                  {isPassword && (
+                     <button
+                        type="button"
+                        onClick={togglePassword}
+                        className={cn(
+                           'flex items-center justify-center',
+                           'absolute right-3 top-1/2 -translate-y-1/2',
+                           'text-neutral-500 hover:text-neutral-700',
+                           'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-default',
+                           'transition-colors duration-200 rounded-sm'
+                        )}
+                        aria-label={
+                           type === 'password'
+                              ? 'Show password'
+                              : 'Hide password'
+                        }
+                     >
+                        <span className="material-symbols-outlined text-neutral-500 dark:text-neutral-400">
+                           {type === 'password'
+                              ? 'visibility'
+                              : 'visibility_off'}
+                        </span>
+                     </button>
+                  )}
+               </div>
+               {error && (
+                  <span className="mt-1 text-sm text-red-500">{error}</span>
+               )}
+            </React.Fragment>
+         )
       }
 
       return (
@@ -203,8 +270,9 @@ export interface InputProps
    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
    label?: string
    error?: string
-   size?: 'default' | 'xs' | 'sm' | 'md' | 'lg'
+   mask?: Mask | ((value: string) => Mask)
    labelStatus?: 'on' | 'off' | 'inherit'
+   size?: 'default' | 'xs' | 'sm' | 'md' | 'lg'
 }
 
 Input.displayName = 'Input'
