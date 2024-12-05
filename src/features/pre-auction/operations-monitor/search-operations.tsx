@@ -61,7 +61,7 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto] h-[calc(100vh-6.5rem)] overflow-hidden">
-            <div className="max-h-svh space-y-10">
+            <div className="max-h-svh">
                <div className="space-y-4">
                   <Breadcrumb>
                      <BreadcrumbList>
@@ -92,52 +92,54 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                      <Separator orientation="horizontal" />
                   </div>
                </div>
-               <div className="space-y-6 max-w-xl mx-auto">
-                  <OperationsMonitorIllustation className="h-52 mx-auto" />
-                  <h3 className="text-center text-2xl font-semibold font-montserrat">
-                     Selecione um leilão para carregar lista de lotes
-                  </h3>
-                  <Form {...form}>
-                     <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="space-y-6"
-                     >
-                        <FormField
-                           control={form.control}
-                           name="auctionCode"
-                           render={({ field }) => (
-                              <FormItem>
-                                 <FormControl>
-                                    <SelectInput
-                                       label="Leilão"
-                                       placeholder="Selecione o leilão"
-                                       onValueChange={(
-                                          value: SelectInputValue
-                                       ) => {
-                                          form.setValue(
-                                             'auctionCode',
-                                             value.value
-                                          )
-                                       }}
-                                       options={
-                                          auctions?.map((auction) => ({
-                                             id: auction.id,
-                                             label: auction.auctionCode,
-                                             value: auction.auctionCode
-                                          })) || []
-                                       }
-                                       {...field}
-                                    />
-                                 </FormControl>
-                                 <FormMessage />
-                              </FormItem>
-                           )}
-                        />
-                        <Button type="submit" className="w-full">
-                           Continuar
-                        </Button>
-                     </form>
-                  </Form>
+               <div className="grid w-full h-[calc(100vh-12.4125rem)] place-items-center">
+                  <div className="space-y-6 max-w-xl">
+                     <OperationsMonitorIllustation className="h-52 mx-auto" />
+                     <h3 className="text-center text-2xl font-semibold font-montserrat">
+                        Selecione um leilão para carregar lista de lotes
+                     </h3>
+                     <Form {...form}>
+                        <form
+                           onSubmit={form.handleSubmit(onSubmit)}
+                           className="space-y-6"
+                        >
+                           <FormField
+                              control={form.control}
+                              name="auctionCode"
+                              render={({ field }) => (
+                                 <FormItem>
+                                    <FormControl>
+                                       <SelectInput
+                                          label="Leilão"
+                                          placeholder="Selecione o leilão"
+                                          onValueChange={(
+                                             value: SelectInputValue
+                                          ) => {
+                                             form.setValue(
+                                                'auctionCode',
+                                                value.value
+                                             )
+                                          }}
+                                          options={
+                                             auctions?.map((auction) => ({
+                                                id: auction.id,
+                                                label: auction.auctionCode,
+                                                value: auction.auctionCode
+                                             })) || []
+                                          }
+                                          {...field}
+                                       />
+                                    </FormControl>
+                                    <FormMessage />
+                                 </FormItem>
+                              )}
+                           />
+                           <Button type="submit" className="w-full">
+                              Continuar
+                           </Button>
+                        </form>
+                     </Form>
+                  </div>
                </div>
             </div>
             <CollapsibleSidebar

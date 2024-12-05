@@ -94,6 +94,8 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
          }
 
          console.log('data', data)
+
+         router.push(pre_auction_routes.create_auction_success('BRU01.23')) // replace with auctionCode from API response
       } catch (error) {
          console.error('Erro ao enviar formulário:', error)
          toast.error('Erro ao enviar formulário. Tente novamente.')
@@ -218,7 +220,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                <Form {...form}>
                   <form
                      onSubmit={form.handleSubmit(onSubmit)}
-                     className="grid w-full overflow-x-visible overflow-y-scroll max-h-[calc(100vh-17.4125rem)] hide-scrollbar"
+                     className="grid w-full overflow-x-visible overflow-y-scroll max-h-[calc(100vh-16.8125rem)] hide-scrollbar"
                   >
                      <div className="flex-1 space-y-6 overflow-x-visible overflow-y-scroll">
                         {/* Dados do leilão */}

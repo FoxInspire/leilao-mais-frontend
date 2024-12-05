@@ -109,7 +109,7 @@ const Dashboard: React.FC<DashboardProps> = ({
    }, [tab])
 
    return (
-      <div className="grid grid-cols-[1fr_auto] h-[calc(100vh-6.5rem)] overflow-hidden">
+      <div className="grid grid-cols-[1fr_auto] h-[calc(100vh-6.4125rem)] overflow-hidden">
          <div className="space-y-6">
             <div className="space-y-2">
                <div className="flex justify-between items-center gap-2">

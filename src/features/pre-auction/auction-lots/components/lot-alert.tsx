@@ -83,7 +83,7 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                            PROCESSO - {row.original.id}
                         </p>
                      </div>
-                     <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
+                     <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
                         <div className="flex-1 overflow-auto pb-4">
                            <TableAuctionLots
                               data={row.original.AuctionLot || []}
