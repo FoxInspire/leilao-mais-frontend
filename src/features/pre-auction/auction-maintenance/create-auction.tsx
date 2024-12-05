@@ -23,12 +23,22 @@ import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DatePicker } from '@/src/components/ui/date-picker'
 import { Input } from '@/src/components/ui/input'
-import { SelectInput } from '@/src/components/ui/select'
+import { SelectInput, SelectInputValue } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
+import { useZipCode } from '@/src/hooks/useZipCode'
+import { ZIP_CODE_MASK, isValidZipCode } from '@/src/utils/masks'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-export const CreateAuction: React.FC = () => {
+interface CreateAuctionProps {
+   countries: SelectInputValue[]
+}
+
+export const CreateAuction: React.FC<CreateAuctionProps> = ({
+   countries
+}: CreateAuctionProps) => {
+   const { handleZipCode } = useZipCode()
+
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
 
    const form = useForm<z.infer<typeof createAuctionSchema>>({
@@ -163,8 +173,47 @@ export const CreateAuction: React.FC = () => {
                                              <Input
                                                 label="CEP *"
                                                 placeholder="00000-000"
-                                                type="number"
                                                 className="min-w-[172px]"
+                                                mask={ZIP_CODE_MASK}
+                                                onInput={(e) => {
+                                                   if (
+                                                      isValidZipCode(
+                                                         e.currentTarget.value
+                                                      )
+                                                   ) {
+                                                      handleZipCode(
+                                                         e.currentTarget.value,
+                                                         ({
+                                                            address,
+                                                            city,
+                                                            neighborhood,
+                                                            state,
+                                                            zipCode
+                                                         }) => {
+                                                            form.setValue(
+                                                               'address',
+                                                               address
+                                                            )
+                                                            form.setValue(
+                                                               'addressCity',
+                                                               city
+                                                            )
+                                                            form.setValue(
+                                                               'neighborhood',
+                                                               neighborhood
+                                                            )
+                                                            form.setValue(
+                                                               'addressState',
+                                                               state
+                                                            )
+                                                            form.setValue(
+                                                               'cep',
+                                                               zipCode
+                                                            )
+                                                         }
+                                                      )
+                                                   }
+                                                }}
                                                 {...field}
                                              />
                                           </FormControl>
@@ -252,7 +301,7 @@ export const CreateAuction: React.FC = () => {
                                           <FormControl>
                                              <SelectInput
                                                 label="UF *"
-                                                options={[]}
+                                                options={countries}
                                                 placeholder="Selecione o estado"
                                                 {...field}
                                              />
