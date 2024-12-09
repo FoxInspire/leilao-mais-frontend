@@ -257,6 +257,23 @@ export interface AuctionEntity {
    LotHistory?: LotHistory[]
    ExpenseReport?: ExpenseReport[]
    VehicleDebt?: VehicleDebt[]
+   AuctionTransactionHistory?: AuctionTransactionHistory[]
+}
+
+export interface AuctionTransactionHistory {
+   id: string
+   auctionId: string
+   auctionLotId?: string
+   name: string
+   code: number
+   position: number
+   status: 'in_progress' | 'finished' | 'error' | 'canceled'
+   messageStatus?: string
+   isLatest: boolean
+   createdAt: Date
+   updatedAt: Date
+   Auction?: AuctionEntity
+   AuctionLot?: AuctionLot
 }
 
 export interface Grv {
