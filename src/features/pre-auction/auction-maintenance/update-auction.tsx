@@ -34,13 +34,17 @@ import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-interface CreateAuctionProps {
+interface UpdateAuctionProps {
+   id: string
    countries: SelectInputValue[]
+   defaultValues: z.infer<typeof updateAuctionSchema>
 }
 
-export const CreateAuction: React.FC<CreateAuctionProps> = ({
-   countries
-}: CreateAuctionProps) => {
+export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
+   id,
+   countries,
+   defaultValues
+}: UpdateAuctionProps) => {
    const router = useRouter()
 
    const { handleZipCode } = useZipCode()
@@ -48,39 +52,12 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [emailTemp, setEmailTemp] = React.useState('')
 
-   const form = useForm<z.infer<typeof createAuctionSchema>>({
-      resolver: zodResolver(createAuctionSchema),
-      defaultValues: {
-         description: '',
-         auctionDate: '',
-         cep: '',
-         address: '',
-         addressNumber: '',
-         addressComplement: '',
-         neighborhood: '',
-         addressState: '',
-         addressCity: '',
-         scheduleDate: '',
-         startRemovalDate: '',
-         endRemovalDate: '',
-         notificationDate: '',
-         noticeDate: '',
-         notificationEmails: [],
-         auctioneerId: '',
-         auctionCompanyId: '',
-         committeeId: '',
-         exhibitorId: '',
-         accountRule: '',
-         officialPublicationDate: '',
-         officialPublicationNumber: '',
-         internalMatrixOrder: '',
-         internalAuctionOrder: '',
-         vehicleObservations: '',
-         tenantId: ''
-      }
+   const form = useForm<z.infer<typeof updateAuctionSchema>>({
+      resolver: zodResolver(updateAuctionSchema),
+      defaultValues: defaultValues
    })
 
-   const onSubmit: SubmitHandler<z.infer<typeof createAuctionSchema>> = async (
+   const onSubmit: SubmitHandler<z.infer<typeof updateAuctionSchema>> = async (
       data
    ) => {
       try {
@@ -95,7 +72,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
 
          console.log('data', data)
 
-         router.push(pre_auction_routes.create_auction_success('BRU01.23')) // replace with auctionCode from API response
+         router.push(pre_auction_routes.edit_auction_success(id))
       } catch (error) {
          console.error('Erro ao enviar formulário:', error)
          toast.error('Erro ao enviar formulário. Tente novamente.')
@@ -180,10 +157,10 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
       const currentEmails = form.getValues('notificationEmails')
       form.setValue(
          'notificationEmails',
-         currentEmails.filter((_, index) => index !== indexToRemove)
+         currentEmails?.filter((_, index) => index !== indexToRemove) || []
       )
       toast.success(
-         `E-mail removido com sucesso: ${currentEmails[indexToRemove]}`
+         `E-mail removido com sucesso: ${currentEmails?.[indexToRemove]}`
       )
    }
 
@@ -205,13 +182,13 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                         </BreadcrumbLink>
                      </BreadcrumbItem>
                      <BreadcrumbSeparator>/</BreadcrumbSeparator>
-                     <BreadcrumbPage>Novo leilão</BreadcrumbPage>
+                     <BreadcrumbPage>Editar leilão</BreadcrumbPage>
                   </BreadcrumbList>
                </Breadcrumb>
                <div className="space-y-2">
                   <div className="flex flex-wrap justify-between items-center gap-2">
                      <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
-                        Cadastrar Novo leilão
+                        Editar leilão {id}
                      </h1>
                      <Button
                         variant="ghost"
@@ -650,14 +627,14 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                                    label="E-mail *"
                                                    placeholder="Digite o e-mail"
                                                    className="w-full"
-                                                   value={emailTemp || ''}
-                                                   onInput={(e) =>
+                                                   onChange={(e) =>
                                                       setEmailTemp(
                                                          e.currentTarget.value
                                                       )
                                                    }
-                                                   onKeyDown={(e) =>
-                                                      handleEmailKeyDown(e)
+                                                   value={emailTemp}
+                                                   onKeyDown={
+                                                      handleEmailKeyDown
                                                    }
                                                 />
                                                 <Button
@@ -665,7 +642,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                                                    variant="outline"
                                                    size="icon"
                                                    className="w-12 h-12"
-                                                   onClick={() => addEmails()}
+                                                   onClick={addEmails}
                                                 >
                                                    <span className="material-symbols-outlined">
                                                       add
@@ -823,14 +800,14 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                            'w-fit bg-transparent text-error-default hover:bg-error-default/10 dark:border-dark-error-default dark:text-dark-error-default dark:hover:bg-dark-error-default/10 text-xs md:text-base'
                         }
                      >
-                        Cancelar cadastro
+                        Cancelar edição
                      </Button>
                      <Button
                         type="submit"
                         className="w-fit text-xs md:text-base"
                         onClick={form.handleSubmit(onSubmit)}
                      >
-                        Continuar
+                        Atualizar leilão
                      </Button>
                   </div>
                </Form>
@@ -888,71 +865,121 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
    )
 }
 
-const createAuctionSchema = z.object({
-   description: z.string().min(1, { message: 'Descrição é obrigatória' }),
-   auctionDate: z.string().min(1, { message: 'Data do leilão é obrigatória' }),
-   cep: z
+const updateAuctionSchema = z.object({
+   description: z
       .string()
-      .min(1, { message: 'CEP é obrigatório' })
-      .regex(/^\d{5}-?\d{3}$/, {
-         message: 'CEP deve estar no formato 00000-000'
-      }),
-   address: z.string().min(1, { message: 'Endereço é obrigatório' }),
+      .min(1, { message: 'Descrição é obrigatória' })
+      .optional(),
+
+   auctionDate: z
+      .string()
+      .min(1, { message: 'Data do leilão é obrigatória' })
+      .optional(),
+
+   cep: z.string().min(1, { message: 'CEP é obrigatório' }).optional(),
+
+   address: z.string().min(1, { message: 'Endereço é obrigatório' }).optional(),
+
    addressNumber: z
       .string()
       .min(1, { message: 'Número é obrigatório' })
-      .regex(/^\d+$/, { message: 'Número deve conter apenas dígitos' }),
+      .optional(),
+
    addressComplement: z.string().optional(),
-   neighborhood: z.string().min(1, { message: 'Bairro é obrigatório' }),
-   addressState: z.string().min(1, { message: 'Estado é obrigatório' }),
-   addressCity: z.string().min(1, { message: 'Cidade é obrigatória' }),
+
+   neighborhood: z
+      .string()
+      .min(1, { message: 'Bairro é obrigatório' })
+      .optional(),
+
+   addressState: z
+      .string()
+      .min(1, { message: 'Estado é obrigatório' })
+      .optional(),
+
+   addressCity: z
+      .string()
+      .min(1, { message: 'Cidade é obrigatória' })
+      .optional(),
 
    scheduleDate: z
       .string()
-      .min(1, { message: 'Data de agendamento é obrigatória' }),
+      .min(1, { message: 'Data de agendamento é obrigatória' })
+      .optional(),
+
    startRemovalDate: z
       .string()
-      .min(1, { message: 'Data de início da retirada é obrigatória' }),
+      .min(1, { message: 'Data de início da retirada é obrigatória' })
+      .optional(),
+
    endRemovalDate: z
       .string()
-      .min(1, { message: 'Data final da retirada é obrigatória' }),
+      .min(1, { message: 'Data final da retirada é obrigatória' })
+      .optional(),
+
    notificationDate: z
       .string()
-      .min(1, { message: 'Data de notificação é obrigatória' }),
-   noticeDate: z.string().min(1, { message: 'Data do edital é obrigatória' }),
-   auctioneerId: z.string().min(1, { message: 'Leiloeiro é obrigatório' }),
-   auctionCompanyId: z.string().min(1, { message: 'Empresa é obrigatória' }),
-   committeeId: z.string().min(1, { message: 'Comitente é obrigatório' }),
-   exhibitorId: z.string().min(1, { message: 'Expositor é obrigatório' }),
-   accountRule: z
+      .min(1, { message: 'Data de notificação é obrigatória' })
+      .optional(),
+
+   noticeDate: z
       .string()
-      .min(1, { message: 'Regra de prestação de contas é obrigatória' }),
+      .min(1, { message: 'Data do edital é obrigatória' })
+      .optional(),
 
    notificationEmails: z
-      .array(z.string().email({ message: 'E-mail inválido' }))
-      .min(1, { message: 'Pelo menos um e-mail é obrigatório' }),
+      .array(
+         z
+            .string()
+            .min(1, { message: 'E-mail é obrigatório' })
+            .email({ message: 'E-mail inválido' })
+      )
+      .optional(),
+
+   auctioneerId: z
+      .string()
+      .min(1, { message: 'Leiloeiro é obrigatório' })
+      .optional(),
+
+   auctionCompanyId: z
+      .string()
+      .min(1, { message: 'Empresa é obrigatória' })
+      .optional(),
+
+   committeeId: z
+      .string()
+      .min(1, { message: 'Comitente é obrigatório' })
+      .optional(),
+
+   exhibitorId: z
+      .string()
+      .min(1, { message: 'Expositor é obrigatório' })
+      .optional(),
+
+   accountRule: z
+      .string()
+      .min(1, { message: 'Regra de prestação de contas é obrigatória' })
+      .optional(),
 
    officialPublicationDate: z
       .string()
-      .min(1, { message: 'Data de publicação oficial é obrigatória' }),
+      .min(1, { message: 'Data de publicação oficial é obrigatória' })
+      .optional(),
+
    officialPublicationNumber: z
       .string()
       .min(1, { message: 'Número de publicação oficial é obrigatório' })
-      .regex(/^\d+$/, { message: 'Número deve conter apenas dígitos' }),
+      .optional(),
 
    internalMatrixOrder: z
       .string()
-      .regex(/^\d+$/, {
-         message: 'Ordem interna matriz deve conter apenas dígitos'
-      })
+      .min(1, { message: 'Ordem interna matriz é obrigatória' })
       .optional(),
+
    internalAuctionOrder: z
       .string()
-      .regex(/^\d+$/, {
-         message: 'Ordem interna leilão deve conter apenas dígitos'
-      })
+      .min(1, { message: 'Ordem interna leilão é obrigatória' })
       .optional(),
-   vehicleObservations: z.string().optional(),
 
-   tenantId: z.string().min(1, { message: 'ID do tenant é obrigatório' })
+   vehicleObservations: z.string().optional()
 })

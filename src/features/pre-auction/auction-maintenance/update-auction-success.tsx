@@ -13,16 +13,15 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
-import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { useRouter } from 'next/navigation'
 
-interface CreateAuctionSuccessProps {
+interface UpdateAuctionSuccessProps {
    id: string
 }
 
-export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
+export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
    id
 }) => {
    const router = useRouter()
@@ -40,13 +39,13 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                            <BreadcrumbLink>Pré-leilão</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator>/</BreadcrumbSeparator>
-                        <BreadcrumbPage>Novo leilão</BreadcrumbPage>
+                        <BreadcrumbPage>Editar leilão</BreadcrumbPage>
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
                      <div className="flex flex-wrap justify-between items-center gap-2">
                         <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
-                           Cadastrar Novo leilão
+                           Editar leilão {id}
                         </h1>
                         <Button
                            variant="ghost"
@@ -67,7 +66,7 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                         check_circle
                      </span>
                      <h3 className="text-center text-2xl font-semibold font-montserrat">
-                        Cadastro leilão {id} realizado com sucesso
+                        Edição leilão {id} realizada com sucesso
                      </h3>
                      <div className="flex items-center gap-4">
                         <Button
@@ -81,11 +80,6 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                         >
                            Ver leilões
                         </Button>
-                        <DisabledFeature>
-                           <Button disabled className="h-10">
-                              Ingressar lotes
-                           </Button>
-                        </DisabledFeature>
                      </div>
                   </div>
                </div>
