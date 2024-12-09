@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { SelectInputValue } from '@/src/components/ui/select'
-import { UpdateAuction } from '@/src/features/pre-auction/auction-maintenance/update-auction'
+import { UpdateAuction } from '@/src/features/pre-auction/auction-maintenance/update-auction/update-auction'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { readJSONFile } from '@/src/utils/file-path-utils'
 import { redirect } from 'next/navigation'
