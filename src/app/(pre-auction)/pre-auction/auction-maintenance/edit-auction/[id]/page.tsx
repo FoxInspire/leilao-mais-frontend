@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { SelectInputValue } from '@/src/components/ui/select'
-import { EditAuction } from '@/src/features/pre-auction/auction-maintenance/edit-auction'
+import { UpdateAuction } from '@/src/features/pre-auction/auction-maintenance/update-auction'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { readJSONFile } from '@/src/utils/file-path-utils'
 import { redirect } from 'next/navigation'
@@ -40,7 +40,7 @@ export default async function EditAuctionPage({
 
    return (
       <React.Suspense>
-         <EditAuction
+         <UpdateAuction
             id={id}
             countries={countries}
             defaultValues={filteredAuction}

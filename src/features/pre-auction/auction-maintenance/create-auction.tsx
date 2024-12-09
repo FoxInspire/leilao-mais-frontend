@@ -197,6 +197,14 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                         <BreadcrumbLink>Pré-leilão</BreadcrumbLink>
                      </BreadcrumbItem>
                      <BreadcrumbSeparator>/</BreadcrumbSeparator>
+                     <BreadcrumbItem>
+                        <BreadcrumbLink
+                           href={pre_auction_routes.auction_maintenance}
+                        >
+                           Manutenção de leilões
+                        </BreadcrumbLink>
+                     </BreadcrumbItem>
+                     <BreadcrumbSeparator>/</BreadcrumbSeparator>
                      <BreadcrumbPage>Novo leilão</BreadcrumbPage>
                   </BreadcrumbList>
                </Breadcrumb>

@@ -34,17 +34,17 @@ import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-interface EditAuctionProps {
+interface UpdateAuctionProps {
    id: string
    countries: SelectInputValue[]
-   defaultValues: z.infer<typeof editAuctionSchema>
+   defaultValues: z.infer<typeof updateAuctionSchema>
 }
 
-export const EditAuction: React.FC<EditAuctionProps> = ({
+export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
    id,
    countries,
    defaultValues
-}: EditAuctionProps) => {
+}: UpdateAuctionProps) => {
    const router = useRouter()
 
    const { handleZipCode } = useZipCode()
@@ -52,12 +52,12 @@ export const EditAuction: React.FC<EditAuctionProps> = ({
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [emailTemp, setEmailTemp] = React.useState('')
 
-   const form = useForm<z.infer<typeof editAuctionSchema>>({
-      resolver: zodResolver(editAuctionSchema),
+   const form = useForm<z.infer<typeof updateAuctionSchema>>({
+      resolver: zodResolver(updateAuctionSchema),
       defaultValues: defaultValues
    })
 
-   const onSubmit: SubmitHandler<z.infer<typeof editAuctionSchema>> = async (
+   const onSubmit: SubmitHandler<z.infer<typeof updateAuctionSchema>> = async (
       data
    ) => {
       try {
@@ -172,6 +172,14 @@ export const EditAuction: React.FC<EditAuctionProps> = ({
                   <BreadcrumbList>
                      <BreadcrumbItem>
                         <BreadcrumbLink>Pré-leilão</BreadcrumbLink>
+                     </BreadcrumbItem>
+                     <BreadcrumbSeparator>/</BreadcrumbSeparator>
+                     <BreadcrumbItem>
+                        <BreadcrumbLink
+                           href={pre_auction_routes.auction_maintenance}
+                        >
+                           Manutenção de leilões
+                        </BreadcrumbLink>
                      </BreadcrumbItem>
                      <BreadcrumbSeparator>/</BreadcrumbSeparator>
                      <BreadcrumbPage>Editar leilão</BreadcrumbPage>
@@ -857,7 +865,7 @@ export const EditAuction: React.FC<EditAuctionProps> = ({
    )
 }
 
-const editAuctionSchema = z.object({
+const updateAuctionSchema = z.object({
    description: z
       .string()
       .min(1, { message: 'Descrição é obrigatória' })

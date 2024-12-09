@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
-import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { useRouter } from 'next/navigation'
@@ -81,11 +80,6 @@ export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
                         >
                            Ver leilões
                         </Button>
-                        <DisabledFeature>
-                           <Button disabled className="h-10">
-                              Ingressar lotes
-                           </Button>
-                        </DisabledFeature>
                      </div>
                   </div>
                </div>
