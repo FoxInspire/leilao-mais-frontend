@@ -2,6 +2,12 @@
 
 import * as React from 'react'
 
+import {
+   Tooltip,
+   TooltipContent,
+   TooltipProvider,
+   TooltipTrigger
+} from '@/components/ui/tooltip'
 import { AuctionStatus } from '@/features/pre-auction/auction-maintenance/components/auction-status'
 import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { DataTableRowActions } from '@/features/pre-auction/auction-maintenance/components/data-table-row-actions'
@@ -30,14 +36,23 @@ export const columns: ColumnDef<AuctionEntity>[] = [
          <DataTableColumnHeader column={column} title="Leilão" />
       ),
       cell: ({ row }) => (
-         <div className="font-bold font-nunito text-primary-default dark:text-dark-primary-default uppercase hover:underline">
-            <Link
-               href={pre_auction_routes.auction_maintenance_lots(
-                  row.getValue('auctionCode')
-               )}
-            >
-               {row.getValue('auctionCode')}
-            </Link>
+         <div className="font-bold font-nunito text-primary-default dark:text-dark-primary-default hover:underline">
+            <TooltipProvider>
+               <Tooltip delayDuration={50}>
+                  <TooltipTrigger>
+                     <Link
+                        href={pre_auction_routes.auction_maintenance_lots(
+                           row.getValue('auctionCode')
+                        )}
+                     >
+                        {row.getValue('auctionCode')}
+                     </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                     <p className="whitespace-pre">Clique para ver lotes</p>
+                  </TooltipContent>
+               </Tooltip>
+            </TooltipProvider>
          </div>
       )
    },

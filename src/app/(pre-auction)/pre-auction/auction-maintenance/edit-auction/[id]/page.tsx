@@ -1,6 +1,10 @@
 import * as React from 'react'
 
+import { SelectInputValue } from '@/src/components/ui/select'
+import { EditAuction } from '@/src/features/pre-auction/auction-maintenance/edit-auction'
+import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { readJSONFile } from '@/src/utils/file-path-utils'
+import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 
@@ -11,6 +15,13 @@ async function getAuctions() {
    return data
 }
 
+async function getCountries() {
+   const data = (await readJSONFile(
+      'src/mocks/countries.json'
+   )) as SelectInputValue[]
+   return data
+}
+
 export default async function EditAuctionPage({
    params
 }: {
@@ -18,21 +29,22 @@ export default async function EditAuctionPage({
 }) {
    const id = (await params).id
    const auctions = await getAuctions()
-   const filteredAuctions = auctions.filter(
+   const countries = await getCountries()
+   const filteredAuction = auctions.find(
       (auction) => auction?.auctionCode?.toLowerCase() === id?.toLowerCase()
    )
 
+   if (!filteredAuction) {
+      return redirect(pre_auction_routes.auction_maintenance)
+   }
+
    return (
       <React.Suspense>
-         {/* <AuctionLots
+         <EditAuction
             id={id}
-            data={filteredAuctions}
-            columns={columns_auction_lots as ColumnDef<AuctionLot>[]}
-         /> */}
-         <div>
-            <h1>Edit Auction</h1>
-            <p>Auction Code: {id}</p>
-         </div>
+            countries={countries}
+            defaultValues={filteredAuction}
+         />
       </React.Suspense>
    )
 }

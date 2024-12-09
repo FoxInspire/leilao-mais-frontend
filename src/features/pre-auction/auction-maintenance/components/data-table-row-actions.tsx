@@ -35,6 +35,7 @@ export function DataTableRowActions<TData>({
          label: 'Ingressar lotes',
          value: 'add-lots',
          filled: false,
+         disabled: true,
          onClick: () => {}
       },
       {
@@ -42,6 +43,7 @@ export function DataTableRowActions<TData>({
          label: 'Editar leilão',
          value: 'edit-auction',
          filled: true,
+         disabled: false,
          onClick: () => {
             router.push(
                pre_auction_routes.edit_auction(
@@ -55,6 +57,7 @@ export function DataTableRowActions<TData>({
          label: 'Exportar lotes',
          value: 'export-lots',
          filled: false,
+         disabled: true,
          onClick: () => {}
       },
       {
@@ -62,6 +65,7 @@ export function DataTableRowActions<TData>({
          label: 'Gerar edital de leilão',
          value: 'generate-notice',
          filled: false,
+         disabled: true,
          onClick: () => {}
       },
       {
@@ -69,6 +73,7 @@ export function DataTableRowActions<TData>({
          label: 'Notificar proprietários',
          value: 'notify-owners',
          filled: false,
+         disabled: true,
          onClick: () => {}
       },
       {
@@ -76,6 +81,7 @@ export function DataTableRowActions<TData>({
          label: 'Importar proprietários',
          value: 'import-owners',
          filled: false,
+         disabled: true,
          onClick: () => {}
       },
       {
@@ -83,6 +89,7 @@ export function DataTableRowActions<TData>({
          label: 'Monitor de operações',
          value: 'operations-monitor',
          filled: false,
+         disabled: true,
          onClick: () => {}
       }
    ]
@@ -107,6 +114,7 @@ export function DataTableRowActions<TData>({
                   {index === menuItems.length - 1 && <DropdownMenuSeparator />}
                   <DropdownMenuItem
                      className="font-medium"
+                     disabled={item.disabled}
                      onClick={() => {
                         onSelect?.(item.value)
                         item.onClick?.()
