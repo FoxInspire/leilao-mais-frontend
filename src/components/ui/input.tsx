@@ -141,6 +141,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
          }
       }
 
+      const { value, defaultValue, ...inputProps } = props
+
       if (mask) {
          return (
             <React.Fragment>
@@ -155,16 +157,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                      autoSave="off"
                      data-type={type}
                      autoCorrect="off"
-                     data-value={props.value}
                      autoComplete="new-password"
-                     aria-invalid={props['aria-invalid']}
+                     aria-invalid={inputProps['aria-invalid']}
                      className={cn(
                         inputVariants({ size, labelStatus }),
                         className
                      )}
                      placeholder={label}
-                     onAnimationStart={(e) => onAnimationStart(e)}
-                     {...props}
+                     onAnimationStart={onAnimationStart}
+                     value={value}
+                     {...inputProps}
                   />
                   {label && (
                      <label
@@ -218,16 +220,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                   autoSave="off"
                   data-type={type}
                   autoCorrect="off"
-                  data-value={props.value}
                   autoComplete="new-password"
-                  aria-invalid={props['aria-invalid']}
+                  aria-invalid={inputProps['aria-invalid']}
                   className={cn(
                      inputVariants({ size, labelStatus }),
                      className
                   )}
                   placeholder={label}
-                  onAnimationStart={(e) => onAnimationStart(e)}
-                  {...props}
+                  onAnimationStart={onAnimationStart}
+                  value={value}
+                  {...inputProps}
                />
                {label && (
                   <label
