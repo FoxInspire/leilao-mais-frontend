@@ -4,6 +4,7 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 import { cva } from 'class-variance-authority'
+import MaskedInput, { Mask } from 'react-text-mask'
 
 export const inputVariants = cva(
    [
@@ -27,11 +28,14 @@ export const inputVariants = cva(
       'dark:focus-visible:border-2',
       'dark:focus-visible:outline-offset-0',
 
+      'placeholder:text-[#737373]',
       'placeholder:opacity-0',
       'placeholder:transition-opacity placeholder:duration-200',
       'focus:placeholder:opacity-100',
       'disabled:cursor-not-allowed disabled:opacity-50',
       'disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none',
+      'aria-[invalid=true]:border-red-500 aria-[invalid=true]:dark:border-red-500',
+      'aria-[invalid=true]:text-red-600 aria-[invalid=true]:dark:text-red-600',
       'invalid:border-red-500 invalid:text-red-600',
       'focus:invalid:border-red-500 focus:invalid:ring-red-500'
    ],
@@ -46,10 +50,16 @@ export const inputVariants = cva(
             md: 'min-h-[48px] px-[12px] py-[8px] text-sm leading-6',
             lg: 'min-h-[56px] px-[14px] py-[10px] text-base leading-6',
             default: 'min-h-[56px] px-[14px] py-[16.5px] text-base leading-6'
+         },
+         labelStatus: {
+            on: 'placeholder:opacity-100 ',
+            off: 'placeholder:opacity-0',
+            inherit: 'placeholder:opacity-0'
          }
       },
       defaultVariants: {
-         size: 'default'
+         size: 'default',
+         labelStatus: 'inherit'
       }
    }
 )
@@ -62,7 +72,7 @@ export const labelVariants = cva(
       'mb-0 max-w-[90%]',
       'origin-[0_0]',
 
-      'truncate leading-6',
+      'truncate leading-6 text-base',
       'text-neutral-500',
       'dark:text-neutral-400',
 
@@ -85,12 +95,19 @@ export const labelVariants = cva(
       'transition-all duration-200 ease-out',
 
       'peer-[&[data-autofilled="true"]]:top-1',
-      'peer-[&[data-autofilled="true"]]:scale-75'
+      'peer-[&[data-autofilled="true"]]:scale-75',
+      'peer-aria-[invalid=true]:text-red-500',
+      'peer-aria-[invalid=true]:dark:text-red-500'
    ],
    {
       variants: {
          error: {
             true: 'text-red-500'
+         },
+         labelStatus: {
+            on: 'top-1 scale-75',
+            off: '',
+            inherit: ''
          }
       }
    }
@@ -98,7 +115,16 @@ export const labelVariants = cva(
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
    (
-      { className, type: initialType, label, error, size = 'md', ...props },
+      {
+         className,
+         type: initialType,
+         label,
+         error,
+         size = 'md',
+         labelStatus = 'on',
+         mask,
+         ...props
+      },
       ref
    ) => {
       const isPassword = initialType === 'password'
@@ -108,6 +134,78 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
          ? () => setType(type === 'password' ? 'text' : 'password')
          : undefined
 
+      const onAnimationStart = (e: React.AnimationEvent<HTMLInputElement>) => {
+         if (e.animationName === 'onAutoFillStart') {
+            const target = e.target as HTMLInputElement
+            target.setAttribute('data-autofilled', 'true')
+         }
+      }
+
+      if (mask) {
+         return (
+            <React.Fragment>
+               <div
+                  className="relative flex flex-col self-stretch p-0 isolate items-center justify-center"
+                  data-twe-input-wrapper-init
+               >
+                  <MaskedInput
+                     ref={ref as React.LegacyRef<MaskedInput>}
+                     mask={mask}
+                     type={type}
+                     autoSave="off"
+                     data-type={type}
+                     autoCorrect="off"
+                     data-value={props.value}
+                     autoComplete="new-password"
+                     aria-invalid={props['aria-invalid']}
+                     className={cn(
+                        inputVariants({ size, labelStatus }),
+                        className
+                     )}
+                     placeholder={label}
+                     onAnimationStart={(e) => onAnimationStart(e)}
+                     {...props}
+                  />
+                  {label && (
+                     <label
+                        htmlFor={props.id}
+                        className={cn(labelVariants({ labelStatus }))}
+                     >
+                        {label}
+                     </label>
+                  )}
+                  {isPassword && (
+                     <button
+                        type="button"
+                        onClick={togglePassword}
+                        className={cn(
+                           'flex items-center justify-center',
+                           'absolute right-3 top-1/2 -translate-y-1/2',
+                           'text-neutral-500 hover:text-neutral-700',
+                           'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-default',
+                           'transition-colors duration-200 rounded-sm'
+                        )}
+                        aria-label={
+                           type === 'password'
+                              ? 'Show password'
+                              : 'Hide password'
+                        }
+                     >
+                        <span className="material-symbols-outlined text-neutral-500 dark:text-neutral-400">
+                           {type === 'password'
+                              ? 'visibility'
+                              : 'visibility_off'}
+                        </span>
+                     </button>
+                  )}
+               </div>
+               {error && (
+                  <span className="mt-1 text-sm text-red-500">{error}</span>
+               )}
+            </React.Fragment>
+         )
+      }
+
       return (
          <React.Fragment>
             <div
@@ -115,33 +213,26 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                data-twe-input-wrapper-init
             >
                <input
+                  ref={ref}
                   type={type}
-                  data-value={props.value}
-                  data-type={type}
-                  autoComplete="new-password"
-                  autoCorrect="off"
                   autoSave="off"
+                  data-type={type}
+                  autoCorrect="off"
+                  data-value={props.value}
+                  autoComplete="new-password"
+                  aria-invalid={props['aria-invalid']}
                   className={cn(
-                     inputVariants({ error: !!error, size }),
+                     inputVariants({ size, labelStatus }),
                      className
                   )}
-                  aria-invalid={error ? 'true' : undefined}
-                  ref={ref}
                   placeholder={label}
-                  onAnimationStart={(e) => {
-                     if (e.animationName === 'onAutoFillStart') {
-                        ;(e.target as HTMLInputElement).setAttribute(
-                           'data-autofilled',
-                           'true'
-                        )
-                     }
-                  }}
+                  onAnimationStart={(e) => onAnimationStart(e)}
                   {...props}
                />
                {label && (
                   <label
                      htmlFor={props.id}
-                     className={cn(labelVariants({ error: !!error }))}
+                     className={cn(labelVariants({ labelStatus }))}
                   >
                      {label}
                   </label>
@@ -179,6 +270,8 @@ export interface InputProps
    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
    label?: string
    error?: string
+   mask?: Mask | ((value: string) => Mask)
+   labelStatus?: 'on' | 'off' | 'inherit'
    size?: 'default' | 'xs' | 'sm' | 'md' | 'lg'
 }
 

@@ -18,26 +18,27 @@ import {
    DialogTrigger
 } from '@/components/ui/dialog'
 import { SelectInput } from '@/components/ui/select'
-import {
-   Tooltip,
-   TooltipContent,
-   TooltipProvider,
-   TooltipTrigger
-} from '@/components/ui/tooltip'
 import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DatePicker } from '@/src/components/ui/date-picker'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
-import { cn } from '@/src/lib/utils'
+import { pre_auction_routes } from '@/src/routes/pre-auction'
+import { AuctionEntity } from '@/src/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
+
+import Link from 'next/link'
+
+interface AuctionMaintenanceProps {
+   data: AuctionEntity[]
+   columns: ColumnDef<AuctionEntity>[]
+}
 
 const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
    columns,
    data
 }: AuctionMaintenanceProps) => {
-   console.log('data', data)
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
 
@@ -107,7 +108,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                  <p className="text-lg font-montserrat">
                                     Preencha os campos necessários para busca
                                  </p>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                                     <Input
                                        label="Placa"
                                        placeholder="000-0000"
@@ -121,7 +122,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                        placeholder="Número do processo"
                                     />
                                  </div>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                                     <DatePicker
                                        label="Data"
                                        placeholder="DD/MM/YYYY"
@@ -135,13 +136,18 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                        placeholder="Descrição do leilão"
                                     />
                                  </div>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-2">
+                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
                                     <SelectInput
                                        label="Status"
                                        placeholder="Selecione o status"
                                        options={[
-                                          { label: 'Ativo', value: 'active' },
                                           {
+                                             id: '1',
+                                             label: 'Ativo',
+                                             value: 'active'
+                                          },
+                                          {
+                                             id: '2',
                                              label: 'Inativo',
                                              value: 'inactive'
                                           }
@@ -178,29 +184,20 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                            </DialogContent>
                         </Dialog>
                      </div>
-                     <TooltipProvider>
-                        <Tooltip delayDuration={0}>
-                           <TooltipTrigger asChild>
-                              <div>
-                                 <Button
-                                    variant="default"
-                                    className="w-full sm:w-auto sm:min-w-[150px] whitespace-nowrap"
-                                    disabled
-                                 >
-                                    Novo leilão
-                                 </Button>
-                              </div>
-                           </TooltipTrigger>
-                           <TooltipContent>
-                              <p className="text-sm">
-                                 Funcionalidade em desenvolvimento.
-                              </p>
-                           </TooltipContent>
-                        </Tooltip>
-                     </TooltipProvider>
+                     <Link
+                        href={pre_auction_routes.create_auction}
+                        prefetch={false}
+                     >
+                        <Button
+                           variant="default"
+                           className="w-full sm:w-auto sm:min-w-[150px] whitespace-nowrap"
+                        >
+                           Novo leilão
+                        </Button>
+                     </Link>
                   </div>
                </div>
-               <div className="grid w-full overflow-scroll max-h-[calc(100vh-17.4125rem)]">
+               <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
                   <div className="flex-1 overflow-auto">
                      <DataTable
                         data={data}
@@ -213,10 +210,6 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
             <CollapsibleSidebar
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
-               className={cn({
-                  'overflow-y-auto': isSidebarOpen,
-                  'overflow-y-hidden h-0': !isSidebarOpen
-               })}
             >
                <div className="space-y-2 h-full overflow-y-auto ml-4 mt-[28px]">
                   <div className="flex justify-between items-center gap-2">
@@ -287,11 +280,6 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
          </div>
       </React.Fragment>
    )
-}
-
-type AuctionMaintenanceProps = {
-   data: any[]
-   columns: ColumnDef<any>[]
 }
 
 export default AuctionMaintenance

@@ -92,15 +92,15 @@ body {
 body,
 input,
 textarea {
-   input[type='number']::-webkit-inner-spin-,
-   input[type='number']::-webkit-outer-spin- {
+   input[type='number']::-webkit-inner-spin-button,
+   input[type='number']::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
    }
 
    input[type='number'] {
-      -moz-appearance: textfield !important;
-      appearance: textfield !important;
+      -moz-appearance: textfield;
+      appearance: textfield;
    }
 
    outline: inherit;
@@ -134,6 +134,20 @@ input:autofill + label {
 
 input {
    caret-color: var(--primary-default);
+}
+
+input[type='time']::-webkit-inner-spin-button,
+input[type='time']::-webkit-calendar-picker-indicator {
+   display: none;
+   -webkit-appearance: none;
+}
+
+input[type='time']::-moz-focus-outer {
+   border: 0;
+}
+
+input[type='time']::-ms-clear {
+   display: none;
 }
 
 ::-webkit-scrollbar {
@@ -183,9 +197,5 @@ input {
 }
 
 .filled {
-   font-variation-settings:
-      'FILL' 1,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
+   font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }

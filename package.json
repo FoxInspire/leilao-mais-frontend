@@ -10,6 +10,7 @@
       "seed": "npx tsx seed.ts"
    },
    "dependencies": {
+      "@hookform/resolvers": "^3.9.1",
       "@radix-ui/react-accordion": "^1.2.1",
       "@radix-ui/react-avatar": "^1.1.1",
       "@radix-ui/react-checkbox": "^1.1.2",
@@ -34,11 +35,13 @@
       "lucide-react": "^0.454.0",
       "next": "15.0.2",
       "next-auth": "^4.24.10",
+      "next-nprogress-bar": "^2.3.15",
       "next-themes": "^0.4.3",
       "nuqs": "^2.2.1",
       "react": "^18.2.0",
       "react-day-picker": "8.10.1",
       "react-dom": "^18.2.0",
+      "react-hook-form": "^7.53.2",
       "sonner": "^1.7.0",
       "tailwind-merge": "^2.5.4",
       "tailwindcss-animate": "^1.0.7",
@@ -52,12 +55,14 @@
       "@types/node": "^20",
       "@types/react": "^18",
       "@types/react-dom": "^18",
+      "@types/react-text-mask": "^5.4.14",
       "cookies-next": "^5.0.2",
       "date-fns": "^4.1.0",
       "eslint": "^9.13.0",
       "eslint-config-next": "15.0.2",
       "postcss": "^8",
       "postcss-import": "^16.1.0",
+      "react-text-mask": "^5.5.0",
       "tailwindcss": "^3.4.1",
       "typescript": "^5"
    }

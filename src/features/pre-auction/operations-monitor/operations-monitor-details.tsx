@@ -17,30 +17,27 @@ import {
    DialogTitle
 } from '@/components/ui/dialog'
 import { SelectInput, SelectInputValue } from '@/components/ui/select'
-import {
-   TableAuctionLots,
-   TableAuctionLotsHandle
-} from '@/features/pre-auction/auction-lots/components/data-table'
+import { TableAuctionLotsHandle } from '@/features/pre-auction/auction-lots/components/data-table'
+import { TableOperationMonitorDetails } from '@/features/pre-auction/operations-monitor/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
+import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
-import { AuctionLot } from '@/types/entities/auction.entity'
+import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
 
-interface AuctionMaintenanceLotsProps {
+interface OperationsMonitorDetailsProps {
    id: string
-   data: any[] // is a AuctionLot[]
    columns: ColumnDef<AuctionLot>[]
+   data: AuctionEntity[]
 }
 
-const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
-   id,
-   columns,
-   data
-}: AuctionMaintenanceLotsProps) => {
+export const OperationsMonitorDetails: React.FC<
+   OperationsMonitorDetailsProps
+> = ({ id, columns, data }: OperationsMonitorDetailsProps) => {
    const tableRef = React.useRef<TableAuctionLotsHandle>(null)
 
    const [selectedRows, setSelectedRows] = React.useState<AuctionLot[]>([])
@@ -48,22 +45,21 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
 
-   const transformedData = React.useMemo(() => {
-      return data.flatMap((auction) => {
-         if (!auction.AuctionLot?.length) return []
-
-         return auction.AuctionLot.map((lot: AuctionLot) => ({
-            ...auction,
-            AuctionLot: [lot],
-            lotNumber: lot.lotNumber,
-            process: auction.auctionCode,
-            plate: lot.Vehicle?.plate,
-            chassis: lot.Vehicle?.chassis,
-            brand: lot.Vehicle?.brand?.name,
-            model: lot.Vehicle?.model?.name,
-            type: lot.Vehicle?.type?.name
+   const transformed_data = React.useMemo(() => {
+      return data.flatMap(({ auctionCode, AuctionLot = [], ...auctionRest }) =>
+         AuctionLot.map(({ Vehicle, lotNumber, ...lotRest }) => ({
+            ...auctionRest,
+            ...lotRest,
+            lotNumber,
+            process: auctionCode,
+            plate: Vehicle?.plate,
+            chassis: Vehicle?.chassis,
+            brand: Vehicle?.brand?.name,
+            model: Vehicle?.model?.name,
+            type: Vehicle?.type?.name,
+            AuctionLot: [{ Vehicle, lotNumber, ...lotRest }]
          }))
-      })
+      )
    }, [data])
 
    return (
@@ -79,21 +75,21 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         <BreadcrumbSeparator>/</BreadcrumbSeparator>
                         <BreadcrumbItem>
                            <BreadcrumbLink
-                              href={pre_auction_routes.auction_maintenance}
+                              href={pre_auction_routes.operations_monitor}
                            >
-                              Manutenção de leilões
+                              Monitor de operações
                            </BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator>/</BreadcrumbSeparator>
                         <BreadcrumbItem>
-                           <BreadcrumbPage>Lista de lotes</BreadcrumbPage>
+                           <BreadcrumbPage>Leilão</BreadcrumbPage>
                         </BreadcrumbItem>
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
                      <div className="flex flex-wrap justify-between items-center gap-2">
                         <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
-                           Lista de lotes - {id?.toUpperCase()}
+                           Operações - {id?.toUpperCase()}
                         </h1>
                         <Button
                            variant="ghost"
@@ -108,14 +104,23 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      <Separator orientation="horizontal" />
                   </div>
                   {selectedRows.length === 0 && (
-                     <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
+                     <div className="flex flex-col gap-4 w-full md:flex-row sm:items-center sm:justify-between">
+                        <div className="grid md:grid-cols-4 items-start sm:items-center gap-4 md:max-w-[70%] w-full">
                            <Input
                               label="Busca geral"
                               value={globalFilter}
                               placeholder="Processo, placa, chassi"
                               onChange={(e) => setGlobalFilter(e.target.value)}
-                              className="min-w-[300px]"
+                           />
+                           <SelectInput
+                              options={[]}
+                              placeholder="Selecione o status"
+                              label="Status"
+                           />
+                           <SelectInput
+                              options={[]}
+                              placeholder="Selecione a transação"
+                              label="Transação"
                            />
                            <Button
                               variant="ghost"
@@ -125,12 +130,15 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                               Busca avançada
                            </Button>
                         </div>
-                        <Button
-                           variant="default"
-                           className="w-full sm:w-auto px-12 sm:min-w-[150px] whitespace-nowrap"
-                        >
-                           Importar numeração lotes
-                        </Button>
+                        <DisabledFeature>
+                           <Button
+                              disabled
+                              variant="default"
+                              className="w-full sm:w-auto px-12 sm:min-w-[150px] whitespace-nowrap"
+                           >
+                              Consultas
+                           </Button>
+                        </DisabledFeature>
                      </div>
                   )}
                   {selectedRows.length > 0 && (
@@ -224,10 +232,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
                   <div className="flex-1 overflow-auto">
-                     <TableAuctionLots
+                     <TableOperationMonitorDetails
                         ref={tableRef}
                         columns={columns}
-                        data={transformedData}
+                        data={transformed_data || []}
                         globalFilter={globalFilter}
                         onSelectionChange={setSelectedRows}
                      />
@@ -237,10 +245,11 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
             <CollapsibleSidebar
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
+               className="h-[calc(100vh-1.5rem-56px)]"
             >
-               <div className="space-y-2 h-full overflow-y-auto md:ml-4 md:mt-9">
-                  <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-2xl font-semibold font-montserrat dark:text-dark-text-primary">
+               <div className="space-y-2 h-full overflow-y-auto md:ml-4">
+                  <div className="flex justify-between items-center gap-2 mt-9">
+                     <h1 className="text-2xl font-semibold font-montserrat">
                         Sobre a página
                      </h1>
                      <Button
@@ -262,12 +271,13 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         Descrição
                      </p>
                      <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                        A página de Lista de Lotes permite visualizar todos os
-                        lotes ingressados no leilão selecionado e acompanhar ou
-                        alterar o status de cada um. O usuário pode criar ou
-                        zerar a numeração de identificação dos lotes, acessar o
-                        histórico de notificações, inserir informações de
-                        perícia e monitorar os alertas relacionados a cada lote.
+                        A página de Monitor de Operações permite acompanhar em
+                        tempo real as transações dos lotes em um leilão ativo
+                        junto ao DETRAN. O usuário pode alterar o status do lote
+                        conforme o retorno do órgão, consultar informações do
+                        veículo, agendar, cancelar ou reiniciar transações e
+                        monitorar mensagens e notificações relevantes para cada
+                        lote.
                      </p>
                      <p className="text-black dark:text-dark-text-primary font-semibold text-start">
                         Detalhes
@@ -283,36 +293,30 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      </div>
                      <div>
                         <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Importar numeração lotes
+                           Transação
                         </p>
                         <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                           Importa e atualiza os dados de GRV e numeração a
-                           partir da planilha enviada.
+                           Operações e processos necessários ao lote junto ao
+                           DETRAN. A cor verde indica sucesso
                         </p>
                      </div>
                      <div>
                         <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Alertas
+                           Agendado
                         </p>
-                        <div className="space-y-2">
-                           <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                              Exibe os alertas pertinentes ao lote, sendo eles:
-                           </p>
-                           <ul className="list-disc list-inside text-text-secondary dark:text-dark-text-secondary text-start">
-                              <li>
-                                 <strong>Restrições:</strong> Exibe a lista de
-                                 restrições adicionadas ao lote.
-                              </li>
-                              <li>
-                                 <strong>Notificações:</strong> Indica que a
-                                 notificação de liberados foi enviada.
-                              </li>
-                              <li>
-                                 <strong>Leilão como sobra:</strong> Indica a
-                                 quantidade de leilões que o lote já participou.
-                              </li>
-                           </ul>
-                        </div>
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           Exibe o ícone quando a transação do lote for
+                           agendada.
+                        </p>
+                     </div>
+                     <div>
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                           Consultas
+                        </p>
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           É possível consultar mais informações sobre o veículo
+                           na base de dados.
+                        </p>
                      </div>
                   </div>
                </div>
@@ -327,33 +331,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                   <p className="text-lg font-montserrat">
                      Preencha os campos necessários para busca
                   </p>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
-                     <SelectInput
-                        label="Notificação liberado"
-                        placeholder="Selecione a notificação"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
-                     />
-                     <SelectInput
-                        label="Perícia"
-                        placeholder="Selecione a perícia"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
-                     />
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-6">
                      <SelectInput
                         label="Status"
                         placeholder="Selecione o status"
@@ -367,11 +345,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            console.log('value', value)
                         }
                      />
-                  </div>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
                      <SelectInput
-                        label="Restrição"
-                        placeholder="Selecione a restrição"
+                        label="Transação"
+                        placeholder="Selecione a transação"
                         options={[
                            { id: '1', label: 'Opção 1', value: 'option1' },
                            { id: '2', label: 'Opção 2', value: 'option2' },
@@ -383,21 +359,8 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         }
                      />
                      <SelectInput
-                        label="Sub-restrição"
-                        placeholder="Selecione a sub-restrição"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
-                     />
-                     <SelectInput
-                        label="Processo"
-                        placeholder="0000000000"
+                        label="Agendado"
+                        placeholder="Selecione agendamento"
                         options={[
                            { id: '1', label: 'Opção 1', value: 'option1' },
                            { id: '2', label: 'Opção 2', value: 'option2' },
@@ -409,82 +372,25 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         }
                      />
                   </div>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
-                     <SelectInput
-                        label="Placa"
-                        placeholder="000-0000"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
-                     <SelectInput
-                        label="Chassi"
-                        placeholder="00000000000000000"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
-                     <SelectInput
-                        label="Marca/Modelo"
-                        placeholder="Selecione a marca/modelo"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) => {
-                           console.log('value', value)
-                        }}
-                     />
+                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
+                     <Input label="Processo" placeholder="Número do processo" />
+                     <Input label="Placa" placeholder="000-0000" />
+                     <Input label="Chassi" placeholder="00000000000000000" />
                   </div>
-                  <div className="grid md:grid-cols-2 grid-cols-1 gap-4 items-center">
-                     <SelectInput
-                        label="Cor"
-                        placeholder="Selecione a cor"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
-                     />
-                     <SelectInput
-                        label="Tipo"
-                        placeholder="Selecione o tipo"
-                        options={[
-                           { id: '1', label: 'Opção 1', value: 'option1' },
-                           { id: '2', label: 'Opção 2', value: 'option2' },
-                           { id: '3', label: 'Opção 3', value: 'option3' },
-                           { id: '4', label: 'Opção 4', value: 'option4' }
-                        ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
-                     />
-                  </div>
+                  <Input
+                     className="col-span-3"
+                     label="Marca/Modelo"
+                     placeholder="Ex: Fiat, VW"
+                  />
                </div>
                <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
                   <div className="md:order-1 order-2">
                      <Button
                         variant="destructive"
                         className="w-full"
-                        onClick={() => setDialog(false)}
+                        onClick={() => {
+                           setDialog(false)
+                        }}
                      >
                         Cancelar
                      </Button>
@@ -504,5 +410,3 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
       </React.Fragment>
    )
 }
-
-export default AuctionLots

@@ -3,14 +3,6 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 import * as React from 'react'
 
-import {
-   DropdownMenu,
-   DropdownMenuContent,
-   DropdownMenuItem,
-   DropdownMenuLabel,
-   DropdownMenuSeparator,
-   DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { useElementSize } from '@/hooks/useElementSize'
 import { cn } from '@/lib/utils'
@@ -179,6 +171,7 @@ const SelectSeparator = React.forwardRef<
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
 export type SelectInputValue = {
+   id: string
    label: string
    value: string
 }
@@ -193,9 +186,14 @@ const SelectInput = React.forwardRef<
 >(({ className, menu_label, options, onValueChange, ...props }, ref) => {
    const [_value, setValue] = React.useState(props.value)
 
+   const uniqueOptions = options.filter(
+      (option, index, self) =>
+         index === self.findIndex((o) => o.value === option.value)
+   )
+
    const handleValueChange = (selectedValue: string) => {
       setValue(selectedValue)
-      const selectedOption = options.find(
+      const selectedOption = uniqueOptions.find(
          (option) => option.value === selectedValue
       )
       if (selectedOption) {
@@ -207,38 +205,48 @@ const SelectInput = React.forwardRef<
 
    return (
       <div className="relative w-full">
-         <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-               <div ref={elementRef}>
+         <Select onValueChange={handleValueChange}>
+            <SelectTrigger
+               hideIcon
+               className="border-none w-full px-0 py-0 m-0"
+            >
+               <div ref={elementRef} className="w-full">
                   <Input
-                     ref={ref}
                      readOnly
+                     ref={ref}
+                     labelStatus="on"
                      className={cn(className)}
                      defaultValue={
-                        options.find((option) => option.value === _value)
+                        uniqueOptions.find((option) => option.value === _value)
                            ?.label || undefined
                      }
+                     placeholder={props.placeholder}
                      {...props}
                   />
                </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" style={{ width: `${width}px` }}>
-               {menu_label && (
-                  <React.Fragment>
-                     <DropdownMenuLabel>{menu_label}</DropdownMenuLabel>
-                     <DropdownMenuSeparator />
-                  </React.Fragment>
+            </SelectTrigger>
+            <SelectContent style={{ width: `${width}px` }} sideOffset={4}>
+               {menu_label && <SelectLabel>{menu_label}</SelectLabel>}
+               {uniqueOptions.length === 0 ? (
+                  <div className="py-2 px-2 text-sm text-neutral-500 text-center">
+                     Não há opções disponíveis
+                  </div>
+               ) : (
+                  uniqueOptions.map((option) => (
+                     <SelectItem
+                        key={option.id}
+                        value={option.value}
+                        onClick={() => handleValueChange(option.value)}
+                     >
+                        {option.label}
+                     </SelectItem>
+                  ))
                )}
-               {options.map((option) => (
-                  <DropdownMenuItem
-                     key={option.value}
-                     onClick={() => handleValueChange(option.value)}
-                  >
-                     {option.label}
-                  </DropdownMenuItem>
-               ))}
-            </DropdownMenuContent>
-         </DropdownMenu>
+            </SelectContent>
+         </Select>
+         <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-action-active dark:text-white">
+            arrow_drop_down
+         </span>
       </div>
    )
 })
