@@ -15,7 +15,6 @@ import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Separator } from '@/src/components/ui/separator'
-import { useZipCode } from '@/src/hooks/useZipCode'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { useRouter } from 'next/navigation'
 
@@ -27,8 +26,6 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
    id
 }) => {
    const router = useRouter()
-
-   const { handleZipCode } = useZipCode()
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
 

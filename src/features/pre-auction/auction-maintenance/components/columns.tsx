@@ -90,8 +90,6 @@ export const columns: ColumnDef<AuctionEntity>[] = [
    },
    {
       id: 'actions',
-      cell: ({ row }) => (
-         <DataTableRowActions row={row} onSelect={(value) => {}} />
-      )
+      cell: ({ row }) => <DataTableRowActions row={row} />
    }
 ]
