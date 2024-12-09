@@ -4,15 +4,15 @@ import * as React from 'react'
 
 import { Calendar } from '@/components/ui/calendar'
 import {
-   Input,
-   inputVariants as inputDatePickerVariants,
-   InputProps,
-   labelVariants as labelDatePickerVariants
+    Input,
+    inputVariants as inputDatePickerVariants,
+    InputProps,
+    labelVariants as labelDatePickerVariants
 } from '@/components/ui/input'
 import {
-   Popover,
-   PopoverContent,
-   PopoverTrigger
+    Popover,
+    PopoverContent,
+    PopoverTrigger
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 import { format, setHours, setMinutes } from 'date-fns'
@@ -27,6 +27,8 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
          onSelected,
          showTime = false,
          labelStatus = 'on',
+         value,
+         defaultValue,
          ...props
       },
       ref
@@ -121,6 +123,17 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
             ? format(selectedDate, showTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy')
             : ''
 
+      const formatDateValue = (dateStr: string | undefined) => {
+         if (!dateStr) return ''
+         const date = new Date(dateStr)
+         return !isNaN(date.getTime())
+            ? format(date, showTime ? 'dd/MM/yyyy HH:mm' : 'dd/MM/yyyy')
+            : ''
+      }
+
+      const formattedValue = formatDateValue(value as string)
+      const formattedDefaultValue = formatDateValue(defaultValue as string)
+
       return (
          <React.Fragment>
             <Popover open={open} onOpenChange={setOpen}>
@@ -130,14 +143,15 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                         readOnly
                         type="text"
                         onKeyDown={handleKeyDown}
-                        data-value={props.value}
+                        data-value={formattedValue}
                         data-date={selectedDate}
                         data-type="date"
                         autoComplete="new-password"
                         autoCorrect="off"
                         autoSave="off"
                         labelStatus={labelStatus}
-                        value={hasSelectedDate}
+                        value={formattedValue || hasSelectedDate}
+                        defaultValue={formattedDefaultValue}
                         className={cn(
                            inputDatePickerVariants({
                               error: !!error,
@@ -204,3 +218,4 @@ export interface DatePickerProps extends InputProps {
 DatePicker.displayName = 'DatePicker'
 
 export { DatePicker }
+
