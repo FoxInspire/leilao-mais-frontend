@@ -1,3 +1,8 @@
+import {
+   LotType,
+   Step
+} from '@/features/pre-auction/auction-maintenance/insert-lots/insert-lots'
+
 export const pre_auction_routes = {
    index: '/pre-auction',
    auction_maintenance: '/pre-auction/auction-maintenance',
@@ -14,7 +19,7 @@ export const pre_auction_routes = {
    operation_monitor_details: (id: string) =>
       `/pre-auction/operations-monitor/${id}`,
    insert_lots: (id: string) =>
-      `/pre-auction/auction-maintenance/insert-lots/${id}`,
+      `/pre-auction/auction-maintenance/insert-lots/${id}?step=${Step.STEP1}&lotType=${LotType.NEW}`,
    insert_lots_success: (id: string) =>
       `/pre-auction/auction-maintenance/insert-lots/success/${id}`
 }
