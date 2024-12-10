@@ -140,38 +140,38 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                   </div>
                   <Separator orientation="horizontal" />
                </div>
-               {query.step === Step.STEP1 && (
-                  <Form {...form}>
-                     <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="grid w-full overflow-x-visible overflow-y-scroll h-[calc(100vh-17.4125rem)] hide-scrollbar lg:grid-cols-[auto_1fr] gap-6"
-                     >
-                        <Card className="h-fit grid justify-items-center w-fit mx-auto lg:mx-0 lg:w-full justify-center items-center px-2 py-2 space-y-2">
-                           <div className="grid justify-items-center">
-                              <Indicator
-                                 active={query.step === String(Step.STEP1)}
-                                 label="1"
-                                 description="Ingressar lotes"
-                                 onClick={() => setQuery({ step: Step.STEP1 })}
-                              />
-                              <Indicator
-                                 active={query.step === String(Step.STEP2)}
-                                 label="2"
-                                 description="Agendamento"
-                                 onClick={() => setQuery({ step: Step.STEP2 })}
-                              />
-                           </div>
-                           <Button
-                              variant="ghost"
-                              className="px-2 py-2 h-fit w-fit min-w-[176px] font-nunito font-semibold"
+               <Form {...form}>
+                  <form
+                     onSubmit={form.handleSubmit(onSubmit)}
+                     className="grid w-full overflow-x-visible overflow-y-scroll h-[calc(100vh-17.4125rem)] hide-scrollbar lg:grid-cols-[auto_1fr] gap-6 !mt-8"
+                  >
+                     <Card className="h-fit grid justify-items-center w-fit mx-auto lg:mx-0 lg:w-full justify-center items-center px-2 py-2 space-y-2">
+                        <div className="grid justify-items-center">
+                           <Indicator
+                              active={query.step === String(Step.STEP1)}
+                              label="1"
+                              description="Ingressar lotes"
+                              onClick={() => setQuery({ step: Step.STEP1 })}
+                           />
+                           <Indicator
+                              active={query.step === String(Step.STEP2)}
+                              label="2"
+                              description="Agendamento"
                               onClick={() => setQuery({ step: Step.STEP2 })}
-                           >
-                              Próximo passo
-                              <span className="material-symbols-outlined">
-                                 chevron_right
-                              </span>
-                           </Button>
-                        </Card>
+                           />
+                        </div>
+                        <Button
+                           variant="ghost"
+                           className="px-2 py-2 h-fit w-fit min-w-[176px] font-nunito font-semibold"
+                           onClick={() => setQuery({ step: Step.STEP2 })}
+                        >
+                           Próximo passo
+                           <span className="material-symbols-outlined">
+                              chevron_right
+                           </span>
+                        </Button>
+                     </Card>
+                     {query.step === Step.STEP1 && (
                         <div className="flex-1 space-y-6 overflow-x-visible overflow-y-scroll">
                            <Card className="h-fit flex items-center justify-between space-y-0">
                               <p className="text-black dark:text-dark-text-primary font-semibold text-start text-base font-nunito ">
@@ -416,18 +416,18 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                               </div>
                            </div>
                         </div>
-                     </form>
-                     <div className="flex flex-1 justify-end items-center">
-                        <Button
-                           type="submit"
-                           className="w-fit"
-                           onClick={form.handleSubmit(onSubmit)}
-                        >
-                           Continuar
-                        </Button>
-                     </div>
-                  </Form>
-               )}
+                     )}
+                  </form>
+                  <div className="flex flex-1 justify-end items-center">
+                     <Button
+                        type="submit"
+                        className="w-fit"
+                        onClick={form.handleSubmit(onSubmit)}
+                     >
+                        Continuar
+                     </Button>
+                  </div>
+               </Form>
             </div>
             <CollapsibleSidebar
                open={isSidebarOpen}
