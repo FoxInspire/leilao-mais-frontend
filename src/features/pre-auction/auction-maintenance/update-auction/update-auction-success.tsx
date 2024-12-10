@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import * as z from 'zod'
 
 import {
    Breadcrumb,
@@ -23,7 +22,7 @@ interface UpdateAuctionSuccessProps {
 
 export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
    id
-}) => {
+}: UpdateAuctionSuccessProps) => {
    const router = useRouter()
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
@@ -136,72 +135,3 @@ export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
       </React.Fragment>
    )
 }
-
-const createAuctionSchema = z.object({
-   description: z.string().min(1, { message: 'Descrição é obrigatória' }),
-   auctionDate: z.string().min(1, { message: 'Data do leilão é obrigatória' }),
-   cep: z
-      .string()
-      .min(1, { message: 'CEP é obrigatório' })
-      .regex(/^\d{5}-?\d{3}$/, {
-         message: 'CEP deve estar no formato 00000-000'
-      }),
-   address: z.string().min(1, { message: 'Endereço é obrigatório' }),
-   addressNumber: z
-      .string()
-      .min(1, { message: 'Número é obrigatório' })
-      .regex(/^\d+$/, { message: 'Número deve conter apenas dígitos' }),
-   addressComplement: z.string().optional(),
-   neighborhood: z.string().min(1, { message: 'Bairro é obrigatório' }),
-   addressState: z.string().min(1, { message: 'Estado é obrigatório' }),
-   addressCity: z.string().min(1, { message: 'Cidade é obrigatória' }),
-
-   scheduleDate: z
-      .string()
-      .min(1, { message: 'Data de agendamento é obrigatória' }),
-   startRemovalDate: z
-      .string()
-      .min(1, { message: 'Data de início da retirada é obrigatória' }),
-   endRemovalDate: z
-      .string()
-      .min(1, { message: 'Data final da retirada é obrigatória' }),
-   notificationDate: z
-      .string()
-      .min(1, { message: 'Data de notificação é obrigatória' }),
-   noticeDate: z.string().min(1, { message: 'Data do edital é obrigatória' }),
-   auctioneerId: z.string().min(1, { message: 'Leiloeiro é obrigatório' }),
-   auctionCompanyId: z.string().min(1, { message: 'Empresa é obrigatória' }),
-   committeeId: z.string().min(1, { message: 'Comitente é obrigatório' }),
-   exhibitorId: z.string().min(1, { message: 'Expositor é obrigatório' }),
-   accountRule: z
-      .string()
-      .min(1, { message: 'Regra de prestação de contas é obrigatória' }),
-
-   notificationEmails: z
-      .array(z.string().email({ message: 'E-mail inválido' }))
-      .min(1, { message: 'Pelo menos um e-mail é obrigatório' }),
-
-   officialPublicationDate: z
-      .string()
-      .min(1, { message: 'Data de publicação oficial é obrigatória' }),
-   officialPublicationNumber: z
-      .string()
-      .min(1, { message: 'Número de publicação oficial é obrigatório' })
-      .regex(/^\d+$/, { message: 'Número deve conter apenas dígitos' }),
-
-   internalMatrixOrder: z
-      .string()
-      .regex(/^\d+$/, {
-         message: 'Ordem interna matriz deve conter apenas dígitos'
-      })
-      .optional(),
-   internalAuctionOrder: z
-      .string()
-      .regex(/^\d+$/, {
-         message: 'Ordem interna leilão deve conter apenas dígitos'
-      })
-      .optional(),
-   vehicleObservations: z.string().optional(),
-
-   tenantId: z.string().min(1, { message: 'ID do tenant é obrigatório' })
-})

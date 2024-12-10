@@ -17,13 +17,13 @@ import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { useRouter } from 'next/navigation'
 
-interface CreateAuctionSuccessProps {
+interface InsertLotsSuccessProps {
    id: string
 }
 
-export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
+export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
    id
-}: CreateAuctionSuccessProps) => {
+}: InsertLotsSuccessProps) => {
    const router = useRouter()
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)

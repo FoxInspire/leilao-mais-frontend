@@ -34,7 +34,13 @@ export function DataTableRowActions<TData>({
          value: 'add-lots',
          filled: false,
          disabled: false,
-         onClick: () => {}
+         onClick: () => {
+            router.push(
+               pre_auction_routes.insert_lots(
+                  String(row?.original?.auctionCode)
+               )
+            )
+         }
       },
       {
          icon: 'edit',
