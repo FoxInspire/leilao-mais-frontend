@@ -32,7 +32,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { useRouter } from 'next/navigation'
-import { useQueryState } from 'nuqs'
+import { parseAsString, useQueryStates } from 'nuqs'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
@@ -49,12 +49,19 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
 
-   const form = useForm<z.infer<typeof insertLotsSchema>>({
-      resolver: zodResolver(insertLotsSchema),
-      defaultValues: {}
+   const form = useForm<z.infer<typeof searchLotsSchema>>({
+      resolver: zodResolver(searchLotsSchema),
+      defaultValues: {
+         yardId: '',
+         daysUntilAuction: 0,
+         daysInYard: 0,
+         lotType: 'NEW',
+         lotsQuantity: 0,
+         grv: ''
+      }
    })
 
-   const onSubmit: SubmitHandler<z.infer<typeof insertLotsSchema>> = async (
+   const onSubmit: SubmitHandler<z.infer<typeof searchLotsSchema>> = async (
       data
    ) => {
       try {
@@ -77,15 +84,23 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
    }
 
    enum Step {
-      Step1 = 'step1',
-      Step2 = 'step2',
-      Step3 = 'step3'
+      STEP1 = 'step1',
+      STEP2 = 'step2',
+      STEP3 = 'step3'
    }
 
-   const [step, setStep] = useQueryState('step', {
-      defaultValue: Step.Step1,
-      clearOnDefault: false
-   })
+   enum LotType {
+      NEW = 'NEW',
+      REUSABLE = 'REUSABLE'
+   }
+
+   const [query, setQuery] = useQueryStates(
+      {
+         step: parseAsString.withDefault(Step.STEP1),
+         lotType: parseAsString.withDefault(LotType.NEW)
+      },
+      { history: 'push', clearOnDefault: false, scroll: false }
+   )
 
    return (
       <React.Fragment>
@@ -128,27 +143,27 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                <Form {...form}>
                   <form
                      onSubmit={form.handleSubmit(onSubmit)}
-                     className="grid w-full overflow-x-visible overflow-y-scroll h-[calc(100vh-17.4125rem)] hide-scrollbar grid-cols-[auto_1fr] gap-6"
+                     className="grid w-full overflow-x-visible overflow-y-scroll h-[calc(100vh-17.4125rem)] hide-scrollbar lg:grid-cols-[auto_1fr] gap-6"
                   >
-                     <Card className="h-fit grid justify-items-center w-full justify-center items-center px-2 py-2">
+                     <Card className="h-fit grid justify-items-center w-fit mx-auto lg:mx-0 lg:w-full justify-center items-center px-2 py-2 space-y-2">
                         <div className="grid justify-items-center">
                            <Indicator
-                              active={step === Step.Step1}
+                              active={query.step === Step.STEP1}
                               label="1"
                               description="Ingressar lotes"
-                              onClick={() => setStep(Step.Step1)}
+                              onClick={() => setQuery({ step: Step.STEP1 })}
                            />
                            <Indicator
-                              active={step === Step.Step2}
+                              active={query.step === Step.STEP2}
                               label="2"
                               description="Agendamento"
-                              onClick={() => setStep(Step.Step2)}
+                              onClick={() => setQuery({ step: Step.STEP2 })}
                            />
                         </div>
                         <Button
                            variant="ghost"
-                           className="px-2 py-2 h-fit w-fit min-w-[176px]"
-                           onClick={() => setStep(Step.Step2)}
+                           className="px-2 py-2 h-fit w-fit min-w-[176px] font-nunito font-semibold"
+                           onClick={() => setQuery({ step: Step.STEP2 })}
                         >
                            Próximo passo
                            <span className="material-symbols-outlined">
@@ -158,10 +173,10 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                      </Card>
                      <div className="flex-1 space-y-6 overflow-x-visible overflow-y-scroll">
                         <Card className="h-fit flex items-center justify-between space-y-0">
-                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-base">
+                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-base font-nunito ">
                               Informação do leilão
                            </p>
-                           <h3 className="text-lg font-medium">
+                           <h3 className="lg:text-lg text-base font-nunito font-semibold">
                               {id} -{' '}
                               {format(new Date(), 'dd MMM yyyy', {
                                  locale: ptBR
@@ -193,7 +208,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                            <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
                               <FormField
                                  control={form.control}
-                                 name="auctionId"
+                                 name="yardId"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -210,7 +225,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                               />
                               <FormField
                                  control={form.control}
-                                 name=""
+                                 name="daysUntilAuction"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -226,7 +241,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                               />
                               <FormField
                                  control={form.control}
-                                 name=""
+                                 name="daysInYard"
                                  render={({ field }) => (
                                     <FormItem>
                                        <FormControl>
@@ -248,18 +263,25 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
                                  <FormField
                                     control={form.control}
-                                    name="type"
+                                    name="lotType"
                                     render={({ field }) => (
                                        <FormItem className="space-y-3">
                                           <FormControl>
                                              <RadioGroup
-                                                onValueChange={field.onChange}
-                                                defaultValue={field.value}
+                                                onValueChange={(value) => {
+                                                   field.onChange(value)
+                                                   setQuery({ lotType: value })
+                                                }}
+                                                defaultValue={
+                                                   query.lotType || field.value
+                                                }
                                                 className="flex gap-6 items-center"
                                              >
                                                 <FormItem className="flex items-center space-x-2 space-y-0">
                                                    <FormControl>
-                                                      <RadioGroupItem value="all" />
+                                                      <RadioGroupItem
+                                                         value={LotType.NEW}
+                                                      />
                                                    </FormControl>
                                                    <FormLabel className="font-normal">
                                                       Lotes novos
@@ -267,7 +289,11 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                                 </FormItem>
                                                 <FormItem className="flex items-center space-x-2 space-y-0">
                                                    <FormControl>
-                                                      <RadioGroupItem value="mentions" />
+                                                      <RadioGroupItem
+                                                         value={
+                                                            LotType.REUSABLE
+                                                         }
+                                                      />
                                                    </FormControl>
                                                    <FormLabel className="font-normal">
                                                       Lotes reaproveitáveis
@@ -280,6 +306,16 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                     )}
                                  />
                               </div>
+                              {query.lotType === LotType.NEW && (
+                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
+                                    new
+                                 </div>
+                              )}
+                              {query.lotType === LotType.REUSABLE && (
+                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
+                                    reusable
+                                 </div>
+                              )}
                            </div>
                         </div>
                      </div>
@@ -410,7 +446,7 @@ const Indicator: React.FC<IndicatorProps> = ({
 }: IndicatorProps) => {
    return (
       <button
-         className="flex items-center gap-2 cursor-default hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10 p-2 w-fit min-w-[181px]  justify-center self-stretch px-[22px] py-2 rounded-[4px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 font-roboto"
+         className="flex items-center gap-2 cursor-default hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10 p-2 w-fit min-w-[184px]  justify-center self-stretch px-[22px] py-2 rounded-[4px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 font-roboto"
          type="button"
          onClick={onClick}
       >
