@@ -4,9 +4,9 @@ export const pre_auction_routes = {
    operations_monitor: '/pre-auction/operations-monitor',
    create_auction: '/pre-auction/auction-maintenance/create-auction',
    edit_auction: (id: string) =>
-      `/pre-auction/auction-maintenance/edit-auction/${id}`,
+      `/pre-auction/auction-maintenance/update-auction/${id}`,
    edit_auction_success: (id: string) =>
-      `/pre-auction/auction-maintenance/edit-auction/success/${id}`,
+      `/pre-auction/auction-maintenance/update-auction/success/${id}`,
    create_auction_success: (id: string) =>
       `/pre-auction/auction-maintenance/create-auction/success/${id}`,
    operation_monitor_details: (id: string) =>

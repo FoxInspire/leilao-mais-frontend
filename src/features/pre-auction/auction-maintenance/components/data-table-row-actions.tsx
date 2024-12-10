@@ -27,15 +27,13 @@ export function DataTableRowActions<TData>({
 }: DataTableRowActionsProps<TData>) {
    const router = useRouter()
 
-   console.log('row?.original', row?.original)
-
    const menuItems = [
       {
          icon: 'add',
          label: 'Ingressar lotes',
          value: 'add-lots',
          filled: false,
-         disabled: true,
+         disabled: false,
          onClick: () => {}
       },
       {
