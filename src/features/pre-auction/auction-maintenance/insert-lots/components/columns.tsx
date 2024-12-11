@@ -1,12 +1,10 @@
 'use client'
 
-import { LotStatus } from '@/features/pre-auction/auction-lots/components/lot-status'
 import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { AuctionEntity } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
-import { LotAlerts } from '../../../auction-lots/components/lot-alert'
-import { DataTableRowActions } from '../../components/data-table-row-actions'
+import { format } from 'date-fns'
 
 export const columns_insert_lots: ColumnDef<AuctionEntity>[] = [
    {
@@ -34,22 +32,6 @@ export const columns_insert_lots: ColumnDef<AuctionEntity>[] = [
       ),
       enableSorting: false,
       enableHiding: false
-   },
-   {
-      accessorKey: 'lotNumber',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Lote" />
-      ),
-      cell: ({ row }) => {
-         const lots = row.original.AuctionLot || []
-         return (
-            <div className="space-y-1">
-               {lots.map((lot) => (
-                  <div key={lot.id}>{lot.lotNumber}</div>
-               ))}
-            </div>
-         )
-      }
    },
    {
       accessorKey: 'process',
@@ -136,25 +118,50 @@ export const columns_insert_lots: ColumnDef<AuctionEntity>[] = [
       }
    },
    {
-      accessorKey: 'status',
+      accessorKey: 'color',
       header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Status do lote" />
-      ),
-      cell: ({ row }) => <LotStatus row={row} />
-   },
-   {
-      accessorKey: 'alerts',
-      header: ({ column }) => (
-         <DataTableColumnHeader column={column} title="Alertas" />
+         <DataTableColumnHeader column={column} title="Cor" />
       ),
       cell: ({ row }) => {
-         return <LotAlerts row={row} />
+         const lots = row.original.AuctionLot || []
+         return (
+            <div className="space-y-1">
+               {lots.map((lot) => (
+                  <div key={lot.id}>{lot.lotNumber}</div>
+               ))}
+            </div>
+         )
       }
    },
    {
-      id: 'actions',
-      cell: ({ row }) => (
-         <DataTableRowActions row={row} onSelect={(value) => {}} />
-      )
+      accessorKey: 'previous_auction',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Leilão anterior" />
+      ),
+      cell: ({ row }) => {
+         return <div className="space-y-1">{'-'}</div>
+      }
+   },
+   {
+      accessorKey: 'previous_status',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Status anterior" />
+      ),
+      cell: ({ row }) => {
+         return <div className="space-y-1">{'-'}</div>
+      }
+   },
+   {
+      accessorKey: 'endRemovalDate',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Data/hora remoção" />
+      ),
+      cell: ({ row }) => {
+         return (
+            <div className="space-y-1">
+               {format(row.original.endRemovalDate, 'dd/MM/yyyy HH:mm')}
+            </div>
+         )
+      }
    }
 ]
