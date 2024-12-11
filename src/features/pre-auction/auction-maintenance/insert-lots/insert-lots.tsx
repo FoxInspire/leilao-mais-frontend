@@ -146,37 +146,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                      className="grid w-full overflow-x-visible max-h-[calc(100vh-12.5125rem)]"
                   >
                      <div className="flex-1 h-full flex-col gap-0">
-                        <div className="grid w-full h-[calc(100vh-16.8125rem)] hide-scrollbar lg:grid-cols-[auto_1fr] gap-6">
-                           <Card className="h-fit grid justify-items-center w-fit mx-auto lg:mx-0 lg:w-full justify-center items-center px-2 py-2 space-y-2">
-                              <div className="grid justify-items-center">
-                                 <Indicator
-                                    active={query.step === String(Step.STEP1)}
-                                    label="1"
-                                    description="Ingressar lotes"
-                                    onClick={() =>
-                                       setQuery({ step: Step.STEP1 })
-                                    }
-                                 />
-                                 <Indicator
-                                    active={query.step === String(Step.STEP2)}
-                                    label="2"
-                                    description="Agendamento"
-                                    onClick={() =>
-                                       setQuery({ step: Step.STEP2 })
-                                    }
-                                 />
-                              </div>
-                              <Button
-                                 variant="ghost"
-                                 className="px-2 py-2 h-fit w-fit min-w-[176px] font-nunito font-semibold"
-                                 onClick={() => setQuery({ step: Step.STEP2 })}
-                              >
-                                 Próximo passo
-                                 <span className="material-symbols-outlined">
-                                    chevron_right
-                                 </span>
-                              </Button>
-                           </Card>
+                        <div className="grid w-full h-[calc(100vh-16.8125rem)] hide-scrollbar lg:grid-cols-1 gap-6">
                            {query.step === Step.STEP1 && (
                               <div className="flex-1 space-y-6 overflow-x-visible overflow-y-scroll">
                                  <Card className="h-fit flex items-center justify-between space-y-0">
