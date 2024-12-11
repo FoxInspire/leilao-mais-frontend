@@ -145,262 +145,255 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                      onSubmit={form.handleSubmit(onSubmit)}
                      className="grid w-full overflow-x-visible max-h-[calc(100vh-12.5125rem)]"
                   >
-                     <div className="flex-1 h-full flex-col gap-0">
-                        <div className="grid w-full h-[calc(100vh-16.8125rem)] hide-scrollbar lg:grid-cols-1 gap-6">
-                           {query.step === Step.STEP1 && (
-                              <div className="flex-1 space-y-6 overflow-x-visible overflow-y-scroll">
-                                 <Card className="h-fit flex items-center justify-between space-y-0">
-                                    <p className="text-black dark:text-dark-text-primary font-semibold text-start text-base font-nunito ">
-                                       Informação do leilão
-                                    </p>
-                                    <h3 className="lg:text-lg text-base font-nunito font-semibold">
-                                       {id} -{' '}
-                                       {format(new Date(), 'dd MMM yyyy', {
-                                          locale: ptBR
-                                       })}
-                                    </h3>
-                                 </Card>
-                                 <div>
-                                    <div className="flex items-center gap-2">
-                                       <span
-                                          className={cn(
-                                             'font-semibold h-6 w-6 rounded-xl bg-action-disabled/35 dark:bg-dark-action-disabled/35 text-white flex items-center justify-center',
-                                             'bg-primary-default dark:bg-dark-primary-default'
-                                          )}
-                                       >
-                                          <span className="text-sm font-roboto font-normal">
-                                             1
-                                          </span>
-                                       </span>
-                                       <span
-                                          className={cn(
-                                             'whitespace-nowrap transition-all duration-300 text-xl text-black font-semibold font-montserrat'
-                                          )}
-                                       >
-                                          Ingressar lotes
-                                       </span>
-                                    </div>
-                                 </div>
-                                 <div className="space-y-6">
-                                    <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
-                                       <FormField
-                                          control={form.control}
-                                          name="yardId"
-                                          render={({ field }) => (
-                                             <FormItem>
-                                                <FormControl>
-                                                   <SelectInput
-                                                      label="Pátios *"
-                                                      options={countries}
-                                                      placeholder="Selecione os pátios"
-                                                      {...field}
-                                                   />
-                                                </FormControl>
-                                                <FormMessage />
-                                             </FormItem>
-                                          )}
-                                       />
-                                       <FormField
-                                          control={form.control}
-                                          name="daysUntilAuction"
-                                          render={({ field }) => (
-                                             <FormItem>
-                                                <FormControl>
-                                                   <Input
-                                                      label="Nº dias para Leilão *"
-                                                      placeholder="0000000000"
-                                                      {...field}
-                                                   />
-                                                </FormControl>
-                                                <FormMessage />
-                                             </FormItem>
-                                          )}
-                                       />
-                                       <FormField
-                                          control={form.control}
-                                          name="daysInYard"
-                                          render={({ field }) => (
-                                             <FormItem>
-                                                <FormControl>
-                                                   <Input
-                                                      label="Nº dias no Pátio *"
-                                                      placeholder="0000000000"
-                                                      {...field}
-                                                   />
-                                                </FormControl>
-                                                <FormMessage />
-                                             </FormItem>
-                                          )}
-                                       />
-                                    </div>
-                                    <div className="space-y-4">
-                                       <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
-                                          Lista de lotes
-                                       </p>
-                                       <div className="space-y-6">
-                                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
-                                             <FormField
-                                                control={form.control}
-                                                name="lotType"
-                                                render={({ field }) => (
-                                                   <FormItem className="space-y-3">
-                                                      <FormControl>
-                                                         <RadioGroup
-                                                            onValueChange={(
-                                                               value
-                                                            ) => {
-                                                               field.onChange(
-                                                                  value
-                                                               )
-                                                               setQuery({
-                                                                  lotType: value
-                                                               })
-                                                            }}
-                                                            defaultValue={
-                                                               query.lotType ||
-                                                               field.value
-                                                            }
-                                                            className="flex gap-6 items-center"
-                                                         >
-                                                            <FormItem className="flex items-center space-x-2 space-y-0">
-                                                               <FormControl>
-                                                                  <RadioGroupItem
-                                                                     value={
-                                                                        LotType.NEW
-                                                                     }
-                                                                  />
-                                                               </FormControl>
-                                                               <FormLabel className="font-normal">
-                                                                  Lotes novos
-                                                               </FormLabel>
-                                                            </FormItem>
-                                                            <FormItem className="flex items-center space-x-2 space-y-0">
-                                                               <FormControl>
-                                                                  <RadioGroupItem
-                                                                     value={
-                                                                        LotType.REUSABLE
-                                                                     }
-                                                                  />
-                                                               </FormControl>
-                                                               <FormLabel className="font-normal">
-                                                                  Lotes
-                                                                  reaproveitáveis
-                                                               </FormLabel>
-                                                            </FormItem>
-                                                         </RadioGroup>
-                                                      </FormControl>
-                                                      <FormMessage />
-                                                   </FormItem>
-                                                )}
+                     <div className="grid w-full h-[calc(100vh-16.8125rem)] grid-rows-[auto_1fr] gap-6">
+                        <div id="filters" className="space-y-6">
+                           <Card className="h-fit flex items-center justify-between space-y-0">
+                              <p className="text-black dark:text-dark-text-primary font-semibold text-start text-base font-nunito ">
+                                 Informação do leilão
+                              </p>
+                              <h3 className="lg:text-lg text-base font-nunito font-semibold">
+                                 {id} -{' '}
+                                 {format(new Date(), 'dd MMM yyyy', {
+                                    locale: ptBR
+                                 })}
+                              </h3>
+                           </Card>
+                           <div>
+                              <div className="flex items-center gap-2">
+                                 <span
+                                    className={cn(
+                                       'font-semibold h-6 w-6 rounded-xl bg-action-disabled/35 dark:bg-dark-action-disabled/35 text-white flex items-center justify-center',
+                                       'bg-primary-default dark:bg-dark-primary-default'
+                                    )}
+                                 >
+                                    <span className="text-sm font-roboto font-normal">
+                                       1
+                                    </span>
+                                 </span>
+                                 <span
+                                    className={cn(
+                                       'whitespace-nowrap transition-all duration-300 text-xl text-black font-semibold font-montserrat'
+                                    )}
+                                 >
+                                    Ingressar lotes
+                                 </span>
+                              </div>
+                           </div>
+                           <div className="space-y-6">
+                              <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="yardId"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Pátios *"
+                                                options={countries}
+                                                placeholder="Selecione os pátios"
+                                                {...field}
                                              />
-                                          </div>
-                                          {query.lotType === LotType.NEW && (
-                                             <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] items-center gap-4">
-                                                <FormField
-                                                   control={form.control}
-                                                   name="yardId"
-                                                   render={({ field }) => (
-                                                      <FormItem>
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="daysUntilAuction"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Nº dias para Leilão *"
+                                                placeholder="0000000000"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="daysInYard"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Nº dias no Pátio *"
+                                                placeholder="0000000000"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
+                              <div className="space-y-4">
+                                 <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                                    Lista de lotes
+                                 </p>
+                                 <div className="space-y-6">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
+                                       <FormField
+                                          control={form.control}
+                                          name="lotType"
+                                          render={({ field }) => (
+                                             <FormItem className="space-y-3">
+                                                <FormControl>
+                                                   <RadioGroup
+                                                      onValueChange={(
+                                                         value
+                                                      ) => {
+                                                         field.onChange(value)
+                                                         setQuery({
+                                                            lotType: value
+                                                         })
+                                                      }}
+                                                      defaultValue={
+                                                         query.lotType ||
+                                                         field.value
+                                                      }
+                                                      className="flex gap-6 items-center"
+                                                   >
+                                                      <FormItem className="flex items-center space-x-2 space-y-0">
                                                          <FormControl>
-                                                            <SelectInput
-                                                               label="Qtd. Lotes *"
-                                                               options={
-                                                                  countries
+                                                            <RadioGroupItem
+                                                               value={
+                                                                  LotType.NEW
                                                                }
-                                                               placeholder="0000000000"
-                                                               {...field}
                                                             />
                                                          </FormControl>
-                                                         <FormMessage />
+                                                         <FormLabel className="font-normal">
+                                                            Lotes novos
+                                                         </FormLabel>
                                                       </FormItem>
-                                                   )}
-                                                />
-                                                <FormField
-                                                   control={form.control}
-                                                   name="daysUntilAuction"
-                                                   render={({ field }) => (
-                                                      <FormItem>
+                                                      <FormItem className="flex items-center space-x-2 space-y-0">
                                                          <FormControl>
-                                                            <Input
-                                                               label="GRV *"
-                                                               placeholder="0000000000"
-                                                               {...field}
-                                                            />
-                                                         </FormControl>
-                                                         <FormMessage />
-                                                      </FormItem>
-                                                   )}
-                                                />
-                                                <Button variant="ghost">
-                                                   Buscar
-                                                </Button>
-                                             </div>
-                                          )}
-                                          {query.lotType ===
-                                             LotType.REUSABLE && (
-                                             <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] items-center gap-4">
-                                                <FormField
-                                                   control={form.control}
-                                                   name="yardId"
-                                                   render={({ field }) => (
-                                                      <FormItem>
-                                                         <FormControl>
-                                                            <SelectInput
-                                                               label="Qtd. Leilões *"
-                                                               options={
-                                                                  countries
+                                                            <RadioGroupItem
+                                                               value={
+                                                                  LotType.REUSABLE
                                                                }
-                                                               placeholder="Selecione os leilões"
-                                                               {...field}
                                                             />
                                                          </FormControl>
-                                                         <FormMessage />
+                                                         <FormLabel className="font-normal">
+                                                            Lotes
+                                                            reaproveitáveis
+                                                         </FormLabel>
                                                       </FormItem>
-                                                   )}
-                                                />
-                                                <FormField
-                                                   control={form.control}
-                                                   name="daysUntilAuction"
-                                                   render={({ field }) => (
-                                                      <FormItem>
-                                                         <FormControl>
-                                                            <Input
-                                                               label="Status do Lote *"
-                                                               placeholder="Selecione o status"
-                                                               {...field}
-                                                            />
-                                                         </FormControl>
-                                                         <FormMessage />
-                                                      </FormItem>
-                                                   )}
-                                                />
-                                                <FormField
-                                                   control={form.control}
-                                                   name="daysUntilAuction"
-                                                   render={({ field }) => (
-                                                      <FormItem>
-                                                         <FormControl>
-                                                            <Input
-                                                               label="GRV *"
-                                                               placeholder="0000000000"
-                                                               {...field}
-                                                            />
-                                                         </FormControl>
-                                                         <FormMessage />
-                                                      </FormItem>
-                                                   )}
-                                                />
-                                                <Button variant="ghost">
-                                                   Buscar
-                                                </Button>
-                                             </div>
+                                                   </RadioGroup>
+                                                </FormControl>
+                                                <FormMessage />
+                                             </FormItem>
                                           )}
-                                       </div>
+                                       />
                                     </div>
+                                    {query.lotType === LotType.NEW && (
+                                       <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] items-center gap-4">
+                                          <FormField
+                                             control={form.control}
+                                             name="yardId"
+                                             render={({ field }) => (
+                                                <FormItem>
+                                                   <FormControl>
+                                                      <SelectInput
+                                                         label="Qtd. Lotes *"
+                                                         options={countries}
+                                                         placeholder="0000000000"
+                                                         {...field}
+                                                      />
+                                                   </FormControl>
+                                                   <FormMessage />
+                                                </FormItem>
+                                             )}
+                                          />
+                                          <FormField
+                                             control={form.control}
+                                             name="daysUntilAuction"
+                                             render={({ field }) => (
+                                                <FormItem>
+                                                   <FormControl>
+                                                      <Input
+                                                         label="GRV *"
+                                                         placeholder="0000000000"
+                                                         {...field}
+                                                      />
+                                                   </FormControl>
+                                                   <FormMessage />
+                                                </FormItem>
+                                             )}
+                                          />
+                                          <Button variant="ghost">
+                                             Buscar
+                                          </Button>
+                                       </div>
+                                    )}
+                                    {query.lotType === LotType.REUSABLE && (
+                                       <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] items-center gap-4">
+                                          <FormField
+                                             control={form.control}
+                                             name="yardId"
+                                             render={({ field }) => (
+                                                <FormItem>
+                                                   <FormControl>
+                                                      <SelectInput
+                                                         label="Qtd. Leilões *"
+                                                         options={countries}
+                                                         placeholder="Selecione os leilões"
+                                                         {...field}
+                                                      />
+                                                   </FormControl>
+                                                   <FormMessage />
+                                                </FormItem>
+                                             )}
+                                          />
+                                          <FormField
+                                             control={form.control}
+                                             name="daysUntilAuction"
+                                             render={({ field }) => (
+                                                <FormItem>
+                                                   <FormControl>
+                                                      <Input
+                                                         label="Status do Lote *"
+                                                         placeholder="Selecione o status"
+                                                         {...field}
+                                                      />
+                                                   </FormControl>
+                                                   <FormMessage />
+                                                </FormItem>
+                                             )}
+                                          />
+                                          <FormField
+                                             control={form.control}
+                                             name="daysUntilAuction"
+                                             render={({ field }) => (
+                                                <FormItem>
+                                                   <FormControl>
+                                                      <Input
+                                                         label="GRV *"
+                                                         placeholder="0000000000"
+                                                         {...field}
+                                                      />
+                                                   </FormControl>
+                                                   <FormMessage />
+                                                </FormItem>
+                                             )}
+                                          />
+                                          <Button variant="ghost">
+                                             Buscar
+                                          </Button>
+                                       </div>
+                                    )}
                                  </div>
                               </div>
-                           )}
+                           </div>
                         </div>
+                        <div
+                           id="table"
+                           className="min-h-0 overflow-auto bg-red-200"
+                        ></div>
                      </div>
                   </form>
                   <div className="flex flex-1 justify-end items-center">
