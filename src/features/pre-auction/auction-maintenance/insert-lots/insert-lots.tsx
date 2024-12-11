@@ -64,6 +64,14 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
    const router = useRouter()
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
+   const [globalFilter, setGlobalFilter] = React.useState('')
+   const [query, setQuery] = useQueryStates(
+      {
+         step: parseAsString.withDefault(Step.STEP1),
+         lotType: parseAsString.withDefault(LotType.NEW)
+      },
+      { history: 'push', clearOnDefault: false, scroll: false }
+   )
 
    const filterForm = useForm<z.infer<typeof searchLotsSchema>>({
       resolver: zodResolver(searchLotsSchema),
@@ -78,11 +86,10 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
          grv: ''
       }
    })
-   console.log('watch', filterForm.watch())
 
-   const onSubmit: SubmitHandler<z.infer<typeof searchLotsSchema>> = async (
-      data
-   ) => {
+   const onSubmitSearch: SubmitHandler<
+      z.infer<typeof searchLotsSchema>
+   > = async (data) => {
       try {
          const filters = {
             yardId: data.yardId || undefined,
@@ -145,15 +152,25 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
       }
    }
 
-   const [query, setQuery] = useQueryStates(
-      {
-         step: parseAsString.withDefault(Step.STEP1),
-         lotType: parseAsString.withDefault(LotType.NEW)
-      },
-      { history: 'push', clearOnDefault: false, scroll: false }
-   )
+   const form = useForm<z.infer<typeof insertLotsSchema>>({
+      resolver: zodResolver(insertLotsSchema),
 
-   const [globalFilter, setGlobalFilter] = React.useState('')
+      defaultValues: {
+         auctionId: '',
+         lotId: ''
+      }
+   })
+
+   const onSubmitInsertLots: SubmitHandler<
+      z.infer<typeof insertLotsSchema>
+   > = async (data) => {
+      try {
+         console.log('data', data)
+      } catch (error) {
+         console.error('Erro ao enviar formulário:', error)
+         toast.error('Erro ao enviar formulário. Tente novamente.')
+      }
+   }
 
    const transformed_data = React.useMemo(() => {
       return data.flatMap((auction) => {
@@ -213,7 +230,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                </div>
                <Form {...filterForm}>
                   <form
-                     onSubmit={filterForm.handleSubmit(onSubmit)}
+                     onSubmit={filterForm.handleSubmit(onSubmitSearch)}
                      className="grid w-full max-h-[calc(100vh-12.5125rem)]"
                   >
                      <div className="grid w-full min-h-[calc(100vh-16.8125rem)] grid-rows-[auto_1fr] gap-6">
@@ -419,7 +436,12 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                                 </FormItem>
                                              )}
                                           />
-                                          <Button variant="ghost">
+                                          <Button
+                                             variant="ghost"
+                                             onClick={filterForm.handleSubmit(
+                                                onSubmitSearch
+                                             )}
+                                          >
                                              Buscar
                                           </Button>
                                        </div>
@@ -493,11 +515,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                      </div>
                   </form>
                   <div className="flex flex-1 justify-end items-center">
-                     <Button
-                        type="submit"
-                        className="w-fit"
-                        onClick={filterForm.handleSubmit(onSubmit)}
-                     >
+                     <Button type="submit" className="w-fit" onClick={() => {}}>
                         Concluir
                      </Button>
                   </div>
