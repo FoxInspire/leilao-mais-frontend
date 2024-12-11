@@ -255,9 +255,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
             </SidebarContent>
             <SidebarRail />
          </Sidebar>
-         <SidebarInset className="p-6">
-            <div className="h-full flex flex-col">{children}</div>
-         </SidebarInset>
+         <SidebarInset className="p-6">{children}</SidebarInset>
       </React.Fragment>
    )
 }

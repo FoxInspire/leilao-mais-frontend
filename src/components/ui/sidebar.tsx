@@ -362,7 +362,7 @@ const Sidebar = React.forwardRef<
                   className={cn(
                      'duration-200 fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] ease-linear md:flex',
                      hasHeaderMenu ? 'top-14' : 'top-0',
-                     hasHeaderMenu ? 'h-[calc(100vh-3.5rem)]' : 'h-screen',
+                     hasHeaderMenu ? 'h-[calc(100vh-56px)]' : 'h-screen',
                      side === 'left'
                         ? 'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'
                         : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
