@@ -28,17 +28,22 @@ import { SelectInput, SelectInputValue } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
+import { AuctionLot } from '@/src/types/entities/auction.entity'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { useRouter } from 'next/navigation'
 import { parseAsString, useQueryStates } from 'nuqs'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import { TableInsertLots } from './components/data-table'
 
 interface InsertLotsProps {
    id: string
    countries: SelectInputValue[]
+   data: any[]
+   columns: ColumnDef<AuctionLot>[]
 }
 
 export enum Step {
@@ -48,13 +53,15 @@ export enum Step {
 }
 
 export enum LotType {
-   NEW = 'NEW',
-   REUSABLE = 'REUSABLE'
+   NEW = 'new',
+   REUSABLE = 'reusable'
 }
 
 export const InsertLots: React.FC<InsertLotsProps> = ({
    id,
-   countries
+   countries,
+   columns,
+   data
 }: InsertLotsProps) => {
    const router = useRouter()
 
@@ -102,6 +109,26 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
       { history: 'push', clearOnDefault: false, scroll: false }
    )
 
+   const [globalFilter, setGlobalFilter] = React.useState('')
+
+   const transformed_data = React.useMemo(() => {
+      return data.flatMap((auction) => {
+         if (!auction.AuctionLot?.length) return []
+
+         return auction.AuctionLot.map((lot: AuctionLot) => ({
+            ...auction,
+            AuctionLot: [lot],
+            lotNumber: lot.lotNumber,
+            process: auction.auctionCode,
+            plate: lot.Vehicle?.plate,
+            chassis: lot.Vehicle?.chassis,
+            brand: lot.Vehicle?.brand?.name,
+            model: lot.Vehicle?.model?.name,
+            type: lot.Vehicle?.type?.name
+         }))
+      })
+   }, [data])
+
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto]">
@@ -143,7 +170,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                <Form {...form}>
                   <form
                      onSubmit={form.handleSubmit(onSubmit)}
-                     className="grid w-full overflow-x-visible max-h-[calc(100vh-12.5125rem)]"
+                     className="grid w-full max-h-[calc(100vh-12.5125rem)]"
                   >
                      <div className="grid w-full h-[calc(100vh-16.8125rem)] grid-rows-[auto_1fr] gap-6">
                         <div id="filters" className="space-y-6">
@@ -390,10 +417,13 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                               </div>
                            </div>
                         </div>
-                        <div
-                           id="table"
-                           className="min-h-0 overflow-auto bg-red-200"
-                        ></div>
+                        <div id="table" className="min-h-0 overflow-hidden">
+                           <TableInsertLots
+                              data={transformed_data}
+                              columns={columns}
+                              globalFilter={globalFilter}
+                           />
+                        </div>
                      </div>
                   </form>
                   <div className="flex flex-1 justify-end items-center">
@@ -506,42 +536,3 @@ const searchLotsSchema = z.object({
       .regex(/^\d+$/, { message: 'GRV deve conter apenas números' })
       .optional()
 })
-
-interface IndicatorProps {
-   active: boolean
-   label: string
-   description: string
-   onClick: () => void
-}
-
-const Indicator: React.FC<IndicatorProps> = ({
-   active,
-   label,
-   description,
-   onClick
-}: IndicatorProps) => {
-   return (
-      <button
-         className="flex items-center gap-2 cursor-default hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10 p-2 w-fit min-w-[184px]  justify-center self-stretch px-[22px] py-2 rounded-[4px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 font-roboto"
-         type="button"
-         onClick={onClick}
-      >
-         <span
-            className={cn(
-               'font-semibold h-6 w-6 rounded-xl bg-action-disabled/35 dark:bg-dark-action-disabled/35 text-white flex items-center justify-center',
-               active && 'bg-primary-default dark:bg-dark-primary-default'
-            )}
-         >
-            <span className="text-sm font-roboto font-normal">{label}</span>
-         </span>
-         <span
-            className={cn(
-               'text-text-secondary font-normal whitespace-nowrap',
-               active && 'text-black font-medium'
-            )}
-         >
-            {description}
-         </span>
-      </button>
-   )
-}

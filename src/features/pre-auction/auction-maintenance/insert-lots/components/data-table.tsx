@@ -35,12 +35,12 @@ interface DataTableProps<TData> {
    onSelectionChange?: (selectedRows: TData[]) => void
 }
 
-export interface TableAuctionLotsHandle {
+export interface TableInsertLotsHandle {
    resetSelection: () => void
 }
 
-export const TableAuctionLots = React.forwardRef<
-   TableAuctionLotsHandle,
+export const TableInsertLots = React.forwardRef<
+   TableInsertLotsHandle,
    DataTableProps<AuctionLot>
 >(
    (
@@ -191,4 +191,4 @@ export const TableAuctionLots = React.forwardRef<
    }
 )
 
-TableAuctionLots.displayName = 'TableAuctionLots'
+TableInsertLots.displayName = 'TableInsertLots'
