@@ -10,7 +10,7 @@ import {
    TableHeader,
    TableRow
 } from '@/components/ui/table'
-import { DataTablePagination } from '@/features/pre-auction/auction-maintenance/components/data-table-pagination'
+import { DataTablePagination } from '@/features/pre-auction/auction-maintenance/insert-lots/components/data-table-pagination'
 import { AuctionLot } from '@/src/types/entities/auction.entity'
 import {
    ColumnDef,
@@ -60,7 +60,7 @@ export const TableInsertLots = React.forwardRef<
          columns,
          initialState: {
             pagination: {
-               pageSize: 10,
+               pageSize: 5,
                pageIndex: 0
             }
          },

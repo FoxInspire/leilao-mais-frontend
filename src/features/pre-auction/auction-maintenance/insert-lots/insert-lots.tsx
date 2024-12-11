@@ -172,7 +172,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                      onSubmit={form.handleSubmit(onSubmit)}
                      className="grid w-full max-h-[calc(100vh-12.5125rem)]"
                   >
-                     <div className="grid w-full h-[calc(100vh-16.8125rem)] grid-rows-[auto_1fr] gap-6">
+                     <div className="grid w-full min-h-[calc(100vh-16.8125rem)] grid-rows-[auto_1fr] gap-6">
                         <div id="filters" className="space-y-6">
                            <Card className="h-fit flex items-center justify-between space-y-0">
                               <p className="text-black dark:text-dark-text-primary font-semibold text-start text-base font-nunito ">
