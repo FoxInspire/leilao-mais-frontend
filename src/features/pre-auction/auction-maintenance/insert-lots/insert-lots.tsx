@@ -28,7 +28,7 @@ import { SelectInput, SelectInputValue } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
-import { AuctionLot } from '@/src/types/entities/auction.entity'
+import { AuctionEntity, AuctionLot } from '@/src/types/entities/auction.entity'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
@@ -41,7 +41,6 @@ import { TableInsertLots } from './components/data-table'
 
 interface InsertLotsProps {
    id: string
-   countries: SelectInputValue[]
    data: any[]
    columns: ColumnDef<AuctionLot>[]
 }
@@ -59,7 +58,6 @@ export enum LotType {
 
 export const InsertLots: React.FC<InsertLotsProps> = ({
    id,
-   countries,
    columns,
    data
 }: InsertLotsProps) => {
@@ -67,34 +65,80 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
 
-   const form = useForm<z.infer<typeof searchLotsSchema>>({
+   const filterForm = useForm<z.infer<typeof searchLotsSchema>>({
       resolver: zodResolver(searchLotsSchema),
       defaultValues: {
+         lotStatus: '',
+         auctionsQuantity: '',
+         daysInYard: '',
+         daysUntilAuction: '',
+         lotsQuantity: '',
          yardId: '',
-         daysUntilAuction: 0,
-         daysInYard: 0,
-         lotType: 'NEW',
-         lotsQuantity: 0,
+         lotType: 'new',
          grv: ''
       }
    })
+   console.log('watch', filterForm.watch())
 
    const onSubmit: SubmitHandler<z.infer<typeof searchLotsSchema>> = async (
       data
    ) => {
       try {
-         const isValid = await form.trigger()
+         const filters = {
+            yardId: data.yardId || undefined,
+            daysUntilAuction: data.daysUntilAuction
+               ? parseInt(data.daysUntilAuction)
+               : undefined,
+            daysInYard: data.daysInYard ? parseInt(data.daysInYard) : undefined,
 
-         if (!isValid) {
-            toast.error(
-               'Por favor, preencha todos os campos obrigatórios corretamente.'
-            )
-            return
+            ...(data.lotType === LotType.NEW
+               ? {
+                    lotsQuantity: data.lotsQuantity
+                       ? parseInt(data.lotsQuantity)
+                       : undefined,
+                    grv: data.grv || undefined
+                 }
+               : {
+                    auctionsQuantity: data.auctionsQuantity
+                       ? parseInt(data.auctionsQuantity)
+                       : undefined,
+                    lotStatus: data.lotStatus || undefined,
+                    grv: data.grv || undefined
+                 }),
+
+            filterConditions: {
+               tenant: (row: AuctionEntity) =>
+                  data.yardId ? row.Tenant?.id === data.yardId : true,
+
+               removalDate: (row: AuctionEntity) => {
+                  if (!data.daysInYard) return true
+                  const removalDate = row.AuctionLot?.[0]?.Ggv?.Grv?.removalDate
+                  if (!removalDate) return false
+
+                  const daysInYard = Math.floor(
+                     (new Date().getTime() - new Date(removalDate).getTime()) /
+                        (1000 * 60 * 60 * 24)
+                  )
+                  return daysInYard >= parseInt(data.daysInYard)
+               },
+
+               grv: (row: AuctionEntity) =>
+                  data.grv
+                     ? row.AuctionLot?.[0]?.Ggv?.grvCode === data.grv
+                     : true
+            }
          }
 
-         console.log('data', data)
+         const filteredData = transformed_data.filter((row) =>
+            Object.values(filters.filterConditions).every((condition) =>
+               condition(row)
+            )
+         )
 
-         //  router.push(pre_auction_routes.create_auction_success('BRU01.23')) // replace with auctionCode from API response
+         setGlobalFilter(JSON.stringify(filters))
+
+         console.log('Applied filters:', filters)
+         console.log('Filtered data:', filteredData)
       } catch (error) {
          console.error('Erro ao enviar formulário:', error)
          toast.error('Erro ao enviar formulário. Tente novamente.')
@@ -167,9 +211,9 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                   </div>
                   <Separator orientation="horizontal" />
                </div>
-               <Form {...form}>
+               <Form {...filterForm}>
                   <form
-                     onSubmit={form.handleSubmit(onSubmit)}
+                     onSubmit={filterForm.handleSubmit(onSubmit)}
                      className="grid w-full max-h-[calc(100vh-12.5125rem)]"
                   >
                      <div className="grid w-full min-h-[calc(100vh-16.8125rem)] grid-rows-[auto_1fr] gap-6">
@@ -209,15 +253,39 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                            <div className="space-y-6">
                               <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
                                  <FormField
-                                    control={form.control}
+                                    control={filterForm.control}
                                     name="yardId"
                                     render={({ field }) => (
                                        <FormItem>
                                           <FormControl>
                                              <SelectInput
-                                                label="Pátios *"
-                                                options={countries}
-                                                placeholder="Selecione os pátios"
+                                                label="Leilão"
+                                                placeholder="Selecione o leilão"
+                                                onValueChange={(
+                                                   value: SelectInputValue
+                                                ) => {
+                                                   filterForm.setValue(
+                                                      'yardId',
+                                                      value.value
+                                                   )
+                                                }}
+                                                options={[
+                                                   {
+                                                      id: '1',
+                                                      label: 'Pátio 1',
+                                                      value: '1'
+                                                   },
+                                                   {
+                                                      id: '2',
+                                                      label: 'Pátio 2',
+                                                      value: '2'
+                                                   },
+                                                   {
+                                                      id: '3',
+                                                      label: 'Pátio 3',
+                                                      value: '3'
+                                                   }
+                                                ]}
                                                 {...field}
                                              />
                                           </FormControl>
@@ -226,13 +294,13 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                     )}
                                  />
                                  <FormField
-                                    control={form.control}
+                                    control={filterForm.control}
                                     name="daysUntilAuction"
                                     render={({ field }) => (
                                        <FormItem>
                                           <FormControl>
                                              <Input
-                                                label="Nº dias para Leilão *"
+                                                label="Nº dias para Leilão"
                                                 placeholder="0000000000"
                                                 {...field}
                                              />
@@ -242,13 +310,13 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                     )}
                                  />
                                  <FormField
-                                    control={form.control}
+                                    control={filterForm.control}
                                     name="daysInYard"
                                     render={({ field }) => (
                                        <FormItem>
                                           <FormControl>
                                              <Input
-                                                label="Nº dias no Pátio *"
+                                                label="Nº dias no Pátio"
                                                 placeholder="0000000000"
                                                 {...field}
                                              />
@@ -265,7 +333,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                  <div className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
                                        <FormField
-                                          control={form.control}
+                                          control={filterForm.control}
                                           name="lotType"
                                           render={({ field }) => (
                                              <FormItem className="space-y-3">
@@ -320,14 +388,13 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                     {query.lotType === LotType.NEW && (
                                        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] items-center gap-4">
                                           <FormField
-                                             control={form.control}
-                                             name="yardId"
+                                             control={filterForm.control}
+                                             name="lotsQuantity"
                                              render={({ field }) => (
                                                 <FormItem>
                                                    <FormControl>
-                                                      <SelectInput
-                                                         label="Qtd. Lotes *"
-                                                         options={countries}
+                                                      <Input
+                                                         label="Qtd. Lotes"
                                                          placeholder="0000000000"
                                                          {...field}
                                                       />
@@ -337,13 +404,13 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                              )}
                                           />
                                           <FormField
-                                             control={form.control}
-                                             name="daysUntilAuction"
+                                             control={filterForm.control}
+                                             name="grv"
                                              render={({ field }) => (
                                                 <FormItem>
                                                    <FormControl>
                                                       <Input
-                                                         label="GRV *"
+                                                         label="GRV"
                                                          placeholder="0000000000"
                                                          {...field}
                                                       />
@@ -360,15 +427,14 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                     {query.lotType === LotType.REUSABLE && (
                                        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] items-center gap-4">
                                           <FormField
-                                             control={form.control}
-                                             name="yardId"
+                                             control={filterForm.control}
+                                             name="auctionsQuantity"
                                              render={({ field }) => (
                                                 <FormItem>
                                                    <FormControl>
-                                                      <SelectInput
-                                                         label="Qtd. Leilões *"
-                                                         options={countries}
-                                                         placeholder="Selecione os leilões"
+                                                      <Input
+                                                         label="Qtd. Leilões"
+                                                         placeholder="0000000000"
                                                          {...field}
                                                       />
                                                    </FormControl>
@@ -377,13 +443,13 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                              )}
                                           />
                                           <FormField
-                                             control={form.control}
-                                             name="daysUntilAuction"
+                                             control={filterForm.control}
+                                             name="lotStatus"
                                              render={({ field }) => (
                                                 <FormItem>
                                                    <FormControl>
                                                       <Input
-                                                         label="Status do Lote *"
+                                                         label="Status do Lote"
                                                          placeholder="Selecione o status"
                                                          {...field}
                                                       />
@@ -393,13 +459,13 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                              )}
                                           />
                                           <FormField
-                                             control={form.control}
-                                             name="daysUntilAuction"
+                                             control={filterForm.control}
+                                             name="grv"
                                              render={({ field }) => (
                                                 <FormItem>
                                                    <FormControl>
                                                       <Input
-                                                         label="GRV *"
+                                                         label="GRV"
                                                          placeholder="0000000000"
                                                          {...field}
                                                       />
@@ -430,7 +496,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                      <Button
                         type="submit"
                         className="w-fit"
-                        onClick={form.handleSubmit(onSubmit)}
+                        onClick={filterForm.handleSubmit(onSubmit)}
                      >
                         Concluir
                      </Button>
@@ -502,37 +568,35 @@ const insertLotsSchema = z.object({
 })
 
 const searchLotsSchema = z.object({
-   yardId: z.string({
-      required_error: 'Pátio é obrigatório',
-      invalid_type_error: 'Pátio deve ser uma string'
-   }),
-   daysUntilAuction: z.coerce
-      .number({
-         required_error: 'Número de dias para leilão é obrigatório',
-         invalid_type_error: 'Número de dias para leilão deve ser um número'
+   yardId: z.string().optional(),
+   daysUntilAuction: z
+      .string()
+      .regex(/^\d+$/, {
+         message: 'Número de dias para leilão deve conter apenas números'
       })
-      .min(0, { message: 'Número de dias para leilão deve ser maior que 0' }),
-   daysInYard: z.coerce
-      .number({
-         required_error: 'Número de dias no pátio é obrigatório',
-         invalid_type_error: 'Número de dias no pátio deve ser um número'
+      .optional(),
+   daysInYard: z
+      .string()
+      .regex(/^\d+$/, {
+         message: 'Número de dias no pátio deve conter apenas números'
       })
-      .min(0, { message: 'Número de dias no pátio deve ser maior que 0' }),
-   lotType: z.enum(['NEW', 'REUSABLE'], {
-      required_error: 'Tipo de lote é obrigatório',
-      invalid_type_error: 'Tipo de lote inválido'
-   }),
-   lotsQuantity: z.coerce
-      .number({
-         required_error: 'Quantidade de lotes é obrigatória',
-         invalid_type_error: 'Quantidade de lotes deve ser um número'
+      .optional(),
+   lotType: z.enum(['new', 'reusable']).default('new'),
+   lotsQuantity: z
+      .string()
+      .regex(/^\d+$/, {
+         message: 'Quantidade de lotes deve conter apenas números'
       })
-      .min(1, { message: 'Quantidade de lotes deve ser maior que 0' }),
+      .optional(),
    grv: z
-      .string({
-         required_error: 'GRV é obrigatório',
-         invalid_type_error: 'GRV deve ser uma string'
-      })
+      .string()
       .regex(/^\d+$/, { message: 'GRV deve conter apenas números' })
+      .optional(),
+   lotStatus: z.string().optional(),
+   auctionsQuantity: z
+      .string()
+      .regex(/^\d+$/, {
+         message: 'Quantidade de leilões deve conter apenas números'
+      })
       .optional()
 })

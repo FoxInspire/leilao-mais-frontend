@@ -84,29 +84,37 @@ export const TableInsertLots = React.forwardRef<
          getFacetedUniqueValues: getFacetedUniqueValues(),
          onGlobalFilterChange: setGlobalFilter,
          globalFilterFn: (row, columnId, filterValue) => {
-            const searchValue = filterValue.toLowerCase()
+            try {
+               const filters = JSON.parse(filterValue)
+               return Object.values(filters.filterConditions).every(
+                  (condition) =>
+                     typeof condition === 'function' && condition(row.original)
+               )
+            } catch {
+               // Fallback to default text search if filter value isn't our filter object
+               const searchValue = filterValue.toLowerCase()
+               const lot = row.original.lotNumber
+               const vehicle = row.original.Vehicle
+               const id = row.original.auctionId
+               const auctionCode = row.original.Auction?.auctionCode
 
-            const lot = row.original.lotNumber
-            const vehicle = row.original.Vehicle
-            const id = row.original.auctionId
-            const auctionCode = row.original.Auction?.auctionCode
+               const searchFields = [
+                  lot,
+                  id,
+                  auctionCode,
+                  vehicle?.plate,
+                  vehicle?.chassis,
+                  vehicle?.brand?.name,
+                  vehicle?.model?.name,
+                  vehicle?.type?.name
+               ]
 
-            const searchFields = [
-               lot,
-               id,
-               auctionCode,
-               vehicle?.plate,
-               vehicle?.chassis,
-               vehicle?.brand?.name,
-               vehicle?.model?.name,
-               vehicle?.type?.name
-            ]
-
-            return searchFields.some((field) =>
-               String(field || '')
-                  .toLowerCase()
-                  .includes(searchValue)
-            )
+               return searchFields.some((field) =>
+                  String(field || '')
+                     .toLowerCase()
+                     .includes(searchValue)
+               )
+            }
          }
       })
 
