@@ -1,10 +1,10 @@
 import * as React from 'react'
 
-import { CreateAuctionSuccess } from '@/src/features/pre-auction/auction-maintenance/create-auction/create-auction-success'
+import { InsertLotsSuccess } from '@/src/features/pre-auction/auction-maintenance/insert-lots/insert-lots-success'
 
 export const dynamic = 'force-dynamic'
 
-export default async function CreateAuctionSuccessPage({
+export default async function InsertLotsSuccessPage({
    params
 }: {
    params: Promise<{ id: string }>
@@ -13,7 +13,7 @@ export default async function CreateAuctionSuccessPage({
 
    return (
       <React.Suspense>
-         <CreateAuctionSuccess id={id} />
+         <InsertLotsSuccess id={id} />
       </React.Suspense>
    )
 }

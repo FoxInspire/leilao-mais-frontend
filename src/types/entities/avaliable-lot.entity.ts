@@ -11,3 +11,17 @@ export interface AvaliableLotEntity {
    previousAuction?: AuctionEntity
    previousStatus: string
 }
+
+export interface AvaliableLotsFiltersInterface {
+   pageNumber?: number
+   pagesLimit?: number
+   createdAt?: string
+   patioId?: string
+   daysForAuction?: number
+   daysInPatio?: number
+   lotStatus?: string
+   grvCode?: string
+   type?: 'new' | 'reusable'
+   userId: string
+   auctionId: string
+}

@@ -28,7 +28,8 @@ import { SelectInput, SelectInputValue } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
 import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
-import { AuctionEntity, AuctionLot } from '@/src/types/entities/auction.entity'
+import { AvaliableLotEntity } from '@/src/types/entities/avaliable-lot.entity'
+import { isoDateRegex } from '@/src/utils/date-iso-regex'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
@@ -42,7 +43,7 @@ import { TableInsertLots } from './components/data-table'
 interface InsertLotsProps {
    id: string
    data: any[]
-   columns: ColumnDef<AuctionLot>[]
+   columns: ColumnDef<AvaliableLotEntity>[]
 }
 
 export enum Step {
@@ -63,6 +64,9 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
 }: InsertLotsProps) => {
    const router = useRouter()
 
+   const [selectedRows, setSelectedRows] = React.useState<AvaliableLotEntity[]>(
+      []
+   )
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
    const [query, setQuery] = useQueryStates(
@@ -73,122 +77,92 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
       { history: 'push', clearOnDefault: false, scroll: false }
    )
 
-   const filterForm = useForm<z.infer<typeof searchLotsSchema>>({
-      resolver: zodResolver(searchLotsSchema),
+   const filterForm = useForm<z.infer<typeof avaliableLotsFilters>>({
+      resolver: zodResolver(avaliableLotsFilters),
       defaultValues: {
-         lotStatus: '',
-         auctionsQuantity: '',
-         daysInYard: '',
-         daysUntilAuction: '',
-         lotsQuantity: '',
-         yardId: '',
-         lotType: 'new',
-         grv: ''
+         auctionId: '',
+         userId: '',
+         pageNumber: undefined,
+         pagesLimit: undefined,
+         createdAt: '',
+         patioId: '',
+         daysForAuction: undefined,
+         daysInPatio: undefined,
+         grvCode: '',
+         type: 'new'
       }
    })
 
-   const onSubmitSearch: SubmitHandler<
-      z.infer<typeof searchLotsSchema>
+   const onSubmitFilters: SubmitHandler<
+      z.infer<typeof avaliableLotsFilters>
    > = async (data) => {
       try {
-         const filters = {
-            yardId: data.yardId || undefined,
-            daysUntilAuction: data.daysUntilAuction
-               ? parseInt(data.daysUntilAuction)
-               : undefined,
-            daysInYard: data.daysInYard ? parseInt(data.daysInYard) : undefined,
-
-            ...(data.lotType === LotType.NEW
-               ? {
-                    lotsQuantity: data.lotsQuantity
-                       ? parseInt(data.lotsQuantity)
-                       : undefined,
-                    grv: data.grv || undefined
-                 }
-               : {
-                    auctionsQuantity: data.auctionsQuantity
-                       ? parseInt(data.auctionsQuantity)
-                       : undefined,
-                    lotStatus: data.lotStatus || undefined,
-                    grv: data.grv || undefined
-                 }),
-
-            filterConditions: {
-               tenant: (row: AuctionEntity) =>
-                  data.yardId ? row.Tenant?.id === data.yardId : true,
-
-               removalDate: (row: AuctionEntity) => {
-                  if (!data.daysInYard) return true
-                  const removalDate = row.AuctionLot?.[0]?.Ggv?.Grv?.removalDate
-                  if (!removalDate) return false
-
-                  const daysInYard = Math.floor(
-                     (new Date().getTime() - new Date(removalDate).getTime()) /
-                        (1000 * 60 * 60 * 24)
-                  )
-                  return daysInYard >= parseInt(data.daysInYard)
-               },
-
-               grv: (row: AuctionEntity) =>
-                  data.grv
-                     ? row.AuctionLot?.[0]?.Ggv?.grvCode === data.grv
-                     : true
-            }
+         const filterConditions = {
+            patioId: (lot: AvaliableLotEntity) =>
+               !data.patioId || lot.id === data.patioId,
+            grvCode: (lot: AvaliableLotEntity) =>
+               !data.grvCode ||
+               lot.grvCode.toLowerCase().includes(data.grvCode.toLowerCase()),
+            type: (lot: AvaliableLotEntity) =>
+               !data.type ||
+               (data.type === 'reusable'
+                  ? lot.previousAuction !== undefined
+                  : lot.previousAuction === undefined)
          }
 
-         const filteredData = transformed_data.filter((row) =>
-            Object.values(filters.filterConditions).every((condition) =>
-               condition(row)
-            )
-         )
+         const tableFilter = JSON.stringify({
+            filterConditions,
+            rawFilters: data
+         })
 
-         setGlobalFilter(JSON.stringify(filters))
-
-         console.log('Applied filters:', filters)
-         console.log('Filtered data:', filteredData)
+         setGlobalFilter(tableFilter)
       } catch (error) {
-         console.error('Erro ao enviar formulário:', error)
-         toast.error('Erro ao enviar formulário. Tente novamente.')
+         console.error('Erro ao aplicar filtros:', error)
+         toast.error('Erro ao aplicar filtros. Tente novamente.')
       }
    }
 
    const form = useForm<z.infer<typeof insertLotsSchema>>({
       resolver: zodResolver(insertLotsSchema),
-
       defaultValues: {
-         auctionId: '',
-         lotId: ''
+         auctionId: id,
+         lotId: []
       }
    })
+
+   console.log('form', form.watch())
+
+   React.useEffect(() => {
+      if (selectedRows.length) {
+         form.setValue(
+            'lotId',
+            selectedRows.map((row) => String(row.id))
+         )
+      }
+   }, [selectedRows])
 
    const onSubmitInsertLots: SubmitHandler<
       z.infer<typeof insertLotsSchema>
    > = async (data) => {
       try {
-         console.log('data', data)
+         for (const lotId of data.lotId) {
+            await fetch('/lot', {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({
+                  auctionId: data.auctionId,
+                  lotId: lotId
+               })
+            })
+         }
+         router.push(pre_auction_routes.insert_lots_success(id))
       } catch (error) {
          console.error('Erro ao enviar formulário:', error)
          toast.error('Erro ao enviar formulário. Tente novamente.')
       }
    }
-
-   const transformed_data = React.useMemo(() => {
-      return data.flatMap((auction) => {
-         if (!auction.AuctionLot?.length) return []
-
-         return auction.AuctionLot.map((lot: AuctionLot) => ({
-            ...auction,
-            AuctionLot: [lot],
-            lotNumber: lot.lotNumber,
-            process: auction.auctionCode,
-            plate: lot.Vehicle?.plate,
-            chassis: lot.Vehicle?.chassis,
-            brand: lot.Vehicle?.brand?.name,
-            model: lot.Vehicle?.model?.name,
-            type: lot.Vehicle?.type?.name
-         }))
-      })
-   }, [data])
 
    return (
       <React.Fragment>
@@ -229,295 +203,304 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                   <Separator orientation="horizontal" />
                </div>
                <Form {...filterForm}>
-                  <form
-                     onSubmit={filterForm.handleSubmit(onSubmitSearch)}
-                     className="grid w-full max-h-[calc(100vh-12.5125rem)]"
-                  >
-                     <div className="grid w-full min-h-[calc(100vh-16.8125rem)] grid-rows-[auto_1fr] gap-6">
-                        <div id="filters" className="space-y-6">
-                           <Card className="h-fit flex items-center justify-between space-y-0">
-                              <p className="text-black dark:text-dark-text-primary font-semibold text-start text-base font-nunito ">
-                                 Informação do leilão
-                              </p>
-                              <h3 className="lg:text-lg text-base font-nunito font-semibold">
-                                 {id} -{' '}
-                                 {format(new Date(), 'dd MMM yyyy', {
-                                    locale: ptBR
-                                 })}
-                              </h3>
-                           </Card>
-                           <div>
-                              <div className="flex items-center gap-2">
-                                 <span
-                                    className={cn(
-                                       'font-semibold h-6 w-6 rounded-xl bg-action-disabled/35 dark:bg-dark-action-disabled/35 text-white flex items-center justify-center',
-                                       'bg-primary-default dark:bg-dark-primary-default'
-                                    )}
-                                 >
-                                    <span className="text-sm font-roboto font-normal">
-                                       1
-                                    </span>
-                                 </span>
-                                 <span
-                                    className={cn(
-                                       'whitespace-nowrap transition-all duration-300 text-xl text-black font-semibold font-montserrat'
-                                    )}
-                                 >
-                                    Ingressar lotes
-                                 </span>
-                              </div>
-                           </div>
-                           <div className="space-y-6">
-                              <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
-                                 <FormField
-                                    control={filterForm.control}
-                                    name="yardId"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <SelectInput
-                                                label="Leilão"
-                                                placeholder="Selecione o leilão"
-                                                onValueChange={(
-                                                   value: SelectInputValue
-                                                ) => {
-                                                   filterForm.setValue(
-                                                      'yardId',
-                                                      value.value
-                                                   )
-                                                }}
-                                                options={[
-                                                   {
-                                                      id: '1',
-                                                      label: 'Pátio 1',
-                                                      value: '1'
-                                                   },
-                                                   {
-                                                      id: '2',
-                                                      label: 'Pátio 2',
-                                                      value: '2'
-                                                   },
-                                                   {
-                                                      id: '3',
-                                                      label: 'Pátio 3',
-                                                      value: '3'
-                                                   }
-                                                ]}
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                                 <FormField
-                                    control={filterForm.control}
-                                    name="daysUntilAuction"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <Input
-                                                label="Nº dias para Leilão"
-                                                placeholder="0000000000"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                                 <FormField
-                                    control={filterForm.control}
-                                    name="daysInYard"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <Input
-                                                label="Nº dias no Pátio"
-                                                placeholder="0000000000"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                              </div>
-                              <div className="space-y-4">
-                                 <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
-                                    Lista de lotes
+                  <div className="space-y-6">
+                     <form onSubmit={filterForm.handleSubmit(onSubmitFilters)}>
+                        <div className="grid w-full min-h-[calc(100vh-16.8125rem)] grid-rows-[auto_1fr] gap-6">
+                           <div id="filters" className="space-y-6">
+                              <Card className="h-fit flex items-center justify-between space-y-0">
+                                 <p className="text-black dark:text-dark-text-primary font-semibold text-start text-base font-nunito ">
+                                    Informação do leilão
                                  </p>
-                                 <div className="space-y-6">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
-                                       <FormField
-                                          control={filterForm.control}
-                                          name="lotType"
-                                          render={({ field }) => (
-                                             <FormItem className="space-y-3">
-                                                <FormControl>
-                                                   <RadioGroup
-                                                      onValueChange={(
-                                                         value
-                                                      ) => {
-                                                         field.onChange(value)
-                                                         setQuery({
-                                                            lotType: value
-                                                         })
-                                                      }}
-                                                      defaultValue={
-                                                         query.lotType ||
-                                                         field.value
+                                 <h3 className="lg:text-lg text-base font-nunito font-semibold">
+                                    {id} -{' '}
+                                    {format(new Date(), 'dd MMM yyyy', {
+                                       locale: ptBR
+                                    })}
+                                 </h3>
+                              </Card>
+                              <div>
+                                 <div className="flex items-center gap-2">
+                                    <span
+                                       className={cn(
+                                          'font-semibold h-6 w-6 rounded-xl bg-action-disabled/35 dark:bg-dark-action-disabled/35 text-white flex items-center justify-center',
+                                          'bg-primary-default dark:bg-dark-primary-default'
+                                       )}
+                                    >
+                                       <span className="text-sm font-roboto font-normal">
+                                          1
+                                       </span>
+                                    </span>
+                                    <span
+                                       className={cn(
+                                          'whitespace-nowrap transition-all duration-300 text-xl text-black font-semibold font-montserrat'
+                                       )}
+                                    >
+                                       Ingressar lotes
+                                    </span>
+                                 </div>
+                              </div>
+                              <div className="space-y-6">
+                                 <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+                                    <FormField
+                                       control={filterForm.control}
+                                       name="auctionId"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <SelectInput
+                                                   label="Leilão"
+                                                   placeholder="Selecione o leilão"
+                                                   onValueChange={(
+                                                      value: SelectInputValue
+                                                   ) => {
+                                                      filterForm.setValue(
+                                                         'auctionId',
+                                                         value.value
+                                                      )
+                                                   }}
+                                                   options={[
+                                                      {
+                                                         id: '1',
+                                                         label: 'Pátio 1',
+                                                         value: '1'
+                                                      },
+                                                      {
+                                                         id: '2',
+                                                         label: 'Pátio 2',
+                                                         value: '2'
+                                                      },
+                                                      {
+                                                         id: '3',
+                                                         label: 'Pátio 3',
+                                                         value: '3'
                                                       }
-                                                      className="flex gap-6 items-center"
-                                                   >
-                                                      <FormItem className="flex items-center space-x-2 space-y-0">
-                                                         <FormControl>
-                                                            <RadioGroupItem
-                                                               value={
-                                                                  LotType.NEW
-                                                               }
-                                                            />
-                                                         </FormControl>
-                                                         <FormLabel className="font-normal">
-                                                            Lotes novos
-                                                         </FormLabel>
-                                                      </FormItem>
-                                                      <FormItem className="flex items-center space-x-2 space-y-0">
-                                                         <FormControl>
-                                                            <RadioGroupItem
-                                                               value={
-                                                                  LotType.REUSABLE
-                                                               }
-                                                            />
-                                                         </FormControl>
-                                                         <FormLabel className="font-normal">
-                                                            Lotes
-                                                            reaproveitáveis
-                                                         </FormLabel>
-                                                      </FormItem>
-                                                   </RadioGroup>
-                                                </FormControl>
-                                                <FormMessage />
-                                             </FormItem>
-                                          )}
-                                       />
+                                                   ]}
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={filterForm.control}
+                                       name="daysForAuction"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Nº dias para Leilão"
+                                                   placeholder="0000000000"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={filterForm.control}
+                                       name="daysInPatio"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Nº dias no Pátio"
+                                                   placeholder="0000000000"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                 </div>
+                                 <div className="space-y-4">
+                                    <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                                       Lista de lotes
+                                    </p>
+                                    <div className="space-y-6">
+                                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
+                                          <FormField
+                                             control={filterForm.control}
+                                             name="type"
+                                             render={({ field }) => (
+                                                <FormItem className="space-y-3">
+                                                   <FormControl>
+                                                      <RadioGroup
+                                                         onValueChange={(
+                                                            value
+                                                         ) => {
+                                                            field.onChange(
+                                                               value
+                                                            )
+                                                            setQuery({
+                                                               lotType: value
+                                                            })
+                                                         }}
+                                                         defaultValue={
+                                                            query.lotType ||
+                                                            field.value
+                                                         }
+                                                         className="flex gap-6 items-center"
+                                                      >
+                                                         <FormItem className="flex items-center space-x-2 space-y-0">
+                                                            <FormControl>
+                                                               <RadioGroupItem
+                                                                  value={
+                                                                     LotType.NEW
+                                                                  }
+                                                               />
+                                                            </FormControl>
+                                                            <FormLabel className="font-normal">
+                                                               Lotes novos
+                                                            </FormLabel>
+                                                         </FormItem>
+                                                         <FormItem className="flex items-center space-x-2 space-y-0">
+                                                            <FormControl>
+                                                               <RadioGroupItem
+                                                                  value={
+                                                                     LotType.REUSABLE
+                                                                  }
+                                                               />
+                                                            </FormControl>
+                                                            <FormLabel className="font-normal">
+                                                               Lotes
+                                                               reaproveitáveis
+                                                            </FormLabel>
+                                                         </FormItem>
+                                                      </RadioGroup>
+                                                   </FormControl>
+                                                   <FormMessage />
+                                                </FormItem>
+                                             )}
+                                          />
+                                       </div>
+                                       {query.lotType === LotType.NEW && (
+                                          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] items-center gap-4">
+                                             <FormField
+                                                control={filterForm.control}
+                                                name="pagesLimit"
+                                                render={({ field }) => (
+                                                   <FormItem>
+                                                      <FormControl>
+                                                         <Input
+                                                            label="Qtd. Lotes"
+                                                            placeholder="0000000000"
+                                                            {...field}
+                                                         />
+                                                      </FormControl>
+                                                      <FormMessage />
+                                                   </FormItem>
+                                                )}
+                                             />
+                                             <FormField
+                                                control={filterForm.control}
+                                                name="grvCode"
+                                                render={({ field }) => (
+                                                   <FormItem>
+                                                      <FormControl>
+                                                         <Input
+                                                            label="GRV"
+                                                            placeholder="0000000000"
+                                                            {...field}
+                                                         />
+                                                      </FormControl>
+                                                      <FormMessage />
+                                                   </FormItem>
+                                                )}
+                                             />
+                                             <Button
+                                                variant="ghost"
+                                                onClick={filterForm.handleSubmit(
+                                                   onSubmitFilters
+                                                )}
+                                             >
+                                                Buscar
+                                             </Button>
+                                          </div>
+                                       )}
+                                       {query.lotType === LotType.REUSABLE && (
+                                          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] items-center gap-4">
+                                             <FormField
+                                                control={filterForm.control}
+                                                name="pagesLimit"
+                                                render={({ field }) => (
+                                                   <FormItem>
+                                                      <FormControl>
+                                                         <Input
+                                                            label="Qtd. Leilões"
+                                                            placeholder="0000000000"
+                                                            {...field}
+                                                         />
+                                                      </FormControl>
+                                                      <FormMessage />
+                                                   </FormItem>
+                                                )}
+                                             />
+                                             <FormField
+                                                control={filterForm.control}
+                                                name="lotStatus"
+                                                render={({ field }) => (
+                                                   <FormItem>
+                                                      <FormControl>
+                                                         <Input
+                                                            label="Status do Lote"
+                                                            placeholder="Selecione o status"
+                                                            {...field}
+                                                         />
+                                                      </FormControl>
+                                                      <FormMessage />
+                                                   </FormItem>
+                                                )}
+                                             />
+                                             <FormField
+                                                control={filterForm.control}
+                                                name="grvCode"
+                                                render={({ field }) => (
+                                                   <FormItem>
+                                                      <FormControl>
+                                                         <Input
+                                                            label="GRV"
+                                                            placeholder="0000000000"
+                                                            {...field}
+                                                         />
+                                                      </FormControl>
+                                                      <FormMessage />
+                                                   </FormItem>
+                                                )}
+                                             />
+                                             <Button variant="ghost">
+                                                Buscar
+                                             </Button>
+                                          </div>
+                                       )}
                                     </div>
-                                    {query.lotType === LotType.NEW && (
-                                       <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] items-center gap-4">
-                                          <FormField
-                                             control={filterForm.control}
-                                             name="lotsQuantity"
-                                             render={({ field }) => (
-                                                <FormItem>
-                                                   <FormControl>
-                                                      <Input
-                                                         label="Qtd. Lotes"
-                                                         placeholder="0000000000"
-                                                         {...field}
-                                                      />
-                                                   </FormControl>
-                                                   <FormMessage />
-                                                </FormItem>
-                                             )}
-                                          />
-                                          <FormField
-                                             control={filterForm.control}
-                                             name="grv"
-                                             render={({ field }) => (
-                                                <FormItem>
-                                                   <FormControl>
-                                                      <Input
-                                                         label="GRV"
-                                                         placeholder="0000000000"
-                                                         {...field}
-                                                      />
-                                                   </FormControl>
-                                                   <FormMessage />
-                                                </FormItem>
-                                             )}
-                                          />
-                                          <Button
-                                             variant="ghost"
-                                             onClick={filterForm.handleSubmit(
-                                                onSubmitSearch
-                                             )}
-                                          >
-                                             Buscar
-                                          </Button>
-                                       </div>
-                                    )}
-                                    {query.lotType === LotType.REUSABLE && (
-                                       <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] items-center gap-4">
-                                          <FormField
-                                             control={filterForm.control}
-                                             name="auctionsQuantity"
-                                             render={({ field }) => (
-                                                <FormItem>
-                                                   <FormControl>
-                                                      <Input
-                                                         label="Qtd. Leilões"
-                                                         placeholder="0000000000"
-                                                         {...field}
-                                                      />
-                                                   </FormControl>
-                                                   <FormMessage />
-                                                </FormItem>
-                                             )}
-                                          />
-                                          <FormField
-                                             control={filterForm.control}
-                                             name="lotStatus"
-                                             render={({ field }) => (
-                                                <FormItem>
-                                                   <FormControl>
-                                                      <Input
-                                                         label="Status do Lote"
-                                                         placeholder="Selecione o status"
-                                                         {...field}
-                                                      />
-                                                   </FormControl>
-                                                   <FormMessage />
-                                                </FormItem>
-                                             )}
-                                          />
-                                          <FormField
-                                             control={filterForm.control}
-                                             name="grv"
-                                             render={({ field }) => (
-                                                <FormItem>
-                                                   <FormControl>
-                                                      <Input
-                                                         label="GRV"
-                                                         placeholder="0000000000"
-                                                         {...field}
-                                                      />
-                                                   </FormControl>
-                                                   <FormMessage />
-                                                </FormItem>
-                                             )}
-                                          />
-                                          <Button variant="ghost">
-                                             Buscar
-                                          </Button>
-                                       </div>
-                                    )}
                                  </div>
                               </div>
                            </div>
+                           <div id="table" className="min-h-0 overflow-hidden">
+                              <TableInsertLots
+                                 columns={columns}
+                                 data={data}
+                                 globalFilter={globalFilter}
+                                 onSelectionChange={setSelectedRows}
+                              />
+                           </div>
                         </div>
-                        <div id="table" className="min-h-0 overflow-hidden">
-                           <TableInsertLots
-                              data={transformed_data}
-                              columns={columns}
-                              globalFilter={globalFilter}
-                           />
-                        </div>
+                     </form>
+                     <div className="flex flex-1 justify-end items-center">
+                        <Button
+                           type="submit"
+                           className="w-fit"
+                           disabled={selectedRows.length === 0}
+                           onClick={() =>
+                              form.handleSubmit(onSubmitInsertLots)()
+                           }
+                        >
+                           Concluir
+                        </Button>
                      </div>
-                  </form>
-                  <div className="flex flex-1 justify-end items-center">
-                     <Button type="submit" className="w-fit" onClick={() => {}}>
-                        Concluir
-                     </Button>
                   </div>
                </Form>
             </div>
@@ -556,14 +539,25 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                         novos ou reaproveitáveis, buscando itens pelo GRV (Guia
                         de Recolhimento de Veículos).
                      </p>
-                     <div className="bg-[#E6F1F7] px-4 py-4 space-y-2 rounded-md">
-                        <p className="text-black font-normal text-start">
-                           Info
+                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                        Detalhes
+                     </p>
+                     <div>
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                           Lotes novos
                         </p>
-                        <p className="text-text-secondary text-start">
-                           Os dados deste formulário são para o Edital do
-                           leilão, sendo enviadas ao DETRAN na criação do leilão
-                           e no resultado do leilão.
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           Lotes Novos são lotes que nunca passaram por um
+                           leilão.
+                        </p>
+                     </div>
+                     <div>
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                           Lotes reaproveitáveis
+                        </p>
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           Lotes Reaproveitáveis são lotes que já participaram
+                           de um leilão e estão novamente disponíveis.
                         </p>
                      </div>
                   </div>
@@ -579,42 +573,71 @@ const insertLotsSchema = z.object({
       required_error: 'ID do leilão é obrigatório',
       invalid_type_error: 'ID do leilão deve ser uma string'
    }),
-   lotId: z.string({
-      required_error: 'ID do lote é obrigatório',
-      invalid_type_error: 'ID do lote deve ser uma string'
-   })
+   lotId: z.array(
+      z.string({
+         required_error: 'ID do lote é obrigatório',
+         invalid_type_error: 'ID do lote deve ser uma string'
+      })
+   )
 })
 
-const searchLotsSchema = z.object({
-   yardId: z.string().optional(),
-   daysUntilAuction: z
-      .string()
-      .regex(/^\d+$/, {
-         message: 'Número de dias para leilão deve conter apenas números'
+const avaliableLotsFilters = z
+   .object({
+      pageNumber: z.coerce
+         .number({
+            invalid_type_error: 'Page number must be a number'
+         })
+         .optional(),
+      pagesLimit: z.coerce
+         .number({
+            invalid_type_error: 'Pages limit must be a number'
+         })
+         .optional(),
+      createdAt: z
+         .string({
+            invalid_type_error: 'Created at must be a string'
+         })
+         .refine((value) => isoDateRegex.test(value), {
+            message: 'Created at must be in ISO 8601 format'
+         })
+         .optional(),
+      lotStatus: z
+         .string({
+            invalid_type_error: 'Lot status must be a string'
+         })
+         .optional(),
+      patioId: z
+         .string({
+            invalid_type_error: 'Patio id must be a string'
+         })
+         .optional(),
+      daysForAuction: z.coerce
+         .number({
+            invalid_type_error: 'Days for auction must be a number'
+         })
+         .optional(),
+      daysInPatio: z.coerce
+         .number({
+            invalid_type_error: 'Days in patio must be a number'
+         })
+         .optional(),
+      grvCode: z
+         .string({
+            invalid_type_error: 'GRV code must be a string'
+         })
+         .optional(),
+      type: z
+         .string({
+            invalid_type_error: 'Is in auction must be a string'
+         })
+         .optional(),
+      userId: z.string({
+         invalid_type_error: 'User id must be a string',
+         required_error: 'User id is required'
+      }),
+      auctionId: z.string({
+         invalid_type_error: 'Auction id must be a string',
+         required_error: 'Auction id is required'
       })
-      .optional(),
-   daysInYard: z
-      .string()
-      .regex(/^\d+$/, {
-         message: 'Número de dias no pátio deve conter apenas números'
-      })
-      .optional(),
-   lotType: z.enum(['new', 'reusable']).default('new'),
-   lotsQuantity: z
-      .string()
-      .regex(/^\d+$/, {
-         message: 'Quantidade de lotes deve conter apenas números'
-      })
-      .optional(),
-   grv: z
-      .string()
-      .regex(/^\d+$/, { message: 'GRV deve conter apenas números' })
-      .optional(),
-   lotStatus: z.string().optional(),
-   auctionsQuantity: z
-      .string()
-      .regex(/^\d+$/, {
-         message: 'Quantidade de leilões deve conter apenas números'
-      })
-      .optional()
-})
+   })
+   .strict()

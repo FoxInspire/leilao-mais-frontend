@@ -11,7 +11,7 @@ import {
    TableRow
 } from '@/components/ui/table'
 import { DataTablePagination } from '@/features/pre-auction/auction-maintenance/insert-lots/components/data-table-pagination'
-import { AuctionLot } from '@/src/types/entities/auction.entity'
+import { AvaliableLotEntity } from '@/src/types/entities/avaliable-lot.entity'
 import {
    ColumnDef,
    ColumnFiltersState,
@@ -41,7 +41,7 @@ export interface TableInsertLotsHandle {
 
 export const TableInsertLots = React.forwardRef<
    TableInsertLotsHandle,
-   DataTableProps<AuctionLot>
+   DataTableProps<AvaliableLotEntity>
 >(
    (
       { columns, data, globalFilter, setGlobalFilter, onSelectionChange },
@@ -91,22 +91,26 @@ export const TableInsertLots = React.forwardRef<
                      typeof condition === 'function' && condition(row.original)
                )
             } catch {
-               // Fallback to default text search if filter value isn't our filter object
                const searchValue = filterValue.toLowerCase()
-               const lot = row.original.lotNumber
-               const vehicle = row.original.Vehicle
-               const id = row.original.auctionId
-               const auctionCode = row.original.Auction?.auctionCode
+               const lot = row.original.grvCode
+               const plate = row.original.vehiclePlate
+               const chassis = row.original.vehicleChassis
+               const brand = row.original.vehicleBrand
+               const type = row.original.vehicleType
+               const color = row.original.vehicleColor
+               const previousAuctionCode =
+                  row.original.previousAuction?.auctionCode
+               const status = row.original.previousStatus
 
                const searchFields = [
                   lot,
-                  id,
-                  auctionCode,
-                  vehicle?.plate,
-                  vehicle?.chassis,
-                  vehicle?.brand?.name,
-                  vehicle?.model?.name,
-                  vehicle?.type?.name
+                  plate,
+                  chassis,
+                  brand,
+                  type,
+                  color,
+                  previousAuctionCode,
+                  status
                ]
 
                return searchFields.some((field) =>

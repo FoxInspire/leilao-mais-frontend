@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
-import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { useRouter } from 'next/navigation'
@@ -39,13 +38,21 @@ export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
                            <BreadcrumbLink>Pré-leilão</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator>/</BreadcrumbSeparator>
+                        <BreadcrumbItem>
+                           <BreadcrumbLink
+                              href={pre_auction_routes.auction_maintenance}
+                           >
+                              Manutenção de leilões
+                           </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator>/</BreadcrumbSeparator>
                         <BreadcrumbPage>Novo leilão</BreadcrumbPage>
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
                      <div className="flex flex-wrap justify-between items-center gap-2">
                         <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
-                           Cadastrar novo leilão
+                           Ingressar lotes
                         </h1>
                         <Button
                            variant="ghost"
@@ -66,7 +73,11 @@ export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
                         check_circle
                      </span>
                      <h3 className="text-center text-2xl font-semibold font-montserrat">
-                        Cadastro leilão {id} realizado com sucesso
+                        Lotes do leilão{' '}
+                        <span className="font-bold text-primary-default dark:text-dark-primary-default">
+                           {id}
+                        </span>{' '}
+                        adicionados e agendados com sucesso!
                      </h3>
                      <div className="flex items-center gap-4">
                         <Button
@@ -78,13 +89,20 @@ export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
                               )
                            }
                         >
-                           Ver leilões
+                           Voltar
                         </Button>
-                        <DisabledFeature>
-                           <Button disabled className="h-10">
-                              Ingressar lotes
-                           </Button>
-                        </DisabledFeature>
+                        <Button
+                           className="h-10"
+                           onClick={() =>
+                              router.push(
+                                 pre_auction_routes.operation_monitor_details(
+                                    id
+                                 )
+                              )
+                           }
+                        >
+                           Ver lotes do leilão
+                        </Button>
                      </div>
                   </div>
                </div>
