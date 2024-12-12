@@ -135,21 +135,31 @@ export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
                         Descrição
                      </p>
                      <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                        A página de Cadastrar Novo Leilão permite registrar um
-                        leilão inserindo seus Dados Gerais, como nome,
-                        localização e datas. Também é possível preencher Dados
-                        Complementares, como leiloeiro, comitente e empresa,
-                        além de definir um e-mail para envio de notificações
-                        relacionadas ao leilão.
+                        A página de Ingressar Lotes permite adicionar veículos
+                        ao leilão selecionando um Pátio para a busca, filtrando
+                        pelo número de dias desde o recolhimento e definindo o
+                        número de dias até o leilão. É possível incluir lotes
+                        novos ou reaproveitáveis, buscando itens pelo GRV (Guia
+                        de Recolhimento de Veículos).
                      </p>
-                     <div className="bg-[#E6F1F7] px-4 py-4 space-y-2 rounded-md">
-                        <p className="text-black font-normal text-start">
-                           Info
+                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                        Detalhes
+                     </p>
+                     <div>
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                           Lotes novos
                         </p>
-                        <p className="text-text-secondary text-start">
-                           Os dados deste formulário são para o Edital do
-                           leilão, sendo enviadas ao DETRAN na criação do leilão
-                           e no resultado do leilão.
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           São lotes que nunca passaram por um leilão.
+                        </p>
+                     </div>
+                     <div>
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                           Lotes reaproveitáveis
+                        </p>
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           São lotes que já participaram de um leilão e estão
+                           novamente disponíveis.
                         </p>
                      </div>
                   </div>

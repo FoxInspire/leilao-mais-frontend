@@ -570,8 +570,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                            Lotes novos
                         </p>
                         <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                           Lotes Novos são lotes que nunca passaram por um
-                           leilão.
+                           São lotes que nunca passaram por um leilão.
                         </p>
                      </div>
                      <div>
@@ -579,8 +578,8 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                            Lotes reaproveitáveis
                         </p>
                         <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                           Lotes Reaproveitáveis são lotes que já participaram
-                           de um leilão e estão novamente disponíveis.
+                           São lotes que já participaram de um leilão e estão
+                           novamente disponíveis.
                         </p>
                      </div>
                   </div>
