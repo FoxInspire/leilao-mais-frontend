@@ -31,10 +31,28 @@ const previousStatuses = [
    'preserved',
    'fix_report',
    'police_station',
+   'disassociated_payment',
    'under_analysis',
    'canceled_grv',
    'inspection_identification',
-   'unanalyzed_report'
+   'unanalyzed_report',
+   'auctioned_preserved',
+   'auctioned_usable_scrap',
+   'auctioned_usable_scrap_unusable_engine',
+   'auctioned_unusable_scrap_identified',
+   'auctioned_unusable_scrap_unidentified',
+   'lot_auctioned_other_auction',
+   'expertise_not_performed',
+   'expertise_without_publication',
+   'removed_from_auction',
+   'administrative_restriction',
+   'judicial_restriction',
+   'theft_restriction',
+   'no_notification_return',
+   'clone_suspicion',
+   'vehicle_written_off',
+   'vehicle_released',
+   'vehicle_not_found'
 ]
 
 const generateSimpleAuction = (): AuctionEntity => {

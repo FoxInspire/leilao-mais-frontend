@@ -3,6 +3,7 @@
 import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { AvaliableLotEntity } from '@/src/types/entities/avaliable-lot.entity'
+import { auctionLotStatusOptions } from '@/src/utils/auction-lot-status'
 import { ColumnDef } from '@tanstack/react-table'
 
 export const columns_insert_lots: ColumnDef<AvaliableLotEntity>[] = [
@@ -101,7 +102,13 @@ export const columns_insert_lots: ColumnDef<AvaliableLotEntity>[] = [
          <DataTableColumnHeader column={column} title="Status anterior" />
       ),
       cell: ({ row }) => {
-         return <div>{row.original.previousStatus || '-'}</div>
+         return (
+            <div>
+               {auctionLotStatusOptions.find(
+                  (option) => option.value === row.original.previousStatus
+               )?.label || '-'}
+            </div>
+         )
       }
    }
 ]

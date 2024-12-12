@@ -16,6 +16,7 @@ import {
    SelectValue
 } from '@/components/ui/select'
 import { Button } from '@/src/components/ui/button'
+import { auctionLotStatusOptions } from '@/src/utils/auction-lot-status'
 import { AuctionEntity } from '@/types/entities/auction.entity'
 import { Row } from '@tanstack/react-table'
 
@@ -50,56 +51,6 @@ export const OperationLotStatus: React.FC<OperationLotStatusProps> = ({
       setDialog(false)
    }
 
-   const statusOptions = [
-      { value: 'unpaid_auction', label: 'Arrematação não paga' },
-      { value: 'preserved', label: 'Conservado' },
-      { value: 'fix_report', label: 'Corrigir laudo' },
-      { value: 'police_station', label: 'Delegacia' },
-      { value: 'disassociated_payment', label: 'Desassociado boleto' },
-      { value: 'under_analysis', label: 'Em análise' },
-      { value: 'canceled_grv', label: 'GRV cancelada' },
-      { value: 'inspection_identification', label: 'Ident na vistoria' },
-      { value: 'unanalyzed_report', label: 'Laudo não analisado' },
-      { value: 'auctioned_preserved', label: 'Leiloado - conservado' },
-      {
-         value: 'auctioned_usable_scrap',
-         label: 'Leiloado - sucata aproveitavel'
-      },
-      {
-         value: 'auctioned_usable_scrap_unusable_engine',
-         label: 'Leiloado - sucata aproveitavel com motor inservível'
-      },
-      {
-         value: 'auctioned_unusable_scrap_identified',
-         label: 'Leiloado - sucata inservível identificada'
-      },
-      {
-         value: 'auctioned_unusable_scrap_unidentified',
-         label: 'Leiloado - sucata inservível não identificada'
-      },
-      {
-         value: 'lot_auctioned_other_auction',
-         label: 'Lote arrematado em outro leilão'
-      },
-      { value: 'expertise_not_performed', label: 'Pericia não realizada' },
-      {
-         value: 'expertise_without_publication',
-         label: 'Periciado sem publicação'
-      },
-      { value: 'removed_from_auction', label: 'Removido de leilão' },
-      {
-         value: 'administrative_restriction',
-         label: 'Restrição administrativa'
-      },
-      { value: 'judicial_restriction', label: 'Restrição judicial' },
-      { value: 'theft_restriction', label: 'Restrição roubo/furto' },
-      { value: 'no_notification_return', label: 'Sem retorno de notificação' },
-      { value: 'clone_suspicion', label: 'Suspeita de clone' },
-      { value: 'vehicle_written_off', label: 'Veículo baixado' },
-      { value: 'vehicle_released', label: 'Veículo liberado' },
-      { value: 'vehicle_not_found', label: 'Veículo não localizado' }
-   ]
-
    return (
       <React.Fragment>
          <div>
@@ -107,14 +58,14 @@ export const OperationLotStatus: React.FC<OperationLotStatusProps> = ({
                <SelectTrigger className="flex items-center gap-2 font-bold font-nunito text-primary-default dark:text-dark-primary-default text-sm uppercase border-none bg-transparent w-fit">
                   <SelectValue
                      placeholder={
-                        statusOptions.find(
+                        auctionLotStatusOptions.find(
                            (option) => option.value === currentStatus
                         )?.label || ''
                      }
                   />
                </SelectTrigger>
                <SelectContent>
-                  {statusOptions.map((option) => (
+                  {auctionLotStatusOptions.map((option) => (
                      <SelectItem key={option.value} value={option.value}>
                         {option.label}
                      </SelectItem>
