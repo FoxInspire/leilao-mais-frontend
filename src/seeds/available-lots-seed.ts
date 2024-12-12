@@ -94,6 +94,7 @@ const generateAvailableLot = (): AvaliableLotEntity => {
       : undefined
 
    return {
+      id: faker.string.numeric(8),
       grvCode: faker.string.numeric(8),
       vehiclePlate: faker.string.alphanumeric(7).toUpperCase(),
       vehicleChassis: faker.string.alphanumeric(17).toUpperCase(),
