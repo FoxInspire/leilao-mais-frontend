@@ -122,6 +122,8 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
       }
    }
 
+   const [isLoading, setIsLoading] = React.useState(false)
+
    const form = useForm<z.infer<typeof insertLotsSchema>>({
       resolver: zodResolver(insertLotsSchema),
       defaultValues: {
@@ -129,8 +131,6 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
          lotId: []
       }
    })
-
-   console.log('form', form.watch())
 
    React.useEffect(() => {
       if (selectedRows.length) {
@@ -145,6 +145,25 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
       z.infer<typeof insertLotsSchema>
    > = async (data) => {
       try {
+         setIsLoading(true)
+         // Mock implementation
+         for (const lotId of data.lotId) {
+            // Show loading toast for each lot
+            const loadingToast = toast.loading(`Processando lote ${lotId}...`)
+
+            // Random delay between 1-3 seconds
+            await new Promise((resolve) =>
+               setTimeout(resolve, Math.random() * 2000 + 1000)
+            )
+
+            // Success toast for each lot
+            toast.dismiss(loadingToast)
+            toast.success(`Lote ${lotId} processado com sucesso!`)
+         }
+
+         router.push(pre_auction_routes.insert_lots_success(id))
+
+         /* Original implementation for API integration
          for (const lotId of data.lotId) {
             await fetch('/lot', {
                method: 'POST',
@@ -158,9 +177,12 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
             })
          }
          router.push(pre_auction_routes.insert_lots_success(id))
+         */
       } catch (error) {
          console.error('Erro ao enviar formulário:', error)
          toast.error('Erro ao enviar formulário. Tente novamente.')
+      } finally {
+         setIsLoading(false)
       }
    }
 
@@ -493,7 +515,8 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                         <Button
                            type="submit"
                            className="w-fit"
-                           disabled={selectedRows.length === 0}
+                           loading={isLoading}
+                           disabled={selectedRows.length === 0 || isLoading}
                            onClick={() =>
                               form.handleSubmit(onSubmitInsertLots)()
                            }

@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
-import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { useRouter } from 'next/navigation'
@@ -66,7 +65,11 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                         check_circle
                      </span>
                      <h3 className="text-center text-2xl font-semibold font-montserrat">
-                        Cadastro leilão {id} realizado com sucesso
+                        Cadastro leilão{' '}
+                        <span className="font-bold text-primary-default dark:text-dark-primary-default">
+                           {id}
+                        </span>{' '}
+                        realizado com sucesso
                      </h3>
                      <div className="flex items-center gap-4">
                         <Button
@@ -80,11 +83,14 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                         >
                            Ver leilões
                         </Button>
-                        <DisabledFeature>
-                           <Button disabled className="h-10">
-                              Ingressar lotes
-                           </Button>
-                        </DisabledFeature>
+                        <Button
+                           className="h-10"
+                           onClick={() =>
+                              router.push(pre_auction_routes.insert_lots(id))
+                           }
+                        >
+                           Ingressar lotes
+                        </Button>
                      </div>
                   </div>
                </div>
