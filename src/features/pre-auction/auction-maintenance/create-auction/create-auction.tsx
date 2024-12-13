@@ -211,7 +211,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
                <div className="space-y-2">
                   <div className="flex flex-wrap justify-between items-center gap-2">
                      <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
-                        Cadastrar Novo leilão
+                        Cadastrar novo leilão
                      </h1>
                      <Button
                         variant="ghost"

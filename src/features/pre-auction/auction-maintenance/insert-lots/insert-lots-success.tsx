@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import * as z from 'zod'
 
 import {
    Breadcrumb,
@@ -17,13 +16,13 @@ import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { useRouter } from 'next/navigation'
 
-interface UpdateAuctionSuccessProps {
+interface InsertLotsSuccessProps {
    id: string
 }
 
-export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
+export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
    id
-}) => {
+}: InsertLotsSuccessProps) => {
    const router = useRouter()
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
@@ -39,13 +38,21 @@ export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
                            <BreadcrumbLink>Pré-leilão</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator>/</BreadcrumbSeparator>
-                        <BreadcrumbPage>Editar leilão</BreadcrumbPage>
+                        <BreadcrumbItem>
+                           <BreadcrumbLink
+                              href={pre_auction_routes.auction_maintenance}
+                           >
+                              Manutenção de leilões
+                           </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator>/</BreadcrumbSeparator>
+                        <BreadcrumbPage>Novo leilão</BreadcrumbPage>
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
                      <div className="flex flex-wrap justify-between items-center gap-2">
                         <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
-                           Editar leilão {id}
+                           Ingressar lotes
                         </h1>
                         <Button
                            variant="ghost"
@@ -66,7 +73,11 @@ export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
                         check_circle
                      </span>
                      <h3 className="text-center text-2xl font-semibold font-montserrat">
-                        Edição leilão {id} realizada com sucesso
+                        Lotes do leilão{' '}
+                        <span className="font-bold text-primary-default dark:text-dark-primary-default">
+                           {id}
+                        </span>{' '}
+                        adicionados e agendados com sucesso!
                      </h3>
                      <div className="flex items-center gap-4">
                         <Button
@@ -78,7 +89,19 @@ export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
                               )
                            }
                         >
-                           Ver leilões
+                           Voltar
+                        </Button>
+                        <Button
+                           className="h-10"
+                           onClick={() =>
+                              router.push(
+                                 pre_auction_routes.operation_monitor_details(
+                                    id
+                                 )
+                              )
+                           }
+                        >
+                           Ver lotes do leilão
                         </Button>
                      </div>
                   </div>
@@ -112,21 +135,31 @@ export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
                         Descrição
                      </p>
                      <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                        A página de Cadastrar Novo Leilão permite registrar um
-                        leilão inserindo seus Dados Gerais, como nome,
-                        localização e datas. Também é possível preencher Dados
-                        Complementares, como leiloeiro, comitente e empresa,
-                        além de definir um e-mail para envio de notificações
-                        relacionadas ao leilão.
+                        A página de Ingressar Lotes permite adicionar veículos
+                        ao leilão selecionando um Pátio para a busca, filtrando
+                        pelo número de dias desde o recolhimento e definindo o
+                        número de dias até o leilão. É possível incluir lotes
+                        novos ou reaproveitáveis, buscando itens pelo GRV (Guia
+                        de Recolhimento de Veículos).
                      </p>
-                     <div className="bg-[#E6F1F7] px-4 py-4 space-y-2 rounded-md">
-                        <p className="text-black font-normal text-start">
-                           Info
+                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                        Detalhes
+                     </p>
+                     <div>
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                           Lotes novos
                         </p>
-                        <p className="text-text-secondary text-start">
-                           Os dados deste formulário são para o Edital do
-                           leilão, sendo enviadas ao DETRAN na criação do leilão
-                           e no resultado do leilão.
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           São lotes que nunca passaram por um leilão.
+                        </p>
+                     </div>
+                     <div>
+                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                           Lotes reaproveitáveis
+                        </p>
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           São lotes que já participaram de um leilão e estão
+                           novamente disponíveis.
                         </p>
                      </div>
                   </div>
@@ -136,72 +169,3 @@ export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
       </React.Fragment>
    )
 }
-
-const createAuctionSchema = z.object({
-   description: z.string().min(1, { message: 'Descrição é obrigatória' }),
-   auctionDate: z.string().min(1, { message: 'Data do leilão é obrigatória' }),
-   cep: z
-      .string()
-      .min(1, { message: 'CEP é obrigatório' })
-      .regex(/^\d{5}-?\d{3}$/, {
-         message: 'CEP deve estar no formato 00000-000'
-      }),
-   address: z.string().min(1, { message: 'Endereço é obrigatório' }),
-   addressNumber: z
-      .string()
-      .min(1, { message: 'Número é obrigatório' })
-      .regex(/^\d+$/, { message: 'Número deve conter apenas dígitos' }),
-   addressComplement: z.string().optional(),
-   neighborhood: z.string().min(1, { message: 'Bairro é obrigatório' }),
-   addressState: z.string().min(1, { message: 'Estado é obrigatório' }),
-   addressCity: z.string().min(1, { message: 'Cidade é obrigatória' }),
-
-   scheduleDate: z
-      .string()
-      .min(1, { message: 'Data de agendamento é obrigatória' }),
-   startRemovalDate: z
-      .string()
-      .min(1, { message: 'Data de início da retirada é obrigatória' }),
-   endRemovalDate: z
-      .string()
-      .min(1, { message: 'Data final da retirada é obrigatória' }),
-   notificationDate: z
-      .string()
-      .min(1, { message: 'Data de notificação é obrigatória' }),
-   noticeDate: z.string().min(1, { message: 'Data do edital é obrigatória' }),
-   auctioneerId: z.string().min(1, { message: 'Leiloeiro é obrigatório' }),
-   auctionCompanyId: z.string().min(1, { message: 'Empresa é obrigatória' }),
-   committeeId: z.string().min(1, { message: 'Comitente é obrigatório' }),
-   exhibitorId: z.string().min(1, { message: 'Expositor é obrigatório' }),
-   accountRule: z
-      .string()
-      .min(1, { message: 'Regra de prestação de contas é obrigatória' }),
-
-   notificationEmails: z
-      .array(z.string().email({ message: 'E-mail inválido' }))
-      .min(1, { message: 'Pelo menos um e-mail é obrigatório' }),
-
-   officialPublicationDate: z
-      .string()
-      .min(1, { message: 'Data de publicação oficial é obrigatória' }),
-   officialPublicationNumber: z
-      .string()
-      .min(1, { message: 'Número de publicação oficial é obrigatório' })
-      .regex(/^\d+$/, { message: 'Número deve conter apenas dígitos' }),
-
-   internalMatrixOrder: z
-      .string()
-      .regex(/^\d+$/, {
-         message: 'Ordem interna matriz deve conter apenas dígitos'
-      })
-      .optional(),
-   internalAuctionOrder: z
-      .string()
-      .regex(/^\d+$/, {
-         message: 'Ordem interna leilão deve conter apenas dígitos'
-      })
-      .optional(),
-   vehicleObservations: z.string().optional(),
-
-   tenantId: z.string().min(1, { message: 'ID do tenant é obrigatório' })
-})

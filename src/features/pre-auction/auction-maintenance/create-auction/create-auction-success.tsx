@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import * as z from 'zod'
 
 import {
    Breadcrumb,
@@ -13,7 +12,6 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
-import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { useRouter } from 'next/navigation'
@@ -24,7 +22,7 @@ interface CreateAuctionSuccessProps {
 
 export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
    id
-}) => {
+}: CreateAuctionSuccessProps) => {
    const router = useRouter()
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
@@ -46,7 +44,7 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                   <div className="space-y-2">
                      <div className="flex flex-wrap justify-between items-center gap-2">
                         <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
-                           Cadastrar Novo leilão
+                           Cadastrar novo leilão
                         </h1>
                         <Button
                            variant="ghost"
@@ -67,7 +65,11 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                         check_circle
                      </span>
                      <h3 className="text-center text-2xl font-semibold font-montserrat">
-                        Cadastro leilão {id} realizado com sucesso
+                        Cadastro leilão{' '}
+                        <span className="font-bold text-primary-default dark:text-dark-primary-default">
+                           {id}
+                        </span>{' '}
+                        realizado com sucesso
                      </h3>
                      <div className="flex items-center gap-4">
                         <Button
@@ -81,11 +83,14 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                         >
                            Ver leilões
                         </Button>
-                        <DisabledFeature>
-                           <Button disabled className="h-10">
-                              Ingressar lotes
-                           </Button>
-                        </DisabledFeature>
+                        <Button
+                           className="h-10"
+                           onClick={() =>
+                              router.push(pre_auction_routes.insert_lots(id))
+                           }
+                        >
+                           Ingressar lotes
+                        </Button>
                      </div>
                   </div>
                </div>
@@ -142,72 +147,3 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
       </React.Fragment>
    )
 }
-
-const createAuctionSchema = z.object({
-   description: z.string().min(1, { message: 'Descrição é obrigatória' }),
-   auctionDate: z.string().min(1, { message: 'Data do leilão é obrigatória' }),
-   cep: z
-      .string()
-      .min(1, { message: 'CEP é obrigatório' })
-      .regex(/^\d{5}-?\d{3}$/, {
-         message: 'CEP deve estar no formato 00000-000'
-      }),
-   address: z.string().min(1, { message: 'Endereço é obrigatório' }),
-   addressNumber: z
-      .string()
-      .min(1, { message: 'Número é obrigatório' })
-      .regex(/^\d+$/, { message: 'Número deve conter apenas dígitos' }),
-   addressComplement: z.string().optional(),
-   neighborhood: z.string().min(1, { message: 'Bairro é obrigatório' }),
-   addressState: z.string().min(1, { message: 'Estado é obrigatório' }),
-   addressCity: z.string().min(1, { message: 'Cidade é obrigatória' }),
-
-   scheduleDate: z
-      .string()
-      .min(1, { message: 'Data de agendamento é obrigatória' }),
-   startRemovalDate: z
-      .string()
-      .min(1, { message: 'Data de início da retirada é obrigatória' }),
-   endRemovalDate: z
-      .string()
-      .min(1, { message: 'Data final da retirada é obrigatória' }),
-   notificationDate: z
-      .string()
-      .min(1, { message: 'Data de notificação é obrigatória' }),
-   noticeDate: z.string().min(1, { message: 'Data do edital é obrigatória' }),
-   auctioneerId: z.string().min(1, { message: 'Leiloeiro é obrigatório' }),
-   auctionCompanyId: z.string().min(1, { message: 'Empresa é obrigatória' }),
-   committeeId: z.string().min(1, { message: 'Comitente é obrigatório' }),
-   exhibitorId: z.string().min(1, { message: 'Expositor é obrigatório' }),
-   accountRule: z
-      .string()
-      .min(1, { message: 'Regra de prestação de contas é obrigatória' }),
-
-   notificationEmails: z
-      .array(z.string().email({ message: 'E-mail inválido' }))
-      .min(1, { message: 'Pelo menos um e-mail é obrigatório' }),
-
-   officialPublicationDate: z
-      .string()
-      .min(1, { message: 'Data de publicação oficial é obrigatória' }),
-   officialPublicationNumber: z
-      .string()
-      .min(1, { message: 'Número de publicação oficial é obrigatório' })
-      .regex(/^\d+$/, { message: 'Número deve conter apenas dígitos' }),
-
-   internalMatrixOrder: z
-      .string()
-      .regex(/^\d+$/, {
-         message: 'Ordem interna matriz deve conter apenas dígitos'
-      })
-      .optional(),
-   internalAuctionOrder: z
-      .string()
-      .regex(/^\d+$/, {
-         message: 'Ordem interna leilão deve conter apenas dígitos'
-      })
-      .optional(),
-   vehicleObservations: z.string().optional(),
-
-   tenantId: z.string().min(1, { message: 'ID do tenant é obrigatório' })
-})

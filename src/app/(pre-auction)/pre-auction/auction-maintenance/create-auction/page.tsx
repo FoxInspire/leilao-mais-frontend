@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { SelectInputValue } from '@/src/components/ui/select'
-import { CreateAuction } from '@/src/features/pre-auction/auction-maintenance/create-auction'
+import { CreateAuction } from '@/src/features/pre-auction/auction-maintenance/create-auction/create-auction'
 import { readJSONFile } from '@/src/utils/file-path-utils'
 
 export const dynamic = 'force-dynamic'

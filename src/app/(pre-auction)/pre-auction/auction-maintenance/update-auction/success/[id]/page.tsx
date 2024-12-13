@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { UpdateAuctionSuccess } from '@/src/features/pre-auction/auction-maintenance/update-auction-success'
+import { UpdateAuctionSuccess } from '@/src/features/pre-auction/auction-maintenance/update-auction/update-auction-success'
 
 export const dynamic = 'force-dynamic'
 

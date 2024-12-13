@@ -8,7 +8,7 @@ import MaskedInput, { Mask } from 'react-text-mask'
 
 export const inputVariants = cva(
    [
-      'peer block w-full',
+      'peer block w-full font-roboto',
       'text-black dark:text-white',
       'bg-transparent',
       'outline-2 outline-transparent',
@@ -66,6 +66,7 @@ export const inputVariants = cva(
 
 export const labelVariants = cva(
    [
+      'font-roboto',
       'absolute left-[11px] top-[50%]',
       'pointer-events-none',
       '-translate-y-[50%]',

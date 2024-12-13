@@ -38,8 +38,8 @@ export const columns: ColumnDef<AuctionEntity>[] = [
       cell: ({ row }) => (
          <div className="font-bold font-nunito text-primary-default dark:text-dark-primary-default hover:underline">
             <TooltipProvider>
-               <Tooltip delayDuration={50}>
-                  <TooltipTrigger>
+               <Tooltip delayDuration={2000}>
+                  <TooltipTrigger className="cursor-pointer hover:underline">
                      <Link
                         href={pre_auction_routes.auction_maintenance_lots(
                            row.getValue('auctionCode')
@@ -49,7 +49,9 @@ export const columns: ColumnDef<AuctionEntity>[] = [
                      </Link>
                   </TooltipTrigger>
                   <TooltipContent>
-                     <p className="whitespace-pre">Clique para ver lotes</p>
+                     <p className="whitespace-pre text-xs">
+                        Clique para ver lotes
+                     </p>
                   </TooltipContent>
                </Tooltip>
             </TooltipProvider>

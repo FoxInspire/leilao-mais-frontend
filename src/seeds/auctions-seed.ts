@@ -343,7 +343,7 @@ const generateGgvData = (grv: Grv): Ggv => {
    }
 }
 
-const generateAuctionsSeed = (): AuctionEntity => {
+export const generateAuctionsSeed = (): AuctionEntity => {
    const location = faker.helpers.arrayElement(brazilianCities)
 
    const baseAuction = {
@@ -598,4 +598,4 @@ export const generateAuctionsData = () => {
    )
 }
 
-export default generateAuctionsData
+generateAuctionsData()

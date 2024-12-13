@@ -27,16 +27,20 @@ export function DataTableRowActions<TData>({
 }: DataTableRowActionsProps<TData>) {
    const router = useRouter()
 
-   console.log('row?.original', row?.original)
-
    const menuItems = [
       {
          icon: 'add',
          label: 'Ingressar lotes',
          value: 'add-lots',
          filled: false,
-         disabled: true,
-         onClick: () => {}
+         disabled: false,
+         onClick: () => {
+            router.push(
+               pre_auction_routes.insert_lots(
+                  String(row?.original?.auctionCode)
+               )
+            )
+         }
       },
       {
          icon: 'edit',
