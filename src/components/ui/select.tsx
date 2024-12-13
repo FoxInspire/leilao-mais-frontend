@@ -3,6 +3,15 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 import * as React from 'react'
 
+import { Checkbox } from '@/components/ui/checkbox'
+import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuLabel,
+   DropdownMenuSeparator,
+   DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { useElementSize } from '@/hooks/useElementSize'
 import { cn } from '@/lib/utils'
@@ -176,80 +185,159 @@ export type SelectInputValue = {
    value: string
 }
 
+export type SelectInputGroup = {
+   label: string
+   options: SelectInputValue[]
+}
+
 const SelectInput = React.forwardRef<
    React.ElementRef<typeof Input>,
    React.ComponentPropsWithoutRef<typeof Input> & {
       menu_label?: string
       options: SelectInputValue[]
-      onValueChange?: (value: SelectInputValue) => void
+      item?: 'default' | 'checkbox'
+      onValueChange?: (value: SelectInputValue | SelectInputValue[]) => void
    }
->(({ className, menu_label, options, onValueChange, ...props }, ref) => {
-   const [_value, setValue] = React.useState(props.value)
+>(
+   (
+      {
+         className,
+         menu_label,
+         options,
+         item = 'default',
+         onValueChange,
+         ...props
+      },
+      ref
+   ) => {
+      const { ref: elementRef, width } = useElementSize<HTMLInputElement>()
 
-   const uniqueOptions = options.filter(
-      (option, index, self) =>
-         index === self.findIndex((o) => o.value === option.value)
-   )
+      const [selectedValues, setSelectedValues] = React.useState<
+         SelectInputValue[]
+      >([])
 
-   const handleValueChange = (selectedValue: string) => {
-      setValue(selectedValue)
-      const selectedOption = uniqueOptions.find(
-         (option) => option.value === selectedValue
-      )
-      if (selectedOption) {
-         onValueChange?.(selectedOption)
+      const handleCheckboxChange = (
+         option: SelectInputValue,
+         checked: boolean
+      ) => {
+         const newValues = checked
+            ? [...selectedValues, option]
+            : selectedValues.filter((v) => v.id !== option.id)
+
+         setSelectedValues(newValues)
+         onValueChange?.(newValues)
       }
-   }
 
-   const { ref: elementRef, width } = useElementSize<HTMLInputElement>()
+      const handleSelectChange = (selectedValue: string) => {
+         const option = options.find((opt) => opt.value === selectedValue)
+         if (option) {
+            setSelectedValues([option])
+            onValueChange?.(option)
+         }
+      }
 
-   return (
-      <div className="relative w-full">
-         <Select onValueChange={handleValueChange}>
-            <SelectTrigger
-               hideIcon
-               className="border-none w-full px-0 py-0 m-0"
-            >
-               <div ref={elementRef} className="w-full">
-                  <Input
-                     readOnly
-                     ref={ref}
-                     labelStatus="on"
-                     className={cn(className)}
-                     defaultValue={
-                        uniqueOptions.find((option) => option.value === _value)
-                           ?.label || undefined
-                     }
-                     placeholder={props.placeholder}
-                     {...props}
-                  />
-               </div>
-            </SelectTrigger>
-            <SelectContent style={{ width: `${width}px` }} sideOffset={4}>
-               {menu_label && <SelectLabel>{menu_label}</SelectLabel>}
-               {uniqueOptions.length === 0 ? (
-                  <div className="py-2 px-2 text-sm text-neutral-500 text-center">
-                     Não há opções disponíveis
+      const displayValue = selectedValues?.map((v) => v?.label)?.join(', ')
+
+      if (item === 'checkbox') {
+         return (
+            <div className="relative w-full">
+               <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                     <div ref={elementRef} className="w-full">
+                        <Input
+                           readOnly
+                           ref={ref}
+                           labelStatus="on"
+                           className={cn(className)}
+                           value={displayValue}
+                           placeholder={props.placeholder}
+                           {...props}
+                        />
+                     </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                     align="end"
+                     className="px-1.5 py-2"
+                     style={{ width: `${width}px` }}
+                  >
+                     {menu_label && (
+                        <React.Fragment>
+                           <DropdownMenuLabel className="text-sm">
+                              {menu_label}
+                           </DropdownMenuLabel>
+                           <DropdownMenuSeparator />
+                        </React.Fragment>
+                     )}
+                     {options.map((option) => (
+                        <DropdownMenuItem
+                           key={option.id}
+                           onSelect={(e) => e.preventDefault()}
+                        >
+                           <Checkbox
+                              size="md"
+                              label={option.label}
+                              checked={selectedValues.some(
+                                 (v) => v.id === option.id
+                              )}
+                              onCheckedChange={(checked) =>
+                                 handleCheckboxChange(
+                                    option,
+                                    checked as boolean
+                                 )
+                              }
+                           />
+                        </DropdownMenuItem>
+                     ))}
+                  </DropdownMenuContent>
+               </DropdownMenu>
+               <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-action-active dark:text-white">
+                  arrow_drop_down
+               </span>
+            </div>
+         )
+      }
+
+      return (
+         <div className="relative w-full">
+            <Select onValueChange={handleSelectChange}>
+               <SelectTrigger
+                  hideIcon
+                  className="border-none w-full px-0 py-0 m-0"
+               >
+                  <div ref={elementRef} className="w-full">
+                     <Input
+                        readOnly
+                        ref={ref}
+                        labelStatus="on"
+                        className={cn(className)}
+                        value={selectedValues[0]?.label}
+                        placeholder={props.placeholder}
+                        {...props}
+                     />
                   </div>
-               ) : (
-                  uniqueOptions.map((option) => (
-                     <SelectItem
-                        key={option.id}
-                        value={option.value}
-                        onClick={() => handleValueChange(option.value)}
-                     >
-                        {option.label}
-                     </SelectItem>
-                  ))
-               )}
-            </SelectContent>
-         </Select>
-         <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-action-active dark:text-white">
-            arrow_drop_down
-         </span>
-      </div>
-   )
-})
+               </SelectTrigger>
+               <SelectContent style={{ width: `${width}px` }} sideOffset={4}>
+                  {menu_label && <SelectLabel>{menu_label}</SelectLabel>}
+                  {options.length === 0 ? (
+                     <div className="py-2 px-2 text-sm text-neutral-500 text-center">
+                        Não há opções disponíveis
+                     </div>
+                  ) : (
+                     options.map((option) => (
+                        <SelectItem key={option.id} value={option.value}>
+                           {option.label}
+                        </SelectItem>
+                     ))
+                  )}
+               </SelectContent>
+            </Select>
+            <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-action-active dark:text-white">
+               arrow_drop_down
+            </span>
+         </div>
+      )
+   }
+)
 SelectInput.displayName = 'SelectInput'
 
 export {
