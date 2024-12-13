@@ -6,6 +6,11 @@ import { Button } from '@/components/ui/button'
 import { DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { SelectInput, SelectInputValue } from '@/src/components/ui/select'
 
+/**
+ * To see export format:
+ * https://drive.google.com/drive/folders/1rDD2QlM4TTzDNRGyWk7M436592rGOKLj?usp=sharing
+ */
+
 interface ExportLotsActionProps {
    id: string
    onExport: () => void
