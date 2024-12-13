@@ -98,7 +98,7 @@ const DialogTitle = React.forwardRef<
          {...props}
       />
       <DialogPrimitive.Close
-         className="rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-neutral-100 data-[state=open]:text-neutral-500 dark:ring-offset-neutral-950 dark:focus:ring-neutral-300 dark:data-[state=open]:bg-neutral-800 dark:data-[state=open]:text-neutral-400 flex items-center justify-center"
+         className="rounded-sm opacity-70 ring-0 transition-opacity hover:opacity-100 focus:ring-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-neutral-100 data-[state=open]:text-neutral-500 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 dark:data-[state=open]:bg-neutral-800 dark:data-[state=open]:text-neutral-400 flex items-center justify-center"
          onClick={() => onClose?.()}
       >
          <span className="material-symbols-outlined">close</span>
