@@ -159,7 +159,17 @@ export function DataTableRowActions<TData>({
                   'md:max-w-xl': dialog.export_lots
                })}
             >
-               {dialog.export_lots && <ExportLotsAction />}
+               {dialog.export_lots && (
+                  <ExportLotsAction
+                     onClose={() =>
+                        setDialog({
+                           ...dialog,
+                           export_lots: false
+                        })
+                     }
+                     onExport={() => {}}
+                  />
+               )}
             </DialogContent>
          </Dialog>
       </React.Fragment>
@@ -168,8 +178,8 @@ export function DataTableRowActions<TData>({
 
 interface ExportLotsActionProps {
    row?: Row<AuctionEntity>
-   onExport?: () => void
-   onClose?: () => void
+   onExport: () => void
+   onClose: () => void
    onSelected?: (value: SelectInputValue | SelectInputValue[]) => void
 }
 
@@ -182,7 +192,7 @@ const ExportLotsAction: React.FC<ExportLotsActionProps> = ({
    return (
       <React.Fragment>
          <DialogHeader>
-            <DialogTitle>Exportar lotes</DialogTitle>
+            <DialogTitle onClose={() => onClose()}>Exportar lotes</DialogTitle>
          </DialogHeader>
          <div className="space-y-6 py-4 pb-6">
             <p className="text-lg font-montserrat">
