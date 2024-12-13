@@ -4,20 +4,20 @@ import * as React from 'react'
 import * as z from 'zod'
 
 import {
-   Breadcrumb,
-   BreadcrumbItem,
-   BreadcrumbLink,
-   BreadcrumbList,
-   BreadcrumbPage,
-   BreadcrumbSeparator
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import {
-   Form,
-   FormControl,
-   FormField,
-   FormItem,
-   FormLabel,
-   FormMessage
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage
 } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Button } from '@/src/components/ui/button'
@@ -148,15 +148,12 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
          setIsLoading(true)
          // Mock implementation
          for (const lotId of data.lotId) {
-            // Show loading toast for each lot
             const loadingToast = toast.loading(`Processando lote ${lotId}...`)
 
-            // Random delay between 1-3 seconds
             await new Promise((resolve) =>
                setTimeout(resolve, Math.random() * 2000 + 1000)
             )
 
-            // Success toast for each lot
             toast.dismiss(loadingToast)
             toast.success(`Lote ${lotId} processado com sucesso!`)
          }
