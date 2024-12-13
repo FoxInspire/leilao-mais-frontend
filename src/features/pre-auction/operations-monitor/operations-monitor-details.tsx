@@ -16,7 +16,7 @@ import {
    DialogHeader,
    DialogTitle
 } from '@/components/ui/dialog'
-import { SelectInput, SelectInputValue } from '@/components/ui/select'
+import { SelectInput } from '@/components/ui/select'
 import { TableAuctionLotsHandle } from '@/features/pre-auction/auction-lots/components/data-table'
 import { TableOperationMonitorDetails } from '@/features/pre-auction/operations-monitor/components/data-table'
 import { Button } from '@/src/components/ui/button'
@@ -341,9 +341,7 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
+                        onValueChange={(value) => console.log('value', value)}
                      />
                      <SelectInput
                         label="Transação"
@@ -354,9 +352,7 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
+                        onValueChange={(value) => console.log('value', value)}
                      />
                      <SelectInput
                         label="Agendado"
@@ -367,9 +363,7 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
+                        onValueChange={(value) => console.log('value', value)}
                      />
                   </div>
                   <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
