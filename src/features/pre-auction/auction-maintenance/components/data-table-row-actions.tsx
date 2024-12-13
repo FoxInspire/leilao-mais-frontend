@@ -57,6 +57,7 @@ export function DataTableRowActions<TData>({
    onSelect
 }: DataTableRowActionsProps<TData>) {
    const router = useRouter()
+
    const [dialog, setDialog] = React.useState({
       export_lots: false,
       generate_notice: false
@@ -189,24 +190,25 @@ export function DataTableRowActions<TData>({
             >
                {dialog.export_lots && (
                   <ExportLotsAction
+                     id={row?.original?.auctionCode || '-'}
+                     onExport={() => {}}
                      onClose={() =>
                         setDialog({
                            ...dialog,
                            export_lots: false
                         })
                      }
-                     onExport={() => {}}
                   />
                )}
                {dialog.generate_notice && (
                   <GenerateNoticeAction
                      row={row}
-                     onClose={() =>
+                     onClose={() => {
                         setDialog({
                            ...dialog,
                            generate_notice: false
                         })
-                     }
+                     }}
                   />
                )}
             </DialogContent>
@@ -216,14 +218,14 @@ export function DataTableRowActions<TData>({
 }
 
 interface ExportLotsActionProps {
-   row?: Row<AuctionEntity>
+   id: string
    onExport: () => void
    onClose: () => void
    onSelected?: (value: SelectInputValue | SelectInputValue[]) => void
 }
 
 const ExportLotsAction: React.FC<ExportLotsActionProps> = ({
-   row,
+   id,
    onExport,
    onClose,
    onSelected
@@ -235,10 +237,7 @@ const ExportLotsAction: React.FC<ExportLotsActionProps> = ({
          </DialogHeader>
          <div className="space-y-6 py-4 pb-6">
             <p className="text-lg font-montserrat">
-               Leilão{' '}
-               <span className="font-semibold">
-                  {row?.original?.auctionCode}
-               </span>
+               Leilão <span className="font-semibold">{id}</span>
             </p>
             <div>
                <SelectInput
