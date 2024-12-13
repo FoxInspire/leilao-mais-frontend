@@ -10,7 +10,7 @@ import {
    TableHeader,
    TableRow
 } from '@/components/ui/table'
-import { DataTablePagination } from '@/features/pre-auction/auction-maintenance/components/data-table-pagination'
+import { DataTablePagination } from '@/src/components/ui/data-table-pagination'
 import {
    ColumnDef,
    ColumnFiltersState,

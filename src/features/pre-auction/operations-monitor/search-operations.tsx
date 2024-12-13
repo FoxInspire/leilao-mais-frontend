@@ -112,12 +112,11 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                                        <SelectInput
                                           label="Leilão"
                                           placeholder="Selecione o leilão"
-                                          onValueChange={(
-                                             value: SelectInputValue
-                                          ) => {
+                                          onValueChange={(value) => {
                                              form.setValue(
                                                 'auctionCode',
-                                                value.value
+                                                (value as SelectInputValue)
+                                                   .value
                                              )
                                           }}
                                           options={

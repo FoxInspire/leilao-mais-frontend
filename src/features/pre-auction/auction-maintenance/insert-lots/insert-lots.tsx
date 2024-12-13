@@ -4,20 +4,20 @@ import * as React from 'react'
 import * as z from 'zod'
 
 import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator
+   Breadcrumb,
+   BreadcrumbItem,
+   BreadcrumbLink,
+   BreadcrumbList,
+   BreadcrumbPage,
+   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage
+   Form,
+   FormControl,
+   FormField,
+   FormItem,
+   FormLabel,
+   FormMessage
 } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Button } from '@/src/components/ui/button'
@@ -139,7 +139,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
             selectedRows.map((row) => String(row.id))
          )
       }
-   }, [selectedRows])
+   }, [selectedRows, form])
 
    const onSubmitInsertLots: SubmitHandler<
       z.infer<typeof insertLotsSchema>
@@ -269,12 +269,12 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                                 <SelectInput
                                                    label="Leilão"
                                                    placeholder="Selecione o leilão"
-                                                   onValueChange={(
-                                                      value: SelectInputValue
-                                                   ) => {
+                                                   onValueChange={(value) => {
                                                       filterForm.setValue(
                                                          'auctionId',
-                                                         value.value
+                                                         (
+                                                            value as SelectInputValue
+                                                         ).value
                                                       )
                                                    }}
                                                    options={[
