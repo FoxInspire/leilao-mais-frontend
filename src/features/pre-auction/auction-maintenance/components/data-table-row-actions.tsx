@@ -420,7 +420,9 @@ const GenerateNoticeAction: React.FC<GenerateNoticeActionProps> = ({
    return (
       <React.Fragment>
          <DialogHeader>
-            <DialogTitle onClose={() => {}}>Edital de leilão</DialogTitle>
+            <DialogTitle onClose={() => onClose()}>
+               Edital de leilão
+            </DialogTitle>
          </DialogHeader>
          <div className="space-y-6 py-4 pb-6">
             <p className="text-lg font-montserrat">
