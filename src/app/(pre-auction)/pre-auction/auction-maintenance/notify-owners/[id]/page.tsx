@@ -1,34 +1,30 @@
 import * as React from 'react'
 
-import { columns_insert_lots } from '@/src/features/pre-auction/auction-maintenance/insert-lots/components/columns'
-import { InsertLots } from '@/src/features/pre-auction/auction-maintenance/insert-lots/insert-lots'
-import { AvaliableLotEntity } from '@/src/types/entities/avaliable-lot.entity'
+import { columns_notify_owners } from '@/src/features/pre-auction/auction-maintenance/notify-owners/components/columns'
+import NotifyOwners from '@/src/features/pre-auction/auction-maintenance/notify-owners/notify-owners'
+import { NotifyOwnersEntity } from '@/src/types/entities/notify-owners.entity'
 import { readJSONFile } from '@/src/utils/file-path-utils'
 
 export const dynamic = 'force-dynamic'
 
-async function getAvailableLots() {
+async function getNotifyOwners() {
    const data = (await readJSONFile(
-      'src/features/pre-auction/auction-maintenance/mocks/available-lots.json'
-   )) as AvaliableLotEntity[]
+      'src/features/pre-auction/auction-maintenance/mocks/notify-owners.json'
+   )) as NotifyOwnersEntity[]
    return data
 }
 
-export default async function InsertLotsPage({
+export default async function NotifyOwnersPage({
    params
 }: {
    params: Promise<{ id: string }>
 }) {
    const id = (await params).id
-   const availableLots = await getAvailableLots()
+   const data = await getNotifyOwners()
 
    return (
       <React.Suspense>
-         <InsertLots
-            id={id}
-            data={availableLots}
-            columns={columns_insert_lots}
-         />
+         <NotifyOwners id={id} data={data} columns={columns_notify_owners} />
       </React.Suspense>
    )
 }

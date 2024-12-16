@@ -90,7 +90,13 @@ export function DataTableRowActions({
          value: 'notify-owners',
          filled: false,
          disabled: false,
-         onClick: () => {}
+         onClick: () => {
+            router.push(
+               pre_auction_routes.auction.notify_owners(
+                  String(row?.original?.auctionCode)
+               )
+            )
+         }
       },
       {
          icon: 'download',

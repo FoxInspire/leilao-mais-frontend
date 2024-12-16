@@ -10,32 +10,23 @@ import {
    BreadcrumbPage,
    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import {
-   Dialog,
-   DialogContent,
-   DialogHeader,
-   DialogTitle,
-   DialogTrigger
-} from '@/components/ui/dialog'
 import { SelectInput } from '@/components/ui/select'
 import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
-import { DatePicker } from '@/src/components/ui/date-picker'
-import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
-import { pre_auction_routes } from '@/src/routes/pre-auction'
-import { AuctionEntity } from '@/src/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 
-import Link from 'next/link'
+import { NotifyOwnersEntity } from '@/src/types/entities/notify-owners.entity'
 
 interface NotifyOwnersProps {
-   data: AuctionEntity[]
-   columns: ColumnDef<AuctionEntity>[]
+   id: string
+   data: NotifyOwnersEntity[]
+   columns: ColumnDef<NotifyOwnersEntity>[]
 }
 
 const NotifyOwners: React.FC<NotifyOwnersProps> = ({
+   id,
    columns,
    data
 }: NotifyOwnersProps) => {
@@ -63,7 +54,7 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                   <div className="space-y-2">
                      <div className="flex flex-wrap justify-between items-center gap-2">
                         <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
-                           Manutenção de leilões
+                           Notificar proprietários - {id}
                         </h1>
                         <Button
                            variant="ghost"
@@ -78,123 +69,29 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                      <Separator orientation="horizontal" />
                   </div>
                   <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
-                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
-                        <Input
-                           label="Busca geral"
-                           value={globalFilter}
-                           placeholder="Descrição, Local, ID"
-                           onChange={(e) => setGlobalFilter(e.target.value)}
-                           className="min-w-[300px]"
-                        />
-                        <Dialog>
-                           <DialogTrigger
-                              className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
-                              asChild
-                           >
-                              <div>
-                                 <Button
-                                    variant="ghost"
-                                    className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
-                                 >
-                                    Busca avançada
-                                 </Button>
-                              </div>
-                           </DialogTrigger>
-                           <DialogContent>
-                              <DialogHeader>
-                                 <DialogTitle>Busca avançada</DialogTitle>
-                              </DialogHeader>
-                              <div className="space-y-4 py-4 pb-6">
-                                 <p className="text-lg font-montserrat">
-                                    Preencha os campos necessários para busca
-                                 </p>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
-                                    <Input
-                                       label="Placa"
-                                       placeholder="000-0000"
-                                    />
-                                    <Input
-                                       label="Descrição"
-                                       placeholder="Descrição do leilão"
-                                    />
-                                    <Input
-                                       label="Processo"
-                                       placeholder="Número do processo"
-                                    />
-                                 </div>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
-                                    <DatePicker
-                                       label="Data"
-                                       placeholder="DD/MM/YYYY"
-                                    />
-                                    <Input
-                                       label="ID"
-                                       placeholder="ID do leilão"
-                                    />
-                                    <Input
-                                       label="Descrição"
-                                       placeholder="Descrição do leilão"
-                                    />
-                                 </div>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
-                                    <SelectInput
-                                       label="Status"
-                                       placeholder="Selecione o status"
-                                       options={[
-                                          {
-                                             id: '1',
-                                             label: 'Ativo',
-                                             value: 'active'
-                                          },
-                                          {
-                                             id: '2',
-                                             label: 'Inativo',
-                                             value: 'inactive'
-                                          }
-                                       ]}
-                                    />
-                                    <Input
-                                       label="Local"
-                                       placeholder="Local do leilão"
-                                    />
-                                    <Input
-                                       label="Comitente"
-                                       placeholder="Comitente do leilão"
-                                    />
-                                 </div>
-                              </div>
-                              <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
-                                 <div className="md:order-1 order-2">
-                                    <Button
-                                       variant="destructive"
-                                       className="w-full"
-                                    >
-                                       Cancelar
-                                    </Button>
-                                 </div>
-                                 <div className="md:order-2 order-1">
-                                    <Button
-                                       variant="default"
-                                       className="w-full"
-                                    >
-                                       Buscar
-                                    </Button>
-                                 </div>
-                              </div>
-                           </DialogContent>
-                        </Dialog>
+                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
+                        <div className="min-w-[300px]">
+                           <SelectInput
+                              options={[]}
+                              label="Endereço notificável"
+                              placeholder="Selecione o endereço notificável"
+                           />
+                        </div>
+                        <p className="text-text-secondary dark:text-dark-text-secondary text-sm">
+                           324 registros encontrados
+                        </p>
                      </div>
-                     <Link
-                        href={pre_auction_routes.auction.create}
-                        prefetch={false}
-                     >
+                     <div className="flex grow items-center gap-2">
+                        <Button variant="ghost" className="whitespace-nowrap">
+                           extrair excel
+                        </Button>
                         <Button
                            variant="default"
-                           className="w-full sm:w-auto sm:min-w-[150px] whitespace-nowrap"
+                           className="sm:min-w-[150px] whitespace-nowrap"
                         >
-                           Novo leilão
+                           Gerar arquivo
                         </Button>
-                     </Link>
+                     </div>
                   </div>
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
@@ -235,43 +132,32 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                         Descrição
                      </p>
                      <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                        A página de Manutenção de Leilões permite visualizar a
-                        lista de leilões cadastrados, alterar o status conforme
-                        o andamento dos processos junto ao DETRAN e buscar
-                        informações específicas. Além disso, é possível
-                        ingressar lotes nos leilões e acessar um menu de opções
-                        avançadas para uma gestão mais detalhada.
+                        A página de Notificar Proprietários permite visualizar a
+                        lista de proprietários dos veículos incluídos em um
+                        leilão. É possível extrair uma planilha com os dados da
+                        listagem e gerar um arquivo de texto para utilização em
+                        outras plataformas, como o sistema dos Correios.
                      </p>
                      <p className="text-black dark:text-dark-text-primary font-semibold text-start">
                         Detalhes
                      </p>
                      <div>
                         <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Status do leilão
+                           Extrair excel
                         </p>
                         <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                           É possível alterar o status conforme o avanço dos
-                           processos junto ao DETRAN.
+                           Faz o download da planilha Excel contendo todos os
+                           dados referente aos proprietários dos veículos.
                         </p>
                      </div>
                      <div>
                         <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Lotes
+                           Gerar arquivo
                         </p>
                         <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                           Exibe a quantidade de lotes ingressados no leilão.
-                        </p>
-                     </div>
-                     <div className="bg-[#E6F1F7] px-4 py-4 space-y-2 rounded-md">
-                        <p className="text-black font-normal text-start">
-                           Info
-                        </p>
-                        <p className="text-text-secondary text-start">
-                           Clique no card para acessar o leilão.
-                        </p>
-                        <p className="text-text-secondary text-start">
-                           Clique no nome do leilão para acessar a lista de
-                           lotes do leilão selecionado.
+                           Faz o download de um arquivo de texto (.txt) para ser
+                           utilizado em outras plataformas, contendo todos os
+                           dados referente aos proprietários dos veículos.
                         </p>
                      </div>
                   </div>

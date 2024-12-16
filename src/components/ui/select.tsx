@@ -243,7 +243,7 @@ const SelectInput = React.forwardRef<
             <div className="relative w-full">
                <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                     <div ref={elementRef} className="w-full">
+                     <div ref={elementRef} className={cn(className, 'w-full')}>
                         <Input
                            readOnly
                            ref={ref}
@@ -304,7 +304,7 @@ const SelectInput = React.forwardRef<
                   hideIcon
                   className="border-none w-full px-0 py-0 m-0"
                >
-                  <div ref={elementRef} className="w-full">
+                  <div ref={elementRef} className={cn(className, 'w-full')}>
                      <Input
                         readOnly
                         ref={ref}

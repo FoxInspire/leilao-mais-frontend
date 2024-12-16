@@ -1,0 +1,402 @@
+[
+   {
+      "id": "3024738d-ada7-40f2-83a0-2b09220c76e5",
+      "vehiclePlate": "WXN8H4C",
+      "vehicleChassis": "3N5KN9I3TEHSPJETT",
+      "ownerName": "Diane Hoppe",
+      "communication": "AR não retornou",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "ce711007-8283-4711-908e-62481dda4aac",
+      "vehiclePlate": "HCAWPBV",
+      "vehicleChassis": "SBMOC7SXIEUDGFKNM",
+      "ownerName": "Daryl Buckridge",
+      "communication": "Aguardando envio",
+      "financial": "Regularizado"
+   },
+   {
+      "id": "7b3ca4a0-768c-45e5-8382-ec36c8d666f7",
+      "vehiclePlate": "9AANUY9",
+      "vehicleChassis": "AKWEDAVTWGY3E6DFU",
+      "ownerName": "Stephen Hand",
+      "communication": "Aguardando envio",
+      "financial": "Em análise"
+   },
+   {
+      "id": "913f6622-eca4-47de-af1b-e86031a1ebad",
+      "vehiclePlate": "XXMT3LU",
+      "vehicleChassis": "AEINHZV3LJUYDA7TX",
+      "ownerName": "Dana Rippin",
+      "communication": "Notificação enviada",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "c42171a0-0e7e-40ab-a4d6-8398a5b80dd2",
+      "vehiclePlate": "QLAB2E1",
+      "vehicleChassis": "Z9YE7JBZL8NEW6HRM",
+      "ownerName": "Lucille MacGyver",
+      "communication": "Notificação enviada",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "249243ab-085b-46d7-81c5-b9cf69e6f374",
+      "vehiclePlate": "F7SKJMI",
+      "vehicleChassis": "MX8RMDCOUFRYLYJKS",
+      "ownerName": "Simon Mueller PhD",
+      "communication": "AR não retornou",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "baeba747-0403-44b3-ab76-434578c24bbd",
+      "vehiclePlate": "DLZENQV",
+      "vehicleChassis": "1OVOTXGDLR9ADXVAD",
+      "ownerName": "Karen Stehr",
+      "communication": "Aguardando envio",
+      "financial": "Em análise"
+   },
+   {
+      "id": "193fd40e-9894-44e0-ac41-8a4c62782466",
+      "vehiclePlate": "AURUECJ",
+      "vehicleChassis": "Y0PM0GDBQVEKSATEI",
+      "ownerName": "Philip Becker",
+      "communication": "Notificação enviada",
+      "financial": "Com débitos"
+   },
+   {
+      "id": "6a85eac6-f6c7-407a-8cf1-446180bad270",
+      "vehiclePlate": "2ICUOFY",
+      "vehicleChassis": "SCBTT9JZDFDP0WF7C",
+      "ownerName": "Jacquelyn Kub",
+      "communication": "AR não retornou",
+      "financial": "Pendente de pagamento"
+   },
+   {
+      "id": "624e571d-2d3a-4b87-94d2-8f5f95f2ede7",
+      "vehiclePlate": "1CYGMVQ",
+      "vehicleChassis": "AZTE6L7HBCTHZ9CEY",
+      "ownerName": "Anita Dibbert",
+      "communication": "Notificação enviada",
+      "financial": "Pendente de pagamento"
+   },
+   {
+      "id": "897c6f73-e8b6-4a51-93a4-520c4be715f0",
+      "vehiclePlate": "OO1E1MV",
+      "vehicleChassis": "TGFUT7BJW56IV8NFM",
+      "ownerName": "Vivian Frami",
+      "communication": "Aguardando envio",
+      "financial": "Em análise"
+   },
+   {
+      "id": "32dfab65-2f6d-4670-b823-fd4a286ac663",
+      "vehiclePlate": "TALSWJW",
+      "vehicleChassis": "PJC29XEZUO2HTVXX1",
+      "ownerName": "Mr. Ismael Bergstrom",
+      "communication": "Proprietário não encontrado",
+      "financial": "Em análise"
+   },
+   {
+      "id": "61832ade-ee0b-4826-b8fc-f98fb96d03b6",
+      "vehiclePlate": "6IHEKML",
+      "vehicleChassis": "84AWTCZWGSBAHPY05",
+      "ownerName": "Annie Spinka",
+      "communication": "Proprietário não encontrado",
+      "financial": "Com débitos"
+   },
+   {
+      "id": "5f2afadb-a8d6-46cd-baca-8f1a70fd298f",
+      "vehiclePlate": "UUEAPO3",
+      "vehicleChassis": "PFTQV1GPWAQKHI6G0",
+      "ownerName": "Julio Gibson",
+      "communication": "Notificação enviada",
+      "financial": "Regularizado"
+   },
+   {
+      "id": "7caf257f-f60f-445b-8299-5ef1d8a01880",
+      "vehiclePlate": "XE7FAUV",
+      "vehicleChassis": "GJ4GDLEF7VTDCV3J2",
+      "ownerName": "Marc Roberts",
+      "communication": "Notificação enviada",
+      "financial": "Em análise"
+   },
+   {
+      "id": "3da19854-cd1a-4bb1-b409-56338608dd60",
+      "vehiclePlate": "K13SPIS",
+      "vehicleChassis": "QXAN4RXFB82GLWHFV",
+      "ownerName": "Kristopher Willms",
+      "communication": "Proprietário não encontrado",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "8e63d99a-1e3e-495d-8ccc-0517c4c1a4ff",
+      "vehiclePlate": "WSA9KSG",
+      "vehicleChassis": "USFW3WINHXP9T22X0",
+      "ownerName": "Ashley Hauck",
+      "communication": "Falha no envio",
+      "financial": "Em análise"
+   },
+   {
+      "id": "eed05bb9-7bc3-46b7-8c55-82e8709775c7",
+      "vehiclePlate": "VPWOIPR",
+      "vehicleChassis": "JRVQH9RHVMQSO2HSV",
+      "ownerName": "Felix Johns Jr.",
+      "communication": "Notificação enviada",
+      "financial": "Com débitos"
+   },
+   {
+      "id": "5fb52b67-85d1-471b-9639-034c58941a14",
+      "vehiclePlate": "XHQZ6GT",
+      "vehicleChassis": "CUSDHTDSJ4QFIR6QB",
+      "ownerName": "Vicky Halvorson",
+      "communication": "Falha no envio",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "5d8e7da9-57e9-41df-a124-ceac444f6cd4",
+      "vehiclePlate": "SQXGYCF",
+      "vehicleChassis": "DIPJCOJLUJZRJQFIB",
+      "ownerName": "Rosemarie Tromp",
+      "communication": "Proprietário não encontrado",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "c01972d0-e710-4474-abbf-51f0c20b117e",
+      "vehiclePlate": "MNCZLQG",
+      "vehicleChassis": "KUCN16JGX3TPYDQF5",
+      "ownerName": "Sylvester Ryan",
+      "communication": "AR não retornou",
+      "financial": "Pendente de pagamento"
+   },
+   {
+      "id": "5066aaca-08e8-4fbb-90f5-547a6c709f05",
+      "vehiclePlate": "ZAVV4ZW",
+      "vehicleChassis": "JBLDS0NDH7KL81KKX",
+      "ownerName": "Marianne Carter",
+      "communication": "Falha no envio",
+      "financial": "Em análise"
+   },
+   {
+      "id": "285e7fdf-55bb-41c9-a1bf-9da629f37426",
+      "vehiclePlate": "MPA1N4G",
+      "vehicleChassis": "Y7LL6BO5L4PODFOKO",
+      "ownerName": "Gladys Lynch",
+      "communication": "Notificação enviada",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "2d2f765f-0507-420e-b148-c80c9a2a918e",
+      "vehiclePlate": "QIVH4O7",
+      "vehicleChassis": "03OKHUQUY2ZHEB8PJ",
+      "ownerName": "Rodolfo Ebert",
+      "communication": "Proprietário não encontrado",
+      "financial": "Pendente de pagamento"
+   },
+   {
+      "id": "70900044-621c-4e1f-b74d-a608bed0de7e",
+      "vehiclePlate": "SSSGF4L",
+      "vehicleChassis": "DYH1ZC6Q3GPIWR3MU",
+      "ownerName": "Erica MacGyver",
+      "communication": "Notificação enviada",
+      "financial": "Com débitos"
+   },
+   {
+      "id": "adc5cae6-be22-450c-92d8-1347bca0ba67",
+      "vehiclePlate": "38BLWAS",
+      "vehicleChassis": "DVSCYRJFYIKZWMXAB",
+      "ownerName": "Lynne Morissette",
+      "communication": "Proprietário não encontrado",
+      "financial": "Com débitos"
+   },
+   {
+      "id": "b7b4796f-6bd1-46ed-b6cf-7d33986d6a56",
+      "vehiclePlate": "NJYCNAT",
+      "vehicleChassis": "GXHAY8KG0JSIFFDFU",
+      "ownerName": "Toni Waters",
+      "communication": "Aguardando envio",
+      "financial": "Regularizado"
+   },
+   {
+      "id": "6e28dc50-4395-4d98-a658-84e511d2b367",
+      "vehiclePlate": "VKFCIM7",
+      "vehicleChassis": "DIBWM8DTOCFXV6LBB",
+      "ownerName": "Raul Ebert",
+      "communication": "Notificação enviada",
+      "financial": "Regularizado"
+   },
+   {
+      "id": "72181578-1f20-42d5-bafd-fc458508a572",
+      "vehiclePlate": "ES6H2BQ",
+      "vehicleChassis": "RQD1YQLZLV4SFFVO5",
+      "ownerName": "Alison Collins PhD",
+      "communication": "Proprietário não encontrado",
+      "financial": "Em análise"
+   },
+   {
+      "id": "c518061f-54aa-406c-acec-4c4a3d541240",
+      "vehiclePlate": "KBT5UMN",
+      "vehicleChassis": "ULSCGJP1HF260APXS",
+      "ownerName": "Courtney Goldner",
+      "communication": "Falha no envio",
+      "financial": "Em análise"
+   },
+   {
+      "id": "7cfb4217-6f36-45ce-b853-ba1af084b4f4",
+      "vehiclePlate": "6UO1EK0",
+      "vehicleChassis": "IJYU6GBM2AZKSY4MQ",
+      "ownerName": "Neal McGlynn II",
+      "communication": "AR não retornou",
+      "financial": "Regularizado"
+   },
+   {
+      "id": "0b76e2c2-584a-4937-9fe0-aab621ab4899",
+      "vehiclePlate": "VB3SRXI",
+      "vehicleChassis": "ZEEUSMFPAAGFTYZWW",
+      "ownerName": "Enrique Lang",
+      "communication": "AR não retornou",
+      "financial": "Com débitos"
+   },
+   {
+      "id": "087cfdfa-8b86-4705-8ee6-709bba443de6",
+      "vehiclePlate": "HMT16WO",
+      "vehicleChassis": "FDBQDDSMAYPC6GK4X",
+      "ownerName": "Emma Wilkinson",
+      "communication": "AR não retornou",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "6953933e-3527-4c0d-b7f5-f1e66427e45c",
+      "vehiclePlate": "LGZ69OB",
+      "vehicleChassis": "RMTFRQKF7NGE7B9AZ",
+      "ownerName": "Everett Haley",
+      "communication": "Proprietário não encontrado",
+      "financial": "Com débitos"
+   },
+   {
+      "id": "85e08290-76f1-466d-9a1a-6ef7888521c8",
+      "vehiclePlate": "4EZNSYI",
+      "vehicleChassis": "ZZS8CP7GK09XX5JNG",
+      "ownerName": "Gilberto Fay",
+      "communication": "Proprietário não encontrado",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "5b97ea20-7328-4a09-b314-76beb45c53f3",
+      "vehiclePlate": "DWXAMTW",
+      "vehicleChassis": "EC3JT3X2QOU2W7YHO",
+      "ownerName": "Lydia Kuhic",
+      "communication": "Aguardando envio",
+      "financial": "Pendente de pagamento"
+   },
+   {
+      "id": "1cf37534-77f1-4e3a-a2cc-0c8ec559f02c",
+      "vehiclePlate": "ETPC3XC",
+      "vehicleChassis": "DBYPYJ3A8DSKIPHCQ",
+      "ownerName": "Wendy Zulauf",
+      "communication": "Proprietário não encontrado",
+      "financial": "Em análise"
+   },
+   {
+      "id": "3dfc4a0e-5d99-41a9-9376-ae0fd2cbebed",
+      "vehiclePlate": "BWONJQB",
+      "vehicleChassis": "ROPIBICK9OQBU4R6Y",
+      "ownerName": "Armando Mayert",
+      "communication": "Proprietário não encontrado",
+      "financial": "Regularizado"
+   },
+   {
+      "id": "1298638c-56f7-41d8-a3f2-b553012c64af",
+      "vehiclePlate": "CPBI8U5",
+      "vehicleChassis": "LAU8MOS290K5DQXGB",
+      "ownerName": "Mr. Simon Osinski-Hettinger",
+      "communication": "AR não retornou",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "1261d04f-b6db-4b2d-baee-6101c5d54f70",
+      "vehiclePlate": "BT5J7QD",
+      "vehicleChassis": "6EDDBGNMYWN1SU5XM",
+      "ownerName": "Sabrina Carter",
+      "communication": "Notificação enviada",
+      "financial": "Com débitos"
+   },
+   {
+      "id": "8fceadc5-9902-4579-a4a2-c9db8726f6fc",
+      "vehiclePlate": "E435YQD",
+      "vehicleChassis": "LKLG5FNTPOC3KFBWM",
+      "ownerName": "Johanna Quitzon",
+      "communication": "Falha no envio",
+      "financial": "Regularizado"
+   },
+   {
+      "id": "db42b7ea-27b3-4bc1-a62d-62f12cfbd398",
+      "vehiclePlate": "TUOW1VB",
+      "vehicleChassis": "VZK4JNVXKIHO0KEFU",
+      "ownerName": "Raquel O'Hara",
+      "communication": "Proprietário não encontrado",
+      "financial": "Com débitos"
+   },
+   {
+      "id": "5334addf-540b-4af6-87d6-8baadcaba2ad",
+      "vehiclePlate": "KNRQVCF",
+      "vehicleChassis": "WLKOZJSI5BCHQAWND",
+      "ownerName": "Dominic McKenzie",
+      "communication": "Falha no envio",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "bc0a92d0-6a2d-4bdf-9dcf-f30cccd94587",
+      "vehiclePlate": "BL3CCUH",
+      "vehicleChassis": "I52V1CURPR0J2U7MN",
+      "ownerName": "Gloria Pagac",
+      "communication": "Proprietário não encontrado",
+      "financial": "Pendente de pagamento"
+   },
+   {
+      "id": "f963c6e0-7c41-4499-8544-40997f4529cf",
+      "vehiclePlate": "K45WTND",
+      "vehicleChassis": "UMPFNEFMWXQUWQEGK",
+      "ownerName": "Joan Hermiston",
+      "communication": "Proprietário não encontrado",
+      "financial": "Pendente de pagamento"
+   },
+   {
+      "id": "78ec294c-9b07-4019-8ff9-283a9bae4f88",
+      "vehiclePlate": "MFJDMWP",
+      "vehicleChassis": "5TPQSW49D36BU7HCB",
+      "ownerName": "Janie Wuckert",
+      "communication": "Falha no envio",
+      "financial": "Regularizado"
+   },
+   {
+      "id": "11ecd580-aa6f-423e-862f-d4e7e110038b",
+      "vehiclePlate": "UOCHNKC",
+      "vehicleChassis": "EF1O67QHMVLARDP5V",
+      "ownerName": "Dr. Jimmie Tillman",
+      "communication": "Falha no envio",
+      "financial": "Regularizado"
+   },
+   {
+      "id": "e66e51bd-77d2-4eb5-af7e-cedb6b6db2b0",
+      "vehiclePlate": "DNHFUOB",
+      "vehicleChassis": "DHKOKA55L2GMZANLJ",
+      "ownerName": "Julian Brown",
+      "communication": "Falha no envio",
+      "financial": "Sem débitos"
+   },
+   {
+      "id": "29653f49-595d-49af-b90d-56385ec3efdf",
+      "vehiclePlate": "DUGH3LL",
+      "vehicleChassis": "QEZHSOGC5OS7RY0KL",
+      "ownerName": "Saul Lakin",
+      "communication": "Falha no envio",
+      "financial": "Regularizado"
+   },
+   {
+      "id": "eab9801e-3da3-4cee-849a-e71e65c17a0c",
+      "vehiclePlate": "3WOEYGH",
+      "vehicleChassis": "8TMBORIUNPH0H6L8S",
+      "ownerName": "Boyd Carter IV",
+      "communication": "AR não retornou",
+      "financial": "Pendente de pagamento"
+   }
+]
