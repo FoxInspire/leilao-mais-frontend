@@ -17,14 +17,14 @@ import {
    DialogTitle
 } from '@/components/ui/dialog'
 import { SelectInput } from '@/components/ui/select'
-import {
-   TableAuctionLots,
-   TableAuctionLotsHandle
-} from '@/features/pre-auction/auction-lots/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
+import {
+   TableAuctionLots,
+   TableAuctionLotsHandle
+} from '@/src/features/pre-auction/auction-maintenance/auction-lots/components/data-table'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'

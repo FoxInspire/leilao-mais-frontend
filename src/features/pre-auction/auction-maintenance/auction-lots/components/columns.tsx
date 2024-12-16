@@ -1,10 +1,10 @@
 'use client'
 
-import { DataTableRowActions } from '@/features/pre-auction/auction-lots/components/data-table-row-actions'
-import { LotAlerts } from '@/features/pre-auction/auction-lots/components/lot-alert'
-import { LotStatus } from '@/features/pre-auction/auction-lots/components/lot-status'
 import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Checkbox } from '@/src/components/ui/checkbox'
+import { DataTableRowActions } from '@/src/features/pre-auction/auction-maintenance/auction-lots/components/data-table-row-actions'
+import { LotAlerts } from '@/src/features/pre-auction/auction-maintenance/auction-lots/components/lot-alert'
+import { LotStatus } from '@/src/features/pre-auction/auction-maintenance/auction-lots/components/lot-status'
 import { AuctionEntity } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 

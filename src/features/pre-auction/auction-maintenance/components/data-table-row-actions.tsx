@@ -89,7 +89,7 @@ export function DataTableRowActions({
          label: 'Notificar proprietários',
          value: 'notify-owners',
          filled: false,
-         disabled: true,
+         disabled: false,
          onClick: () => {}
       },
       {
