@@ -95,7 +95,7 @@ export const CreateAuction: React.FC<CreateAuctionProps> = ({
 
          console.log('data', data)
 
-         router.push(pre_auction_routes.create_auction_success('BRU01.23')) // replace with auctionCode from API response
+         router.push(pre_auction_routes.auction.create_success('BRU01.23')) // replace with auctionCode from API response
       } catch (error) {
          console.error('Erro ao enviar formulário:', error)
          toast.error('Erro ao enviar formulário. Tente novamente.')

@@ -86,7 +86,9 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                         <Button
                            className="h-10"
                            onClick={() =>
-                              router.push(pre_auction_routes.insert_lots(id))
+                              router.push(
+                                 pre_auction_routes.auction.insert_lots(id)
+                              )
                            }
                         >
                            Ingressar lotes

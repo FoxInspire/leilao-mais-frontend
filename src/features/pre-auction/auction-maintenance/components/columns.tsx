@@ -41,7 +41,7 @@ export const columns: ColumnDef<AuctionEntity>[] = [
                <Tooltip delayDuration={2000}>
                   <TooltipTrigger className="cursor-pointer hover:underline">
                      <Link
-                        href={pre_auction_routes.auction_maintenance_list_lots(
+                        href={pre_auction_routes.auction.list_lots(
                            row.getValue('auctionCode')
                         )}
                      >

@@ -185,7 +185,7 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                         </Dialog>
                      </div>
                      <Link
-                        href={pre_auction_routes.create_auction}
+                        href={pre_auction_routes.auction.create}
                         prefetch={false}
                      >
                         <Button

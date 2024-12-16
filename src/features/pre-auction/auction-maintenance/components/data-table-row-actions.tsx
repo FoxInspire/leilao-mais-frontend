@@ -44,7 +44,7 @@ export function DataTableRowActions({
          disabled: false,
          onClick: () => {
             router.push(
-               pre_auction_routes.insert_lots(
+               pre_auction_routes.auction.insert_lots(
                   String(row?.original?.auctionCode)
                )
             )
@@ -58,7 +58,7 @@ export function DataTableRowActions({
          disabled: false,
          onClick: () => {
             router.push(
-               pre_auction_routes.edit_auction(
+               pre_auction_routes.auction.edit(
                   String(row?.original?.auctionCode)
                )
             )

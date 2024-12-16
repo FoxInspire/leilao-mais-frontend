@@ -158,7 +158,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
             toast.success(`Lote ${lotId} processado com sucesso!`)
          }
 
-         router.push(pre_auction_routes.insert_lots_success(id))
+         router.push(pre_auction_routes.auction.insert_lots_success(id))
 
          /* Original implementation for API integration
          for (const lotId of data.lotId) {

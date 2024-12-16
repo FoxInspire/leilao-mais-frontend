@@ -53,9 +53,7 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
    })
 
    async function onSubmit(data: z.infer<typeof searchOperationsSchema>) {
-      router.push(
-         pre_auction_routes.operation_monitor_details(data.auctionCode)
-      )
+      router.push(pre_auction_routes.operations.details(data.auctionCode))
    }
 
    return (
