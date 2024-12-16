@@ -18,9 +18,9 @@ import {
    DialogTrigger
 } from '@/components/ui/dialog'
 import { SelectInput } from '@/components/ui/select'
-import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
+import { DataTable } from '@/src/components/ui/data-table'
 import { DatePicker } from '@/src/components/ui/date-picker'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'

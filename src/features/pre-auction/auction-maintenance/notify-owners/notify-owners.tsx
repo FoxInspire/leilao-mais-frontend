@@ -11,14 +11,13 @@ import {
    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import { SelectInput } from '@/components/ui/select'
-import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
+import { DataTable } from '@/src/components/ui/data-table'
 import { Separator } from '@/src/components/ui/separator'
-import { ColumnDef } from '@tanstack/react-table'
-
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { NotifyOwnersEntity } from '@/src/types/entities/notify-owners.entity'
+import { ColumnDef } from '@tanstack/react-table'
 
 interface NotifyOwnersProps {
    id: string
