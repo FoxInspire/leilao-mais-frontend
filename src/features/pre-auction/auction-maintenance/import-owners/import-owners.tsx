@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import * as XLSX from 'xlsx'
 
 import {
    Breadcrumb,
@@ -14,17 +15,133 @@ import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Separator } from '@/src/components/ui/separator'
 
+import { DataTable } from '@/src/components/ui/data-table'
+import { useFilePicker } from '@/src/hooks/useFilePicker'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
+import { ColumnDef } from '@tanstack/react-table'
+import { toast } from 'sonner'
+import { DataTableColumnHeader } from '../components/data-table-column-header'
 
 interface ImportOwnersProps {
    id: string
+}
+
+interface ImportOwnersColumnsProps {
+   file: string
+   type: string
+   itemsCount: number
+   errorsCount: number
+   status: string
+}
+
+interface ConvertedFile {
+   fileName: string
+   data: any[]
 }
 
 const ImportOwners: React.FC<ImportOwnersProps> = ({
    id
 }: ImportOwnersProps) => {
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
+   const [data, setData] = React.useState<ImportOwnersColumnsProps[]>([])
+   console.log('data', data)
    const [globalFilter, setGlobalFilter] = React.useState('')
+
+   const handleDownloadModel = () => {
+      try {
+         const link = document.createElement('a')
+         link.href = '/ModeloImportacaoProprietario.xlsx'
+         link.download = 'ModeloImportacaoProprietario.xlsx'
+
+         document.body.appendChild(link)
+         link.click()
+         document.body.removeChild(link)
+      } catch (error) {
+         console.error('Erro ao baixar modelo:', error)
+         toast.error('Erro ao baixar modelo')
+      }
+   }
+
+   const handleFileConversion = async (
+      files: File[]
+   ): Promise<ConvertedFile[]> => {
+      try {
+         const results = await Promise.all(
+            files.map(async (file) => {
+               return new Promise<ConvertedFile>((resolve, reject) => {
+                  const reader = new FileReader()
+
+                  reader.onload = (e) => {
+                     try {
+                        const data = e.target?.result
+                        const workbook = XLSX.read(data, { type: 'binary' })
+
+                        // Pega a primeira planilha
+                        const firstSheet =
+                           workbook.Sheets[workbook.SheetNames[0]]
+
+                        // Converte para JSON
+                        const jsonData = XLSX.utils.sheet_to_json(firstSheet)
+
+                        resolve({
+                           fileName: file.name,
+                           data: jsonData
+                        })
+                     } catch (error) {
+                        reject(error)
+                     }
+                  }
+
+                  reader.onerror = (error) => reject(error)
+                  reader.readAsBinaryString(file)
+               })
+            })
+         )
+
+         return results
+      } catch (error) {
+         toast.error('Erro ao processar arquivo(s)')
+         console.error(error)
+         return []
+      }
+   }
+
+   const select_files = useFilePicker({
+      accept: '.csv',
+      multiple: false,
+      onFileSelect: async (files) => {}
+   })
+
+   const handleSelectFileFromSys = () => {
+      select_files.onSelectFile()
+   }
+
+   const handleSendFile = async () => {
+      if (select_files.files.length === 0) {
+         toast.error('Selecione um arquivo primeiro')
+         return
+      }
+
+      try {
+         const convertedFiles = await handleFileConversion(select_files.files)
+
+         const newData: ImportOwnersColumnsProps[] = convertedFiles.map(
+            (file) => ({
+               file: file.fileName,
+               type: file.fileName.split('.').pop() || '',
+               itemsCount: Array.isArray(file.data) ? file.data.length : 0,
+               errorsCount: 0,
+               status: 'Processado'
+            })
+         )
+
+         setData(newData)
+         toast.success('Arquivo(s) processado(s) com sucesso!')
+      } catch (error) {
+         toast.error('Erro ao processar arquivo(s)')
+         console.error(error)
+      }
+   }
 
    return (
       <React.Fragment>
@@ -71,7 +188,11 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                   </div>
                   <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
                      <div className="flex items-center gap-2 grow w-full">
-                        <Button variant="outline" className="whitespace-nowrap">
+                        <Button
+                           variant="outline"
+                           className="whitespace-nowrap"
+                           onClick={() => handleDownloadModel()}
+                        >
                            <div className="flex items-center gap-2">
                               <span className="material-symbols-outlined filled symbol-sm">
                                  download_2
@@ -81,12 +202,21 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                         </Button>
                      </div>
                      <div className="flex grow items-center gap-2">
-                        <Button variant="ghost" className="whitespace-nowrap">
-                           Selecionar arquivo
+                        <Button
+                           variant="ghost"
+                           className="whitespace-nowrap"
+                           onClick={() => handleSelectFileFromSys()}
+                        >
+                           {select_files.files.length > 0
+                              ? select_files.files
+                                   .map((file) => file.name)
+                                   .join(', ')
+                              : 'Selecionar arquivo'}
                         </Button>
                         <Button
                            variant="default"
                            className="sm:min-w-[150px] whitespace-nowrap"
+                           onClick={() => handleSendFile()}
                         >
                            Enviar arquivo
                         </Button>
@@ -95,11 +225,7 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
                   <div className="flex-1 overflow-auto">
-                     {/* <DataTable
-                        data={data}
-                        columns={columns}
-                        globalFilter={globalFilter}
-                     /> */}
+                     <DataTable columns={columns_import_owners} data={data} />
                   </div>
                </div>
             </div>
@@ -166,5 +292,43 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
       </React.Fragment>
    )
 }
+
+const columns_import_owners: ColumnDef<ImportOwnersColumnsProps>[] = [
+   {
+      accessorKey: 'file',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Arquivo" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('file')}</div>
+   },
+   {
+      accessorKey: 'type',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Tipo" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('type')}</div>
+   },
+   {
+      accessorKey: 'itemsCount',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Qtd itens" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('itemsCount')}</div>
+   },
+   {
+      accessorKey: 'errorsCount',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Qtd erro" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('errorsCount')}</div>
+   },
+   {
+      accessorKey: 'status',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Status" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('status')}</div>
+   }
+]
 
 export default ImportOwners
