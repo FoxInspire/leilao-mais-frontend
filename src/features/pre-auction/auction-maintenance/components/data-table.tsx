@@ -128,7 +128,7 @@ export function DataTable<TData>({
                         className="text-center hover:bg-transparent cursor-default"
                      >
                         <span className="text-text-secondary text-base">
-                           Nenhum resultado encontrado.
+                           Nenhum resultado encontrado no sistema.
                         </span>
                      </TableCell>
                   </TableRow>

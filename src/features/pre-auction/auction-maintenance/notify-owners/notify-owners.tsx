@@ -17,6 +17,7 @@ import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Separator } from '@/src/components/ui/separator'
 import { ColumnDef } from '@tanstack/react-table'
 
+import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { NotifyOwnersEntity } from '@/src/types/entities/notify-owners.entity'
 
 interface NotifyOwnersProps {
@@ -42,6 +43,14 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                      <BreadcrumbList>
                         <BreadcrumbItem>
                            <BreadcrumbLink>Pré-leilão</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator>/</BreadcrumbSeparator>
+                        <BreadcrumbItem>
+                           <BreadcrumbLink
+                              href={pre_auction_routes.auction_maintenance}
+                           >
+                              Manutenção de leilões
+                           </BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator>/</BreadcrumbSeparator>
                         <BreadcrumbItem>
