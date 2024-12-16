@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import * as XLSX from 'xlsx'
 
 import {
    Breadcrumb,
@@ -18,6 +19,7 @@ import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { NotifyOwnersEntity } from '@/src/types/entities/notify-owners.entity'
 import { ColumnDef } from '@tanstack/react-table'
+import { toast } from 'sonner'
 
 interface NotifyOwnersProps {
    id: string
@@ -32,6 +34,42 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
 }: NotifyOwnersProps) => {
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
+
+   const createHeaders = (columns: ExcelColumn[]) =>
+      columns.reduce((acc, col) => ({ ...acc, [col.key]: col.header }), {})
+
+   const transformData = (data: NotifyOwnersEntity[], columns: ExcelColumn[]) =>
+      data.map((row) =>
+         columns.reduce(
+            (acc, col) => ({
+               ...acc,
+               [col.key]: col.transform
+                  ? col.transform(row[col.key])
+                  : row[col.key]
+            }),
+            {}
+         )
+      )
+
+   const handleExportToExcel = () => {
+      try {
+         const headers = createHeaders(excelColumns)
+         const transformedData = transformData(data, excelColumns)
+
+         const ws = XLSX.utils.json_to_sheet([headers, ...transformedData], {
+            skipHeader: true
+         })
+
+         const wb = XLSX.utils.book_new()
+         XLSX.utils.book_append_sheet(wb, ws, 'Notificações')
+         XLSX.writeFile(wb, `notificacoes_${id}.csv`)
+
+         toast.success('Arquivo exportado com sucesso!')
+      } catch (error) {
+         console.error('Erro ao exportar:', error)
+         toast.error('Erro ao exportar arquivo')
+      }
+   }
 
    return (
       <React.Fragment>
@@ -90,7 +128,11 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                         </p>
                      </div>
                      <div className="flex grow items-center gap-2">
-                        <Button variant="ghost" className="whitespace-nowrap">
+                        <Button
+                           variant="ghost"
+                           className="whitespace-nowrap"
+                           onClick={() => handleExportToExcel()}
+                        >
                            extrair excel
                         </Button>
                         <Button
@@ -175,5 +217,31 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
       </React.Fragment>
    )
 }
+
+interface TransformFunction<T, K extends keyof T> {
+   (value: T[K]): unknown
+}
+
+interface ExcelColumn<T = NotifyOwnersEntity> {
+   key: keyof T
+   header: string
+   transform?: TransformFunction<T, keyof T>
+}
+
+const excelColumns: ExcelColumn[] = [
+   { key: 'vehiclePlate', header: 'Placa' },
+   { key: 'vehicleChassis', header: 'Chassi' },
+   {
+      key: 'ownerName',
+      header: 'Proprietário',
+      transform: (value) => value?.toUpperCase()
+   },
+   { key: 'financial', header: 'Financeira' },
+   {
+      key: 'communication',
+      header: 'Comunicado venda',
+      transform: (value) => (value ? 'Sim' : 'Não')
+   }
+]
 
 export default NotifyOwners

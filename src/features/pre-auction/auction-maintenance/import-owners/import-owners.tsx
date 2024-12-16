@@ -136,9 +136,9 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
          )
 
          setData(newData)
-         toast.success('Arquivo(s) processado(s) com sucesso!')
+         toast.success('Arquivo processado com sucesso!')
       } catch (error) {
-         toast.error('Erro ao processar arquivo(s)')
+         toast.error('Erro ao processar arquivo: ' + error)
          console.error(error)
       }
    }
@@ -225,7 +225,11 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
                   <div className="flex-1 overflow-auto">
-                     <DataTable columns={columns_import_owners} data={data} />
+                     <DataTable
+                        emptyMessage={'Nenhum arquivo encontrado.'}
+                        columns={columns_import_owners}
+                        data={data}
+                     />
                   </div>
                </div>
             </div>
