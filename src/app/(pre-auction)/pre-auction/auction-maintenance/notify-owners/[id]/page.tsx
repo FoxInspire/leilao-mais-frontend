@@ -24,7 +24,7 @@ export default async function NotifyOwnersPage({
 
    return (
       <React.Suspense>
-         <NotifyOwners id={id} data={[]} columns={columns_notify_owners} />
+         <NotifyOwners id={id} data={data} columns={columns_notify_owners} />
       </React.Suspense>
    )
 }
