@@ -10,27 +10,19 @@ import {
    BreadcrumbPage,
    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { SelectInput } from '@/components/ui/select'
-import { DataTable } from '@/features/pre-auction/auction-maintenance/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Separator } from '@/src/components/ui/separator'
-import { ColumnDef } from '@tanstack/react-table'
 
 import { pre_auction_routes } from '@/src/routes/pre-auction'
-import { NotifyOwnersEntity } from '@/src/types/entities/notify-owners.entity'
 
-interface NotifyOwnersProps {
+interface ImportOwnersProps {
    id: string
-   data: NotifyOwnersEntity[]
-   columns: ColumnDef<NotifyOwnersEntity>[]
 }
 
-const NotifyOwners: React.FC<NotifyOwnersProps> = ({
-   id,
-   columns,
-   data
-}: NotifyOwnersProps) => {
+const ImportOwners: React.FC<ImportOwnersProps> = ({
+   id
+}: ImportOwnersProps) => {
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [globalFilter, setGlobalFilter] = React.useState('')
 
@@ -55,7 +47,7 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                         <BreadcrumbSeparator>/</BreadcrumbSeparator>
                         <BreadcrumbItem>
                            <BreadcrumbPage>
-                              Notificar proprietários
+                              Importar proprietários
                            </BreadcrumbPage>
                         </BreadcrumbItem>
                      </BreadcrumbList>
@@ -63,7 +55,7 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                   <div className="space-y-2">
                      <div className="flex flex-wrap justify-between items-center gap-2">
                         <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
-                           Notificar proprietários - {id}
+                           Importar proprietários - {id}
                         </h1>
                         <Button
                            variant="ghost"
@@ -78,38 +70,36 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                      <Separator orientation="horizontal" />
                   </div>
                   <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
-                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
-                        <div className="min-w-[300px]">
-                           <SelectInput
-                              options={[]}
-                              label="Endereço notificável"
-                              placeholder="Selecione o endereço notificável"
-                           />
-                        </div>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-sm">
-                           324 registros encontrados
-                        </p>
+                     <div className="flex items-center gap-2 grow w-full">
+                        <Button variant="outline" className="whitespace-nowrap">
+                           <div className="flex items-center gap-2">
+                              <span className="material-symbols-outlined filled symbol-sm">
+                                 download_2
+                              </span>
+                              <span className="text-sm">Baixar modelo</span>
+                           </div>
+                        </Button>
                      </div>
                      <div className="flex grow items-center gap-2">
                         <Button variant="ghost" className="whitespace-nowrap">
-                           extrair excel
+                           Selecionar arquivo
                         </Button>
                         <Button
                            variant="default"
                            className="sm:min-w-[150px] whitespace-nowrap"
                         >
-                           Gerar arquivo
+                           Enviar arquivo
                         </Button>
                      </div>
                   </div>
                </div>
                <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
                   <div className="flex-1 overflow-auto">
-                     <DataTable
+                     {/* <DataTable
                         data={data}
                         columns={columns}
                         globalFilter={globalFilter}
-                     />
+                     /> */}
                   </div>
                </div>
             </div>
@@ -141,32 +131,32 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                         Descrição
                      </p>
                      <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                        A página de Notificar Proprietários permite visualizar a
-                        lista de proprietários dos veículos incluídos em um
-                        leilão. É possível extrair uma planilha com os dados da
-                        listagem e gerar um arquivo de texto para utilização em
-                        outras plataformas, como o sistema dos Correios.
+                        A página de Importar Proprietários permite atualizar
+                        informações dos lotes quando o retorno do Detran não é
+                        automático. O usuário pode enviar um arquivo no sistema
+                        seguindo um modelo específico e visualizar a lista de
+                        arquivos importados para acompanhar as atualizações
+                        realizadas.
                      </p>
                      <p className="text-black dark:text-dark-text-primary font-semibold text-start">
                         Detalhes
                      </p>
                      <div>
                         <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Extrair excel
+                           Baixar modelo
                         </p>
                         <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                           Faz o download da planilha Excel contendo todos os
-                           dados referente aos proprietários dos veículos.
+                           Faz o download do modelo da planilha para
+                           preenchimento dos dados necessários.
                         </p>
                      </div>
                      <div>
                         <p className="text-black dark:text-dark-text-primary font-normal text-start">
-                           Gerar arquivo
+                           Enviar arquivo
                         </p>
                         <p className="text-text-secondary dark:text-dark-text-secondary text-start">
-                           Faz o download de um arquivo de texto (.txt) para ser
-                           utilizado em outras plataformas, contendo todos os
-                           dados referente aos proprietários dos veículos.
+                           Atualiza as informações dos proprietários com o
+                           conteúdo da planilha enviada.
                         </p>
                      </div>
                   </div>
@@ -177,4 +167,4 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
    )
 }
 
-export default NotifyOwners
+export default ImportOwners

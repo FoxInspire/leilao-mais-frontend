@@ -103,8 +103,14 @@ export function DataTableRowActions({
          label: 'Importar proprietários',
          value: 'import-owners',
          filled: false,
-         disabled: true,
-         onClick: () => {}
+         disabled: false,
+         onClick: () => {
+            router.push(
+               pre_auction_routes.auction.import_owners(
+                  String(row?.original?.auctionCode)
+               )
+            )
+         }
       },
       {
          icon: 'monitor',

@@ -27,8 +27,9 @@ export const pre_auction_routes = {
 
       notify_owners: (id: string) =>
          `/pre-auction/auction-maintenance/notify-owners/${id}`,
-      notify_owners_success: (id: string) =>
-         `/pre-auction/auction-maintenance/notify-owners/success/${id}`
+
+      import_owners: (id: string) =>
+         `/pre-auction/auction-maintenance/import-owners/${id}`
    },
 
    operations: {
