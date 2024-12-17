@@ -54,7 +54,7 @@ export function DataTableRowActions({
          icon: 'edit',
          label: 'Editar leilão',
          value: 'edit-auction',
-         filled: true,
+         filled: false,
          disabled: false,
          onClick: () => {
             router.push(

@@ -19,6 +19,7 @@ import {
 import { SelectInput } from '@/components/ui/select'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
+import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
 import {
@@ -125,12 +126,15 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                               Busca avançada
                            </Button>
                         </div>
-                        <Button
-                           variant="default"
-                           className="w-full sm:w-auto px-12 sm:min-w-[150px] whitespace-nowrap"
-                        >
-                           Importar numeração lotes
-                        </Button>
+                        <DisabledFeature>
+                           <Button
+                              disabled
+                              variant="default"
+                              className="w-full sm:w-auto px-12 sm:min-w-[150px] whitespace-nowrap"
+                           >
+                              Importar numeração lotes
+                           </Button>
+                        </DisabledFeature>
                      </div>
                   )}
                   {selectedRows.length > 0 && (
