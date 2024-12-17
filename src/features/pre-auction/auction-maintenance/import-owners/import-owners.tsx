@@ -19,6 +19,7 @@ import { DataTable } from '@/src/components/ui/data-table'
 import { useFilePicker } from '@/src/hooks/useFilePicker'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { ColumnDef } from '@tanstack/react-table'
+import { format } from 'date-fns'
 import { toast } from 'sonner'
 import { DataTableColumnHeader } from '../components/data-table-column-header'
 
@@ -32,6 +33,8 @@ interface ImportOwnersColumnsProps {
    itemsCount: number
    errorsCount: number
    status: string
+   importDate: string
+   importUser: string
 }
 
 interface ConvertedFile {
@@ -76,11 +79,9 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                         const data = e.target?.result
                         const workbook = XLSX.read(data, { type: 'binary' })
 
-                        // Pega a primeira planilha
                         const firstSheet =
                            workbook.Sheets[workbook.SheetNames[0]]
 
-                        // Converte para JSON
                         const jsonData = XLSX.utils.sheet_to_json(firstSheet)
 
                         resolve({
@@ -131,12 +132,15 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                type: file.fileName.split('.').pop() || '',
                itemsCount: Array.isArray(file.data) ? file.data.length : 0,
                errorsCount: 0,
-               status: 'Processado'
+               status: 'Processado',
+               importDate: format(new Date(), 'dd/MM/yyyy HH:mm:ss'),
+               importUser: 'teste'
             })
          )
 
          setData(newData)
          toast.success('Arquivo processado com sucesso!')
+         select_files.clear()
       } catch (error) {
          toast.error('Erro ao processar arquivo: ' + error)
          console.error(error)
@@ -207,11 +211,20 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                            className="whitespace-nowrap"
                            onClick={() => handleSelectFileFromSys()}
                         >
-                           {select_files.files.length > 0
-                              ? select_files.files
-                                   .map((file) => file.name)
-                                   .join(', ')
-                              : 'Selecionar arquivo'}
+                           <div className="flex items-center gap-2">
+                              {select_files.files.length > 0 && (
+                                 <span className="material-symbols-outlined symbol-sm">
+                                    close
+                                 </span>
+                              )}
+                              <span className="text-sm">
+                                 {select_files.files.length > 0
+                                    ? select_files.files
+                                         .map((file) => file.name)
+                                         .join(', ')
+                                    : 'Selecionar arquivo'}
+                              </span>
+                           </div>
                         </Button>
                         <Button
                            variant="default"
@@ -332,6 +345,20 @@ const columns_import_owners: ColumnDef<ImportOwnersColumnsProps>[] = [
          <DataTableColumnHeader column={column} title="Status" />
       ),
       cell: ({ row }) => <div>{row.getValue('status')}</div>
+   },
+   {
+      accessorKey: 'importDate',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Data importação" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('importDate')}</div>
+   },
+   {
+      accessorKey: 'importUser',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Usuário" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('importUser')}</div>
    }
 ]
 

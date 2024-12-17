@@ -31,13 +31,13 @@ export const inputVariants = cva(
       'placeholder:text-[#737373]',
       'placeholder:opacity-0',
       'placeholder:transition-opacity placeholder:duration-200',
-      'focus:placeholder:opacity-100',
+      'focus-visible:placeholder:opacity-100',
       'disabled:cursor-not-allowed disabled:opacity-50',
       'disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none',
       'aria-[invalid=true]:border-red-500 aria-[invalid=true]:dark:border-red-500',
       'aria-[invalid=true]:text-red-600 aria-[invalid=true]:dark:text-red-600',
       'invalid:border-red-500 invalid:text-red-600',
-      'focus:invalid:border-red-500 focus:invalid:ring-red-500'
+      'focus-visible:invalid:border-red-500 focus-visible:invalid:ring-red-500'
    ],
    {
       variants: {
