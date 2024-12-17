@@ -1,10 +1,11 @@
 'use client'
 
+import * as React from 'react'
+
 import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Button } from '@/src/components/ui/button'
 import { NotifyOwnersEntity } from '@/src/types/entities/notify-owners.entity'
 import { ColumnDef } from '@tanstack/react-table'
-import React from 'react'
 
 export const columns_notify_owners: ColumnDef<NotifyOwnersEntity>[] = [
    {

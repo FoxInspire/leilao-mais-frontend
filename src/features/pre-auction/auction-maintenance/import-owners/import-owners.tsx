@@ -17,19 +17,18 @@ import {
    DialogHeader,
    DialogTitle
 } from '@/components/ui/dialog'
+import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
-import { Separator } from '@/src/components/ui/separator'
-
 import { DataTable } from '@/src/components/ui/data-table'
 import { DisabledFeature } from '@/src/components/ui/disabled-feature'
+import { Separator } from '@/src/components/ui/separator'
 import { useFilePicker } from '@/src/hooks/useFilePicker'
 import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
 import { toast } from 'sonner'
-import { DataTableColumnHeader } from '../components/data-table-column-header'
 
 interface ImportOwnersProps {
    id: string
@@ -53,10 +52,9 @@ interface ConvertedFile {
 const ImportOwners: React.FC<ImportOwnersProps> = ({
    id
 }: ImportOwnersProps) => {
+   const [dialog, setDialog] = React.useState(false)
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
    const [data, setData] = React.useState<ImportOwnersColumnsProps[]>([])
-   console.log('data', data)
-   const [globalFilter, setGlobalFilter] = React.useState('')
 
    const handleDownloadModel = () => {
       try {
@@ -156,8 +154,6 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
          setDialog(false)
       }
    }
-
-   const [dialog, setDialog] = React.useState(false)
 
    return (
       <React.Fragment>

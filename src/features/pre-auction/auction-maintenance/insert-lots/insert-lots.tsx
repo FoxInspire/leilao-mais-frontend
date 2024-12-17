@@ -20,6 +20,7 @@ import {
    FormMessage
 } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { TableInsertLots } from '@/features/pre-auction/auction-maintenance/insert-lots/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { Card } from '@/src/components/ui/card'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
@@ -38,23 +39,11 @@ import { useRouter } from 'next/navigation'
 import { parseAsString, useQueryStates } from 'nuqs'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { TableInsertLots } from './components/data-table'
 
 interface InsertLotsProps {
    id: string
    data: any[]
    columns: ColumnDef<AvaliableLotEntity>[]
-}
-
-export enum Step {
-   STEP1 = 'step1',
-   STEP2 = 'step2',
-   STEP3 = 'step3'
-}
-
-export enum LotType {
-   NEW = 'new',
-   REUSABLE = 'reusable'
 }
 
 export const InsertLots: React.FC<InsertLotsProps> = ({
@@ -600,63 +589,72 @@ const insertLotsSchema = z.object({
    )
 })
 
-const avaliableLotsFilters = z
-   .object({
-      pageNumber: z.coerce
-         .number({
-            invalid_type_error: 'Page number must be a number'
-         })
-         .optional(),
-      pagesLimit: z.coerce
-         .number({
-            invalid_type_error: 'Pages limit must be a number'
-         })
-         .optional(),
-      createdAt: z
-         .string({
-            invalid_type_error: 'Created at must be a string'
-         })
-         .refine((value) => isoDateRegex.test(value), {
-            message: 'Created at must be in ISO 8601 format'
-         })
-         .optional(),
-      lotStatus: z
-         .string({
-            invalid_type_error: 'Lot status must be a string'
-         })
-         .optional(),
-      patioId: z
-         .string({
-            invalid_type_error: 'Patio id must be a string'
-         })
-         .optional(),
-      daysForAuction: z.coerce
-         .number({
-            invalid_type_error: 'Days for auction must be a number'
-         })
-         .optional(),
-      daysInPatio: z.coerce
-         .number({
-            invalid_type_error: 'Days in patio must be a number'
-         })
-         .optional(),
-      grvCode: z
-         .string({
-            invalid_type_error: 'GRV code must be a string'
-         })
-         .optional(),
-      type: z
-         .string({
-            invalid_type_error: 'Is in auction must be a string'
-         })
-         .optional(),
-      userId: z.string({
-         invalid_type_error: 'User id must be a string',
-         required_error: 'User id is required'
-      }),
-      auctionId: z.string({
-         invalid_type_error: 'Auction id must be a string',
-         required_error: 'Auction id is required'
+const avaliableLotsFilters = z.object({
+   pageNumber: z.coerce
+      .number({
+         invalid_type_error: 'Page number must be a number'
       })
+      .optional(),
+   pagesLimit: z.coerce
+      .number({
+         invalid_type_error: 'Pages limit must be a number'
+      })
+      .optional(),
+   createdAt: z
+      .string({
+         invalid_type_error: 'Created at must be a string'
+      })
+      .refine((value) => isoDateRegex.test(value), {
+         message: 'Created at must be in ISO 8601 format'
+      })
+      .optional(),
+   lotStatus: z
+      .string({
+         invalid_type_error: 'Lot status must be a string'
+      })
+      .optional(),
+   patioId: z
+      .string({
+         invalid_type_error: 'Patio id must be a string'
+      })
+      .optional(),
+   daysForAuction: z.coerce
+      .number({
+         invalid_type_error: 'Days for auction must be a number'
+      })
+      .optional(),
+   daysInPatio: z.coerce
+      .number({
+         invalid_type_error: 'Days in patio must be a number'
+      })
+      .optional(),
+   grvCode: z
+      .string({
+         invalid_type_error: 'GRV code must be a string'
+      })
+      .optional(),
+   type: z
+      .string({
+         invalid_type_error: 'Is in auction must be a string'
+      })
+      .optional(),
+   userId: z.string({
+      invalid_type_error: 'User id must be a string',
+      required_error: 'User id is required'
+   }),
+   auctionId: z.string({
+      invalid_type_error: 'Auction id must be a string',
+      required_error: 'Auction id is required'
    })
-   .strict()
+})
+
+export enum Step {
+   STEP1 = 'step1',
+   STEP2 = 'step2',
+   STEP3 = 'step3'
+}
+
+export enum LotType {
+   NEW = 'new',
+   REUSABLE = 'reusable'
+}
