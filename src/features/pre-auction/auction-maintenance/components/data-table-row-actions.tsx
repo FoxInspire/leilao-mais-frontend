@@ -117,8 +117,14 @@ export function DataTableRowActions({
          label: 'Monitor de operações',
          value: 'operations-monitor',
          filled: false,
-         disabled: true,
-         onClick: () => {}
+         disabled: false,
+         onClick: () => {
+            router.push(
+               pre_auction_routes.operations.details(
+                  String(row?.original?.auctionCode)
+               )
+            )
+         }
       }
    ]
 

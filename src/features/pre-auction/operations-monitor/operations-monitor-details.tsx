@@ -27,6 +27,7 @@ import { TableAuctionLotsHandle } from '@/src/features/pre-auction/auction-maint
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 interface OperationsMonitorDetailsProps {
@@ -38,6 +39,7 @@ interface OperationsMonitorDetailsProps {
 export const OperationsMonitorDetails: React.FC<
    OperationsMonitorDetailsProps
 > = ({ id, columns, data }: OperationsMonitorDetailsProps) => {
+   const router = useRouter()
    const tableRef = React.useRef<TableAuctionLotsHandle>(null)
 
    const [selectedRows, setSelectedRows] = React.useState<AuctionLot[]>([])
