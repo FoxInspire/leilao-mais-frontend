@@ -11,12 +11,20 @@ import {
    BreadcrumbPage,
    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import {
+   Dialog,
+   DialogContent,
+   DialogHeader,
+   DialogTitle
+} from '@/components/ui/dialog'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { Separator } from '@/src/components/ui/separator'
 
 import { DataTable } from '@/src/components/ui/data-table'
+import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { useFilePicker } from '@/src/hooks/useFilePicker'
+import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
@@ -144,8 +152,12 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
       } catch (error) {
          toast.error('Erro ao processar arquivo: ' + error)
          console.error(error)
+      } finally {
+         setDialog(false)
       }
    }
+
+   const [dialog, setDialog] = React.useState(false)
 
    return (
       <React.Fragment>
@@ -226,13 +238,29 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                               </span>
                            </div>
                         </Button>
-                        <Button
-                           variant="default"
-                           className="sm:min-w-[150px] whitespace-nowrap"
-                           onClick={() => handleSendFile()}
-                        >
-                           Enviar arquivo
-                        </Button>
+                        {select_files.files.length === 0 && (
+                           <DisabledFeature message="Selecione um arquivo primeiro">
+                              <div>
+                                 <Button
+                                    variant="default"
+                                    disabled
+                                    className="sm:min-w-[150px] whitespace-nowrap"
+                                    onClick={() => setDialog(true)}
+                                 >
+                                    Enviar arquivo
+                                 </Button>
+                              </div>
+                           </DisabledFeature>
+                        )}
+                        {select_files.files.length > 0 && (
+                           <Button
+                              variant="default"
+                              className="sm:min-w-[150px] whitespace-nowrap"
+                              onClick={() => setDialog(true)}
+                           >
+                              Enviar arquivo
+                           </Button>
+                        )}
                      </div>
                   </div>
                </div>
@@ -306,6 +334,49 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                </div>
             </CollapsibleSidebar>
          </div>
+         <Dialog open={dialog} onOpenChange={setDialog}>
+            <DialogContent className={cn('md:max-w-md')}>
+               <DialogHeader>
+                  <DialogTitle>Enviar arquivo</DialogTitle>
+               </DialogHeader>
+               <div className="space-y-6 py-4 pb-6">
+                  <div className="w-full flex flex-col justify-center items-center">
+                     <span className="material-symbols-outlined text-error-default symbol-xl">
+                        warning
+                     </span>
+                  </div>
+                  <div className="space-y-2">
+                     <p className="text-lg text-center font-montserrat font-medium">
+                        Enviar os dados do arquivo no sistema
+                     </p>
+                     <p className="text-center text-sm font-montserrat">
+                        Esta ação irá atualizar as informações dos proprietários
+                        com os dados do arquivo selecionado. Deseja continuar?
+                     </p>
+                  </div>
+               </div>
+               <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
+                  <div className="md:order-1 order-2">
+                     <Button
+                        variant="destructive"
+                        className="w-full"
+                        onClick={() => setDialog(false)}
+                     >
+                        cancelar
+                     </Button>
+                  </div>
+                  <div className="md:order-2 order-1">
+                     <Button
+                        variant="default"
+                        className="w-full"
+                        onClick={() => handleSendFile()}
+                     >
+                        enviar arquivo
+                     </Button>
+                  </div>
+               </div>
+            </DialogContent>
+         </Dialog>
       </React.Fragment>
    )
 }
