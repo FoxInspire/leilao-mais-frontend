@@ -71,6 +71,30 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
       }
    }
 
+   const handleExportToTxt = () => {
+      try {
+         const content = 'sample_txt'
+
+         const blob = new Blob([content], { type: 'text/plain;charset=utf-8' })
+
+         const url = window.URL.createObjectURL(blob)
+         const link = document.createElement('a')
+         link.href = url
+         link.download = `notificacoes_${id}.txt`
+
+         document.body.appendChild(link)
+         link.click()
+
+         document.body.removeChild(link)
+         window.URL.revokeObjectURL(url)
+
+         toast.success('Arquivo exportado com sucesso!')
+      } catch (error) {
+         console.error('Erro ao exportar:', error)
+         toast.error('Erro ao exportar arquivo')
+      }
+   }
+
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto]">
@@ -118,13 +142,25 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
                         <div className="min-w-[300px]">
                            <SelectInput
-                              options={[]}
+                              options={[
+                                 { value: 'all', label: 'Todos', id: 'all' },
+                                 {
+                                    value: 'has_address',
+                                    label: 'Possui endereço notificável',
+                                    id: 'has_address'
+                                 },
+                                 {
+                                    value: 'no_address',
+                                    label: 'Não possui endereço notificável',
+                                    id: 'no_address'
+                                 }
+                              ]}
                               label="Endereço notificável"
                               placeholder="Selecione o endereço notificável"
                            />
                         </div>
                         <p className="text-text-secondary dark:text-dark-text-secondary text-sm">
-                           324 registros encontrados
+                           {data?.length} registros encontrados
                         </p>
                      </div>
                      <div className="flex grow items-center gap-2">
@@ -138,6 +174,7 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                         <Button
                            variant="default"
                            className="sm:min-w-[150px] whitespace-nowrap"
+                           onClick={() => handleExportToTxt()}
                         >
                            Gerar arquivo
                         </Button>
