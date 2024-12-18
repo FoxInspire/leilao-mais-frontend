@@ -16,17 +16,18 @@ import {
    DialogHeader,
    DialogTitle
 } from '@/components/ui/dialog'
-import { SelectInput, SelectInputValue } from '@/components/ui/select'
-import { TableAuctionLotsHandle } from '@/features/pre-auction/auction-lots/components/data-table'
+import { SelectInput } from '@/components/ui/select'
 import { TableOperationMonitorDetails } from '@/features/pre-auction/operations-monitor/components/data-table'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Input } from '@/src/components/ui/input'
 import { Separator } from '@/src/components/ui/separator'
+import { TableAuctionLotsHandle } from '@/src/features/pre-auction/auction-maintenance/auction-lots/components/data-table'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 interface OperationsMonitorDetailsProps {
@@ -38,6 +39,7 @@ interface OperationsMonitorDetailsProps {
 export const OperationsMonitorDetails: React.FC<
    OperationsMonitorDetailsProps
 > = ({ id, columns, data }: OperationsMonitorDetailsProps) => {
+   const router = useRouter()
    const tableRef = React.useRef<TableAuctionLotsHandle>(null)
 
    const [selectedRows, setSelectedRows] = React.useState<AuctionLot[]>([])
@@ -341,9 +343,7 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
+                        onValueChange={(value) => console.log('value', value)}
                      />
                      <SelectInput
                         label="Transação"
@@ -354,9 +354,7 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
+                        onValueChange={(value) => console.log('value', value)}
                      />
                      <SelectInput
                         label="Agendado"
@@ -367,9 +365,7 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value: SelectInputValue) =>
-                           console.log('value', value)
-                        }
+                        onValueChange={(value) => console.log('value', value)}
                      />
                   </div>
                   <div className="grid md:grid-cols-3 grid-cols-1 gap-4">

@@ -64,13 +64,12 @@ export default function RootLayout({
                href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
             />
             <link
-               rel="preload"
+               rel="stylesheet"
                href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block"
-               as="style"
             />
             <link
                rel="stylesheet"
-               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block"
+               href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
             />
             <link
                rel="stylesheet"

@@ -84,8 +84,10 @@ DialogFooter.displayName = 'DialogFooter'
 
 const DialogTitle = React.forwardRef<
    React.ElementRef<typeof DialogPrimitive.Title>,
-   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
->(({ className, ...props }, ref) => (
+   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> & {
+      onClose?: () => void
+   }
+>(({ className, onClose, ...props }, ref) => (
    <div className="flex justify-between items-center bg-dark-background-paper text-white py-4 px-6 -mx-6 dark:bg-dark-primary-default">
       <DialogPrimitive.Title
          ref={ref}
@@ -95,7 +97,10 @@ const DialogTitle = React.forwardRef<
          )}
          {...props}
       />
-      <DialogPrimitive.Close className="rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-neutral-100 data-[state=open]:text-neutral-500 dark:ring-offset-neutral-950 dark:focus:ring-neutral-300 dark:data-[state=open]:bg-neutral-800 dark:data-[state=open]:text-neutral-400 flex items-center justify-center">
+      <DialogPrimitive.Close
+         className="rounded-sm opacity-70 ring-0 transition-opacity hover:opacity-100 focus:ring-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-neutral-100 data-[state=open]:text-neutral-500 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 dark:data-[state=open]:bg-neutral-800 dark:data-[state=open]:text-neutral-400 flex items-center justify-center"
+         onClick={() => onClose?.()}
+      >
          <span className="material-symbols-outlined">close</span>
          <span className="sr-only">Close</span>
       </DialogPrimitive.Close>

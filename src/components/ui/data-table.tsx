@@ -10,7 +10,7 @@ import {
    TableHeader,
    TableRow
 } from '@/components/ui/table'
-import { DataTablePagination } from '@/features/pre-auction/auction-maintenance/components/data-table-pagination'
+import { DataTablePagination } from '@/src/components/ui/data-table-pagination'
 import {
    ColumnDef,
    ColumnFiltersState,
@@ -30,6 +30,7 @@ interface DataTableProps<TData> {
    data: TData[]
    columns: ColumnDef<TData>[]
    globalFilter?: string
+   emptyMessage?: string
    setGlobalFilter?: (value: string) => void
 }
 
@@ -37,7 +38,8 @@ export function DataTable<TData>({
    columns,
    data,
    globalFilter,
-   setGlobalFilter
+   setGlobalFilter,
+   emptyMessage = 'Nenhum resultado encontrado no sistema.'
 }: DataTableProps<TData>) {
    const [rowSelection, setRowSelection] = React.useState({})
    const [columnVisibility, setColumnVisibility] =
@@ -128,7 +130,7 @@ export function DataTable<TData>({
                         className="text-center hover:bg-transparent cursor-default"
                      >
                         <span className="text-text-secondary text-base">
-                           Nenhum resultado encontrado.
+                           {emptyMessage}
                         </span>
                      </TableCell>
                   </TableRow>

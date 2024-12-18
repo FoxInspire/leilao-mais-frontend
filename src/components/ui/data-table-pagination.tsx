@@ -14,11 +14,17 @@ import { Table } from '@tanstack/react-table'
 
 interface DataTablePaginationProps<TData> {
    table: Table<TData>
+   per_page?: number
 }
 
 export function DataTablePagination<TData>({
-   table
+   table,
+   per_page = 10
 }: DataTablePaginationProps<TData>) {
+   React.useEffect(() => {
+      table.setPageSize(per_page)
+   }, [per_page, table])
+
    return (
       <React.Fragment>
          <div className="flex items-center justify-end px-2">
@@ -31,12 +37,16 @@ export function DataTablePagination<TData>({
                      }}
                   >
                      <SelectTrigger className="h-8 w-[70px] dark:border-white/10">
-                        <SelectValue
-                           placeholder={table.getState().pagination.pageSize}
-                        />
+                        <SelectValue placeholder={per_page} />
                      </SelectTrigger>
                      <SelectContent side="top">
-                        {[10, 20, 30, 40, 50].map((pageSize) => (
+                        {[
+                           per_page,
+                           per_page * 2,
+                           per_page * 3,
+                           per_page * 4,
+                           per_page * 5
+                        ].map((pageSize) => (
                            <SelectItem key={pageSize} value={`${pageSize}`}>
                               {pageSize}
                            </SelectItem>

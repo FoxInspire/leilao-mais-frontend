@@ -72,7 +72,7 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
 
          console.log('data', data)
 
-         router.push(pre_auction_routes.edit_auction_success(id))
+         router.push(pre_auction_routes.auction.edit_success(id))
       } catch (error) {
          console.error('Erro ao enviar formulário:', error)
          toast.error('Erro ao enviar formulário. Tente novamente.')

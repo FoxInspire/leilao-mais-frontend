@@ -1,11 +1,11 @@
 import * as React from 'react'
 
-import { columns_auction_lots } from '@/src/features/pre-auction/auction-lots/components/columns'
+import { columns_auction_lots } from '@/src/features/pre-auction/auction-maintenance/auction-lots/components/columns'
 import { readJSONFile } from '@/src/utils/file-path-utils'
 import { AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef } from '@tanstack/react-table'
 
-import AuctionLots from '@/src/features/pre-auction/auction-lots/auction-lots'
+import AuctionLots from '@/src/features/pre-auction/auction-maintenance/auction-lots/auction-lots'
 
 export const dynamic = 'force-dynamic'
 

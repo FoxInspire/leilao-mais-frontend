@@ -95,9 +95,7 @@ export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
                            className="h-10"
                            onClick={() =>
                               router.push(
-                                 pre_auction_routes.operation_monitor_details(
-                                    id
-                                 )
+                                 pre_auction_routes.operations.details(id)
                               )
                            }
                         >

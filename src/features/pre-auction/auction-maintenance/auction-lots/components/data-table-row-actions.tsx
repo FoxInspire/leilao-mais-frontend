@@ -26,37 +26,43 @@ export function DataTableRowActions<TData>({
          icon: 'edit',
          label: 'Editar lote',
          value: 'edit-lot',
-         filled: false
+         filled: false,
+         disabled: true
       },
       {
          icon: 'check_circle',
          label: 'Lançar perícia',
          value: 'launch-expertise',
-         filled: false
+         filled: false,
+         disabled: true
       },
       {
          icon: 'calendar_today',
          label: 'Histórico',
          value: 'history',
-         filled: false
+         filled: false,
+         disabled: true
       },
       {
          icon: 'content_cut',
          label: 'Zerar numeração',
          value: 'reset-numbering',
-         filled: false
+         filled: false,
+         disabled: true
       },
       {
          icon: 'content_paste',
          label: 'Criar numeração lote',
          value: 'create-lot-numbering',
-         filled: false
+         filled: false,
+         disabled: true
       },
       {
          icon: 'delete',
          label: 'Deletar lote',
          value: 'delete-lot',
-         filled: false
+         filled: false,
+         disabled: true
       }
    ]
    return (
@@ -76,12 +82,13 @@ export function DataTableRowActions<TData>({
          <DropdownMenuContent align="end">
             {menuItems.map((item, index) => (
                <React.Fragment key={item.label}>
-                  {index === Math.floor(menuItems.length / 2) && (
-                     <DropdownMenuSeparator />
-                  )}
+                  {index === menuItems.length - 1 && <DropdownMenuSeparator />}
                   <DropdownMenuItem
                      className="font-medium"
-                     onClick={() => onSelect(item.value)}
+                     disabled={item.disabled}
+                     onClick={() => {
+                        onSelect?.(item.value)
+                     }}
                   >
                      <span
                         className={cn(

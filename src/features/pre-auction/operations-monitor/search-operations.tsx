@@ -53,9 +53,7 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
    })
 
    async function onSubmit(data: z.infer<typeof searchOperationsSchema>) {
-      router.push(
-         pre_auction_routes.operation_monitor_details(data.auctionCode)
-      )
+      router.push(pre_auction_routes.operations.details(data.auctionCode))
    }
 
    return (
@@ -112,12 +110,11 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                                        <SelectInput
                                           label="Leilão"
                                           placeholder="Selecione o leilão"
-                                          onValueChange={(
-                                             value: SelectInputValue
-                                          ) => {
+                                          onValueChange={(value) => {
                                              form.setValue(
                                                 'auctionCode',
-                                                value.value
+                                                (value as SelectInputValue)
+                                                   .value
                                              )
                                           }}
                                           options={

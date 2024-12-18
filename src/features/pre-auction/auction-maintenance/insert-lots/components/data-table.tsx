@@ -10,7 +10,7 @@ import {
    TableHeader,
    TableRow
 } from '@/components/ui/table'
-import { DataTablePagination } from '@/features/pre-auction/auction-maintenance/insert-lots/components/data-table-pagination'
+import { DataTablePagination } from '@/src/components/ui/data-table-pagination'
 import { AvaliableLotEntity } from '@/src/types/entities/avaliable-lot.entity'
 import {
    ColumnDef,
