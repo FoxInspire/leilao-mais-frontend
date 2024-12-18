@@ -4,20 +4,27 @@ import * as React from 'react'
 import * as z from 'zod'
 
 import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator
+   Breadcrumb,
+   BreadcrumbEllipsis,
+   BreadcrumbItem,
+   BreadcrumbLink,
+   BreadcrumbList,
+   BreadcrumbPage,
+   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormMessage
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import {
+   Form,
+   FormControl,
+   FormDescription,
+   FormField,
+   FormItem,
+   FormMessage
 } from '@/components/ui/form'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
@@ -173,11 +180,20 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                      </BreadcrumbItem>
                      <BreadcrumbSeparator>/</BreadcrumbSeparator>
                      <BreadcrumbItem>
-                        <BreadcrumbLink
-                           href={pre_auction_routes.auction_maintenance}
-                        >
-                           Manutenção de leilões
-                        </BreadcrumbLink>
+                        <DropdownMenu>
+                           <DropdownMenuTrigger className="flex items-center gap-1">
+                              <BreadcrumbEllipsis className="h-4 w-4" />
+                              <span className="sr-only">Toggle menu</span>
+                           </DropdownMenuTrigger>
+                           <DropdownMenuContent align="start">
+                              <DropdownMenuItem>
+                                 Manutenção de leilões
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                 Lista de lotes
+                              </DropdownMenuItem>
+                           </DropdownMenuContent>
+                        </DropdownMenu>
                      </BreadcrumbItem>
                      <BreadcrumbSeparator>/</BreadcrumbSeparator>
                      <BreadcrumbPage>Editar leilão</BreadcrumbPage>
