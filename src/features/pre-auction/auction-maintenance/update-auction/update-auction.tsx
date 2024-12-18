@@ -4,20 +4,20 @@ import * as React from 'react'
 import * as z from 'zod'
 
 import {
-   Breadcrumb,
-   BreadcrumbItem,
-   BreadcrumbLink,
-   BreadcrumbList,
-   BreadcrumbPage,
-   BreadcrumbSeparator
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import {
-   Form,
-   FormControl,
-   FormDescription,
-   FormField,
-   FormItem,
-   FormMessage
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormMessage
 } from '@/components/ui/form'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
@@ -69,8 +69,6 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
             )
             return
          }
-
-         console.log('data', data)
 
          router.push(pre_auction_routes.auction.edit_success(id))
       } catch (error) {
@@ -186,8 +184,8 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                   </BreadcrumbList>
                </Breadcrumb>
                <div className="space-y-2">
-                  <div className="flex flex-wrap justify-between items-center gap-2">
-                     <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
                         Editar leilão {id}
                      </h1>
                      <Button
@@ -205,15 +203,15 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                <Form {...form}>
                   <form
                      onSubmit={form.handleSubmit(onSubmit)}
-                     className="grid w-full overflow-x-visible overflow-y-scroll max-h-[calc(100vh-16.8125rem)] hide-scrollbar"
+                     className="hide-scrollbar grid max-h-[calc(100vh-16.8125rem)] w-full overflow-x-visible overflow-y-scroll"
                   >
                      <div className="flex-1 space-y-6 overflow-x-visible overflow-y-scroll">
                         {/* Dados do leilão */}
                         <div className="space-y-4">
-                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Dados do leilão
                            </p>
-                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
+                           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
                               <FormField
                                  control={form.control}
                                  name="description"
@@ -252,11 +250,11 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
 
                         {/* Localização */}
                         <div className="space-y-4">
-                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Localização
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="cep"
@@ -364,7 +362,7 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                                     )}
                                  />
                               </div>
-                              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 items-center">
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="neighborhood"
@@ -420,11 +418,11 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
 
                         {/* Datas gerais */}
                         <div className="space-y-4">
-                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Datas gerais
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-1 md:grid-cols-[0.6fr_0.2fr_0.2fr] gap-6 md:gap-4">
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-[0.6fr_0.2fr_0.2fr] md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="scheduleDate"
@@ -474,7 +472,7 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                                     )}
                                  />
                               </div>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 items-center">
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="noticeDate"
@@ -513,11 +511,11 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
 
                         {/* Dados complementares */}
                         <div className="space-y-4">
-                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Dados complementares
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4">
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="auctioneerId"
@@ -570,7 +568,7 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                                     )}
                                  />
                               </div>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 items-center">
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="exhibitorId"
@@ -611,7 +609,7 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
 
                         {/* E-mail para Notificação */}
                         <div className="space-y-4">
-                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               E-mail para Notificação
                            </p>
                            <div className="space-y-6">
@@ -622,7 +620,7 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                                     render={({ field }) => (
                                        <FormItem>
                                           <FormControl>
-                                             <div className="grid grid-cols-[1fr_auto] items-center gap-2 w-full">
+                                             <div className="grid w-full grid-cols-[1fr_auto] items-center gap-2">
                                                 <Input
                                                    label="E-mail *"
                                                    placeholder="Digite o e-mail"
@@ -641,7 +639,7 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                                                    type="button"
                                                    variant="outline"
                                                    size="icon"
-                                                   className="w-12 h-12"
+                                                   className="h-12 w-12"
                                                    onClick={addEmails}
                                                 >
                                                    <span className="material-symbols-outlined">
@@ -653,7 +651,7 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                                           <FormDescription className="hidden md:block">
                                              Para adicionar mais de um e-mail,
                                              separe por vírgula e pressione{' '}
-                                             <kbd className="px-1 py-0.5 rounded-sm bg-gray-100 dark:bg-gray-600 text-xs dark:text-dark-text-primary">
+                                             <kbd className="rounded-sm bg-gray-100 px-1 py-0.5 text-xs dark:bg-gray-600 dark:text-dark-text-primary">
                                                 Enter
                                              </kbd>
                                              .
@@ -677,14 +675,14 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                                                 (email, index) => (
                                                    <div
                                                       key={index}
-                                                      className="flex items-center gap-2 bg-gray-100 dark:bg-gray-600 px-2 py-1 rounded"
+                                                      className="flex items-center gap-2 rounded bg-gray-100 px-2 py-1 dark:bg-gray-600"
                                                    >
                                                       <span className="text-sm">
                                                          {email}
                                                       </span>
 
                                                       <span
-                                                         className="material-symbols-outlined symbol-xs w-4 h-4 hover:text-error-default hover:scale-110 transition-all duration-300 cursor-pointer my-auto mt-0.5"
+                                                         className="material-symbols-outlined symbol-xs my-auto mt-0.5 h-4 w-4 cursor-pointer transition-all duration-300 hover:scale-110 hover:text-error-default"
                                                          onClick={() =>
                                                             removeEmail(index)
                                                          }
@@ -705,11 +703,11 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
 
                         {/* Diário oficial */}
                         <div className="space-y-4">
-                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Diário oficial
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 items-center">
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="officialPublicationDate"
@@ -748,11 +746,11 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
 
                         {/* Ordem Interna */}
                         <div className="space-y-4">
-                           <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Ordem Interna
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 items-center">
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="internalMatrixOrder"
@@ -790,14 +788,14 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                         </div>
                      </div>
                   </form>
-                  <div className="flex flex-1 justify-between items-center">
+                  <div className="flex flex-1 items-center justify-between">
                      <Button
                         variant="ghost"
                         onClick={() =>
                            router.push(pre_auction_routes.auction_maintenance)
                         }
                         className={
-                           'w-fit bg-transparent text-error-default hover:bg-error-default/10 dark:border-dark-error-default dark:text-dark-error-default dark:hover:bg-dark-error-default/10 text-xs md:text-base'
+                           'w-fit bg-transparent text-xs text-error-default hover:bg-error-default/10 dark:border-dark-error-default dark:text-dark-error-default dark:hover:bg-dark-error-default/10 md:text-base'
                         }
                      >
                         Cancelar edição
@@ -816,9 +814,9 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
             >
-               <div className="space-y-2 h-full overflow-y-auto md:ml-4 md:mt-9">
-                  <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-2xl font-semibold font-montserrat dark:text-dark-text-primary">
+               <div className="h-full space-y-2 overflow-y-auto md:ml-4 md:mt-9">
+                  <div className="flex items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold dark:text-dark-text-primary">
                         Sobre a página
                      </h1>
                      <Button
@@ -835,11 +833,11 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                      </Button>
                   </div>
                   <Separator orientation="horizontal" />
-                  <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                  <div className="max-h-[calc(100vh-12rem)] space-y-4 overflow-y-auto py-6 md:px-4">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Descrição
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         A página de Cadastrar Novo Leilão permite registrar um
                         leilão inserindo seus Dados Gerais, como nome,
                         localização e datas. Também é possível preencher Dados
@@ -847,11 +845,11 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
                         além de definir um e-mail para envio de notificações
                         relacionadas ao leilão.
                      </p>
-                     <div className="bg-[#E6F1F7] px-4 py-4 space-y-2 rounded-md">
-                        <p className="text-black font-normal text-start">
+                     <div className="space-y-2 rounded-md bg-[#E6F1F7] px-4 py-4">
+                        <p className="text-start font-normal text-black">
                            Info
                         </p>
-                        <p className="text-text-secondary text-start">
+                        <p className="text-start text-text-secondary">
                            Os dados deste formulário são para o Edital do
                            leilão, sendo enviadas ao DETRAN na criação do leilão
                            e no resultado do leilão.

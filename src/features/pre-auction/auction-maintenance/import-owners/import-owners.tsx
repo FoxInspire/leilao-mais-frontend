@@ -158,7 +158,7 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto]">
-            <div className="space-y-6 h-full flex flex-col">
+            <div className="flex h-full flex-col space-y-6">
                <div className="space-y-4">
                   <Breadcrumb>
                      <BreadcrumbList>
@@ -182,8 +182,8 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
-                     <div className="flex flex-wrap justify-between items-center gap-2">
-                        <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
+                     <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
                            Importar proprietários - {id}
                         </h1>
                         <Button
@@ -198,8 +198,8 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                      </div>
                      <Separator orientation="horizontal" />
                   </div>
-                  <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
-                     <div className="flex items-center gap-2 grow w-full">
+                  <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                     <div className="flex w-full grow items-center gap-2">
                         <Button
                            variant="outline"
                            className="whitespace-nowrap"
@@ -240,7 +240,7 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                                  <Button
                                     variant="default"
                                     disabled
-                                    className="sm:min-w-[150px] whitespace-nowrap"
+                                    className="whitespace-nowrap sm:min-w-[150px]"
                                     onClick={() => setDialog(true)}
                                  >
                                     Enviar arquivo
@@ -251,7 +251,7 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                         {select_files.files.length > 0 && (
                            <Button
                               variant="default"
-                              className="sm:min-w-[150px] whitespace-nowrap"
+                              className="whitespace-nowrap sm:min-w-[150px]"
                               onClick={() => setDialog(true)}
                            >
                               Enviar arquivo
@@ -260,7 +260,7 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                      </div>
                   </div>
                </div>
-               <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
+               <div className="grid max-h-[calc(100vh-12.4125rem)] w-full overflow-scroll">
                   <div className="flex-1 overflow-auto">
                      <DataTable
                         emptyMessage={'Nenhum arquivo encontrado.'}
@@ -274,9 +274,9 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
             >
-               <div className="space-y-2 h-full overflow-y-auto ml-4 mt-[36px]">
-                  <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-2xl font-semibold font-montserrat">
+               <div className="ml-4 mt-[36px] h-full space-y-2 overflow-y-auto">
+                  <div className="flex items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold">
                         Sobre a página
                      </h1>
                      <Button
@@ -293,11 +293,11 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                      </Button>
                   </div>
                   <Separator orientation="horizontal" />
-                  <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                  <div className="max-h-[calc(100vh-12rem)] space-y-4 overflow-y-auto px-4 py-6">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Descrição
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         A página de Importar Proprietários permite atualizar
                         informações dos lotes quando o retorno do Detran não é
                         automático. O usuário pode enviar um arquivo no sistema
@@ -305,23 +305,23 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                         arquivos importados para acompanhar as atualizações
                         realizadas.
                      </p>
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Detalhes
                      </p>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Baixar modelo
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            Faz o download do modelo da planilha para
                            preenchimento dos dados necessários.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Enviar arquivo
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            Atualiza as informações dos proprietários com o
                            conteúdo da planilha enviada.
                         </p>
@@ -336,23 +336,23 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                   <DialogTitle>Enviar arquivo</DialogTitle>
                </DialogHeader>
                <div className="space-y-6 py-4 pb-6">
-                  <div className="w-full flex flex-col justify-center items-center">
-                     <span className="material-symbols-outlined text-error-default symbol-xl">
+                  <div className="flex w-full flex-col items-center justify-center">
+                     <span className="material-symbols-outlined symbol-xl text-error-default">
                         warning
                      </span>
                   </div>
                   <div className="space-y-2">
-                     <p className="text-lg text-center font-montserrat font-medium">
+                     <p className="text-center font-montserrat text-lg font-medium">
                         Enviar os dados do arquivo no sistema
                      </p>
-                     <p className="text-center text-sm font-montserrat">
+                     <p className="text-center font-montserrat text-sm">
                         Esta ação irá atualizar as informações dos proprietários
                         com os dados do arquivo selecionado. Deseja continuar?
                      </p>
                   </div>
                </div>
-               <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
-                  <div className="md:order-1 order-2">
+               <div className="mb-6 mt-2 grid gap-2 md:grid-cols-2">
+                  <div className="order-2 md:order-1">
                      <Button
                         variant="destructive"
                         className="w-full"
@@ -361,7 +361,7 @@ const ImportOwners: React.FC<ImportOwnersProps> = ({
                         cancelar
                      </Button>
                   </div>
-                  <div className="md:order-2 order-1">
+                  <div className="order-1 md:order-2">
                      <Button
                         variant="default"
                         className="w-full"

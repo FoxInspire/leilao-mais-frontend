@@ -47,7 +47,7 @@ const SelectTrigger = React.forwardRef<
    <SelectPrimitive.Trigger
       ref={ref}
       className={cn(
-         'flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 dark:bg-transparent',
+         'flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:bg-neutral-950 dark:bg-transparent dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300 [&>span]:line-clamp-1',
          className
       )}
       {...props}
@@ -105,7 +105,7 @@ const SelectContent = React.forwardRef<
       <SelectPrimitive.Content
          ref={ref}
          className={cn(
-            'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-neutral-200 bg-white text-neutral-950 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:border-neutral-800 dark:text-neutral-50 dark:bg-dark-background-default dark:shadow-2xl dark:border-dark-secondary-contrast/5',
+            'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-neutral-200 bg-white text-neutral-950 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:border-dark-secondary-contrast/5 dark:border-neutral-800 dark:bg-dark-background-default dark:text-neutral-50 dark:shadow-2xl',
             position === 'popper' &&
                'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
             className
@@ -302,7 +302,7 @@ const SelectInput = React.forwardRef<
             <Select onValueChange={handleSelectChange}>
                <SelectTrigger
                   hideIcon
-                  className="border-none w-full px-0 py-0 m-0"
+                  className="m-0 w-full border-none px-0 py-0"
                >
                   <div ref={elementRef} className={cn(className, 'w-full')}>
                      <Input
@@ -319,7 +319,7 @@ const SelectInput = React.forwardRef<
                <SelectContent style={{ width: `${width}px` }} sideOffset={4}>
                   {menu_label && <SelectLabel>{menu_label}</SelectLabel>}
                   {options.length === 0 ? (
-                     <div className="py-2 px-2 text-sm text-neutral-500 text-center">
+                     <div className="px-2 py-2 text-center text-sm text-neutral-500">
                         Não há opções disponíveis
                      </div>
                   ) : (

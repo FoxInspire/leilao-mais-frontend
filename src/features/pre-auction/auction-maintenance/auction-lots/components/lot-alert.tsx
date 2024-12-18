@@ -38,7 +38,7 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                         size="icon"
                         onClick={() => setDialog(true)}
                      >
-                        <span className="material-symbols-outlined text-primary-default dark:text-dark-primary-default cursor-pointer">
+                        <span className="material-symbols-outlined cursor-pointer text-primary-default dark:text-dark-primary-default">
                            warning
                         </span>
                      </Button>
@@ -47,7 +47,7 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                      <Button
                         variant="ghost"
                         size="icon"
-                        className="w-auto px-2 hover:bg-transparent cursor-default"
+                        className="w-auto cursor-default px-2 hover:bg-transparent"
                      >
                         <div className="flex items-center justify-center gap-1">
                            <span className="text-sm text-text-secondary">
@@ -63,7 +63,7 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                      <Button
                         variant="ghost"
                         size="icon"
-                        className="w-auto px-2 hover:bg-transparent cursor-default"
+                        className="w-auto cursor-default px-2 hover:bg-transparent"
                      >
                         <span className="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">
                            mail
@@ -79,11 +79,11 @@ export const LotAlerts: React.FC<LotAlertsProps> = ({
                   </DialogHeader>
                   <div className="space-y-4 py-4 pb-6">
                      <div className="space-y-2">
-                        <p className="text-lg font-montserrat font-medium">
+                        <p className="font-montserrat text-lg font-medium">
                            PROCESSO - {row.original.id}
                         </p>
                      </div>
-                     <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
+                     <div className="grid max-h-[calc(100vh-12.4125rem)] w-full overflow-scroll">
                         <div className="flex-1 overflow-auto pb-4">
                            <TableAuctionLots
                               data={row.original.AuctionLot || []}

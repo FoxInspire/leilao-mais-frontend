@@ -59,7 +59,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                   {props.children}
                </span>
                {loading && (
-                  <span className="loader absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animation-spin" />
+                  <span className="loader animation-spin absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
                )}
             </div>
          </Comp>

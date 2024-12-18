@@ -24,7 +24,7 @@ export const TransactionStatus: React.FC<TransactionStatusProps> = ({
       <React.Fragment>
          <div
             className={cn(
-               'px-2 py-0.5 flex flex-1 items-center justify-center rounded-3xl text-white',
+               'flex flex-1 items-center justify-center rounded-3xl px-2 py-0.5 text-white',
                colors.awaiting
             )}
          >

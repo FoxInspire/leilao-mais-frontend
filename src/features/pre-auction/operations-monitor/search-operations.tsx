@@ -58,7 +58,7 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
 
    return (
       <React.Fragment>
-         <div className="grid grid-cols-[1fr_auto] h-[calc(100vh-6.5rem)] overflow-hidden">
+         <div className="grid h-[calc(100vh-6.5rem)] grid-cols-[1fr_auto] overflow-hidden">
             <div className="max-h-svh">
                <div className="space-y-4">
                   <Breadcrumb>
@@ -73,8 +73,8 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
-                     <div className="flex flex-wrap justify-between items-center gap-2">
-                        <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
+                     <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
                            Monitor de operações
                         </h1>
                         <Button
@@ -90,10 +90,10 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                      <Separator orientation="horizontal" />
                   </div>
                </div>
-               <div className="grid w-full h-[calc(100vh-12.4125rem)] place-items-center">
-                  <div className="space-y-6 max-w-xl">
-                     <OperationsMonitorIllustation className="h-52 mx-auto" />
-                     <h3 className="text-center text-2xl font-semibold font-montserrat">
+               <div className="grid h-[calc(100vh-12.4125rem)] w-full place-items-center">
+                  <div className="max-w-xl space-y-6">
+                     <OperationsMonitorIllustation className="mx-auto h-52" />
+                     <h3 className="text-center font-montserrat text-2xl font-semibold">
                         Selecione um leilão para carregar lista de lotes
                      </h3>
                      <Form {...form}>
@@ -144,9 +144,9 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                onOpenChange={setIsSidebarOpen}
                className="h-[calc(100vh-1.5rem-56px)]"
             >
-               <div className="space-y-2 h-full overflow-y-auto md:ml-4">
-                  <div className="flex justify-between items-center gap-2 mt-9">
-                     <h1 className="text-2xl font-semibold font-montserrat">
+               <div className="h-full space-y-2 overflow-y-auto md:ml-4">
+                  <div className="mt-9 flex items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold">
                         Sobre a página
                      </h1>
                      <Button
@@ -163,11 +163,11 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                      </Button>
                   </div>
                   <Separator orientation="horizontal" />
-                  <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                  <div className="max-h-[calc(100vh-12rem)] space-y-4 overflow-y-auto py-6 md:px-4">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Descrição
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         A página de Monitor de Operações permite acompanhar em
                         tempo real as transações dos lotes em um leilão ativo
                         junto ao DETRAN. O usuário pode alterar o status do lote
@@ -176,41 +176,41 @@ export const SearchOperations: React.FC<SearchOperationsProps> = ({
                         monitorar mensagens e notificações relevantes para cada
                         lote.
                      </p>
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Detalhes
                      </p>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Status do lote
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            É possível alterar o status conforme o avanço dos
                            processos junto ao DETRAN.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Transação
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            Operações e processos necessários ao lote junto ao
                            DETRAN. A cor verde indica sucesso
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Agendado
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            Exibe o ícone quando a transação do lote for
                            agendada.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Consultas
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            É possível consultar mais informações sobre o veículo
                            na base de dados.
                         </p>

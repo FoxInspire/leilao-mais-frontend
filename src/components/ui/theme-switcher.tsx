@@ -20,14 +20,14 @@ export const ThemeSwitch: React.FC = () => {
    }
 
    return (
-      <div className="flex justify-center items-center">
-         <div className="border border-neutral-300 dark:border-gray-400 rounded-full p-1 flex gap-1.5">
+      <div className="flex items-center justify-center">
+         <div className="flex gap-1.5 rounded-full border border-neutral-300 p-1 dark:border-gray-400">
             <button
                onClick={() => setTheme('light')}
                className={cn(
-                  'rounded-full h-6 w-6 transition-all duration-200',
+                  'h-6 w-6 rounded-full transition-all duration-200',
                   'text-gray-500 dark:text-gray-500',
-                  'hover:bg-gray-100 ',
+                  'hover:bg-gray-100',
                   'flex items-center justify-center',
                   'focus:outline-none',
                   theme === 'light' ? 'bg-gray-100 dark:bg-gray-700' : ''
@@ -48,9 +48,9 @@ export const ThemeSwitch: React.FC = () => {
             <button
                onClick={() => setTheme('system')}
                className={cn(
-                  'rounded-full h-6 w-6 transition-all duration-200',
+                  'h-6 w-6 rounded-full transition-all duration-200',
                   'text-gray-500 dark:text-gray-500',
-                  'hover:bg-gray-100 ',
+                  'hover:bg-gray-100',
                   'flex items-center justify-center',
                   'focus:outline-none',
                   theme === 'system' ? 'bg-gray-100' : ''
@@ -89,9 +89,9 @@ export const ThemeSwitch: React.FC = () => {
                   )
                }}
                className={cn(
-                  'rounded-full h-6 w-6 transition-all duration-200',
+                  'h-6 w-6 rounded-full transition-all duration-200',
                   'text-gray-500 dark:text-gray-500',
-                  'hover:bg-gray-100 ',
+                  'hover:bg-gray-100',
                   'flex items-center justify-center',
                   'focus:outline-none',
                   theme === 'dark' ? 'bg-gray-100' : ''

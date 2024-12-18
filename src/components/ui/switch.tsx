@@ -26,21 +26,21 @@ const Switch = React.forwardRef<
    React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
 >(({ className, ...props }, ref) => (
    <SwitchPrimitives.Root
-      className={cn('relative inline-block w-11 h-5', className)}
+      className={cn('relative inline-block h-5 w-11', className)}
       {...props}
       ref={ref}
    >
       <SwitchPrimitives.Thumb
          className={cn(
-            'absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow transition-transform duration-300',
+            'absolute left-0 top-0 h-5 w-5 rounded-full border border-slate-300 bg-white shadow transition-transform duration-300',
             'data-[state=checked]:translate-x-6 data-[state=checked]:border-blue-600',
             'data-[state=unchecked]:translate-x-0'
          )}
       />
       <span
          className={cn(
-            'block w-11 h-4 bg-slate-100 border border-slate-300 rounded-full transition-colors duration-300',
-            'data-[state=checked]:bg-blue-600 data-[state=checked]:border-blue-600'
+            'block h-4 w-11 rounded-full border border-slate-300 bg-slate-100 transition-colors duration-300',
+            'data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600'
          )}
       />
    </SwitchPrimitives.Root>

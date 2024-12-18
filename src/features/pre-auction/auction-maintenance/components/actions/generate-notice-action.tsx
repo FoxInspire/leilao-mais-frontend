@@ -155,7 +155,7 @@ export const GenerateNoticeAction: React.FC<GenerateNoticeActionProps> = ({
             </DialogTitle>
          </DialogHeader>
          <div className="space-y-6 py-4 pb-6">
-            <p className="text-lg font-montserrat">
+            <p className="font-montserrat text-lg">
                <span className="font-semibold">
                   {row?.original?.auctionCode}
                </span>
@@ -209,9 +209,9 @@ export const GenerateNoticeAction: React.FC<GenerateNoticeActionProps> = ({
                            <TableRow>
                               <TableCell
                                  colSpan={columns_generate_notice.length}
-                                 className="text-center hover:bg-transparent cursor-default"
+                                 className="cursor-default text-center hover:bg-transparent"
                               >
-                                 <span className="text-text-secondary text-base">
+                                 <span className="text-base text-text-secondary">
                                     Nenhum resultado encontrado.
                                  </span>
                               </TableCell>

@@ -79,7 +79,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                  handleCollapseChange(item.title, isOpen)
                               }
                               className={cn('group/collapsible', {
-                                 'opacity-50 pointer-events-none': item.disabled
+                                 'pointer-events-none opacity-50': item.disabled
                               })}
                            >
                               <SidebarMenuItem>
@@ -165,7 +165,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                                              </span>
                                              <div
                                                 className={cn(
-                                                   'material-symbols-outlined shrink-0 transition-transform duration-200 origin-center text-action-active w-6 h-6 block !text-[24px]',
+                                                   'material-symbols-outlined block h-6 w-6 shrink-0 origin-center !text-[24px] text-action-active transition-transform duration-200',
                                                    'ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:-rotate-90 dark:text-sidebar-foreground'
                                                 )}
                                              >
@@ -223,7 +223,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
                               <SidebarMenuButton
                                  tooltip={item.title}
                                  className={cn('h-10', {
-                                    'opacity-50 pointer-events-none':
+                                    'pointer-events-none opacity-50':
                                        item.disabled
                                  })}
                                  asChild
@@ -256,7 +256,7 @@ const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
             <SidebarRail />
          </Sidebar>
          <SidebarInset className="p-6">
-            <div className="h-full flex flex-col overflow-hidden">
+            <div className="flex h-full flex-col overflow-hidden">
                {children}
             </div>
          </SidebarInset>
@@ -280,7 +280,7 @@ const data = {
          title: 'Dashboard',
          url: dashboard_routes.index,
          icon: (
-            <span className="material-symbols-outlined filled !text-[24px] leading-6 w-6 h-6 block">
+            <span className="material-symbols-outlined filled block h-6 w-6 !text-[24px] leading-6">
                space_dashboard
             </span>
          ),
@@ -290,7 +290,7 @@ const data = {
          title: 'Pré-leilão',
          url: dashboard_routes.pre_auction.auction_maintenance,
          icon: (
-            <span className="material-symbols-outlined !text-[24px] leading-6 w-6 h-6 block">
+            <span className="material-symbols-outlined block h-6 w-6 !text-[24px] leading-6">
                monitor
             </span>
          ),
@@ -313,7 +313,7 @@ const data = {
          url: dashboard_routes.post_auction.index,
          disabled: true,
          icon: (
-            <span className="material-symbols-outlined filled !text-[24px] leading-6 w-6 h-6 block">
+            <span className="material-symbols-outlined filled block h-6 w-6 !text-[24px] leading-6">
                star
             </span>
          )
@@ -346,7 +346,7 @@ const renderIcon = (icon: IconType | JSX.Element, className?: string) => {
       return icon
    }
    const IconComponent = icon as IconType
-   return <IconComponent className={cn(className, 'w-6 h-6 block')} />
+   return <IconComponent className={cn(className, 'block h-6 w-6')} />
 }
 
 const LogoSwitcher: React.FC<{ state: 'expanded' | 'collapsed' }> = ({
@@ -355,21 +355,21 @@ const LogoSwitcher: React.FC<{ state: 'expanded' | 'collapsed' }> = ({
    const isMobile = useIsMobile()
    return (
       <div
-         className={cn('flex items-center justify-center h-full', {
+         className={cn('flex h-full items-center justify-center', {
             'pt-6': state === 'expanded',
             'py-6': state === 'collapsed'
          })}
       >
          {state === 'expanded' ? (
             <React.Fragment>
-               <LogoComplete className="w-48 h-auto" />
+               <LogoComplete className="h-auto w-48" />
             </React.Fragment>
          ) : (
             <React.Fragment>
                {isMobile ? (
-                  <LogoComplete className="w-48 h-auto" />
+                  <LogoComplete className="h-auto w-48" />
                ) : (
-                  <LogoSimplified className="w-full h-8" />
+                  <LogoSimplified className="h-8 w-full" />
                )}
             </React.Fragment>
          )}

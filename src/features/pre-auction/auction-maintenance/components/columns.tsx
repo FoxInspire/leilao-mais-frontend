@@ -36,7 +36,7 @@ export const columns: ColumnDef<AuctionEntity>[] = [
          <DataTableColumnHeader column={column} title="Leilão" />
       ),
       cell: ({ row }) => (
-         <div className="font-bold font-nunito text-primary-default dark:text-dark-primary-default hover:underline">
+         <div className="font-nunito font-bold text-primary-default hover:underline dark:text-dark-primary-default">
             <TooltipProvider>
                <Tooltip delayDuration={2000}>
                   <TooltipTrigger className="cursor-pointer hover:underline">
@@ -98,7 +98,7 @@ export const columns: ColumnDef<AuctionEntity>[] = [
                   <span className="material-symbols-outlined">add</span>
                </Button>
             ) : (
-               <span className="font-bold font-nunito text-black dark:text-white">
+               <span className="font-nunito font-bold text-black dark:text-white">
                   {row.original.AuctionLot.length}
                </span>
             )}

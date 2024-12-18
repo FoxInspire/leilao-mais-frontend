@@ -148,7 +148,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
          return (
             <React.Fragment>
                <div
-                  className="relative flex flex-col self-stretch p-0 isolate items-center justify-center"
+                  className="relative isolate flex flex-col items-center justify-center self-stretch p-0"
                   data-twe-input-wrapper-init
                >
                   <MaskedInput
@@ -186,7 +186,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                            'absolute right-3 top-1/2 -translate-y-1/2',
                            'text-neutral-500 hover:text-neutral-700',
                            'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-default',
-                           'transition-colors duration-200 rounded-sm'
+                           'rounded-sm transition-colors duration-200'
                         )}
                         aria-label={
                            type === 'password'
@@ -212,7 +212,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       return (
          <React.Fragment>
             <div
-               className="relative flex flex-col self-stretch p-0 isolate items-center justify-center"
+               className="relative isolate flex flex-col items-center justify-center self-stretch p-0"
                data-twe-input-wrapper-init
             >
                <input
@@ -249,7 +249,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                         'absolute right-3 top-1/2 -translate-y-1/2',
                         'text-neutral-500 hover:text-neutral-700',
                         'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-default',
-                        'transition-colors duration-200 rounded-sm'
+                        'rounded-sm transition-colors duration-200'
                      )}
                      aria-label={
                         type === 'password' ? 'Show password' : 'Hide password'

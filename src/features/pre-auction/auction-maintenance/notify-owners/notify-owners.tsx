@@ -98,7 +98,7 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto]">
-            <div className="space-y-6 h-full flex flex-col">
+            <div className="flex h-full flex-col space-y-6">
                <div className="space-y-4">
                   <Breadcrumb>
                      <BreadcrumbList>
@@ -122,8 +122,8 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
-                     <div className="flex flex-wrap justify-between items-center gap-2">
-                        <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
+                     <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
                            Notificar proprietários - {id}
                         </h1>
                         <Button
@@ -138,8 +138,8 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                      </div>
                      <Separator orientation="horizontal" />
                   </div>
-                  <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
-                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
+                  <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                     <div className="flex w-full flex-col items-start gap-4 sm:flex-row sm:items-center">
                         <div className="min-w-[300px]">
                            <SelectInput
                               options={[
@@ -159,7 +159,7 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                               placeholder="Selecione o endereço notificável"
                            />
                         </div>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-sm">
+                        <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
                            {data?.length} registros encontrados
                         </p>
                      </div>
@@ -173,7 +173,7 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                         </Button>
                         <Button
                            variant="default"
-                           className="sm:min-w-[150px] whitespace-nowrap"
+                           className="whitespace-nowrap sm:min-w-[150px]"
                            onClick={() => handleExportToTxt()}
                         >
                            Gerar arquivo
@@ -181,7 +181,7 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                      </div>
                   </div>
                </div>
-               <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
+               <div className="grid max-h-[calc(100vh-12.4125rem)] w-full overflow-scroll">
                   <div className="flex-1 overflow-auto">
                      <DataTable
                         data={data}
@@ -195,9 +195,9 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
             >
-               <div className="space-y-2 h-full overflow-y-auto ml-4 mt-[36px]">
-                  <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-2xl font-semibold font-montserrat">
+               <div className="ml-4 mt-[36px] h-full space-y-2 overflow-y-auto">
+                  <div className="flex items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold">
                         Sobre a página
                      </h1>
                      <Button
@@ -214,34 +214,34 @@ const NotifyOwners: React.FC<NotifyOwnersProps> = ({
                      </Button>
                   </div>
                   <Separator orientation="horizontal" />
-                  <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                  <div className="max-h-[calc(100vh-12rem)] space-y-4 overflow-y-auto px-4 py-6">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Descrição
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         A página de Notificar Proprietários permite visualizar a
                         lista de proprietários dos veículos incluídos em um
                         leilão. É possível extrair uma planilha com os dados da
                         listagem e gerar um arquivo de texto para utilização em
                         outras plataformas, como o sistema dos Correios.
                      </p>
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Detalhes
                      </p>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Extrair excel
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            Faz o download da planilha Excel contendo todos os
                            dados referente aos proprietários dos veículos.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Gerar arquivo
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            Faz o download de um arquivo de texto (.txt) para ser
                            utilizado em outras plataformas, contendo todos os
                            dados referente aos proprietários dos veículos.

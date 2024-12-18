@@ -4,15 +4,15 @@ import * as React from 'react'
 
 import { Calendar } from '@/components/ui/calendar'
 import {
-    Input,
-    inputVariants as inputDatePickerVariants,
-    InputProps,
-    labelVariants as labelDatePickerVariants
+   Input,
+   inputVariants as inputDatePickerVariants,
+   InputProps,
+   labelVariants as labelDatePickerVariants
 } from '@/components/ui/input'
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger
+   Popover,
+   PopoverContent,
+   PopoverTrigger
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 import { format, setHours, setMinutes } from 'date-fns'
@@ -138,7 +138,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
          <React.Fragment>
             <Popover open={open} onOpenChange={setOpen}>
                <PopoverTrigger asChild>
-                  <div className="relative flex flex-col self-stretch p-0 isolate items-center justify-center">
+                  <div className="relative isolate flex flex-col items-center justify-center self-stretch p-0">
                      <Input
                         readOnly
                         type="text"
@@ -182,12 +182,12 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
                </PopoverTrigger>
                <PopoverContent className="w-auto p-0">
                   {showTime && (
-                     <div className="p-3 border-b">
+                     <div className="border-b p-3">
                         <input
                            type="time"
                            value={timeValue}
                            onChange={handleTimeChange}
-                           className="w-full px-2 py-1 border rounded"
+                           className="w-full rounded border px-2 py-1"
                         />
                      </div>
                   )}
@@ -218,4 +218,3 @@ export interface DatePickerProps extends InputProps {
 DatePicker.displayName = 'DatePicker'
 
 export { DatePicker }
-

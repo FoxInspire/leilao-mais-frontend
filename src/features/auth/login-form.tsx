@@ -16,22 +16,22 @@ const LoginForm: React.FC = () => {
    const { theme } = useTheme()
    return (
       <React.Fragment>
-         <div className="grid lg:grid-cols-2 grid-cols-1 gap-8 min-h-screen p-4 lg:p-10">
-            <div className="bg-primary-default/70 dark:bg-dark-primary-default/70 hidden lg:flex flex-col justify-center items-center rounded-3xl">
+         <div className="grid min-h-screen grid-cols-1 gap-8 p-4 lg:grid-cols-2 lg:p-10">
+            <div className="hidden flex-col items-center justify-center rounded-3xl bg-primary-default/70 dark:bg-dark-primary-default/70 lg:flex">
                {theme === 'light' ? (
                   <LoginIllustrationLight className="max-w-full lg:max-w-[500px]" />
                ) : (
                   <LoginIllustrationDark className="max-w-full lg:max-w-[500px]" />
                )}
             </div>
-            <div className="flex gap-6 flex-col justify-center w-full mx-auto relative p-6">
-               <LogoComplete className="w-56 lg:w-64 mx-auto my-0" />
-               <div className="flex gap-6 flex-col">
+            <div className="relative mx-auto flex w-full flex-col justify-center gap-6 p-6">
+               <LogoComplete className="mx-auto my-0 w-56 lg:w-64" />
+               <div className="flex flex-col gap-6">
                   <div className="space-y-1">
-                     <h3 className="text-xl lg:text-2xl font-semibold font-montserrat">
+                     <h3 className="font-montserrat text-xl font-semibold lg:text-2xl">
                         Login
                      </h3>
-                     <p className="text-sm lg:text-base text-gray-500 font-nunito">
+                     <p className="font-nunito text-sm text-gray-500 lg:text-base">
                         Insira suas credenciais para acessar a plataforma.
                      </p>
                   </div>
@@ -47,12 +47,12 @@ const LoginForm: React.FC = () => {
                         placeholder="Digite sua senha"
                      />
                   </div>
-                  <span className="text-base font-normal text-primary-default hover:underline cursor-pointer text-end dark:text-dark-primary-default">
+                  <span className="cursor-pointer text-end text-base font-normal text-primary-default hover:underline dark:text-dark-primary-default">
                      Esqueceu sua senha?
                   </span>
                   <Button>Entrar</Button>
                </div>
-               <div className="lg:absolute static mt-4 lg:mt-0 lg:bottom-0 lg:right-0">
+               <div className="static mt-4 lg:absolute lg:bottom-0 lg:right-0 lg:mt-0">
                   <ThemeSwitch />
                </div>
             </div>

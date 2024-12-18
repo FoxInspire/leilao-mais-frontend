@@ -15,7 +15,7 @@ export const ScheduleStatus: React.FC<ScheduleStatusProps> = ({
    return (
       <React.Fragment>
          <div className="flex items-center">
-            <span className="material-symbols-outlined text-text-secondary symbol-md dark:text-dark-text-secondary">
+            <span className="material-symbols-outlined symbol-md text-text-secondary dark:text-dark-text-secondary">
                schedule
             </span>
          </div>

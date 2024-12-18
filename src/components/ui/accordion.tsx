@@ -33,7 +33,7 @@ const AccordionTrigger = React.forwardRef<
          {...props}
       >
          {children}
-         <div className="material-symbols-outlined shrink-0 transition-transform duration-200 origin-center text-action-active">
+         <div className="material-symbols-outlined shrink-0 origin-center text-action-active transition-transform duration-200">
             keyboard_arrow_down
          </div>
       </AccordionPrimitive.Trigger>

@@ -194,8 +194,8 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                   </BreadcrumbList>
                </Breadcrumb>
                <div className="space-y-2">
-                  <div className="flex flex-wrap justify-between items-center gap-2">
-                     <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
                         Ingressar lotes
                      </h1>
                      <Button
@@ -213,13 +213,13 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                <Form {...filterForm}>
                   <div className="space-y-6">
                      <form onSubmit={filterForm.handleSubmit(onSubmitFilters)}>
-                        <div className="grid w-full min-h-[calc(100vh-16.8125rem)] grid-rows-[auto_1fr] gap-6">
+                        <div className="grid min-h-[calc(100vh-16.8125rem)] w-full grid-rows-[auto_1fr] gap-6">
                            <div id="filters" className="space-y-6">
-                              <Card className="h-fit flex items-center justify-between space-y-0">
-                                 <p className="text-black dark:text-dark-text-primary font-semibold text-start text-base font-nunito ">
+                              <Card className="flex h-fit items-center justify-between space-y-0">
+                                 <p className="text-start font-nunito text-base font-semibold text-black dark:text-dark-text-primary">
                                     Informação do leilão
                                  </p>
-                                 <h3 className="lg:text-lg text-base font-nunito font-semibold">
+                                 <h3 className="font-nunito text-base font-semibold lg:text-lg">
                                     {id} -{' '}
                                     {format(new Date(), 'dd MMM yyyy', {
                                        locale: ptBR
@@ -230,17 +230,17 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                  <div className="flex items-center gap-2">
                                     <span
                                        className={cn(
-                                          'font-semibold h-6 w-6 rounded-xl bg-action-disabled/35 dark:bg-dark-action-disabled/35 text-white flex items-center justify-center',
+                                          'flex h-6 w-6 items-center justify-center rounded-xl bg-action-disabled/35 font-semibold text-white dark:bg-dark-action-disabled/35',
                                           'bg-primary-default dark:bg-dark-primary-default'
                                        )}
                                     >
-                                       <span className="text-sm font-roboto font-normal">
+                                       <span className="font-roboto text-sm font-normal">
                                           1
                                        </span>
                                     </span>
                                     <span
                                        className={cn(
-                                          'whitespace-nowrap transition-all duration-300 text-xl text-black font-semibold font-montserrat'
+                                          'whitespace-nowrap font-montserrat text-xl font-semibold text-black transition-all duration-300'
                                        )}
                                     >
                                        Ingressar lotes
@@ -248,7 +248,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                  </div>
                               </div>
                               <div className="space-y-6">
-                                 <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+                                 <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-3">
                                     <FormField
                                        control={filterForm.control}
                                        name="auctionId"
@@ -324,11 +324,11 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                     />
                                  </div>
                                  <div className="space-y-4">
-                                    <p className="text-black dark:text-dark-text-primary font-semibold text-start text-sm">
+                                    <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                                        Lista de lotes
                                     </p>
                                     <div className="space-y-6">
-                                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4">
+                                       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
                                           <FormField
                                              control={filterForm.control}
                                              name="type"
@@ -350,7 +350,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                                             query.lotType ||
                                                             field.value
                                                          }
-                                                         className="flex gap-6 items-center"
+                                                         className="flex items-center gap-6"
                                                       >
                                                          <FormItem className="flex items-center space-x-2 space-y-0">
                                                             <FormControl>
@@ -385,7 +385,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                           />
                                        </div>
                                        {query.lotType === LotType.NEW && (
-                                          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] items-center gap-4">
+                                          <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-[1fr_1fr_auto]">
                                              <FormField
                                                 control={filterForm.control}
                                                 name="pagesLimit"
@@ -429,7 +429,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                                           </div>
                                        )}
                                        {query.lotType === LotType.REUSABLE && (
-                                          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] items-center gap-4">
+                                          <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-[1fr_1fr_1fr_auto]">
                                              <FormField
                                                 control={filterForm.control}
                                                 name="pagesLimit"
@@ -497,7 +497,7 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                            </div>
                         </div>
                      </form>
-                     <div className="flex flex-1 justify-end items-center">
+                     <div className="flex flex-1 items-center justify-end">
                         <Button
                            type="submit"
                            className="w-fit"
@@ -517,9 +517,9 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
             >
-               <div className="space-y-2 h-full overflow-y-auto md:ml-4 md:mt-9">
-                  <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-2xl font-semibold font-montserrat dark:text-dark-text-primary">
+               <div className="h-full space-y-2 overflow-y-auto md:ml-4 md:mt-9">
+                  <div className="flex items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold dark:text-dark-text-primary">
                         Sobre a página
                      </h1>
                      <Button
@@ -536,11 +536,11 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                      </Button>
                   </div>
                   <Separator orientation="horizontal" />
-                  <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                  <div className="max-h-[calc(100vh-12rem)] space-y-4 overflow-y-auto py-6 md:px-4">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Descrição
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         A página de Ingressar Lotes permite adicionar veículos
                         ao leilão selecionando um Pátio para a busca, filtrando
                         pelo número de dias desde o recolhimento e definindo o
@@ -548,22 +548,22 @@ export const InsertLots: React.FC<InsertLotsProps> = ({
                         novos ou reaproveitáveis, buscando itens pelo GRV (Guia
                         de Recolhimento de Veículos).
                      </p>
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Detalhes
                      </p>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Lotes novos
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            São lotes que nunca passaram por um leilão.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Lotes reaproveitáveis
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            São lotes que já participaram de um leilão e estão
                            novamente disponíveis.
                         </p>
