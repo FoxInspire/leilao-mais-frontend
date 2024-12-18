@@ -2,9 +2,7 @@ import * as React from 'react'
 
 import { SelectInputValue } from '@/src/components/ui/select'
 import { UpdateAuction } from '@/src/features/pre-auction/auction-maintenance/update-auction/update-auction'
-import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { readJSONFile } from '@/src/utils/file-path-utils'
-import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-dynamic'
 
@@ -35,7 +33,7 @@ export default async function EditAuctionPage({
    )
 
    if (!filteredAuction) {
-      return redirect(pre_auction_routes.auction_maintenance)
+      return console.error('Auction not found.')
    }
 
    return (
