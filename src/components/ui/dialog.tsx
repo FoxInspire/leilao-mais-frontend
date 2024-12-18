@@ -20,7 +20,7 @@ const DialogOverlay = React.forwardRef<
    <DialogPrimitive.Overlay
       ref={ref}
       className={cn(
-         'fixed inset-0 z-50 backdrop-blur-[2px] bg-black/50  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 pointer-events-none',
+         'pointer-events-none fixed inset-0 z-50 bg-black/50 backdrop-blur-[2px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
          className
       )}
       {...props}
@@ -39,8 +39,8 @@ const DialogContent = React.forwardRef<
          ref={ref}
          onPointerDownOutside={(e) => e.preventDefault()}
          className={cn(
-            'fixed top-auto left-auto right-0 bottom-0 translate-x-0 translate-y-0 z-50 grid w-full gap-4 bg-white shadow-lg duration-200 rounded-t-2xl rounded-bl-none rounded-br-none max-h-[85vh] overflow-y-auto',
-            'md:left-[50%] md:top-[50%] md:bottom-auto md:right-auto md:translate-x-[-50%] md:translate-y-[-50%] md:max-w-4xl md:rounded-xl pb-12 md:pb-0',
+            'fixed bottom-0 left-auto right-0 top-auto z-50 grid max-h-[85vh] w-full translate-x-0 translate-y-0 gap-4 overflow-y-auto rounded-t-2xl rounded-bl-none rounded-br-none bg-white shadow-lg duration-200',
+            'pb-12 md:bottom-auto md:left-[50%] md:right-auto md:top-[50%] md:max-w-4xl md:translate-x-[-50%] md:translate-y-[-50%] md:rounded-xl md:pb-0',
             'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
             'md:data-[state=closed]:slide-out-to-left-1/2 md:data-[state=closed]:slide-out-to-top-[48%] md:data-[state=open]:slide-in-from-left-1/2 md:data-[state=open]:slide-in-from-top-[48%]',
             'dark:border-neutral-800 dark:bg-dark-background-paper',
@@ -88,17 +88,17 @@ const DialogTitle = React.forwardRef<
       onClose?: () => void
    }
 >(({ className, onClose, ...props }, ref) => (
-   <div className="flex justify-between items-center bg-dark-background-paper text-white py-4 px-6 -mx-6 dark:bg-dark-primary-default">
+   <div className="-mx-6 flex items-center justify-between bg-dark-background-paper px-6 py-4 text-white dark:bg-dark-primary-default">
       <DialogPrimitive.Title
          ref={ref}
          className={cn(
-            'text-xl font-semibold leading-none tracking-tight font-montserrat',
+            'font-montserrat text-xl font-semibold leading-none tracking-tight',
             className
          )}
          {...props}
       />
       <DialogPrimitive.Close
-         className="rounded-sm opacity-70 ring-0 transition-opacity hover:opacity-100 focus:ring-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-neutral-100 data-[state=open]:text-neutral-500 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 dark:data-[state=open]:bg-neutral-800 dark:data-[state=open]:text-neutral-400 flex items-center justify-center"
+         className="flex items-center justify-center rounded-sm opacity-70 ring-0 transition-opacity hover:opacity-100 focus:outline-none focus:ring-0 focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-neutral-100 data-[state=open]:text-neutral-500 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 dark:data-[state=open]:bg-neutral-800 dark:data-[state=open]:text-neutral-400"
          onClick={() => onClose?.()}
       >
          <span className="material-symbols-outlined">close</span>

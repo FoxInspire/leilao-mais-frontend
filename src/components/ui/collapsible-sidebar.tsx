@@ -65,14 +65,14 @@ export function CollapsibleSidebar({
             hasHeaderMenu ? 'mt-14' : '',
             {
                'overflow-y-auto': open,
-               'overflow-y-hidden h-0': !open
+               'h-0 overflow-y-hidden': !open
             },
             className
          )}
       >
          <div
             className={cn(
-               'h-full bg-background',
+               'bg-background h-full',
                'overflow-hidden',
                open ? 'opacity-100' : 'opacity-0',
                'transition-opacity duration-300'

@@ -50,8 +50,8 @@ export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
-                     <div className="flex flex-wrap justify-between items-center gap-2">
-                        <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
+                     <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
                            Ingressar lotes
                         </h1>
                         <Button
@@ -67,12 +67,12 @@ export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
                      <Separator orientation="horizontal" />
                   </div>
                </div>
-               <div className="grid w-full h-[calc(100vh-12.4125rem)] place-items-center">
+               <div className="grid h-[calc(100vh-12.4125rem)] w-full place-items-center">
                   <div className="grid place-items-center gap-4">
-                     <span className="material-symbols-outlined text-[#19B26B] symbol-xl">
+                     <span className="material-symbols-outlined symbol-xl text-[#19B26B]">
                         check_circle
                      </span>
-                     <h3 className="text-center text-2xl font-semibold font-montserrat">
+                     <h3 className="text-center font-montserrat text-2xl font-semibold">
                         Lotes do leilão{' '}
                         <span className="font-bold text-primary-default dark:text-dark-primary-default">
                            {id}
@@ -109,9 +109,9 @@ export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
             >
-               <div className="space-y-2 h-full overflow-y-auto md:ml-4 md:mt-9">
-                  <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-2xl font-semibold font-montserrat dark:text-dark-text-primary">
+               <div className="h-full space-y-2 overflow-y-auto md:ml-4 md:mt-9">
+                  <div className="flex items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold dark:text-dark-text-primary">
                         Sobre a página
                      </h1>
                      <Button
@@ -128,11 +128,11 @@ export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
                      </Button>
                   </div>
                   <Separator orientation="horizontal" />
-                  <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                  <div className="max-h-[calc(100vh-12rem)] space-y-4 overflow-y-auto py-6 md:px-4">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Descrição
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         A página de Ingressar Lotes permite adicionar veículos
                         ao leilão selecionando um Pátio para a busca, filtrando
                         pelo número de dias desde o recolhimento e definindo o
@@ -140,22 +140,22 @@ export const InsertLotsSuccess: React.FC<InsertLotsSuccessProps> = ({
                         novos ou reaproveitáveis, buscando itens pelo GRV (Guia
                         de Recolhimento de Veículos).
                      </p>
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Detalhes
                      </p>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Lotes novos
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            São lotes que nunca passaram por um leilão.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Lotes reaproveitáveis
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            São lotes que já participaram de um leilão e estão
                            novamente disponíveis.
                         </p>

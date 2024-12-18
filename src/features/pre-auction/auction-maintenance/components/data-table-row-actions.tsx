@@ -135,7 +135,7 @@ export function DataTableRowActions({
                <Button
                   variant="icon"
                   size="icon"
-                  className="flex data-[state=open]:bg-muted"
+                  className="data-[state=open]:bg-muted flex"
                >
                   <span className="material-symbols-outlined text-text-secondary dark:text-dark-text-secondary">
                      more_vert
@@ -159,7 +159,7 @@ export function DataTableRowActions({
                      >
                         <span
                            className={cn(
-                              'material-symbols-outlined text-text-secondary symbol-md dark:text-dark-text-secondary',
+                              'material-symbols-outlined symbol-md text-text-secondary dark:text-dark-text-secondary',
                               item.filled && 'filled'
                            )}
                         >

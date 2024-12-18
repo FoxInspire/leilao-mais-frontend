@@ -67,7 +67,7 @@ export const OperationsMonitorDetails: React.FC<
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto]">
-            <div className="space-y-6 h-full flex flex-col">
+            <div className="flex h-full flex-col space-y-6">
                <div className="space-y-4">
                   <Breadcrumb>
                      <BreadcrumbList>
@@ -89,8 +89,8 @@ export const OperationsMonitorDetails: React.FC<
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
-                     <div className="flex flex-wrap justify-between items-center gap-2">
-                        <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
+                     <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
                            Operações - {id?.toUpperCase()}
                         </h1>
                         <Button
@@ -106,8 +106,8 @@ export const OperationsMonitorDetails: React.FC<
                      <Separator orientation="horizontal" />
                   </div>
                   {selectedRows.length === 0 && (
-                     <div className="flex flex-col gap-4 w-full md:flex-row sm:items-center sm:justify-between">
-                        <div className="grid md:grid-cols-4 items-start sm:items-center gap-4 md:max-w-[70%] w-full">
+                     <div className="flex w-full flex-col gap-4 sm:items-center sm:justify-between md:flex-row">
+                        <div className="grid w-full items-start gap-4 sm:items-center md:max-w-[70%] md:grid-cols-4">
                            <Input
                               label="Busca geral"
                               value={globalFilter}
@@ -126,7 +126,7 @@ export const OperationsMonitorDetails: React.FC<
                            />
                            <Button
                               variant="ghost"
-                              className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
+                              className="w-full whitespace-nowrap sm:w-auto sm:min-w-[150px] md:w-fit"
                               onClick={() => setDialog(true)}
                            >
                               Busca avançada
@@ -136,7 +136,7 @@ export const OperationsMonitorDetails: React.FC<
                            <Button
                               disabled
                               variant="default"
-                              className="w-full sm:w-auto px-12 sm:min-w-[150px] whitespace-nowrap"
+                              className="w-full whitespace-nowrap px-12 sm:w-auto sm:min-w-[150px]"
                            >
                               Consultas
                            </Button>
@@ -144,7 +144,7 @@ export const OperationsMonitorDetails: React.FC<
                      </div>
                   )}
                   {selectedRows.length > 0 && (
-                     <div className="flex items-center gap-4 w-full min-h-12">
+                     <div className="flex min-h-12 w-full items-center gap-4">
                         <Button
                            variant="ghost"
                            size="icon"
@@ -156,7 +156,7 @@ export const OperationsMonitorDetails: React.FC<
                            </span>
                         </Button>
 
-                        <span className="text-sm text-text-secondary whitespace-nowrap dark:text-dark-text-secondary">
+                        <span className="whitespace-nowrap text-sm text-text-secondary dark:text-dark-text-secondary">
                            {selectedRows?.length} selecionado
                         </span>
 
@@ -232,7 +232,7 @@ export const OperationsMonitorDetails: React.FC<
                      </div>
                   )}
                </div>
-               <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
+               <div className="grid max-h-[calc(100vh-12.4125rem)] w-full overflow-scroll">
                   <div className="flex-1 overflow-auto">
                      <TableOperationMonitorDetails
                         ref={tableRef}
@@ -249,9 +249,9 @@ export const OperationsMonitorDetails: React.FC<
                onOpenChange={setIsSidebarOpen}
                className="h-[calc(100vh-1.5rem-56px)]"
             >
-               <div className="space-y-2 h-full overflow-y-auto md:ml-4">
-                  <div className="flex justify-between items-center gap-2 mt-9">
-                     <h1 className="text-2xl font-semibold font-montserrat">
+               <div className="h-full space-y-2 overflow-y-auto md:ml-4">
+                  <div className="mt-9 flex items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold">
                         Sobre a página
                      </h1>
                      <Button
@@ -268,11 +268,11 @@ export const OperationsMonitorDetails: React.FC<
                      </Button>
                   </div>
                   <Separator orientation="horizontal" />
-                  <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                  <div className="max-h-[calc(100vh-12rem)] space-y-4 overflow-y-auto py-6 md:px-4">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Descrição
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         A página de Monitor de Operações permite acompanhar em
                         tempo real as transações dos lotes em um leilão ativo
                         junto ao DETRAN. O usuário pode alterar o status do lote
@@ -281,41 +281,41 @@ export const OperationsMonitorDetails: React.FC<
                         monitorar mensagens e notificações relevantes para cada
                         lote.
                      </p>
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Detalhes
                      </p>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Status do lote
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            É possível alterar o status conforme o avanço dos
                            processos junto ao DETRAN.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Transação
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            Operações e processos necessários ao lote junto ao
                            DETRAN. A cor verde indica sucesso
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Agendado
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            Exibe o ícone quando a transação do lote for
                            agendada.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Consultas
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            É possível consultar mais informações sobre o veículo
                            na base de dados.
                         </p>
@@ -330,10 +330,10 @@ export const OperationsMonitorDetails: React.FC<
                   <DialogTitle>Busca avançada</DialogTitle>
                </DialogHeader>
                <div className="space-y-6 py-4 pb-6">
-                  <p className="text-lg font-montserrat">
+                  <p className="font-montserrat text-lg">
                      Preencha os campos necessários para busca
                   </p>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-6">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                      <SelectInput
                         label="Status"
                         placeholder="Selecione o status"
@@ -368,7 +368,7 @@ export const OperationsMonitorDetails: React.FC<
                         onValueChange={(value) => console.log('value', value)}
                      />
                   </div>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                      <Input label="Processo" placeholder="Número do processo" />
                      <Input label="Placa" placeholder="000-0000" />
                      <Input label="Chassi" placeholder="00000000000000000" />
@@ -379,8 +379,8 @@ export const OperationsMonitorDetails: React.FC<
                      placeholder="Ex: Fiat, VW"
                   />
                </div>
-               <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
-                  <div className="md:order-1 order-2">
+               <div className="mb-6 mt-2 grid gap-2 md:grid-cols-2">
+                  <div className="order-2 md:order-1">
                      <Button
                         variant="destructive"
                         className="w-full"
@@ -391,7 +391,7 @@ export const OperationsMonitorDetails: React.FC<
                         Cancelar
                      </Button>
                   </div>
-                  <div className="md:order-2 order-1">
+                  <div className="order-1 md:order-2">
                      <Button
                         variant="default"
                         className="w-full"

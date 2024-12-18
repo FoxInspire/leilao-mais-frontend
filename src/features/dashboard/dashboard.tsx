@@ -21,8 +21,8 @@ import { CheckedState } from '@radix-ui/react-checkbox'
 import { useQueryState } from 'nuqs'
 
 interface DashboardProps {
-   filterOptions: typeof import('@/src/features/dashboard/mocks/filter-options.json')['options']
-   transactionOptions: typeof import('@/src/features/dashboard/mocks/filter-transactions.json')['options']
+   filterOptions: (typeof import('@/src/features/dashboard/mocks/filter-options.json'))['options']
+   transactionOptions: (typeof import('@/src/features/dashboard/mocks/filter-transactions.json'))['options']
    cardsMock: typeof import('@/src/features/dashboard/mocks/cards-mock.json')
 }
 
@@ -109,11 +109,11 @@ const Dashboard: React.FC<DashboardProps> = ({
    }, [tab])
 
    return (
-      <div className="grid grid-cols-[1fr_auto] h-[calc(100vh-6.5125rem)] overflow-hidden">
+      <div className="grid h-[calc(100vh-6.5125rem)] grid-cols-[1fr_auto] overflow-hidden">
          <div className="space-y-6">
             <div className="space-y-2">
-               <div className="flex justify-between items-center gap-2">
-                  <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
+               <div className="flex items-center justify-between gap-2">
+                  <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
                      Dashboard
                   </h1>
                   <Button
@@ -134,16 +134,16 @@ const Dashboard: React.FC<DashboardProps> = ({
                   defaultValue={Tab.InProgress}
                   onValueChange={(value) => setTab(value as Tab)}
                >
-                  <TabsList className="flex justify-between w-full">
-                     <div className="grid grid-flow-col items-center gap-4 overflow-x-auto hide-scrollbar">
+                  <TabsList className="flex w-full justify-between">
+                     <div className="hide-scrollbar grid grid-flow-col items-center gap-4 overflow-x-auto">
                         <span
-                           className="material-symbols-outlined rotate-180 cursor-pointer !text-[32px] hover:scale-110 lg:!hidden shrink-0"
+                           className="material-symbols-outlined shrink-0 rotate-180 cursor-pointer !text-[32px] hover:scale-110 lg:!hidden"
                            onClick={previousTab}
                         >
                            chevron_right
                         </span>
                         <div
-                           className="flex w-full overflow-x-auto hide-scrollbar"
+                           className="hide-scrollbar flex w-full overflow-x-auto"
                            ref={tabsRef}
                         >
                            <div className="flex shrink-0">
@@ -171,7 +171,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                            </div>
                         </div>
                         <span
-                           className="material-symbols-outlined cursor-pointer !text-[32px] hover:scale-110 lg:!hidden shrink-0"
+                           className="material-symbols-outlined shrink-0 cursor-pointer !text-[32px] hover:scale-110 lg:!hidden"
                            onClick={nextTab}
                         >
                            chevron_right
@@ -181,7 +181,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                         <DropdownMenuTrigger asChild>
                            <Button variant="ghost" size="sm">
                               <div className="flex items-center gap-1.5">
-                                 <span className="text-sm font-nunito font-semibold hidden md:block">
+                                 <span className="hidden font-nunito text-sm font-semibold md:block">
                                     Filtros
                                  </span>
                                  <span className="material-symbols-outlined filled symbol-sm">
@@ -232,7 +232,7 @@ const Dashboard: React.FC<DashboardProps> = ({
                   </TabsList>
                   <TabsContent value={tab} className="h-full">
                      <ScrollArea className="h-[calc(100vh-15rem)] w-full pr-2.5">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-4">
+                        <div className="grid grid-cols-1 gap-4 pb-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                            {tabs_content[tab as Tab].map((auction) => (
                               <Card
                                  key={auction.auctionCode}
@@ -252,9 +252,9 @@ const Dashboard: React.FC<DashboardProps> = ({
             onOpenChange={setIsSidebarOpen}
             className="h-[calc(100vh-1.5rem-56px)]"
          >
-            <div className="space-y-2 h-full overflow-y-auto md:ml-4">
-               <div className="flex justify-between items-center gap-2">
-                  <h1 className="text-2xl font-semibold font-montserrat">
+            <div className="h-full space-y-2 overflow-y-auto md:ml-4">
+               <div className="flex items-center justify-between gap-2">
+                  <h1 className="font-montserrat text-2xl font-semibold">
                      Sobre a página
                   </h1>
                   <Button
@@ -271,11 +271,11 @@ const Dashboard: React.FC<DashboardProps> = ({
                   </Button>
                </div>
                <Separator orientation="horizontal" />
-               <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                  <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+               <div className="max-h-[calc(100vh-12rem)] space-y-4 overflow-y-auto py-6 md:px-4">
+                  <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                      Descrição
                   </p>
-                  <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                  <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                      A página de Dashboard oferece uma visão geral dos leilões,
                      exibindo cards com o status das transações. O usuário pode
                      navegar em abas organizadas por: Em progresso, Inaptos e
@@ -283,39 +283,39 @@ const Dashboard: React.FC<DashboardProps> = ({
                      erro e transação, facilitando o acompanhamento e a gestão
                      eficiente dos leilões.
                   </p>
-                  <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                  <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                      Detalhes
                   </p>
                   <div>
-                     <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                     <p className="text-start font-normal text-black dark:text-dark-text-primary">
                         Aba Em progresso
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         Reúne os leilões que iniciaram as transações com o
                         DETRAN e não apresentam erros.
                      </p>
                   </div>
                   <div>
-                     <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                     <p className="text-start font-normal text-black dark:text-dark-text-primary">
                         Aba Inaptos
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         Reúne os leilões que não aderem a nenhum filtro de erro.
                      </p>
                   </div>
                   <div>
-                     <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                     <p className="text-start font-normal text-black dark:text-dark-text-primary">
                         Aba Concluídos
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         Reúne os leilões finalizados.
                      </p>
                   </div>
                   <div>
-                     <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                     <p className="text-start font-normal text-black dark:text-dark-text-primary">
                         Status
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         A cor cinza indica lotes com transações em progresso. A
                         cor vermelha indica lotes com transações que precisam
                         ser revisadas. A cor verde indica lotes que necessitam
@@ -323,12 +323,12 @@ const Dashboard: React.FC<DashboardProps> = ({
                         automático.
                      </p>
                   </div>
-                  <div className="bg-[#E6F1F7] px-4 py-4 space-y-2 rounded-md">
-                     <p className="text-black font-normal text-start">Info</p>
-                     <p className="text-text-secondary text-start">
+                  <div className="space-y-2 rounded-md bg-[#E6F1F7] px-4 py-4">
+                     <p className="text-start font-normal text-black">Info</p>
+                     <p className="text-start text-text-secondary">
                         Clique no card para acessar o leilão.
                      </p>
-                     <p className="text-text-secondary text-start">
+                     <p className="text-start text-text-secondary">
                         Passe o ponteiro do mouse na cor do status para
                         visualizar a quantidade de lotes por transação.
                      </p>

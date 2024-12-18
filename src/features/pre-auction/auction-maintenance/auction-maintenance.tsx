@@ -45,7 +45,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto]">
-            <div className="space-y-6 h-full flex flex-col">
+            <div className="flex h-full flex-col space-y-6">
                <div className="space-y-4">
                   <Breadcrumb>
                      <BreadcrumbList>
@@ -61,8 +61,8 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
-                     <div className="flex flex-wrap justify-between items-center gap-2">
-                        <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
+                     <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
                            Manutenção de leilões
                         </h1>
                         <Button
@@ -77,8 +77,8 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                      </div>
                      <Separator orientation="horizontal" />
                   </div>
-                  <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
-                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
+                  <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                     <div className="flex w-full flex-col items-start gap-2 sm:flex-row sm:items-center">
                         <Input
                            label="Busca geral"
                            value={globalFilter}
@@ -88,13 +88,13 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                         />
                         <Dialog>
                            <DialogTrigger
-                              className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
+                              className="w-full whitespace-nowrap sm:w-auto sm:min-w-[150px] md:w-fit"
                               asChild
                            >
                               <div>
                                  <Button
                                     variant="ghost"
-                                    className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
+                                    className="w-full whitespace-nowrap sm:w-auto sm:min-w-[150px] md:w-fit"
                                  >
                                     Busca avançada
                                  </Button>
@@ -105,10 +105,10 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                  <DialogTitle>Busca avançada</DialogTitle>
                               </DialogHeader>
                               <div className="space-y-4 py-4 pb-6">
-                                 <p className="text-lg font-montserrat">
+                                 <p className="font-montserrat text-lg">
                                     Preencha os campos necessários para busca
                                  </p>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
+                                 <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                                     <Input
                                        label="Placa"
                                        placeholder="000-0000"
@@ -122,7 +122,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                        placeholder="Número do processo"
                                     />
                                  </div>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
+                                 <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                                     <DatePicker
                                        label="Data"
                                        placeholder="DD/MM/YYYY"
@@ -136,7 +136,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                        placeholder="Descrição do leilão"
                                     />
                                  </div>
-                                 <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
+                                 <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-3">
                                     <SelectInput
                                        label="Status"
                                        placeholder="Selecione o status"
@@ -163,8 +163,8 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                     />
                                  </div>
                               </div>
-                              <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
-                                 <div className="md:order-1 order-2">
+                              <div className="mb-6 mt-2 grid gap-2 md:grid-cols-2">
+                                 <div className="order-2 md:order-1">
                                     <Button
                                        variant="destructive"
                                        className="w-full"
@@ -172,7 +172,7 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                                        Cancelar
                                     </Button>
                                  </div>
-                                 <div className="md:order-2 order-1">
+                                 <div className="order-1 md:order-2">
                                     <Button
                                        variant="default"
                                        className="w-full"
@@ -190,14 +190,14 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                      >
                         <Button
                            variant="default"
-                           className="w-full sm:w-auto sm:min-w-[150px] whitespace-nowrap"
+                           className="w-full whitespace-nowrap sm:w-auto sm:min-w-[150px]"
                         >
                            Novo leilão
                         </Button>
                      </Link>
                   </div>
                </div>
-               <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
+               <div className="grid max-h-[calc(100vh-12.4125rem)] w-full overflow-scroll">
                   <div className="flex-1 overflow-auto">
                      <DataTable
                         data={data}
@@ -211,9 +211,9 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
             >
-               <div className="space-y-2 h-full overflow-y-auto ml-4 mt-[28px]">
-                  <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-2xl font-semibold font-montserrat">
+               <div className="ml-4 mt-[28px] h-full space-y-2 overflow-y-auto">
+                  <div className="flex items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold">
                         Sobre a página
                      </h1>
                      <Button
@@ -230,11 +230,11 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                      </Button>
                   </div>
                   <Separator orientation="horizontal" />
-                  <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                  <div className="max-h-[calc(100vh-12rem)] space-y-4 overflow-y-auto px-4 py-6">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Descrição
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         A página de Manutenção de Leilões permite visualizar a
                         lista de leilões cadastrados, alterar o status conforme
                         o andamento dos processos junto ao DETRAN e buscar
@@ -242,34 +242,34 @@ const AuctionMaintenance: React.FC<AuctionMaintenanceProps> = ({
                         ingressar lotes nos leilões e acessar um menu de opções
                         avançadas para uma gestão mais detalhada.
                      </p>
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Detalhes
                      </p>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Status do leilão
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            É possível alterar o status conforme o avanço dos
                            processos junto ao DETRAN.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Lotes
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            Exibe a quantidade de lotes ingressados no leilão.
                         </p>
                      </div>
-                     <div className="bg-[#E6F1F7] px-4 py-4 space-y-2 rounded-md">
-                        <p className="text-black font-normal text-start">
+                     <div className="space-y-2 rounded-md bg-[#E6F1F7] px-4 py-4">
+                        <p className="text-start font-normal text-black">
                            Info
                         </p>
-                        <p className="text-text-secondary text-start">
+                        <p className="text-start text-text-secondary">
                            Clique no card para acessar o leilão.
                         </p>
-                        <p className="text-text-secondary text-start">
+                        <p className="text-start text-text-secondary">
                            Clique no nome do leilão para acessar a lista de
                            lotes do leilão selecionado.
                         </p>

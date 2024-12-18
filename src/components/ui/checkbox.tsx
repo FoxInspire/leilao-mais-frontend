@@ -36,7 +36,7 @@ const Checkbox = React.forwardRef<
             ref={ref}
             id={id}
             className={cn(
-               'peer shrink-0 gap-0 flex rounded-sm border-2 border-text-secondary ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary-default data-[state=checked]:bg-primary-default data-[state=checked]:text-common-white dark:border-dark-text-secondary dark:ring-offset-dark-background-default dark:focus-visible:ring-neutral-300 dark:data-[state=checked]:border-dark-primary-default dark:data-[state=checked]:bg-dark-primary-default dark:data-[state=checked]:text-dark-text-primary',
+               'peer flex shrink-0 gap-0 rounded-sm border-2 border-text-secondary ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary-default data-[state=checked]:bg-primary-default data-[state=checked]:text-common-white dark:border-dark-text-secondary dark:ring-offset-dark-background-default dark:focus-visible:ring-neutral-300 dark:data-[state=checked]:border-dark-primary-default dark:data-[state=checked]:bg-dark-primary-default dark:data-[state=checked]:text-dark-text-primary',
                sizeStyles[size].checkbox,
                className
             )}
@@ -44,11 +44,11 @@ const Checkbox = React.forwardRef<
          >
             <CheckboxPrimitive.Indicator
                className={cn(
-                  'flex items-center gap-0 flex-grow justify-center p-0 m-0',
+                  'm-0 flex flex-grow items-center justify-center gap-0 p-0',
                   sizeStyles[size].indicator
                )}
             >
-               <span className="material-symbols-outlined text-white !text-[16px]">
+               <span className="material-symbols-outlined !text-[16px] text-white">
                   check
                </span>
             </CheckboxPrimitive.Indicator>
@@ -67,17 +67,17 @@ const Checkbox = React.forwardRef<
       <CheckboxPrimitive.Root
          ref={ref}
          className={cn(
-            'peer h-4 w-4 shrink-0 gap-0 flex flex-grow rounded-sm border border-text-secondary ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary-default data-[state=checked]:bg-primary-default data-[state=checked]:text-common-white dark:border-dark-text-secondary dark:ring-offset-dark-background-default dark:focus-visible:ring-neutral-300 dark:data-[state=checked]:border-dark-primary-default dark:data-[state=checked]:bg-dark-primary-default dark:data-[state=checked]:text-dark-text-primary',
+            'peer flex h-4 w-4 shrink-0 flex-grow gap-0 rounded-sm border border-text-secondary ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary-default data-[state=checked]:bg-primary-default data-[state=checked]:text-common-white dark:border-dark-text-secondary dark:ring-offset-dark-background-default dark:focus-visible:ring-neutral-300 dark:data-[state=checked]:border-dark-primary-default dark:data-[state=checked]:bg-dark-primary-default dark:data-[state=checked]:text-dark-text-primary',
             className
          )}
          {...props}
       >
          <CheckboxPrimitive.Indicator
             className={cn(
-               'flex items-center gap-0 flex-grow justify-center w-3 h-4 p-0 m-0'
+               'm-0 flex h-4 w-3 flex-grow items-center justify-center gap-0 p-0'
             )}
          >
-            <span className="material-symbols-outlined text-white !text-[16px]">
+            <span className="material-symbols-outlined !text-[16px] text-white">
                check
             </span>
          </CheckboxPrimitive.Indicator>

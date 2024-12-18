@@ -175,9 +175,9 @@ export const TableOperationMonitorDetails = React.forwardRef<
                      <TableRow>
                         <TableCell
                            colSpan={columns.length}
-                           className="text-center hover:bg-transparent cursor-default"
+                           className="cursor-default text-center hover:bg-transparent"
                         >
-                           <span className="text-text-secondary text-base">
+                           <span className="text-base text-text-secondary">
                               Nenhum resultado encontrado.
                            </span>
                         </TableCell>

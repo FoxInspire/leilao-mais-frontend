@@ -61,7 +61,7 @@ export const columns_notify_owners: ColumnDef<NotifyOwnersEntity>[] = [
                <Button
                   variant="ghost"
                   size="icon"
-                  className="text-text-secondary hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10 group transition-all duration-300"
+                  className="group text-text-secondary transition-all duration-300 hover:bg-primary-default/10 dark:text-dark-primary-default dark:hover:bg-dark-primary-default/10"
                >
                   <span className="material-symbols-outlined group-hover:text-primary-default">
                      edit

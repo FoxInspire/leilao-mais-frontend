@@ -30,7 +30,7 @@ export const ExportLotsAction: React.FC<ExportLotsActionProps> = ({
             <DialogTitle onClose={() => onClose()}>Exportar lotes</DialogTitle>
          </DialogHeader>
          <div className="space-y-6 py-4 pb-6">
-            <p className="text-lg font-montserrat">
+            <p className="font-montserrat text-lg">
                Leilão <span className="font-semibold">{id}</span>
             </p>
             <div>
@@ -69,8 +69,8 @@ export const ExportLotsAction: React.FC<ExportLotsActionProps> = ({
                />
             </div>
          </div>
-         <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
-            <div className="md:order-1 order-2">
+         <div className="mb-6 mt-2 grid gap-2 md:grid-cols-2">
+            <div className="order-2 md:order-1">
                <Button
                   variant="destructive"
                   className="w-full"
@@ -79,7 +79,7 @@ export const ExportLotsAction: React.FC<ExportLotsActionProps> = ({
                   Cancelar
                </Button>
             </div>
-            <div className="md:order-2 order-1">
+            <div className="order-1 md:order-2">
                <Button
                   variant="default"
                   className="w-full"

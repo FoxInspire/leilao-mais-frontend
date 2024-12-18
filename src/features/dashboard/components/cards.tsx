@@ -133,7 +133,7 @@ export const Card: React.FC<CardProps> = ({
 
    return (
       <CardContainer>
-         <div className="flex justify-between items-center">
+         <div className="flex items-center justify-between">
             <div className="flex flex-col items-start">
                <span className="text-base font-normal text-black dark:text-dark-text-primary">
                   {auctionCode}
@@ -153,7 +153,7 @@ export const Card: React.FC<CardProps> = ({
                </span>
             </Button>
          </div>
-         <div className="flex justify-between items-center">
+         <div className="flex items-center justify-between">
             <span className="text-2xl font-semibold text-black dark:text-dark-text-primary">
                {name}
             </span>
@@ -162,7 +162,7 @@ export const Card: React.FC<CardProps> = ({
                   <TooltipProvider>
                      <Tooltip>
                         <TooltipTrigger>
-                           <div className="w-3.5 h-3.5 rounded-full bg-warning-default dark:bg-dark-warning-light" />
+                           <div className="h-3.5 w-3.5 rounded-full bg-warning-default dark:bg-dark-warning-light" />
                         </TooltipTrigger>
                         <TooltipContent>
                            <p className="whitespace-pre">
@@ -178,7 +178,7 @@ export const Card: React.FC<CardProps> = ({
                   <TooltipProvider>
                      <Tooltip>
                         <TooltipTrigger>
-                           <div className="w-3.5 h-3.5 rounded-full bg-error-default dark:bg-dark-error-default" />
+                           <div className="h-3.5 w-3.5 rounded-full bg-error-default dark:bg-dark-error-default" />
                         </TooltipTrigger>
                         <TooltipContent>
                            <p className="whitespace-pre">
@@ -192,7 +192,7 @@ export const Card: React.FC<CardProps> = ({
                   <TooltipProvider>
                      <Tooltip>
                         <TooltipTrigger>
-                           <div className="w-3.5 h-3.5 rounded-full bg-success-default dark:bg-dark-success-default" />
+                           <div className="h-3.5 w-3.5 rounded-full bg-success-default dark:bg-dark-success-default" />
                         </TooltipTrigger>
                         <TooltipContent>
                            <p className="whitespace-pre">

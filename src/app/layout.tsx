@@ -76,7 +76,7 @@ export default function RootLayout({
                href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Nunito:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap"
             />
          </head>
-         <body className="antialiased bg-background-default dark:bg-dark-background-default">
+         <body className="bg-background-default antialiased dark:bg-dark-background-default">
             <NuqsAdapter>
                <ThemeProvider
                   attribute="class"

@@ -70,7 +70,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
    return (
       <React.Fragment>
          <div className="grid grid-cols-[1fr_auto]">
-            <div className="space-y-6 h-full flex flex-col">
+            <div className="flex h-full flex-col space-y-6">
                <div className="space-y-4">
                   <Breadcrumb>
                      <BreadcrumbList>
@@ -92,8 +92,8 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
-                     <div className="flex flex-wrap justify-between items-center gap-2">
-                        <h1 className="md:text-3xl text-2xl font-semibold font-montserrat">
+                     <div className="flex flex-wrap items-center justify-between gap-2">
+                        <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
                            Lista de lotes - {id?.toUpperCase()}
                         </h1>
                         <Button
@@ -109,8 +109,8 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      <Separator orientation="horizontal" />
                   </div>
                   {selectedRows.length === 0 && (
-                     <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:justify-between">
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full">
+                     <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="flex w-full flex-col items-start gap-2 sm:flex-row sm:items-center">
                            <Input
                               label="Busca geral"
                               value={globalFilter}
@@ -120,7 +120,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            />
                            <Button
                               variant="ghost"
-                              className="md:w-fit sm:w-auto sm:min-w-[150px] whitespace-nowrap w-full"
+                              className="w-full whitespace-nowrap sm:w-auto sm:min-w-[150px] md:w-fit"
                               onClick={() => setDialog(true)}
                            >
                               Busca avançada
@@ -130,7 +130,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            <Button
                               disabled
                               variant="default"
-                              className="w-full sm:w-auto px-12 sm:min-w-[150px] whitespace-nowrap"
+                              className="w-full whitespace-nowrap px-12 sm:w-auto sm:min-w-[150px]"
                            >
                               Importar numeração lotes
                            </Button>
@@ -138,7 +138,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      </div>
                   )}
                   {selectedRows.length > 0 && (
-                     <div className="flex items-center gap-4 w-full min-h-12">
+                     <div className="flex min-h-12 w-full items-center gap-4">
                         <Button
                            variant="ghost"
                            size="icon"
@@ -150,7 +150,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                            </span>
                         </Button>
 
-                        <span className="text-sm text-text-secondary whitespace-nowrap dark:text-dark-text-secondary">
+                        <span className="whitespace-nowrap text-sm text-text-secondary dark:text-dark-text-secondary">
                            {selectedRows?.length} selecionado
                         </span>
 
@@ -226,7 +226,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      </div>
                   )}
                </div>
-               <div className="grid w-full overflow-scroll max-h-[calc(100vh-12.4125rem)]">
+               <div className="grid max-h-[calc(100vh-12.4125rem)] w-full overflow-scroll">
                   <div className="flex-1 overflow-auto">
                      <TableAuctionLots
                         ref={tableRef}
@@ -242,9 +242,9 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                open={isSidebarOpen}
                onOpenChange={setIsSidebarOpen}
             >
-               <div className="space-y-2 h-full overflow-y-auto md:ml-4 md:mt-9">
-                  <div className="flex justify-between items-center gap-2">
-                     <h1 className="text-2xl font-semibold font-montserrat dark:text-dark-text-primary">
+               <div className="h-full space-y-2 overflow-y-auto md:ml-4 md:mt-9">
+                  <div className="flex items-center justify-between gap-2">
+                     <h1 className="font-montserrat text-2xl font-semibold dark:text-dark-text-primary">
                         Sobre a página
                      </h1>
                      <Button
@@ -261,11 +261,11 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      </Button>
                   </div>
                   <Separator orientation="horizontal" />
-                  <div className="md:px-4 py-6 space-y-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                  <div className="max-h-[calc(100vh-12rem)] space-y-4 overflow-y-auto py-6 md:px-4">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Descrição
                      </p>
-                     <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                     <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                         A página de Lista de Lotes permite visualizar todos os
                         lotes ingressados no leilão selecionado e acompanhar ou
                         alterar o status de cada um. O usuário pode criar ou
@@ -273,36 +273,36 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         histórico de notificações, inserir informações de
                         perícia e monitorar os alertas relacionados a cada lote.
                      </p>
-                     <p className="text-black dark:text-dark-text-primary font-semibold text-start">
+                     <p className="text-start font-semibold text-black dark:text-dark-text-primary">
                         Detalhes
                      </p>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Status do lote
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            É possível alterar o status conforme o avanço dos
                            processos junto ao DETRAN.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Importar numeração lotes
                         </p>
-                        <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                        <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                            Importa e atualiza os dados de GRV e numeração a
                            partir da planilha enviada.
                         </p>
                      </div>
                      <div>
-                        <p className="text-black dark:text-dark-text-primary font-normal text-start">
+                        <p className="text-start font-normal text-black dark:text-dark-text-primary">
                            Alertas
                         </p>
                         <div className="space-y-2">
-                           <p className="text-text-secondary dark:text-dark-text-secondary text-start">
+                           <p className="text-start text-text-secondary dark:text-dark-text-secondary">
                               Exibe os alertas pertinentes ao lote, sendo eles:
                            </p>
-                           <ul className="list-disc list-inside text-text-secondary dark:text-dark-text-secondary text-start">
+                           <ul className="list-inside list-disc text-start text-text-secondary dark:text-dark-text-secondary">
                               <li>
                                  <strong>Restrições:</strong> Exibe a lista de
                                  restrições adicionadas ao lote.
@@ -328,10 +328,10 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                   <DialogTitle>Busca avançada</DialogTitle>
                </DialogHeader>
                <div className="space-y-6 py-4 pb-6">
-                  <p className="text-lg font-montserrat">
+                  <p className="font-montserrat text-lg">
                      Preencha os campos necessários para busca
                   </p>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                      <SelectInput
                         label="Notificação liberado"
                         placeholder="Selecione a notificação"
@@ -366,7 +366,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         onValueChange={(value) => console.log('value', value)}
                      />
                   </div>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
+                  <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-3">
                      <SelectInput
                         label="Restrição"
                         placeholder="Selecione a restrição"
@@ -401,7 +401,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         onValueChange={(value) => console.log('value', value)}
                      />
                   </div>
-                  <div className="grid md:grid-cols-3 grid-cols-1 gap-4 items-center">
+                  <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-3">
                      <SelectInput
                         label="Placa"
                         placeholder="000-0000"
@@ -442,7 +442,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         }}
                      />
                   </div>
-                  <div className="grid md:grid-cols-2 grid-cols-1 gap-4 items-center">
+                  <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-2">
                      <SelectInput
                         label="Cor"
                         placeholder="Selecione a cor"
@@ -467,8 +467,8 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                      />
                   </div>
                </div>
-               <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
-                  <div className="md:order-1 order-2">
+               <div className="mb-6 mt-2 grid gap-2 md:grid-cols-2">
+                  <div className="order-2 md:order-1">
                      <Button
                         variant="destructive"
                         className="w-full"
@@ -477,7 +477,7 @@ const AuctionLots: React.FC<AuctionMaintenanceLotsProps> = ({
                         Cancelar
                      </Button>
                   </div>
-                  <div className="md:order-2 order-1">
+                  <div className="order-1 md:order-2">
                      <Button
                         variant="default"
                         className="w-full"

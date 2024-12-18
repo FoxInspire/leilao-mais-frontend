@@ -55,7 +55,7 @@ export const OperationLotStatus: React.FC<OperationLotStatusProps> = ({
       <React.Fragment>
          <div>
             <Select onValueChange={handleValueChange} value={currentStatus}>
-               <SelectTrigger className="flex items-center gap-2 font-bold font-nunito text-primary-default dark:text-dark-primary-default text-sm uppercase border-none bg-transparent w-fit">
+               <SelectTrigger className="flex w-fit items-center gap-2 border-none bg-transparent font-nunito text-sm font-bold uppercase text-primary-default dark:text-dark-primary-default">
                   <SelectValue
                      placeholder={
                         auctionLotStatusOptions.find(
@@ -78,23 +78,23 @@ export const OperationLotStatus: React.FC<OperationLotStatusProps> = ({
                      <DialogTitle>Alterar status</DialogTitle>
                   </DialogHeader>
                   <div className="space-y-4 py-4 pb-6">
-                     <div className="flex flex-1 justify-center items-center">
-                        <span className="material-symbols-outlined text-error-default symbol-xl">
+                     <div className="flex flex-1 items-center justify-center">
+                        <span className="material-symbols-outlined symbol-xl text-error-default">
                            warning
                         </span>
                      </div>
                      <div className="space-y-2">
-                        <p className="text-lg text-center font-montserrat font-medium">
+                        <p className="text-center font-montserrat text-lg font-medium">
                            Alterar o status do leilão
                         </p>
-                        <p className="text-center text-sm font-montserrat">
+                        <p className="text-center font-montserrat text-sm">
                            Esta ação irá notificar o Pátio/DETRAN. Deseja
                            continuar?
                         </p>
                      </div>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-2 mb-6 mt-2">
-                     <div className="md:order-1 order-2">
+                  <div className="mb-6 mt-2 grid gap-2 md:grid-cols-2">
+                     <div className="order-2 md:order-1">
                         <Button
                            variant="destructive"
                            className="w-full"
@@ -103,7 +103,7 @@ export const OperationLotStatus: React.FC<OperationLotStatusProps> = ({
                            Cancelar
                         </Button>
                      </div>
-                     <div className="md:order-2 order-1">
+                     <div className="order-1 md:order-2">
                         <Button
                            variant="default"
                            className="w-full"
