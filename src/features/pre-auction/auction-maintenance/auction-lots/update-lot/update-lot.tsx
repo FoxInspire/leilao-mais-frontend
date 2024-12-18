@@ -21,22 +21,25 @@ import {
 import {
    Form,
    FormControl,
-   FormDescription,
    FormField,
    FormItem,
    FormMessage
 } from '@/components/ui/form'
 import { Button } from '@/src/components/ui/button'
+import { Card } from '@/src/components/ui/card'
+import { Checkbox } from '@/src/components/ui/checkbox'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
-import { DatePicker } from '@/src/components/ui/date-picker'
 import { Input } from '@/src/components/ui/input'
 import { SelectInput, SelectInputValue } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
+import { Textarea } from '@/src/components/ui/textarea'
 import { useZipCode } from '@/src/hooks/useZipCode'
-import { cn } from '@/src/lib/utils'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
-import { ZIP_CODE_MASK, isValidEmail, isValidZipCode } from '@/src/utils/masks'
+import { isValidZipCode, ZIP_CODE_MASK } from '@/src/utils/masks'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { CheckedState } from '@radix-ui/react-checkbox'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -82,91 +85,6 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
          console.error('Erro ao enviar formulário:', error)
          toast.error('Erro ao enviar formulário. Tente novamente.')
       }
-   }
-
-   const addEmails = () => {
-      try {
-         if (emailTemp && emailTemp.trim() !== '') {
-            const emails = emailTemp.split(',').map((email) => email.trim())
-
-            const validEmails = []
-            const invalidEmails = []
-            const duplicatedEmails = []
-
-            for (const email of emails) {
-               if (email !== '') {
-                  if (isValidEmail(email)) {
-                     if (
-                        !form.getValues('notificationEmails')?.includes(email)
-                     ) {
-                        validEmails.push(email)
-                     } else {
-                        duplicatedEmails.push(email)
-                     }
-                  } else {
-                     invalidEmails.push(email)
-                  }
-               }
-            }
-
-            if (invalidEmails.length > 0) {
-               toast.error(`E-mails inválidos: ${invalidEmails.join(', ')}`, {
-                  duration: 4000,
-                  position: 'top-right'
-               })
-            }
-
-            if (duplicatedEmails.length > 0) {
-               toast.error(
-                  `E-mails duplicados: ${duplicatedEmails.join(', ')}`,
-                  {
-                     duration: 4000,
-                     position: 'top-right'
-                  }
-               )
-            }
-
-            if (validEmails.length > 0) {
-               form.setValue('notificationEmails', [
-                  ...(form.getValues('notificationEmails') || []),
-                  ...validEmails
-               ])
-
-               toast.success(
-                  `E-mail${validEmails.length > 1 ? 's' : ''} adicionado${
-                     validEmails.length > 1 ? 's' : ''
-                  } com sucesso: ${validEmails.join(', ')}`,
-                  {
-                     duration: 4000,
-                     position: 'top-right'
-                  }
-               )
-            }
-
-            setEmailTemp('')
-         }
-      } catch (error) {
-         console.error('Erro ao adicionar emails:', error)
-         toast.error('Erro ao adicionar e-mails. Tente novamente.')
-      }
-   }
-
-   const handleEmailKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Enter') {
-         e.preventDefault()
-         addEmails()
-      }
-   }
-
-   const removeEmail = (indexToRemove: number) => {
-      const currentEmails = form.getValues('notificationEmails')
-      form.setValue(
-         'notificationEmails',
-         currentEmails?.filter((_, index) => index !== indexToRemove) || []
-      )
-      toast.success(
-         `E-mail removido com sucesso: ${currentEmails?.[indexToRemove]}`
-      )
    }
 
    return (
@@ -216,112 +134,275 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                   </div>
                   <Separator orientation="horizontal" />
                </div>
+               <Card className="flex h-fit items-center justify-between space-y-0">
+                  <p className="text-start font-nunito text-base font-semibold text-black dark:text-dark-text-primary">
+                     Informação do leilão
+                  </p>
+                  <h3 className="font-nunito text-base font-semibold lg:text-lg">
+                     {id} -{' '}
+                     {format(new Date(), 'dd MMM yyyy', {
+                        locale: ptBR
+                     })}
+                  </h3>
+               </Card>
                <Form {...form}>
                   <form
                      onSubmit={form.handleSubmit(onSubmit)}
-                     className="hide-scrollbar grid max-h-[calc(100vh-16.8125rem)] w-full overflow-x-visible overflow-y-scroll"
+                     className="hide-scrollbar grid max-h-[calc(100vh-16.8125rem-62px-16px)] w-full overflow-x-visible overflow-y-scroll"
                   >
                      <div className="flex-1 space-y-6 overflow-x-visible overflow-y-scroll">
-                        {/* Dados do leilão */}
+                        {/* Dados do lote */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
-                              Dados do leilão
+                              Dados do lote
                            </p>
-                           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
-                              <FormField
-                                 control={form.control}
-                                 name="description"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <Input
-                                             label="Descrição *"
-                                             placeholder="Digite a descrição"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
-                              />
-                              <FormField
-                                 control={form.control}
-                                 name="auctionDate"
-                                 render={({ field }) => (
-                                    <FormItem>
-                                       <FormControl>
-                                          <DatePicker
-                                             showTime
-                                             label="Data e hora do leilão *"
-                                             placeholder="DD/MM/YYYY hh:mm aa"
-                                             {...field}
-                                          />
-                                       </FormControl>
-                                       <FormMessage />
-                                    </FormItem>
-                                 )}
+                           <div className="grid gap-6 md:gap-4">
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                                 <FormField
+                                    control={form.control}
+                                    name="lotNumber"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Nº lote"
+                                                placeholder="0000000000"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="itemNumber"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Nº item lote"
+                                                placeholder="0000000000"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <Input
+                                    label="Processo"
+                                    placeholder="0000000000"
+                                 />
+                              </div>
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="location"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <Input
+                                                label="Localização"
+                                                placeholder="Digite a localização"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <Input
+                                    label="R. remoção"
+                                    placeholder="0000000000"
+                                 />
+                              </div>
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
+                                 <Input
+                                    label="Avaliação"
+                                    placeholder="0000000000"
+                                 />
+                                 <Input
+                                    label="Lance mínimo"
+                                    placeholder="0000000000"
+                                 />
+                              </div>
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[0.8fr_auto_auto] md:gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="status"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Status"
+                                                options={[]}
+                                                placeholder="Selecione o status do lote"
+                                                onValueChange={(value) => {}}
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <Input
+                                    label="Obs. transação"
+                                    placeholder="Digite a observação"
+                                 />
+                                 <Input
+                                    label="Roubo/Furto"
+                                    placeholder="Digite se o lote é roubo/furto"
+                                 />
+                              </div>
+                           </div>
+                        </div>
+
+                        {/* Dados do veículo */}
+                        <div className="space-y-4">
+                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
+                              Dados do veículo
+                           </p>
+                           <div className="space-y-6">
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-4">
+                                 <div className="flex gap-4">
+                                    <div className="flex-1">
+                                       <Input
+                                          label="Placa"
+                                          placeholder="00000000"
+                                       />
+                                    </div>
+                                    <Button variant="ghost" type="button">
+                                       Buscar
+                                    </Button>
+                                 </div>
+                                 <div className="flex gap-4">
+                                    <div className="flex-1">
+                                       <Input
+                                          label="Chassi"
+                                          placeholder="00000000"
+                                       />
+                                    </div>
+                                    <Button variant="ghost" type="button">
+                                       Buscar
+                                    </Button>
+                                 </div>
+                              </div>
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-4 md:gap-4">
+                                 <Input
+                                    label="RENAVAM"
+                                    placeholder="0000000000"
+                                 />
+                                 <Input
+                                    label="Ano Fab."
+                                    placeholder="0000000000"
+                                 />
+                                 <Input
+                                    label="Ano Mod."
+                                    placeholder="Digite o bairro"
+                                 />
+                                 <Input
+                                    label="Tipo"
+                                    placeholder="Digite o tipo de veículo"
+                                 />
+                                 <Input
+                                    label="Marca/modelo"
+                                    placeholder="Digite a marca/modelo"
+                                 />
+                                 <Input
+                                    label="Cor"
+                                    placeholder="Digite a cor"
+                                 />
+                                 <SelectInput
+                                    label="UF"
+                                    options={countries}
+                                    placeholder="Selecione o estado"
+                                 />
+                                 <Input
+                                    label="Município"
+                                    placeholder="Digite o município"
+                                 />
+                              </div>
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
+                                 <Input
+                                    label="Nº motor"
+                                    placeholder="0000000000"
+                                 />
+                                 <Input
+                                    label="Combustível"
+                                    placeholder="Digite o tipo de combustível"
+                                 />
+                              </div>
+                              <Textarea
+                                 label="Observação"
+                                 placeholder="Digite a observação"
                               />
                            </div>
                         </div>
 
-                        {/* Localização */}
+                        {/* Características */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
-                              Localização
+                              Características
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-4">
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
+                                 <div className="flex items-center gap-4">
+                                    <Checkbox
+                                       size="md"
+                                       label="Periciado"
+                                       onCheckedChange={(
+                                          checked: CheckedState
+                                       ) => {}}
+                                    />
+                                    <div className="flex-1">
+                                       <FormField
+                                          control={form.control}
+                                          name="characteristics.origin"
+                                          render={({ field }) => (
+                                             <FormItem>
+                                                <FormControl>
+                                                   <SelectInput
+                                                      label="Procedência"
+                                                      placeholder="Selecione a procedência"
+                                                      options={[]}
+                                                      onValueChange={(
+                                                         value
+                                                      ) => {}}
+                                                      {...field}
+                                                   />
+                                                </FormControl>
+                                                <FormMessage />
+                                             </FormItem>
+                                          )}
+                                       />
+                                    </div>
+                                 </div>
                                  <FormField
                                     control={form.control}
-                                    name="cep"
-                                    render={({ field }) => (
-                                       <FormItem className="flex-1">
+                                    name="characteristics.hasKey"
+                                    render={({
+                                       field: { value, ...fieldProps }
+                                    }) => (
+                                       <FormItem>
                                           <FormControl>
-                                             <Input
-                                                label="CEP *"
-                                                placeholder="00000-000"
-                                                className="w-full md:min-w-[172px]"
-                                                mask={ZIP_CODE_MASK}
-                                                onInput={(e) => {
-                                                   if (
-                                                      isValidZipCode(
-                                                         e.currentTarget.value
-                                                      )
-                                                   ) {
-                                                      handleZipCode(
-                                                         e.currentTarget.value,
-                                                         ({
-                                                            address,
-                                                            city,
-                                                            neighborhood,
-                                                            state,
-                                                            zipCode
-                                                         }) => {
-                                                            form.setValue(
-                                                               'address',
-                                                               address
-                                                            )
-                                                            form.setValue(
-                                                               'addressCity',
-                                                               city
-                                                            )
-                                                            form.setValue(
-                                                               'neighborhood',
-                                                               neighborhood
-                                                            )
-                                                            form.setValue(
-                                                               'addressState',
-                                                               state
-                                                            )
-                                                            form.setValue(
-                                                               'cep',
-                                                               zipCode
-                                                            )
-                                                         }
-                                                      )
+                                             <SelectInput
+                                                {...fieldProps}
+                                                label="Chave"
+                                                placeholder="Selecione se o lote possui chave"
+                                                options={[
+                                                   {
+                                                      id: 'true',
+                                                      label: 'Sim',
+                                                      value: 'true'
+                                                   },
+                                                   {
+                                                      id: 'false',
+                                                      label: 'Não',
+                                                      value: 'false'
                                                    }
-                                                }}
-                                                {...field}
+                                                ]}
+                                                onValueChange={(value) => {}}
                                              />
                                           </FormControl>
                                           <FormMessage />
@@ -330,30 +411,33 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  />
                                  <FormField
                                     control={form.control}
-                                    name="address"
+                                    name="km"
                                     render={({ field }) => (
                                        <FormItem>
                                           <FormControl>
                                              <Input
-                                                label="Endereço *"
-                                                placeholder="Digite o endereço"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                                 <FormField
-                                    control={form.control}
-                                    name="addressNumber"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <Input
-                                                label="Número *"
+                                                label="KM"
                                                 placeholder="0000000000"
-                                                type="number"
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-4 md:gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="characteristics.transmission"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Transmissão"
+                                                placeholder="Selecione a transmissão"
+                                                options={[]}
+                                                onValueChange={(value) => {}}
                                                 {...field}
                                              />
                                           </FormControl>
@@ -363,14 +447,196 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  />
                                  <FormField
                                     control={form.control}
-                                    name="addressComplement"
+                                    name="characteristics.hasAirConditioner"
                                     render={({ field }) => (
                                        <FormItem>
                                           <FormControl>
-                                             <Input
-                                                label="Complemento"
-                                                placeholder="Digite o complemento"
-                                                {...field}
+                                             <SelectInput
+                                                label="Ar"
+                                                placeholder="Selecione"
+                                                options={[
+                                                   {
+                                                      id: 'true',
+                                                      label: 'Sim',
+                                                      value: 'true'
+                                                   },
+                                                   {
+                                                      id: 'false',
+                                                      label: 'Não',
+                                                      value: 'false'
+                                                   }
+                                                ]}
+                                                onValueChange={(value) => {}}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="characteristics.hasPowerSteering"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Direção"
+                                                placeholder="Selecione a direção"
+                                                options={[
+                                                   {
+                                                      id: 'true',
+                                                      label: 'Sim',
+                                                      value: 'true'
+                                                   },
+                                                   {
+                                                      id: 'false',
+                                                      label: 'Não',
+                                                      value: 'false'
+                                                   }
+                                                ]}
+                                                onValueChange={(value) => {}}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="characteristics.hasElectricWindow"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Vidro elétrico"
+                                                placeholder="Selecione"
+                                                options={[
+                                                   {
+                                                      id: 'true',
+                                                      label: 'Sim',
+                                                      value: 'true'
+                                                   },
+                                                   {
+                                                      id: 'false',
+                                                      label: 'Não',
+                                                      value: 'false'
+                                                   }
+                                                ]}
+                                                onValueChange={(value) => {}}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                              </div>
+                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-4 md:gap-4">
+                                 <FormField
+                                    control={form.control}
+                                    name="characteristics.hasLock"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Trava"
+                                                placeholder="Selecione"
+                                                options={[
+                                                   {
+                                                      id: 'true',
+                                                      label: 'Sim',
+                                                      value: 'true'
+                                                   },
+                                                   {
+                                                      id: 'false',
+                                                      label: 'Não',
+                                                      value: 'false'
+                                                   }
+                                                ]}
+                                                onValueChange={(value) => {}}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="characteristics.hasTrailer"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Reboque"
+                                                placeholder="Selecione"
+                                                options={[
+                                                   {
+                                                      id: 'true',
+                                                      label: 'Sim',
+                                                      value: 'true'
+                                                   },
+                                                   {
+                                                      id: 'false',
+                                                      label: 'Não',
+                                                      value: 'false'
+                                                   }
+                                                ]}
+                                                onValueChange={(value) => {}}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="characteristics.inspected"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Situação"
+                                                placeholder="Selecione"
+                                                options={[
+                                                   {
+                                                      id: 'true',
+                                                      label: 'Sim',
+                                                      value: 'true'
+                                                   },
+                                                   {
+                                                      id: 'false',
+                                                      label: 'Não',
+                                                      value: 'false'
+                                                   }
+                                                ]}
+                                                onValueChange={(value) => {}}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="characteristics.hasGnvKit"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Kit GNV"
+                                                placeholder="Selecione"
+                                                options={[
+                                                   {
+                                                      id: 'true',
+                                                      label: 'Sim',
+                                                      value: 'true'
+                                                   },
+                                                   {
+                                                      id: 'false',
+                                                      label: 'Não',
+                                                      value: 'false'
+                                                   }
+                                                ]}
+                                                onValueChange={(value) => {}}
                                              />
                                           </FormControl>
                                           <FormMessage />
@@ -381,30 +647,15 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                               <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
                                  <FormField
                                     control={form.control}
-                                    name="neighborhood"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <Input
-                                                label="Bairro *"
-                                                placeholder="Digite o bairro"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                                 <FormField
-                                    control={form.control}
-                                    name="addressState"
+                                    name="characteristics.transmission"
                                     render={({ field }) => (
                                        <FormItem>
                                           <FormControl>
                                              <SelectInput
-                                                label="UF *"
-                                                options={countries}
-                                                placeholder="Selecione o estado"
+                                                label="Situação da placa"
+                                                placeholder="Selecione a situação da placa"
+                                                options={[]}
+                                                onValueChange={(value) => {}}
                                                 {...field}
                                              />
                                           </FormControl>
@@ -414,13 +665,33 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  />
                                  <FormField
                                     control={form.control}
-                                    name="addressCity"
+                                    name="characteristics.transmission"
                                     render={({ field }) => (
                                        <FormItem>
                                           <FormControl>
-                                             <Input
-                                                label="Município *"
-                                                placeholder="Digite o município"
+                                             <SelectInput
+                                                label="Situação do veículo"
+                                                placeholder="Selecione a situação do veículo"
+                                                options={[]}
+                                                onValueChange={(value) => {}}
+                                                {...field}
+                                             />
+                                          </FormControl>
+                                          <FormMessage />
+                                       </FormItem>
+                                    )}
+                                 />
+                                 <FormField
+                                    control={form.control}
+                                    name="characteristics.transmission"
+                                    render={({ field }) => (
+                                       <FormItem>
+                                          <FormControl>
+                                             <SelectInput
+                                                label="Situação do chassi"
+                                                placeholder="Selecione a situação do chassi"
+                                                options={[]}
+                                                onValueChange={(value) => {}}
                                                 {...field}
                                              />
                                           </FormControl>
@@ -432,338 +703,604 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                            </div>
                         </div>
 
-                        {/* Datas gerais */}
+                        {/* Proprietário */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
-                              Datas gerais
+                              Proprietário
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-1 gap-6 md:grid-cols-[0.6fr_0.2fr_0.2fr] md:gap-4">
-                                 <FormField
-                                    control={form.control}
-                                    name="scheduleDate"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <DatePicker
-                                                label="Agendamento *"
-                                                placeholder="DD/MM/YYYY"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
+                                 <Input
+                                    label="Nome"
+                                    placeholder="Digite o nome"
                                  />
-                                 <FormField
-                                    control={form.control}
-                                    name="startRemovalDate"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <DatePicker
-                                                label="Início da Retirada *"
-                                                placeholder="DD/MM/YYYY"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                                 <FormField
-                                    control={form.control}
-                                    name="endRemovalDate"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <DatePicker
-                                                label="Fim da Retirada *"
-                                                placeholder="DD/MM/YYYY"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
+                                 <Input
+                                    label="CPF/CNPJ"
+                                    placeholder="000.000.000-00"
                                  />
                               </div>
-                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
-                                 <FormField
-                                    control={form.control}
-                                    name="noticeDate"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <DatePicker
-                                                label="Edital do Leilão *"
-                                                placeholder="DD/MM/YYYY"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                                 <FormField
-                                    control={form.control}
-                                    name="notificationDate"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <DatePicker
-                                                label="Notificação *"
-                                                placeholder="DD/MM/YYYY"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                              </div>
-                           </div>
-                        </div>
-
-                        {/* Dados complementares */}
-                        <div className="space-y-4">
-                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
-                              Dados complementares
-                           </p>
-                           <div className="space-y-6">
-                              <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-4">
-                                 <FormField
-                                    control={form.control}
-                                    name="auctioneerId"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <SelectInput
-                                                label="Leiloeiro *"
-                                                placeholder="Selecione o leiloeiro"
-                                                options={[]}
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                                 <FormField
-                                    control={form.control}
-                                    name="auctionCompanyId"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <SelectInput
-                                                label="Empresa *"
-                                                placeholder="Selecione a empresa"
-                                                options={[]}
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                                 <FormField
-                                    control={form.control}
-                                    name="committeeId"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <SelectInput
-                                                label="Comitente *"
-                                                placeholder="Selecione o comitente"
-                                                options={[]}
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                              </div>
-                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
-                                 <FormField
-                                    control={form.control}
-                                    name="exhibitorId"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <SelectInput
-                                                label="Expositor *"
-                                                placeholder="Selecione o expositor"
-                                                options={[]}
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                                 <FormField
-                                    control={form.control}
-                                    name="accountRule"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <SelectInput
-                                                label="Regra Prestação de Contas *"
-                                                placeholder="Selecione a regra"
-                                                options={[]}
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                              </div>
-                           </div>
-                        </div>
-
-                        {/* E-mail para Notificação */}
-                        <div className="space-y-4">
-                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
-                              E-mail para Notificação
-                           </p>
-                           <div className="space-y-6">
-                              <div className="grid grid-cols-1 gap-4">
-                                 <FormField
-                                    control={form.control}
-                                    name="notificationEmails"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <div className="grid w-full grid-cols-[1fr_auto] items-center gap-2">
-                                                <Input
-                                                   label="E-mail *"
-                                                   placeholder="Digite o e-mail"
-                                                   className="w-full"
-                                                   onChange={(e) =>
-                                                      setEmailTemp(
-                                                         e.currentTarget.value
-                                                      )
-                                                   }
-                                                   value={emailTemp}
-                                                   onKeyDown={
-                                                      handleEmailKeyDown
-                                                   }
-                                                />
-                                                <Button
-                                                   type="button"
-                                                   variant="outline"
-                                                   size="icon"
-                                                   className="h-12 w-12"
-                                                   onClick={addEmails}
-                                                >
-                                                   <span className="material-symbols-outlined">
-                                                      add
-                                                   </span>
-                                                </Button>
-                                             </div>
-                                          </FormControl>
-                                          <FormDescription className="hidden md:block">
-                                             Para adicionar mais de um e-mail,
-                                             separe por vírgula e pressione{' '}
-                                             <kbd className="rounded-sm bg-gray-100 px-1 py-0.5 text-xs dark:bg-gray-600 dark:text-dark-text-primary">
-                                                Enter
-                                             </kbd>
-                                             .
-                                          </FormDescription>
-                                          <FormDescription className="block md:hidden">
-                                             Para adicionar mais de um e-mail,
-                                             separe por vírgula e pressione o
-                                             botão de adicionar.
-                                          </FormDescription>
-                                          <div
-                                             className={cn(
-                                                'flex flex-wrap gap-2',
-                                                {
-                                                   'mt-2':
-                                                      (field.value?.length ||
-                                                         0) > 0
-                                                }
-                                             )}
-                                          >
-                                             {field.value?.map(
-                                                (email, index) => (
-                                                   <div
-                                                      key={index}
-                                                      className="flex items-center gap-2 rounded bg-gray-100 px-2 py-1 dark:bg-gray-600"
-                                                   >
-                                                      <span className="text-sm">
-                                                         {email}
-                                                      </span>
-
-                                                      <span
-                                                         className="material-symbols-outlined symbol-xs my-auto mt-0.5 h-4 w-4 cursor-pointer transition-all duration-300 hover:scale-110 hover:text-error-default"
-                                                         onClick={() =>
-                                                            removeEmail(index)
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-4">
+                                 <div className="flex gap-4">
+                                    <div className="flex-1">
+                                       <FormField
+                                          control={form.control}
+                                          name="financialDetails.cep"
+                                          render={({ field }) => (
+                                             <FormItem className="flex-1">
+                                                <FormControl>
+                                                   <Input
+                                                      label="CEP *"
+                                                      placeholder="00000-000"
+                                                      className="w-full md:min-w-[172px]"
+                                                      mask={ZIP_CODE_MASK}
+                                                      onInput={(e) => {
+                                                         if (
+                                                            isValidZipCode(
+                                                               e.currentTarget
+                                                                  .value
+                                                            )
+                                                         ) {
+                                                            handleZipCode(
+                                                               e.currentTarget
+                                                                  .value,
+                                                               ({
+                                                                  address,
+                                                                  city,
+                                                                  neighborhood,
+                                                                  state,
+                                                                  zipCode
+                                                               }) => {
+                                                                  //    form.setValue(
+                                                                  //       'address',
+                                                                  //       address
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'addressCity',
+                                                                  //       city
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'neighborhood',
+                                                                  //       neighborhood
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'addressState',
+                                                                  //       state
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'cep',
+                                                                  //       zipCode
+                                                                  //    )
+                                                               }
+                                                            )
                                                          }
-                                                      >
-                                                         close
-                                                      </span>
-                                                   </div>
-                                                )
-                                             )}
-                                          </div>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
+                                                      }}
+                                                      {...field}
+                                                   />
+                                                </FormControl>
+                                                <FormMessage />
+                                             </FormItem>
+                                          )}
+                                       />
+                                    </div>
+                                    <Button variant="ghost" type="button">
+                                       Buscar
+                                    </Button>
+                                 </div>
+                              </div>
+                              <div className="space-y-6">
+                                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-4">
+                                    <FormField
+                                       control={form.control}
+                                       name="address"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Endereço *"
+                                                   placeholder="Digite o endereço"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressNumber"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Número *"
+                                                   placeholder="0000000000"
+                                                   type="number"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressComplement"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Complemento"
+                                                   placeholder="Digite o complemento"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                 </div>
+                                 <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
+                                    <FormField
+                                       control={form.control}
+                                       name="neighborhood"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Bairro *"
+                                                   placeholder="Digite o bairro"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressState"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <SelectInput
+                                                   label="UF *"
+                                                   options={countries}
+                                                   placeholder="Selecione o estado"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressCity"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Município *"
+                                                   placeholder="Digite o município"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                 </div>
+                                 <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
+                                    <SelectInput
+                                       label="Notificar Correios"
+                                       placeholder="Selecione"
+                                       options={[]}
+                                    />
+                                 </div>
                               </div>
                            </div>
                         </div>
 
-                        {/* Diário oficial */}
+                        {/* Financeira */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
-                              Diário oficial
+                              Financeira
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
-                                 <FormField
-                                    control={form.control}
-                                    name="officialPublicationDate"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <DatePicker
-                                                label="Data da Publicação D.O. *"
-                                                placeholder="DD/MM/YYYY"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
+                                 <Input
+                                    label="Nome"
+                                    placeholder="Digite o nome"
                                  />
-                                 <FormField
-                                    control={form.control}
-                                    name="officialPublicationNumber"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <Input
-                                                label="Número D.O. *"
-                                                placeholder="0000000000"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
+                                 <Input
+                                    label="CPF/CNPJ"
+                                    placeholder="000.000.000-00"
                                  />
+                              </div>
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-4">
+                                 <div className="flex gap-4">
+                                    <div className="flex-1">
+                                       <FormField
+                                          control={form.control}
+                                          name="financialDetails.cep"
+                                          render={({ field }) => (
+                                             <FormItem className="flex-1">
+                                                <FormControl>
+                                                   <Input
+                                                      label="CEP *"
+                                                      placeholder="00000-000"
+                                                      className="w-full md:min-w-[172px]"
+                                                      mask={ZIP_CODE_MASK}
+                                                      onInput={(e) => {
+                                                         if (
+                                                            isValidZipCode(
+                                                               e.currentTarget
+                                                                  .value
+                                                            )
+                                                         ) {
+                                                            handleZipCode(
+                                                               e.currentTarget
+                                                                  .value,
+                                                               ({
+                                                                  address,
+                                                                  city,
+                                                                  neighborhood,
+                                                                  state,
+                                                                  zipCode
+                                                               }) => {
+                                                                  //    form.setValue(
+                                                                  //       'address',
+                                                                  //       address
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'addressCity',
+                                                                  //       city
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'neighborhood',
+                                                                  //       neighborhood
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'addressState',
+                                                                  //       state
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'cep',
+                                                                  //       zipCode
+                                                                  //    )
+                                                               }
+                                                            )
+                                                         }
+                                                      }}
+                                                      {...field}
+                                                   />
+                                                </FormControl>
+                                                <FormMessage />
+                                             </FormItem>
+                                          )}
+                                       />
+                                    </div>
+                                    <Button variant="ghost" type="button">
+                                       Buscar
+                                    </Button>
+                                 </div>
+                              </div>
+                              <div className="space-y-6">
+                                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-4">
+                                    <FormField
+                                       control={form.control}
+                                       name="address"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Endereço *"
+                                                   placeholder="Digite o endereço"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressNumber"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Número *"
+                                                   placeholder="0000000000"
+                                                   type="number"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressComplement"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Complemento"
+                                                   placeholder="Digite o complemento"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                 </div>
+                                 <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
+                                    <FormField
+                                       control={form.control}
+                                       name="neighborhood"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Bairro *"
+                                                   placeholder="Digite o bairro"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressState"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <SelectInput
+                                                   label="UF *"
+                                                   options={countries}
+                                                   placeholder="Selecione o estado"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressCity"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Município *"
+                                                   placeholder="Digite o município"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                 </div>
+                                 <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
+                                    <SelectInput
+                                       label="Notificar Correios"
+                                       placeholder="Selecione"
+                                       options={[]}
+                                    />
+                                 </div>
                               </div>
                            </div>
                         </div>
 
-                        {/* Ordem Interna */}
+                        {/* Comunicado de venda */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
-                              Ordem Interna
+                              Comunicado de venda
+                           </p>
+                           <div className="space-y-6">
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
+                                 <Input
+                                    label="Nome"
+                                    placeholder="Digite o nome"
+                                 />
+                                 <Input
+                                    label="CPF/CNPJ"
+                                    placeholder="000.000.000-00"
+                                 />
+                              </div>
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-4">
+                                 <div className="flex gap-4">
+                                    <div className="flex-1">
+                                       <FormField
+                                          control={form.control}
+                                          name="financialDetails.cep"
+                                          render={({ field }) => (
+                                             <FormItem className="flex-1">
+                                                <FormControl>
+                                                   <Input
+                                                      label="CEP *"
+                                                      placeholder="00000-000"
+                                                      className="w-full md:min-w-[172px]"
+                                                      mask={ZIP_CODE_MASK}
+                                                      onInput={(e) => {
+                                                         if (
+                                                            isValidZipCode(
+                                                               e.currentTarget
+                                                                  .value
+                                                            )
+                                                         ) {
+                                                            handleZipCode(
+                                                               e.currentTarget
+                                                                  .value,
+                                                               ({
+                                                                  address,
+                                                                  city,
+                                                                  neighborhood,
+                                                                  state,
+                                                                  zipCode
+                                                               }) => {
+                                                                  //    form.setValue(
+                                                                  //       'address',
+                                                                  //       address
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'addressCity',
+                                                                  //       city
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'neighborhood',
+                                                                  //       neighborhood
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'addressState',
+                                                                  //       state
+                                                                  //    )
+                                                                  //    form.setValue(
+                                                                  //       'cep',
+                                                                  //       zipCode
+                                                                  //    )
+                                                               }
+                                                            )
+                                                         }
+                                                      }}
+                                                      {...field}
+                                                   />
+                                                </FormControl>
+                                                <FormMessage />
+                                             </FormItem>
+                                          )}
+                                       />
+                                    </div>
+                                    <Button variant="ghost" type="button">
+                                       Buscar
+                                    </Button>
+                                 </div>
+                              </div>
+                              <div className="space-y-6">
+                                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-4">
+                                    <FormField
+                                       control={form.control}
+                                       name="address"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Endereço *"
+                                                   placeholder="Digite o endereço"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressNumber"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Número *"
+                                                   placeholder="0000000000"
+                                                   type="number"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressComplement"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Complemento"
+                                                   placeholder="Digite o complemento"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                 </div>
+                                 <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
+                                    <FormField
+                                       control={form.control}
+                                       name="neighborhood"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Bairro *"
+                                                   placeholder="Digite o bairro"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressState"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <SelectInput
+                                                   label="UF *"
+                                                   options={countries}
+                                                   placeholder="Selecione o estado"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                    <FormField
+                                       control={form.control}
+                                       name="addressCity"
+                                       render={({ field }) => (
+                                          <FormItem>
+                                             <FormControl>
+                                                <Input
+                                                   label="Município *"
+                                                   placeholder="Digite o município"
+                                                   {...field}
+                                                />
+                                             </FormControl>
+                                             <FormMessage />
+                                          </FormItem>
+                                       )}
+                                    />
+                                 </div>
+                                 <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
+                                    <SelectInput
+                                       label="Notificar Correios"
+                                       placeholder="Selecione"
+                                       options={[]}
+                                    />
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        {/* Restrições */}
+                        <div className="space-y-4">
+                           <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
+                              Restrições
                            </p>
                            <div className="space-y-6">
                               <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
@@ -821,7 +1358,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                         className="w-fit text-xs md:text-base"
                         onClick={form.handleSubmit(onSubmit)}
                      >
-                        Atualizar leilão
+                        Salvar edição
                      </Button>
                   </div>
                </Form>
@@ -880,179 +1417,242 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
 }
 
 const updateLotSchema = z.object({
-   description: z
-      .string()
-      .min(1, { message: 'Descrição é obrigatória' })
+   // Base lot fields
+   lotNumber: z
+      .string({
+         invalid_type_error: 'Lot number must be a string'
+      })
+      .optional(),
+   itemNumber: z
+      .string({
+         invalid_type_error: 'Item number must be a string'
+      })
+      .optional(),
+   location: z
+      .string({
+         invalid_type_error: 'Location must be a string'
+      })
+      .optional(),
+   evaluation: z
+      .number({
+         invalid_type_error: 'Evaluation must be a number'
+      })
+      .optional(),
+   status: z
+      .enum(['in_progress', 'finished', 'canceled'], {
+         invalid_type_error:
+            'Status must be one of: in_progress, finished, canceled'
+      })
+      .optional(),
+   minumumBid: z
+      .number({
+         invalid_type_error: 'Minimum bid must be a number'
+      })
+      .optional(),
+   hasKey: z
+      .boolean({
+         invalid_type_error: 'Has key must be a boolean'
+      })
+      .optional(),
+   km: z
+      .number({
+         invalid_type_error: 'Kilometers must be a number'
+      })
       .optional(),
 
-   auctionDate: z
-      .string()
-      .min(1, { message: 'Data do leilão é obrigatória' })
+   // Characteristics
+   characteristics: z
+      .object({
+         inspected: z
+            .boolean({
+               invalid_type_error: 'Inspected must be a boolean'
+            })
+            .optional(),
+         origin: z
+            .string({
+               invalid_type_error: 'Origin must be a string'
+            })
+            .optional(),
+         hasKey: z
+            .boolean({
+               invalid_type_error: 'HasKey must be a boolean'
+            })
+            .optional(),
+         mileage: z
+            .number({
+               invalid_type_error: 'Mileage must be a number'
+            })
+            .optional(),
+         transmission: z
+            .string({
+               invalid_type_error: 'Transmission must be a string'
+            })
+            .optional(),
+         hasAirConditioner: z
+            .boolean({
+               invalid_type_error: 'HasAirConditioner must be a boolean'
+            })
+            .optional(),
+         hasPowerSteering: z
+            .boolean({
+               invalid_type_error: 'HasPowerSteering must be a boolean'
+            })
+            .optional(),
+         hasElectricWindow: z
+            .boolean({
+               invalid_type_error: 'HasElectricWindow must be a boolean'
+            })
+            .optional(),
+         hasLock: z
+            .boolean({
+               invalid_type_error: 'HasLock must be a boolean'
+            })
+            .optional(),
+         hasTrailer: z
+            .boolean({
+               invalid_type_error: 'HasTrailer must be a boolean'
+            })
+            .optional(),
+         condition: z
+            .string({
+               invalid_type_error: 'Condition must be a string'
+            })
+            .optional(),
+         hasGnvKit: z
+            .boolean({
+               invalid_type_error: 'HasGnvKit must be a boolean'
+            })
+            .optional(),
+         plateCondition: z
+            .string({
+               invalid_type_error: 'PlateCondition must be a string'
+            })
+            .optional(),
+         vehicleCondition: z
+            .string({
+               invalid_type_error: 'VehicleCondition must be a string'
+            })
+            .optional(),
+         chassisCondition: z
+            .string({
+               invalid_type_error: 'ChassisCondition must be a string'
+            })
+            .optional()
+      })
+      .strict()
       .optional(),
 
-   cep: z.string().min(1, { message: 'CEP é obrigatório' }).optional(),
-
-   address: z.string().min(1, { message: 'Endereço é obrigatório' }).optional(),
-
-   addressNumber: z
-      .string()
-      .min(1, { message: 'Número é obrigatório' })
+   // Financial Details
+   financialDetails: z
+      .object({
+         name: z
+            .string({
+               invalid_type_error: 'Name must be a string'
+            })
+            .optional(),
+         document: z
+            .string({
+               invalid_type_error: 'Document must be a string'
+            })
+            .optional(),
+         cep: z
+            .string({
+               invalid_type_error: 'CEP must be a string'
+            })
+            .optional(),
+         address: z
+            .string({
+               invalid_type_error: 'Address must be a string'
+            })
+            .optional(),
+         addressNumber: z
+            .string({
+               invalid_type_error: 'AddressNumber must be a string'
+            })
+            .optional(),
+         addressComplement: z
+            .string({
+               invalid_type_error: 'AddressComplement must be a string'
+            })
+            .optional(),
+         neighborhood: z
+            .string({
+               invalid_type_error: 'Neighborhood must be a string'
+            })
+            .optional(),
+         addressState: z
+            .string({
+               invalid_type_error: 'AddressState must be a string'
+            })
+            .optional(),
+         addressCity: z
+            .string({
+               invalid_type_error: 'AddressCity must be a string'
+            })
+            .optional(),
+         notifyByMail: z
+            .boolean({
+               invalid_type_error: 'NotifyByMail must be a boolean'
+            })
+            .optional()
+      })
+      .strict()
       .optional(),
 
-   addressComplement: z.string().optional(),
-
-   neighborhood: z
-      .string()
-      .min(1, { message: 'Bairro é obrigatório' })
-      .optional(),
-
-   addressState: z
-      .string()
-      .min(1, { message: 'Estado é obrigatório' })
-      .optional(),
-
-   addressCity: z
-      .string()
-      .min(1, { message: 'Cidade é obrigatória' })
-      .optional(),
-
-   scheduleDate: z
-      .string()
-      .min(1, { message: 'Data de agendamento é obrigatória' })
-      .optional(),
-
-   startRemovalDate: z
-      .string()
-      .min(1, { message: 'Data de início da retirada é obrigatória' })
-      .optional(),
-
-   endRemovalDate: z
-      .string()
-      .min(1, { message: 'Data final da retirada é obrigatória' })
-      .optional(),
-
-   notificationDate: z
-      .string()
-      .min(1, { message: 'Data de notificação é obrigatória' })
-      .optional(),
-
-   noticeDate: z
-      .string()
-      .min(1, { message: 'Data do edital é obrigatória' })
-      .optional(),
-
-   notificationEmails: z
-      .array(
-         z
-            .string()
-            .min(1, { message: 'E-mail é obrigatório' })
-            .email({ message: 'E-mail inválido' })
-      )
-      .optional(),
-
-   auctioneerId: z
-      .string()
-      .min(1, { message: 'Leiloeiro é obrigatório' })
-      .optional(),
-
-   auctionCompanyId: z
-      .string()
-      .min(1, { message: 'Empresa é obrigatória' })
-      .optional(),
-
-   committeeId: z
-      .string()
-      .min(1, { message: 'Comitente é obrigatório' })
-      .optional(),
-
-   exhibitorId: z
-      .string()
-      .min(1, { message: 'Expositor é obrigatório' })
-      .optional(),
-
-   accountRule: z
-      .string()
-      .min(1, { message: 'Regra de prestação de contas é obrigatória' })
-      .optional(),
-
-   officialPublicationDate: z
-      .string()
-      .min(1, { message: 'Data de publicação oficial é obrigatória' })
-      .optional(),
-
-   officialPublicationNumber: z
-      .string()
-      .min(1, { message: 'Número de publicação oficial é obrigatório' })
-      .optional(),
-
-   internalMatrixOrder: z
-      .string()
-      .min(1, { message: 'Ordem interna matriz é obrigatória' })
-      .optional(),
-
-   internalAuctionOrder: z
-      .string()
-      .min(1, { message: 'Ordem interna leilão é obrigatória' })
-      .optional(),
-
-   vehicleObservations: z.string().optional()
+   // Sale Notification
+   saleNotification: z
+      .object({
+         name: z
+            .string({
+               invalid_type_error: 'Name must be a string'
+            })
+            .optional(),
+         document: z
+            .string({
+               invalid_type_error: 'Document must be a string'
+            })
+            .optional(),
+         cep: z
+            .string({
+               invalid_type_error: 'CEP must be a string'
+            })
+            .optional(),
+         address: z
+            .string({
+               invalid_type_error: 'Address must be a string'
+            })
+            .optional(),
+         addressNumber: z
+            .string({
+               invalid_type_error: 'AddressNumber must be a string'
+            })
+            .optional(),
+         addressComplement: z
+            .string({
+               invalid_type_error: 'AddressComplement must be a string'
+            })
+            .optional(),
+         neighborhood: z
+            .string({
+               invalid_type_error: 'Neighborhood must be a string'
+            })
+            .optional(),
+         addressState: z
+            .string({
+               invalid_type_error: 'AddressState must be a string'
+            })
+            .optional(),
+         addressCity: z
+            .string({
+               invalid_type_error: 'AddressCity must be a string'
+            })
+            .optional(),
+         notifyByMail: z
+            .boolean({
+               invalid_type_error: 'NotifyByMail must be a boolean'
+            })
+            .optional()
+      })
+      .strict()
+      .optional()
 })
-
-// export const updateLotSchema = z.object({
-//   // Base lot fields
-//   lotNumber: z.string().optional(),
-//   itemNumber: z.string().optional(),
-//   location: z.string().optional(),
-//   evaluation: z.number().optional(),
-//   status: z.enum(['in_progress', 'finished', 'canceled']).optional(),
-//   minumumBid: z.number().optional(),
-//   hasKey: z.boolean().optional(),
-//   km: z.number().optional(),
-
-//   // Characteristics
-//   characteristics: z.object({
-//     inspected: z.boolean().optional(),
-//     origin: z.string().optional(),
-//     hasKey: z.boolean().optional(),
-//     mileage: z.number().optional(),
-//     transmission: z.string().optional(),
-//     hasAirConditioner: z.boolean().optional(),
-//     hasPowerSteering: z.boolean().optional(),
-//     hasElectricWindow: z.boolean().optional(),
-//     hasLock: z.boolean().optional(),
-//     hasTrailer: z.boolean().optional(),
-//     condition: z.string().optional(),
-//     hasGnvKit: z.boolean().optional(),
-//     plateCondition: z.string().optional(),
-//     vehicleCondition: z.string().optional(),
-//     chassisCondition: z.string().optional(),
-//   }).optional(),
-
-//   // Financial Details
-//   financialDetails: z.object({
-//     name: z.string().optional(),
-//     document: z.string().optional(),
-//     cep: z.string().optional(),
-//     address: z.string().optional(),
-//     addressNumber: z.string().optional(),
-//     addressComplement: z.string().optional(),
-//     neighborhood: z.string().optional(),
-//     addressState: z.string().optional(),
-//     addressCity: z.string().optional(),
-//     notifyByMail: z.boolean().optional(),
-//   }).optional(),
-
-//   // Sale Notification
-//   saleNotification: z.object({
-//     name: z.string().optional(),
-//     document: z.string().optional(),
-//     cep: z.string().optional(),
-//     address: z.string().optional(),
-//     addressNumber: z.string().optional(),
-//     addressComplement: z.string().optional(),
-//     neighborhood: z.string().optional(),
-//     addressState: z.string().optional(),
-//     addressCity: z.string().optional(),
-//     notifyByMail: z.boolean().optional(),
-//   }).optional(),
-// })
