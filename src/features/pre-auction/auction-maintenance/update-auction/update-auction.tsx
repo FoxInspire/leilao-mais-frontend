@@ -4,20 +4,20 @@ import * as React from 'react'
 import * as z from 'zod'
 
 import {
-   Breadcrumb,
-   BreadcrumbItem,
-   BreadcrumbLink,
-   BreadcrumbList,
-   BreadcrumbPage,
-   BreadcrumbSeparator
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import {
-   Form,
-   FormControl,
-   FormDescription,
-   FormField,
-   FormItem,
-   FormMessage
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormMessage
 } from '@/components/ui/form'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
@@ -69,8 +69,6 @@ export const UpdateAuction: React.FC<UpdateAuctionProps> = ({
             )
             return
          }
-
-         console.log('data', data)
 
          router.push(pre_auction_routes.auction.edit_success(id))
       } catch (error) {

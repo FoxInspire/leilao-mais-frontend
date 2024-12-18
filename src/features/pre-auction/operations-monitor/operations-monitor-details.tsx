@@ -3,18 +3,18 @@
 import * as React from 'react'
 
 import {
-   Breadcrumb,
-   BreadcrumbItem,
-   BreadcrumbLink,
-   BreadcrumbList,
-   BreadcrumbPage,
-   BreadcrumbSeparator
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import {
-   Dialog,
-   DialogContent,
-   DialogHeader,
-   DialogTitle
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle
 } from '@/components/ui/dialog'
 import { SelectInput } from '@/components/ui/select'
 import { TableOperationMonitorDetails } from '@/features/pre-auction/operations-monitor/components/data-table'
@@ -343,7 +343,7 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value) => console.log('value', value)}
+                        onValueChange={(value) => {}}
                      />
                      <SelectInput
                         label="Transação"
@@ -354,7 +354,7 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value) => console.log('value', value)}
+                        onValueChange={(value) => {}}
                      />
                      <SelectInput
                         label="Agendado"
@@ -365,7 +365,7 @@ export const OperationsMonitorDetails: React.FC<
                            { id: '3', label: 'Opção 3', value: 'option3' },
                            { id: '4', label: 'Opção 4', value: 'option4' }
                         ]}
-                        onValueChange={(value) => console.log('value', value)}
+                        onValueChange={(value) => {}}
                      />
                   </div>
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
