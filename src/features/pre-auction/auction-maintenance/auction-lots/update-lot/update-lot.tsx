@@ -151,7 +151,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                      className="hide-scrollbar grid max-h-[calc(100vh-16.8125rem-62px-16px)] w-full overflow-x-visible overflow-y-scroll"
                   >
                      <div className="flex-1 space-y-6 overflow-x-visible overflow-y-scroll">
-                        {/* Dados do lote */}
+                        {/* Dados do lote (Alguns campos são editáveis) */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Dados do lote
@@ -191,7 +191,9 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     )}
                                  />
                                  <Input
+                                    disabled
                                     label="Processo"
+                                    value={'1092837393030'} // replace with api value
                                     placeholder="0000000000"
                                  />
                               </div>
@@ -258,7 +260,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                            </div>
                         </div>
 
-                        {/* Dados do veículo */}
+                        {/* Dados do veículo (Read Only) */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Dados do veículo
@@ -340,7 +342,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                            </div>
                         </div>
 
-                        {/* Características */}
+                        {/* Características (editável) */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Características
@@ -703,7 +705,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                            </div>
                         </div>
 
-                        {/* Proprietário */}
+                        {/* Proprietário (Read Only) */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Proprietário
@@ -722,64 +724,29 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                               <div className="grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-4">
                                  <div className="flex gap-4">
                                     <div className="flex-1">
-                                       <FormField
-                                          control={form.control}
-                                          name="financialDetails.cep"
-                                          render={({ field }) => (
-                                             <FormItem className="flex-1">
-                                                <FormControl>
-                                                   <Input
-                                                      label="CEP *"
-                                                      placeholder="00000-000"
-                                                      className="w-full md:min-w-[172px]"
-                                                      mask={ZIP_CODE_MASK}
-                                                      onInput={(e) => {
-                                                         if (
-                                                            isValidZipCode(
-                                                               e.currentTarget
-                                                                  .value
-                                                            )
-                                                         ) {
-                                                            handleZipCode(
-                                                               e.currentTarget
-                                                                  .value,
-                                                               ({
-                                                                  address,
-                                                                  city,
-                                                                  neighborhood,
-                                                                  state,
-                                                                  zipCode
-                                                               }) => {
-                                                                  //    form.setValue(
-                                                                  //       'address',
-                                                                  //       address
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'addressCity',
-                                                                  //       city
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'neighborhood',
-                                                                  //       neighborhood
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'addressState',
-                                                                  //       state
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'cep',
-                                                                  //       zipCode
-                                                                  //    )
-                                                               }
-                                                            )
-                                                         }
-                                                      }}
-                                                      {...field}
-                                                   />
-                                                </FormControl>
-                                                <FormMessage />
-                                             </FormItem>
-                                          )}
+                                       <Input
+                                          label="CEP *"
+                                          placeholder="00000-000"
+                                          className="w-full md:min-w-[172px]"
+                                          mask={ZIP_CODE_MASK}
+                                          onInput={(e) => {
+                                             if (
+                                                isValidZipCode(
+                                                   e.currentTarget.value
+                                                )
+                                             ) {
+                                                handleZipCode(
+                                                   e.currentTarget.value,
+                                                   ({
+                                                      address,
+                                                      city,
+                                                      neighborhood,
+                                                      state,
+                                                      zipCode
+                                                   }) => {}
+                                                )
+                                             }
+                                          }}
                                        />
                                     </div>
                                     <Button variant="ghost" type="button">
@@ -791,7 +758,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-4">
                                     <FormField
                                        control={form.control}
-                                       name="address"
+                                       name="financialDetails.address"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -807,7 +774,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressNumber"
+                                       name="financialDetails.addressNumber"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -824,7 +791,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressComplement"
+                                       name="financialDetails.addressComplement"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -842,7 +809,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
                                     <FormField
                                        control={form.control}
-                                       name="neighborhood"
+                                       name="financialDetails.neighborhood"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -858,7 +825,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressState"
+                                       name="financialDetails.addressState"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -875,7 +842,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressCity"
+                                       name="financialDetails.addressCity"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -894,14 +861,25 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     <SelectInput
                                        label="Notificar Correios"
                                        placeholder="Selecione"
-                                       options={[]}
+                                       options={[
+                                          {
+                                             id: 'true',
+                                             label: 'Sim',
+                                             value: 'true'
+                                          },
+                                          {
+                                             id: 'false',
+                                             label: 'Não',
+                                             value: 'false'
+                                          }
+                                       ]}
                                     />
                                  </div>
                               </div>
                            </div>
                         </div>
 
-                        {/* Financeira */}
+                        {/* Financeira (Alguns campos são editáveis) */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Financeira
@@ -989,7 +967,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-4">
                                     <FormField
                                        control={form.control}
-                                       name="address"
+                                       name="financialDetails.address"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1005,7 +983,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressNumber"
+                                       name="financialDetails.addressNumber"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1022,7 +1000,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressComplement"
+                                       name="financialDetails.addressComplement"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1040,7 +1018,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
                                     <FormField
                                        control={form.control}
-                                       name="neighborhood"
+                                       name="financialDetails.neighborhood"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1056,7 +1034,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressState"
+                                       name="financialDetails.addressState"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1073,7 +1051,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressCity"
+                                       name="financialDetails.addressCity"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1092,14 +1070,25 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     <SelectInput
                                        label="Notificar Correios"
                                        placeholder="Selecione"
-                                       options={[]}
+                                       options={[
+                                          {
+                                             id: 'true',
+                                             label: 'Sim',
+                                             value: 'true'
+                                          },
+                                          {
+                                             id: 'false',
+                                             label: 'Não',
+                                             value: 'false'
+                                          }
+                                       ]}
                                     />
                                  </div>
                               </div>
                            </div>
                         </div>
 
-                        {/* Comunicado de venda */}
+                        {/* Comunicado de venda (Alguns campos são editáveis) */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Comunicado de venda
@@ -1145,28 +1134,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                                                   neighborhood,
                                                                   state,
                                                                   zipCode
-                                                               }) => {
-                                                                  //    form.setValue(
-                                                                  //       'address',
-                                                                  //       address
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'addressCity',
-                                                                  //       city
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'neighborhood',
-                                                                  //       neighborhood
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'addressState',
-                                                                  //       state
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'cep',
-                                                                  //       zipCode
-                                                                  //    )
-                                                               }
+                                                               }) => {}
                                                             )
                                                          }
                                                       }}
@@ -1297,7 +1265,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                            </div>
                         </div>
 
-                        {/* Restrições */}
+                        {/* Restrições (Read Only) */}
                         <div className="space-y-4">
                            <p className="text-start text-sm font-semibold text-black dark:text-dark-text-primary">
                               Restrições

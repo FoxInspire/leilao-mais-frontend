@@ -192,13 +192,16 @@ export const inputVariants = cva(
       'dark:focus-visible:border-2',
       'dark:focus-visible:outline-offset-0',
 
+      'peer-disabled:text-neutral-500 dark:peer-disabled:text-neutral-400 peer-disabled:bg-transparent dark:peer-disabled:bg-transparent',
+
+      'disabled:cursor-not-allowed disabled:opacity-50 disabled:text-neutral-500 dark:disabled:text-neutral-400',
+      'disabled:bg-transparent disabled:border-slate-200 disabled:shadow-none',
+      'aria-[invalid=true]:border-red-500 aria-[invalid=true]:dark:border-red-500',
+
       'placeholder:text-[#737373]',
       'placeholder:opacity-0',
       'placeholder:transition-opacity placeholder:duration-200',
       'focus-visible:placeholder:opacity-100',
-      'disabled:cursor-not-allowed disabled:opacity-50',
-      'disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none',
-      'aria-[invalid=true]:border-red-500 aria-[invalid=true]:dark:border-red-500',
       'aria-[invalid=true]:text-red-600 aria-[invalid=true]:dark:text-red-600',
       'invalid:border-red-500 invalid:text-red-600',
       'focus-visible:invalid:border-red-500 focus-visible:invalid:ring-red-500'
@@ -243,7 +246,7 @@ export const labelVariants = cva(
       'dark:text-neutral-400',
 
       'bg-white dark:bg-dark-background-paper px-1',
-      'peer-disabled:bg-transparent peer-disabled:text-neutral-500',
+      'peer-disabled:text-neutral-500 peer-disabled:dark:text-neutral-400',
 
       'peer-focus:top-1',
       'peer-focus:scale-75',
