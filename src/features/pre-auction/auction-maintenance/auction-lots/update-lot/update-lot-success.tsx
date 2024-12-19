@@ -16,13 +16,13 @@ import { Separator } from '@/src/components/ui/separator'
 import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { useRouter } from 'next/navigation'
 
-interface CreateAuctionSuccessProps {
+interface UpdateLotSuccessProps {
    id: string
 }
 
-export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
+export const UpdateLotSuccess: React.FC<UpdateLotSuccessProps> = ({
    id
-}: CreateAuctionSuccessProps) => {
+}: UpdateLotSuccessProps) => {
    const router = useRouter()
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
@@ -38,13 +38,13 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                            <BreadcrumbLink>Pré-leilão</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator>/</BreadcrumbSeparator>
-                        <BreadcrumbPage>Novo leilão</BreadcrumbPage>
+                        <BreadcrumbPage>Editar lote</BreadcrumbPage>
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
                      <div className="flex flex-wrap items-center justify-between gap-2">
                         <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
-                           Cadastrar novo leilão
+                           Editar lote {id}
                         </h1>
                         <Button
                            variant="ghost"
@@ -65,33 +65,29 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                         check_circle
                      </span>
                      <h3 className="text-center font-montserrat text-2xl font-semibold">
-                        Cadastro leilão{' '}
+                        Lote leilão{' '}
                         <span className="font-bold text-primary-default dark:text-dark-primary-default">
                            {id}
                         </span>{' '}
-                        realizado com sucesso!
+                        editado com sucesso!
                      </h3>
                      <div className="flex items-center gap-4">
                         <Button
                            variant="outline"
                            className="h-10"
-                           onClick={() =>
-                              router.push(
-                                 pre_auction_routes.auction_maintenance
-                              )
-                           }
+                           onClick={() => router.back()}
                         >
-                           Ver leilões
+                           Voltar
                         </Button>
                         <Button
                            className="h-10"
                            onClick={() =>
                               router.push(
-                                 pre_auction_routes.auction.insert_lots(id)
+                                 pre_auction_routes.auction.list_lots(id)
                               )
                            }
                         >
-                           Ingressar lotes
+                           Ir para lotes
                         </Button>
                      </div>
                   </div>

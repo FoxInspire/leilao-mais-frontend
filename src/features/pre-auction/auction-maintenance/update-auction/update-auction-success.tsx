@@ -65,7 +65,7 @@ export const UpdateAuctionSuccess: React.FC<UpdateAuctionSuccessProps> = ({
                         check_circle
                      </span>
                      <h3 className="text-center font-montserrat text-2xl font-semibold">
-                        Edição leilão {id} realizada com sucesso
+                        Edição leilão {id} realizada com sucesso!
                      </h3>
                      <div className="flex items-center gap-4">
                         <Button

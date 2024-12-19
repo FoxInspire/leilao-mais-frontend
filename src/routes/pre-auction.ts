@@ -1,6 +1,6 @@
 import {
-   LotType,
-   Step
+    LotType,
+    Step
 } from '@/features/pre-auction/auction-maintenance/insert-lots/insert-lots'
 
 export const pre_auction_routes = {
@@ -20,6 +20,12 @@ export const pre_auction_routes = {
 
       list_lots: (id: string) =>
          `/pre-auction/auction-maintenance/auction-lots/${id}`,
+      
+      update_lot: (id: string) =>
+         `/pre-auction/auction-maintenance/auction-lots/update-lot/${id}`,
+      update_lot_success: (id: string) =>
+         `/pre-auction/auction-maintenance/auction-lots/update-lot/success/${id}`,
+
       insert_lots: (id: string) =>
          `/pre-auction/auction-maintenance/insert-lots/${id}?step=${Step.STEP1}&lotType=${LotType.NEW}`,
       insert_lots_success: (id: string) =>
