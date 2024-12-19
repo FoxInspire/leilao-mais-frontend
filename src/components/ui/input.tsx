@@ -194,7 +194,7 @@ export const inputVariants = cva(
 
       'peer-disabled:text-neutral-500 dark:peer-disabled:text-neutral-400 peer-disabled:bg-transparent dark:peer-disabled:bg-transparent',
 
-      'disabled:cursor-not-allowed disabled:opacity-50 disabled:text-neutral-500 dark:disabled:text-neutral-400',
+      'disabled:cursor-not-allowed disabled:opacity-90 disabled:text-neutral-500 dark:disabled:text-neutral-400',
       'disabled:bg-transparent disabled:border-slate-200 disabled:shadow-none',
       'aria-[invalid=true]:border-red-500 aria-[invalid=true]:dark:border-red-500',
 
@@ -246,7 +246,7 @@ export const labelVariants = cva(
       'dark:text-neutral-400',
 
       'bg-white dark:bg-dark-background-paper px-1',
-      'peer-disabled:text-neutral-500 peer-disabled:dark:text-neutral-400',
+      'peer-disabled:text-neutral-500 peer-disabled:dark:text-neutral-400 peer-disabled:opacity-90',
 
       'peer-focus:top-1',
       'peer-focus:scale-75',
