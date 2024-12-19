@@ -65,19 +65,29 @@ export const UpdateLotSuccess: React.FC<UpdateLotSuccessProps> = ({
                         check_circle
                      </span>
                      <h3 className="text-center font-montserrat text-2xl font-semibold">
-                        Lote leilão {id} editado com sucesso!
+                        Lote leilão{' '}
+                        <span className="font-bold text-primary-default dark:text-dark-primary-default">
+                           {id}
+                        </span>{' '}
+                        editado com sucesso!
                      </h3>
                      <div className="flex items-center gap-4">
                         <Button
                            variant="outline"
                            className="h-10"
+                           onClick={() => router.back()}
+                        >
+                           Voltar
+                        </Button>
+                        <Button
+                           className="h-10"
                            onClick={() =>
                               router.push(
-                                 pre_auction_routes.auction_maintenance
+                                 pre_auction_routes.auction.list_lots(id)
                               )
                            }
                         >
-                           Ver leilões
+                           Ir para lotes
                         </Button>
                      </div>
                   </div>

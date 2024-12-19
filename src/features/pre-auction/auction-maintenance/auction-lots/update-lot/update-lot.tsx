@@ -106,10 +106,22 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                               <span className="sr-only">Toggle menu</span>
                            </DropdownMenuTrigger>
                            <DropdownMenuContent align="start">
-                              <DropdownMenuItem>
+                              <DropdownMenuItem
+                                 onClick={() =>
+                                    router.push(
+                                       pre_auction_routes.auction_maintenance
+                                    )
+                                 }
+                              >
                                  Manutenção de leilões
                               </DropdownMenuItem>
-                              <DropdownMenuItem>
+                              <DropdownMenuItem
+                                 onClick={() =>
+                                    router.push(
+                                       pre_auction_routes.auction.list_lots(id)
+                                    )
+                                 }
+                              >
                                  Lista de lotes
                               </DropdownMenuItem>
                            </DropdownMenuContent>
