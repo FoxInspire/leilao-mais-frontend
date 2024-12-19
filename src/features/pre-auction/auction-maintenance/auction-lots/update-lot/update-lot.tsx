@@ -206,12 +206,12 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  />
                                  <Input
                                     disabled
-                                    label="Processo"
                                     value={'1092837393030'} // replace with api value
+                                    label="Processo"
                                     placeholder="0000000000"
                                  />
                               </div>
-                              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
+                              <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-4">
                                  <FormField
                                     control={form.control}
                                     name="location"
@@ -229,16 +229,14 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     )}
                                  />
                                  <Input
-                                    label="R. remoção"
-                                    placeholder="0000000000"
-                                 />
-                              </div>
-                              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
-                                 <Input
+                                    disabled
+                                    value={'Sem avaliação.'} // replace with api value
                                     label="Avaliação"
                                     placeholder="0000000000"
                                  />
                                  <Input
+                                    disabled
+                                    value={'100'} // replace with api value
                                     label="Lance mínimo"
                                     placeholder="0000000000"
                                  />
@@ -263,10 +261,14 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     )}
                                  />
                                  <Input
+                                    disabled
+                                    value={'Sem observação.'} // replace with api value
                                     label="Obs. transação"
                                     placeholder="Digite a observação"
                                  />
                                  <Input
+                                    disabled
+                                    value={'Sem roubo/furto.'} // replace with api value
                                     label="Roubo/Furto"
                                     placeholder="Digite se o lote é roubo/furto"
                                  />
@@ -284,6 +286,8 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  <div className="flex gap-4">
                                     <div className="flex-1">
                                        <Input
+                                          disabled
+                                          value={'ABC-1234'} // replace with api value
                                           label="Placa"
                                           placeholder="00000000"
                                        />
@@ -295,6 +299,8 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  <div className="flex gap-4">
                                     <div className="flex-1">
                                        <Input
+                                          disabled
+                                          value={'1234567890'} // replace with api value
                                           label="Chassi"
                                           placeholder="00000000"
                                        />
@@ -306,50 +312,72 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                               </div>
                               <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-4 md:gap-4">
                                  <Input
+                                    disabled
+                                    value={'59831321830'} // replace with api value
                                     label="RENAVAM"
                                     placeholder="0000000000"
                                  />
                                  <Input
+                                    disabled
+                                    value={'2024'} // replace with api value
                                     label="Ano Fab."
                                     placeholder="0000000000"
                                  />
                                  <Input
+                                    disabled
+                                    value={'2024'} // replace with api value
                                     label="Ano Mod."
                                     placeholder="Digite o bairro"
                                  />
                                  <Input
+                                    disabled
+                                    value={'SUV'} // replace with api value
                                     label="Tipo"
                                     placeholder="Digite o tipo de veículo"
                                  />
                                  <Input
+                                    disabled
+                                    value={'Hyundai'} // replace with api value
                                     label="Marca/modelo"
                                     placeholder="Digite a marca/modelo"
                                  />
                                  <Input
+                                    disabled
+                                    value={'Preto'} // replace with api value
                                     label="Cor"
                                     placeholder="Digite a cor"
                                  />
                                  <SelectInput
+                                    disabled
+                                    value={'PR'} // replace with api value
                                     label="UF"
                                     options={countries}
                                     placeholder="Selecione o estado"
                                  />
                                  <Input
+                                    disabled
+                                    value={'Curitiba'} // replace with api value
                                     label="Município"
                                     placeholder="Digite o município"
                                  />
                               </div>
                               <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
                                  <Input
+                                    disabled
+                                    value={'34265774'} // replace with api value
                                     label="Nº motor"
                                     placeholder="0000000000"
                                  />
                                  <Input
+                                    disabled
+                                    value={'Gasolina'} // replace with api value
                                     label="Combustível"
                                     placeholder="Digite o tipo de combustível"
                                  />
                               </div>
                               <Textarea
+                                 disabled
+                                 value={'Sem observação.'} // replace with api value
                                  label="Observação"
                                  placeholder="Digite a observação"
                               />
@@ -727,10 +755,14 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                            <div className="space-y-6">
                               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
                                  <Input
+                                    disabled
+                                    value={'João da Silva'} // replace with api value
                                     label="Nome"
                                     placeholder="Digite o nome"
                                  />
                                  <Input
+                                    disabled
+                                    value={'123.456.789-00'} // replace with api value
                                     label="CPF/CNPJ"
                                     placeholder="000.000.000-00"
                                  />
@@ -901,10 +933,14 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                            <div className="space-y-6">
                               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
                                  <Input
+                                    disabled
+                                    value={'Lucas da Silva'} // replace with api value
                                     label="Nome"
                                     placeholder="Digite o nome"
                                  />
                                  <Input
+                                    disabled
+                                    value={'123.456.789-00'} // replace with api value
                                     label="CPF/CNPJ"
                                     placeholder="000.000.000-00"
                                  />
@@ -1089,10 +1125,14 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                            <div className="space-y-6">
                               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4">
                                  <Input
+                                    disabled
+                                    value={'Bruno da Silva'} // replace with api value
                                     label="Nome"
                                     placeholder="Digite o nome"
                                  />
                                  <Input
+                                    disabled
+                                    value={'123.456.789-00'} // replace with api value
                                     label="CPF/CNPJ"
                                     placeholder="000.000.000-00"
                                  />
