@@ -29,6 +29,7 @@ import { Button } from '@/src/components/ui/button'
 import { Card } from '@/src/components/ui/card'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
+import { DataTable } from '@/src/components/ui/data-table'
 import { Input } from '@/src/components/ui/input'
 import { SelectInput, SelectInputValue } from '@/src/components/ui/select'
 import { Separator } from '@/src/components/ui/separator'
@@ -38,11 +39,13 @@ import { pre_auction_routes } from '@/src/routes/pre-auction'
 import { isValidZipCode, ZIP_CODE_MASK } from '@/src/utils/masks'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckedState } from '@radix-ui/react-checkbox'
+import { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import { DataTableColumnHeader } from '../../components/data-table-column-header'
 
 interface UpdateLotProps {
    id: string
@@ -60,7 +63,6 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
    const { handleZipCode } = useZipCode()
 
    const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
-   const [emailTemp, setEmailTemp] = React.useState('')
 
    const form = useForm<z.infer<typeof updateLotSchema>>({
       resolver: zodResolver(updateLotSchema),
@@ -925,28 +927,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                                                   neighborhood,
                                                                   state,
                                                                   zipCode
-                                                               }) => {
-                                                                  //    form.setValue(
-                                                                  //       'address',
-                                                                  //       address
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'addressCity',
-                                                                  //       city
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'neighborhood',
-                                                                  //       neighborhood
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'addressState',
-                                                                  //       state
-                                                                  //    )
-                                                                  //    form.setValue(
-                                                                  //       'cep',
-                                                                  //       zipCode
-                                                                  //    )
-                                                               }
+                                                               }) => {}
                                                             )
                                                          }
                                                       }}
@@ -1155,7 +1136,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-4">
                                     <FormField
                                        control={form.control}
-                                       name="address"
+                                       name="saleNotification.address"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1171,7 +1152,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressNumber"
+                                       name="saleNotification.addressNumber"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1188,7 +1169,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressComplement"
+                                       name="saleNotification.addressComplement"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1206,7 +1187,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                  <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3 md:gap-4">
                                     <FormField
                                        control={form.control}
-                                       name="neighborhood"
+                                       name="saleNotification.neighborhood"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1222,7 +1203,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressState"
+                                       name="saleNotification.addressState"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1239,7 +1220,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                                     />
                                     <FormField
                                        control={form.control}
-                                       name="addressCity"
+                                       name="saleNotification.addressCity"
                                        render={({ field }) => (
                                           <FormItem>
                                              <FormControl>
@@ -1271,40 +1252,18 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
                               Restrições
                            </p>
                            <div className="space-y-6">
-                              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-4">
-                                 <FormField
-                                    control={form.control}
-                                    name="internalMatrixOrder"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <Input
-                                                label="Ordem Interna Matriz"
-                                                placeholder="0000000000"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                                 <FormField
-                                    control={form.control}
-                                    name="internalAuctionOrder"
-                                    render={({ field }) => (
-                                       <FormItem>
-                                          <FormControl>
-                                             <Input
-                                                label="Ordem Interna Leilão "
-                                                placeholder="0000000000"
-                                                {...field}
-                                             />
-                                          </FormControl>
-                                          <FormMessage />
-                                       </FormItem>
-                                    )}
-                                 />
-                              </div>
+                              <DataTable
+                                 data={[
+                                    {
+                                       code: '123456',
+                                       observation: 'Restrição 1',
+                                       origin: 'Restrição 1',
+                                       restriction: 'Restrição 1',
+                                       subRestriction: '-'
+                                    }
+                                 ]}
+                                 columns={columns_restrictions}
+                              />
                            </div>
                         </div>
                      </div>
@@ -1624,3 +1583,49 @@ const updateLotSchema = z.object({
       .strict()
       .optional()
 })
+
+interface RestrictionsColumnsProps {
+   code: string
+   restriction: string
+   subRestriction: string
+   observation: string
+   origin: string
+}
+
+const columns_restrictions: ColumnDef<RestrictionsColumnsProps>[] = [
+   {
+      accessorKey: 'code',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Código" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('code')}</div>
+   },
+   {
+      accessorKey: 'restriction',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Restrição" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('restriction')}</div>
+   },
+   {
+      accessorKey: 'subRestriction',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Sub-restrição" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('subRestriction')}</div>
+   },
+   {
+      accessorKey: 'observation',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Observação" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('observation')}</div>
+   },
+   {
+      accessorKey: 'origin',
+      header: ({ column }) => (
+         <DataTableColumnHeader column={column} title="Origem" />
+      ),
+      cell: ({ row }) => <div>{row.getValue('origin')}</div>
+   }
+]
