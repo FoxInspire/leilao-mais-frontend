@@ -3,12 +3,12 @@
 import * as React from 'react'
 
 import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator
+   Breadcrumb,
+   BreadcrumbItem,
+   BreadcrumbLink,
+   BreadcrumbList,
+   BreadcrumbPage,
+   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
@@ -65,7 +65,7 @@ export const UpdateLotSuccess: React.FC<UpdateLotSuccessProps> = ({
                         check_circle
                      </span>
                      <h3 className="text-center font-montserrat text-2xl font-semibold">
-                        Edição lote {id} realizada com sucesso
+                        Lote leilão {id} editado com sucesso!
                      </h3>
                      <div className="flex items-center gap-4">
                         <Button

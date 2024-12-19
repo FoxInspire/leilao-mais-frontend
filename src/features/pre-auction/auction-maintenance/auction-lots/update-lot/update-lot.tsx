@@ -82,7 +82,7 @@ export const UpdateLot: React.FC<UpdateLotProps> = ({
             return
          }
 
-         router.push(pre_auction_routes.auction.edit_success(id))
+         router.push(pre_auction_routes.auction.update_lot_success(id))
       } catch (error) {
          console.error('Erro ao enviar formulário:', error)
          toast.error('Erro ao enviar formulário. Tente novamente.')

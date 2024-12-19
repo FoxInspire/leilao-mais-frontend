@@ -69,7 +69,7 @@ export const CreateAuctionSuccess: React.FC<CreateAuctionSuccessProps> = ({
                         <span className="font-bold text-primary-default dark:text-dark-primary-default">
                            {id}
                         </span>{' '}
-                        realizado com sucesso
+                        realizado com sucesso!
                      </h3>
                      <div className="flex items-center gap-4">
                         <Button
