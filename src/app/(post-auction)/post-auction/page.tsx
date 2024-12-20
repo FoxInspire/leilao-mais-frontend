@@ -4,7 +4,7 @@ import { columns } from '@/src/features/pre-auction/auction-maintenance/componen
 import { AuctionEntity } from '@/src/types/entities/auction.entity'
 import { readJSONFile } from '@/src/utils/file-path-utils'
 
-import AuctionMaintenance from '@/src/features/pre-auction/auction-maintenance/auction-maintenance'
+import PostAuction from '@/src/features/post-auction/post-auction'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,11 +15,11 @@ async function getAuctions() {
    return data
 }
 
-export default async function AuctionMaintenancePage() {
+export default async function PostAuctionPage() {
    const auctions = await getAuctions()
    return (
       <React.Suspense>
-         <AuctionMaintenance data={auctions} columns={columns} />
+         <PostAuction data={auctions} columns={columns} />
       </React.Suspense>
    )
 }
