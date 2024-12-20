@@ -38,7 +38,7 @@ export const ThemeSwitch: React.FC = () => {
                      'material-symbols-outlined text-base',
                      theme === 'light'
                         ? 'text-primary-light'
-                        : 'text-gray-400 dark:text-gray-500'
+                        : 'text-gray-400 dark:text-gray-400'
                   )}
                   style={{ fontSize: '1.2rem' }}
                >
@@ -61,7 +61,7 @@ export const ThemeSwitch: React.FC = () => {
                      'material-symbols-outlined text-base',
                      theme === 'system'
                         ? 'text-primary-light'
-                        : 'text-gray-400 dark:text-gray-500'
+                        : 'text-gray-400 dark:text-gray-400'
                   )}
                   style={{ fontSize: '1.2rem' }}
                >
@@ -100,7 +100,9 @@ export const ThemeSwitch: React.FC = () => {
                <span
                   className={cn(
                      'material-symbols-outlined text-base',
-                     theme === 'dark' ? 'text-primary-light' : ''
+                     theme === 'dark'
+                        ? 'text-primary-light'
+                        : 'text-gray-400 dark:text-gray-400'
                   )}
                   style={{ fontSize: '1.2rem' }}
                >
