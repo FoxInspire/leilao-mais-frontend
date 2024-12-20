@@ -50,20 +50,18 @@ const PostAuction: React.FC<PostAuctionProps> = ({
                   <Breadcrumb>
                      <BreadcrumbList>
                         <BreadcrumbItem>
-                           <BreadcrumbLink>Pré-leilão</BreadcrumbLink>
+                           <BreadcrumbLink>Pós-leilão</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator>/</BreadcrumbSeparator>
                         <BreadcrumbItem>
-                           <BreadcrumbPage>
-                              Manutenção de leilões
-                           </BreadcrumbPage>
+                           <BreadcrumbPage>Leilões</BreadcrumbPage>
                         </BreadcrumbItem>
                      </BreadcrumbList>
                   </Breadcrumb>
                   <div className="space-y-2">
                      <div className="flex flex-wrap items-center justify-between gap-2">
                         <h1 className="font-montserrat text-2xl font-semibold md:text-3xl">
-                           Manutenção de leilões
+                           Pós-leilão
                         </h1>
                         <Button
                            variant="ghost"
