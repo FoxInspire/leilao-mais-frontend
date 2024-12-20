@@ -31,10 +31,12 @@ import { dashboard_routes } from '@/src/routes/dashboard'
 import { COOKIE_KEYS } from '@/src/utils/cookies-keys'
 import { usePathname } from 'next/navigation'
 
+import { post_auction_routes } from '@/src/routes/post-auction'
 import Link from 'next/link'
 
 const DashboardContent: React.FC<React.PropsWithChildren> = ({ children }) => {
    const { state } = useSidebar()
+
    const pathname = usePathname()
 
    const [collapsedItems, setCollapsedItems] = React.useState<string[]>(() => {
@@ -310,8 +312,8 @@ const data = {
       },
       {
          title: 'Pós-leilão',
-         url: dashboard_routes.post_auction.index,
-         disabled: true,
+         url: post_auction_routes.index,
+         disabled: false,
          icon: (
             <span className="material-symbols-outlined filled block h-6 w-6 !text-[24px] leading-6">
                star
