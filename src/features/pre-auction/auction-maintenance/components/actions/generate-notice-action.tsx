@@ -11,7 +11,7 @@ import {
    TableHeader,
    TableRow
 } from '@/components/ui/table'
-import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
+import { DataTableColumnHeader } from '@/src/components/ui/data-table-column-header'
 import { DataTablePagination } from '@/src/components/ui/data-table-pagination'
 import { AuctionEntity } from '@/src/types/entities/auction.entity'
 import {

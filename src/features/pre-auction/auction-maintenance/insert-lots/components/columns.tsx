@@ -1,7 +1,7 @@
 'use client'
 
-import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Checkbox } from '@/src/components/ui/checkbox'
+import { DataTableColumnHeader } from '@/src/components/ui/data-table-column-header'
 import { AvaliableLotEntity } from '@/src/types/entities/avaliable-lot.entity'
 import { auctionLotStatusOptions } from '@/src/utils/auction-lot-status'
 import { ColumnDef } from '@tanstack/react-table'

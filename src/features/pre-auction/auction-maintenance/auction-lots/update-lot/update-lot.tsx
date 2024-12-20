@@ -45,7 +45,7 @@ import { ptBR } from 'date-fns/locale'
 import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { DataTableColumnHeader } from '../../components/data-table-column-header'
+import { DataTableColumnHeader } from '../../../../../components/ui/data-table-column-header'
 
 interface UpdateLotProps {
    id: string

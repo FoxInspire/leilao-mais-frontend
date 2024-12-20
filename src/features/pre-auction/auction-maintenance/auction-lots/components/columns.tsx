@@ -1,7 +1,7 @@
 'use client'
 
-import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Checkbox } from '@/src/components/ui/checkbox'
+import { DataTableColumnHeader } from '@/src/components/ui/data-table-column-header'
 import { DataTableRowActions } from '@/src/features/pre-auction/auction-maintenance/auction-lots/components/data-table-row-actions'
 import { LotAlerts } from '@/src/features/pre-auction/auction-maintenance/auction-lots/components/lot-alert'
 import { LotStatus } from '@/src/features/pre-auction/auction-maintenance/auction-lots/components/lot-status'
@@ -153,8 +153,6 @@ export const columns_auction_lots: ColumnDef<AuctionEntity>[] = [
    },
    {
       id: 'actions',
-      cell: ({ row }) => (
-         <DataTableRowActions row={row}/>
-      )
+      cell: ({ row }) => <DataTableRowActions row={row} />
    }
 ]

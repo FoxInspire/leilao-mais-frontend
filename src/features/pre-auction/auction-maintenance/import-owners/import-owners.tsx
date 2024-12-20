@@ -17,10 +17,10 @@ import {
    DialogHeader,
    DialogTitle
 } from '@/components/ui/dialog'
-import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Button } from '@/src/components/ui/button'
 import { CollapsibleSidebar } from '@/src/components/ui/collapsible-sidebar'
 import { DataTable } from '@/src/components/ui/data-table'
+import { DataTableColumnHeader } from '@/src/components/ui/data-table-column-header'
 import { DisabledFeature } from '@/src/components/ui/disabled-feature'
 import { Separator } from '@/src/components/ui/separator'
 import { useFilePicker } from '@/src/hooks/useFilePicker'

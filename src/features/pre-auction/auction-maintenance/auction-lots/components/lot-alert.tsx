@@ -8,8 +8,8 @@ import {
    DialogHeader,
    DialogTitle
 } from '@/components/ui/dialog'
-import { DataTableColumnHeader } from '@/features/pre-auction/auction-maintenance/components/data-table-column-header'
 import { Button } from '@/src/components/ui/button'
+import { DataTableColumnHeader } from '@/src/components/ui/data-table-column-header'
 import { TableAuctionLots } from '@/src/features/pre-auction/auction-maintenance/auction-lots/components/data-table'
 import { AuctionEntity, AuctionLot } from '@/types/entities/auction.entity'
 import { ColumnDef, Row } from '@tanstack/react-table'
